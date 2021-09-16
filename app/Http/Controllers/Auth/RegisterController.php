@@ -42,6 +42,37 @@ class RegisterController extends Controller
     }
 
     /**
+     * バリデーションエラーメッセージ
+     */
+     
+    protected $messages = [
+        'name.required' => '名前を入力してください。',
+        'name.max' => '名前は255文字以内で入力してください。',
+        'email.required' => 'メールアドレスを入力してください。',
+        'email.email' => '正しいメールアドレスを入力してください。',
+        'email.max' => 'メールアドレスは255文字以内で入力してください。',
+        'email.unique' => 'そのメールアドレスはすでに登録されています。',
+        'password.required' => 'パスワードを入力してください。',
+        'password.min' => 'パスワードは最低8文字必要です。',
+        'password.confirmed' => '入力されたパスワードが一致しません。',
+        'tel.required' => '電話番号を入力してください。',
+        'tel.numeric' => '電話番号は数字で入力してください。',
+        'tel.digits_between' => '電話番号は10文字、あるいは11文字で入力してください。',
+    ];
+    
+    /**
+     * バリデーションルール
+     */
+     
+    protected $rules = [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        //'image' => ['required'], //登録画面に画像フォームはないがバリデーション必須？
+        'tel' => ['required', 'numeric', 'digits_between:10,11'],
+    ];
+    
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -49,11 +80,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return Validator::make($data, $rules, $messages);
     }
 
     /**
