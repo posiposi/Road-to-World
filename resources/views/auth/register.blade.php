@@ -1,7 +1,7 @@
-@include ('layouts.app')
+@extends ('layouts.app')
 
 @section('content')
-    <div class="text-left">
+    <div class="text-center">
         <h1>ユーザ登録</h1>
     </div>
 
@@ -21,7 +21,7 @@
                 
                 <div class="form-group">
                     {!! Form::label('tel', '電話番号') !!}
-                    {!! Form::input('tel', null, ['class' => 'form-control'])!!}
+                    {!! Form::number('tel', null, ['class' => 'form-control'])!!}
                 </div>
 
                 <div class="form-group">
@@ -34,7 +34,7 @@
                     {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                 </div>
 
-                {!! Form::submit('登録', ['class' => 'btn btn-primary btn-block']) !!}
+                {!! Form::submit('登録', ['class' => 'btn btn-success btn-block']) !!}
             {!! Form::close() !!}
         </div>
     </div>

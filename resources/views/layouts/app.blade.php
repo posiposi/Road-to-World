@@ -1,3 +1,5 @@
+{{-- 共通レイアウト --}}
+
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -13,9 +15,9 @@
         @include('commons.navbar')
 
         <div class="container">
-            {{-- エラーメッセージ 
-            @include('commons.error_messages')--}}
-
+            {{-- エラーメッセージ --}}
+            @include('commons.error_messages')
+            
             @yield('content')
         </div>
 
