@@ -78,6 +78,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+     //バリデーション
     protected function validator(array $data)
     {
         return Validator::make($data, $this->rules, $this->messages);

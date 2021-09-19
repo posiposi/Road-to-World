@@ -20,7 +20,7 @@ class CreateBikesTable extends Migration
             $table->string('brand');
             $table->string('status');
             $table->string('bike_address');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
