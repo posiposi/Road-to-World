@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /*
+    *一対多の記述(このUserは多数のBikeを所持する)
+    */
+    public function bikes()
+    {
+        return $this->hasMany(Bike::class);
+    }
 }

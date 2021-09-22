@@ -5,7 +5,7 @@
         <div class="center jumbotron">
             <div class="text-center">
                 <h1>Ride</h1>
-                {!! link_to_route('bikeregister.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
+                {!! link_to_route('bikes.store', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
             </div>
         </div>
     @else

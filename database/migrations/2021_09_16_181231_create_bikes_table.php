@@ -20,8 +20,11 @@ class CreateBikesTable extends Migration
             $table->string('brand');
             $table->string('status');
             $table->string('bike_address');
-            $table->string('image')->nullable();
+            $table->string('image_path')->nullable(); //画像パスを保存するカラム
             $table->timestamps();
+            
+            //外部キー制約
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

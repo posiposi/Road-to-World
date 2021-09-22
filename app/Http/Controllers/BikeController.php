@@ -3,25 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http;
+use Illuminate\Support\Facades\Storage;
+use App\Bike;
 
 class BikeController extends Controller
 {
-    //protected $redirectTo = App\Auth\RouteServiceProvider::Home; //コード可否怪しいため要再確認(特にAppとか・・・)
-    
     //自転車登録画面表示
     public function index()
     {
         return view('auth.bikeregister');
     }
-
-    public function post(Register $request)
+    
+    //自転車登録メソッド
+    public function store(Request $request)
     {
-        $bike = new Bike;
-        $bike->user_id = $request->user_id;
-        $bike->brand = $request->brand;
-        $bike->name = $request->name;
-        $bike->status = $request->status;
-        $bike->bike_address = $request->bike_address;
-        $bike->image = $request->image;
+        //バリデーション
+        $request->validate([
+            'brand' => 'required',
+            'name' => 'required',
+            'status' => 'required',
+            'bike_address' => 'required',
+            'image_path' => 'required',
+        ]);
+        
+        //ユーザーのバイク情報登録メソッド
+        $request->user()->bikes()->create([
+            'brand' => $request->brand,
+            'name' => $request->name,
+            'status' => $request->status,
+            'bike_address' => $request->bike_address,
+            'image_path' => $request->image_path,
+            ]);
+        
+        //s3アップロード開始
+        $image = $request->file('image_path');
+        // バケットの`myprefix`フォルダへアップロード
+        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        // アップロードした画像のフルパスを取得
+        $image = Storage::disk('s3')->url($path);
+    
+        return back();
     }
 }

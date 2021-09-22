@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
 
-            {!! Form::open(['route' => 'bikeregister.post']) !!}
+            {!! Form::open(['route' => 'bikes.store', 'files' => true]) !!}
                 <div class="form-group">
                     {!! Form::label('brand', 'ブランド') !!}
                     {!! Form::text('brand', null, ['class' => 'form-control']) !!}
@@ -28,7 +28,11 @@
                     {!! Form::label('bike_address', '受け渡し場所') !!}
                     {!! Form::text('bike_address', null, ['class' => 'form-control'])!!}
                 </div>
-
+                
+                <div class="form-group">
+                    {{-- {!! Form::label('image_path', '画像') !!} --}}
+                    {!! Form::file('image_path', ['class' => 'form-contorol-file']) !!}
+                </div>
                 {!! Form::submit('登録', ['class' => 'btn btn-success btn-block']) !!}
             {!! Form::close() !!}
         </div>
