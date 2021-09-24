@@ -29,8 +29,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::group(['middleware' => ['auth']], function ()
     {
     //自転車登録
-        Route::get('bikeregister', 'BikeController@index')->name('bikes.get'); //自転車登録画面へのルーティング
-        Route::post('bikeregister', 'BikeController@store')->name('bikes.store'); //新規バイクの登録
-    
+        Route::get('bikeregister', 'BikesController@show')->name('bikes.get'); //自転車登録画面へのルーティング
+        Route::post('bikeregister', 'BikesController@store')->name('bikes.store'); //新規バイクの登録
     }    
 );

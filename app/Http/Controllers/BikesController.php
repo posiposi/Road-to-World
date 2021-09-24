@@ -7,10 +7,10 @@ use Illuminate\Http;
 use Illuminate\Support\Facades\Storage;
 use App\Bike;
 
-class BikeController extends Controller
+class BikesController extends Controller
 {
     //自転車登録画面表示
-    public function index()
+    public function show()
     {
         return view('auth.bikeregister');
     }
