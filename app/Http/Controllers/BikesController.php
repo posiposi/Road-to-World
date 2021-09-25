@@ -24,7 +24,7 @@ class BikesController extends Controller
             'name' => 'required',
             'status' => 'required',
             'bike_address' => 'required',
-            'image_path' => 'required',
+            'image_path' => 'required | file | image | dimensions:max_width=1500,max_height=1500 | max:2048',
         ]);
         
         //ユーザーのバイク情報登録メソッド
@@ -42,7 +42,13 @@ class BikesController extends Controller
         $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
         // アップロードした画像のフルパスを取得
         $image = Storage::disk('s3')->url($path);
-    
+
         return back();
+    }
+    
+    //貸出中自転車一覧の表示メソッド
+    public function index(Request $request)
+    {
+        return view('bikes.index');
     }
 }

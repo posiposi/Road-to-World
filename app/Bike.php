@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bike extends Model
 {
     protected $fillable = [
-        'name', 'brand', 'status', 'bike_address', 'image_path',
+        'name', 'brand', 'status', 'bike_address', 'image_path'
     ];
     
     /*
