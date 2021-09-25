@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
-                        <h5 class="card-title">ここから下にブランド名などを表示</h5>
+                        <h5 class="card-title">テスト</h5>
                     </div>
                 </div>
             </div>
