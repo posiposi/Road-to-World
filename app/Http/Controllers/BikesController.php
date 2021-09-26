@@ -28,27 +28,31 @@ class BikesController extends Controller
         ]);
         
         //ユーザーのバイク情報登録メソッド
-        $request->user()->bikes()->create([
+        $bike = $request->user()->bikes()->create([
             'brand' => $request->brand,
             'name' => $request->name,
             'status' => $request->status,
             'bike_address' => $request->bike_address,
             'image_path' => $request->image_path,
-            ]);
+        ]);
         
         //s3アップロード開始
-        $image = $request->file('image_path');
+        $image = $bike->image_path;
         // バケットの`myprefix`フォルダへアップロード
         $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
         // アップロードした画像のフルパスを取得
-        $image = Storage::disk('s3')->url($path);
-
+        $url = Storage::disk('s3')->url($path);
+        // dd($url);
+        $bike->image_path = $url;
+        $bike->save();
+        
         return back();
     }
     
     //貸出中自転車一覧の表示メソッド
     public function index(Request $request)
     {
-        return view('bikes.index');
+        $bikes = \App\Bike::all();
+        return view('bikes.index', ['bikes' => $bikes]);
     }
 }
