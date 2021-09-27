@@ -20,6 +20,12 @@ class CreateReservationsTable extends Migration
             $table->dateTime('start_at');
             $table->dateTime('end_at');
             $table->timestamps();
+            
+            //外部キー制約
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('bike_id')->references('id')->on('bikes')->onDelete('cascade');
+            
+            $table->unique(['user_id', 'bike_id']);
         });
     }
 
