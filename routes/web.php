@@ -33,5 +33,7 @@ Route::group(['middleware' => ['auth']], function ()
         Route::post('bikeregister', 'BikesController@store')->name('bikes.store'); //新規自転車の登録
     //自転車一覧
         Route::get('bikes', 'BikesController@index')->name('bikes.index'); //貸出中自転車一覧へのルーティング
+    //自転車予約
+        Route::post('reservation', 'ReservationController@store')->name('bikes.reservation'); //自転車予約アクションへのルーティング
     }
 );
