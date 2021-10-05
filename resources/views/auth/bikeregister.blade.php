@@ -21,16 +21,15 @@
                 
                 <div class="form-group">
                     {!! Form::label('status', '保管状態') !!}
-                    {!! Form::text('status', null, ['class' => 'form-control'])!!}
+                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('bike_address', '受け渡し場所') !!}
-                    {!! Form::text('bike_address', null, ['class' => 'form-control'])!!}
+                    {!! Form::text('bike_address', null, ['class' => 'form-control']) !!}
                 </div>
                 
                 <div class="form-group">
-                    {{-- {!! Form::label('image_path', '画像') !!} --}}
                     {!! Form::file('image_path', ['class' => 'form-contorol-file']) !!}
                 </div>
                 {!! Form::submit('登録', ['class' => 'btn btn-success btn-block']) !!}
