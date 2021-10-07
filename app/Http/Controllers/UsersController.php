@@ -12,8 +12,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $user = \Auth::user();
-        //$form = $request->all();
-        
+
         //s3アップロード開始
         $image = $request->file('image');
         // バケットの`myprefix`フォルダへアップロード

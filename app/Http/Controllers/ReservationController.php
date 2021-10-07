@@ -4,28 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\DateTimeRequest;
 
 class ReservationController extends Controller
 {
     //自転車予約メソッド
-    public function store(Request $request, $id) {
+    public function store(DateTimeRequest $request, $id) {
         
-        global $reservation_start_at;
-        global $reservation_end_at;
         //開始日時リクエストを代入
         $reservation_start_at = $request->start_date. ' ' .$request->start_time;
         //終了日時リクエストを代入
         $reservation_end_at = $request->end_date. ' ' .$request->end_time;        
-        
-        //バリデーション
-        $rules = [
-            'start_date' => 'required|date',
-            'start_time' => 'required|date_format:H:i',
-            'end_date' => 'required|date',
-            'end_time' => 'required|date_format:H:i',
-        ];
-        
-        $this->validate($request, $rules); 
         
         //DB内で同一のbike_idかつ希望時間が重なるか確認、変数へ代入
         //予約確認・条件分岐
