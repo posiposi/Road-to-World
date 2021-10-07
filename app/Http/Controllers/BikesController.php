@@ -42,7 +42,6 @@ class BikesController extends Controller
         $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
         // アップロードした画像のフルパスを取得
         $url = Storage::disk('s3')->url($path);
-        // dd($url);
         $bike->image_path = $url;
         $bike->save();
         

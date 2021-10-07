@@ -10,7 +10,7 @@
             <div class="border border-dark card mt-3 mb-3" style="max-width: 1080px">
                 <div class="row no-gutters ml-3">
                     @foreach ($bikes as $bike)
-                        <div class="col-md-6 mt-3">
+                        <div class="col-md-6 mt-3 mb-3">
                             <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
                         </div>
                         <div class="col-md-6">

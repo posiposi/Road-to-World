@@ -5,14 +5,20 @@
         <h1>My Page</h1>
     </div>
     <div class='container'>
-        <div class="border border-dark card mt-3 mb-3" style="max-width: 1080px">
-            <div class="row no-gutters ml-3">
-                {{-- アバター画像 --}}
-                <div class="col-md-6 mt-3">
-                    
+        <div class="row no-gutters ml-3">
+            {{-- ユーザアバター --}}
+            <div class="col-md-6 mt-3">
+                <div class="card-body">
+                    <img class="card-img img-fluid" src="{{ $auth->image }}" alt="ユーザアバター画像">
+                    <div class="form-group">
+                        {!! Form::open(['route' => 'users.store', 'files' => true]) !!}
+                            {!! Form::file('image', ['class' => 'form-contorol-file']) !!}
+                            {!! Form::submit('アバター登録', ['class' => 'btn btn-success btn-block']) !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
-            
+    
             {{-- ユーザ情報表示カード --}}
             <div class="col-md-6">
                 <div class="card-body">

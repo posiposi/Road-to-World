@@ -37,5 +37,7 @@ Route::group(['middleware' => ['auth']], function ()
         Route::post('bikes/{id}', 'ReservationController@store')->name('bikes.reservation'); //自転車予約アクションへのルーティング
     //ユーザ情報画面
         Route::get('users', 'UsersController@index')->name('users.index');
+    //ユーザアバター登録
+        Route::post('users', 'UsersController@store')->name('users.store');
     }
 );

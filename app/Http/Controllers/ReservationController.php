@@ -10,6 +10,8 @@ class ReservationController extends Controller
     //自転車予約メソッド
     public function store(Request $request, $id) {
         
+        global $reservation_start_at;
+        global $reservation_end_at;
         //開始日時リクエストを代入
         $reservation_start_at = $request->start_date. ' ' .$request->start_time;
         //終了日時リクエストを代入
@@ -17,9 +19,9 @@ class ReservationController extends Controller
         
         //バリデーション
         $rules = [
-            'start_date' => 'required_with:end_date|date',
-            'start_time' => 'required_with:end_time|date_format:H:i',
-            'end_date' => 'required|date|after:start_date',
+            'start_date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_date' => 'required|date',
             'end_time' => 'required|date_format:H:i',
         ];
         

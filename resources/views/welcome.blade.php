@@ -12,7 +12,7 @@
     @else
         <div class="center jumbotron">
             <div class="text-center">
-                <h1>未ログインテスト</h1>
+                <h1>ようこそ！</h1>
             </div>
     @endif
 @endsection
