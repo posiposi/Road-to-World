@@ -2,7 +2,7 @@
 
 @section('content')
     @if (Auth::check())
-        <div class="center jumbotron">
+        <div class="jumbotron">
             <div class="text-center">
                 <h1>Ride</h1>
                 {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}

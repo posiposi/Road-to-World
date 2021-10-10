@@ -54,4 +54,10 @@ class BikesController extends Controller
         $bikes = \App\Bike::all();
         return view('bikes.index', ['bikes' => $bikes]);
     }
+    
+    //自転車情報変更画面表示メソッド
+    public function edit()
+    {
+        
+    }
 }

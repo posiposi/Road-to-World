@@ -33,11 +33,16 @@ Route::group(['middleware' => ['auth']], function ()
         Route::post('bikeregister', 'BikesController@store')->name('bikes.store'); //新規自転車の登録
     //自転車一覧
         Route::get('bikes', 'BikesController@index')->name('bikes.index'); //貸出中自転車一覧へのルーティング
+    //自転車情報変更画面表示
+        Route::get('bikes/{id}/edit', 'BikesController@edit')->name('bikes.edit');
     //自転車予約
         Route::post('bikes/{id}', 'ReservationController@store')->name('bikes.reservation'); //自転車予約アクションへのルーティング
     //ユーザ情報画面
         Route::get('users', 'UsersController@index')->name('users.index');
     //ユーザアバター登録
         Route::post('users', 'UsersController@store')->name('users.store');
-    }
-);
+    //ユーザ情報変更画面表示
+        Route::get('users/{id}/edit', 'UsersController@edit')->name('users.edit');
+    //ユーザ情報変更
+        Route::put('users/{id}/update', 'UsersController@update')->name('users.update');
+    });
