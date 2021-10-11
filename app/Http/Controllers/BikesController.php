@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http;
 use Illuminate\Support\Facades\Storage;
 use App\Bike;
+use App\User;
 
 class BikesController extends Controller
 {
@@ -15,7 +16,7 @@ class BikesController extends Controller
         return view('auth.bikeregister');
     }
     
-    //自転車登録メソッド
+    //自転車登録
     public function store(Request $request)
     {
         //バリデーション
@@ -27,7 +28,7 @@ class BikesController extends Controller
             'image_path' => 'required | file | image | dimensions:max_width=1500,max_height=1500 | max:2048',
         ]);
         
-        //ユーザーのバイク情報登録メソッド
+        //ユーザーのバイク情報登録
         $bike = $request->user()->bikes()->create([
             'brand' => $request->brand,
             'name' => $request->name,
@@ -48,16 +49,43 @@ class BikesController extends Controller
         return back();
     }
     
-    //貸出中自転車一覧の表示メソッド
+    //貸出中自転車一覧の表示
     public function index(Request $request)
     {
         $bikes = \App\Bike::all();
         return view('bikes.index', ['bikes' => $bikes]);
     }
     
-    //自転車情報変更画面表示メソッド
-    public function edit()
+    //自転車情報変更画面表示
+    public function edit($id)
     {
+        $bikes = Bike::findOrFail($id);
+        return view('bikes.edit', ['bikes' => $bikes]);
+    }
+    
+    //自転車情報変更
+    public function update(Request $request, $id)
+    {
+        //バリデーション
+        $request->validate([
+            'brand' => 'required',
+            'name' => 'required',
+            'status' => 'required',
+            'bike_address' => 'required',
+            'image_path' => 'required | file | image | dimensions:max_width=1500,max_height=1500 | max:2048',
+        ]);
         
+        $bike = Bike::findOrFail($id);
+        $form = $request->all();
+        $bike->fill($form)->save();
+        //画像S3アップロード
+        $image = $request->image_path;
+        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        // アップロードした画像のフルパスを取得
+        $url = Storage::disk('s3')->url($path);
+        $bike->image_path = $url;
+        $bike->save();
+
+        return redirect('/users');
     }
 }

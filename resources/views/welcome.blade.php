@@ -95,8 +95,8 @@
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-primary']) !!}
                                 {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-success']) !!}
-                                <h2 class="text-warning">ようこそ自転車の世界へ！</h2>
-                                <p class="text-warning">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</p>
+                                <h2 class="text-dark">ようこそ自転車の世界へ！</h2>
+                                <p class="text-dark">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</p>
                             </div>
                         </div>
                         {{-- スライド02 --}}
@@ -105,8 +105,8 @@
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-primary']) !!}
                                 {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-success']) !!}
-                                <h2 class="text-warning">ようこそ自転車の世界へ！</h2>
-                                <p class="text-warning">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</p>
+                                <h2 class="text-dark">ようこそ自転車の世界へ！</h2>
+                                <p class="text-dark">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</p>
                             </div>
                         </div>
                         {{-- スライド03 --}}
@@ -115,8 +115,8 @@
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-primary']) !!}
                                 {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-success']) !!}
-                                <h2 class="text-warning">ようこそ自転車の世界へ！</h2>
-                                <p class="text-warning">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</p>
+                                <h2 class="text-dark">ようこそ自転車の世界へ！</h2>
+                                <p class="text-dark">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</p>
                             </div>
                         </div>
                     </div>

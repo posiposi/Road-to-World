@@ -40,10 +40,28 @@
     
     <div class="container">
         <div class="row ml-3">
-            <h1 class="text-primary">貸出中自転車</h1>
+            <h1 class="text-primary">あなたが貸し出している自転車</h1>
         </div>
-        <div class="row">
-
+        <div class="row no-gutters ml-3">
+            @foreach ($bikes as $bike)
+                @if($bike->user_id == $auth->id)
+                    <div class="col-md-6 mt-3 mb-3">
+                        <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <ul class="list-group list-unstyled border border-dark">
+                                <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
+                                <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
+                                <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
+                                <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
+                                <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
+                                <li class="list-group-item">{!! link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) !!}</li>
+                            </ul>
+                        </div> 
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
 @endsection

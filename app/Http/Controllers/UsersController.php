@@ -27,11 +27,12 @@ class UsersController extends Controller
         return back();
     }
     
+    //ユーザ情報表示(MyPage表示)
     public function index()
     {
         $auths = \Auth::user();
         $bikes = \App\Bike::all();
-        return view('users.index', ['auth' => $auths, 'bike' => $bikes]);
+        return view('users.index', ['auth' => $auths, 'bikes' => $bikes]);
     }
     
     //ユーザ情報変更画面表示

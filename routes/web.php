@@ -24,25 +24,20 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
-
 //ログイン認証
 Route::group(['middleware' => ['auth']], function ()
     {
-    //自転車登録
-        Route::get('bikeregister', 'BikesController@show')->name('bikes.get'); //自転車登録画面へのルーティング
-        Route::post('bikeregister', 'BikesController@store')->name('bikes.store'); //新規自転車の登録
-    //自転車一覧
-        Route::get('bikes', 'BikesController@index')->name('bikes.index'); //貸出中自転車一覧へのルーティング
-    //自転車情報変更画面表示
-        Route::get('bikes/{id}/edit', 'BikesController@edit')->name('bikes.edit');
-    //自転車予約
-        Route::post('bikes/{id}', 'ReservationController@store')->name('bikes.reservation'); //自転車予約アクションへのルーティング
-    //ユーザ情報画面
-        Route::get('users', 'UsersController@index')->name('users.index');
-    //ユーザアバター登録
-        Route::post('users', 'UsersController@store')->name('users.store');
-    //ユーザ情報変更画面表示
-        Route::get('users/{id}/edit', 'UsersController@edit')->name('users.edit');
-    //ユーザ情報変更
-        Route::put('users/{id}/update', 'UsersController@update')->name('users.update');
+    //自転車関連
+        Route::get('bikeregister', 'BikesController@show')->name('bikes.get'); //自転車登録画面表示
+        Route::post('bikeregister', 'BikesController@store')->name('bikes.store'); //新規自転車登録
+        Route::get('bikes', 'BikesController@index')->name('bikes.index'); //貸出中自転車一覧表示
+        Route::get('bikes/{id}/edit', 'BikesController@edit')->name('bikes.edit'); //自転車情報変更画面表示
+        Route::post('bikes/{id}', 'ReservationController@store')->name('bikes.reservation'); //自転車予約アクション
+        Route::put('bikes/{id}/update', 'BikesController@update')->name('bikes.update'); //自転車情報変更
+        
+    //ユーザ関連
+        Route::get('users', 'UsersController@index')->name('users.index'); //ユーザ情報表示
+        Route::post('users', 'UsersController@store')->name('users.store'); //ユーザアバター登録
+        Route::get('users/{id}/edit', 'UsersController@edit')->name('users.edit'); //ユーザ情報変更画面表示
+        Route::put('users/{id}/update', 'UsersController@update')->name('users.update'); //ユーザ情報変更
     });
