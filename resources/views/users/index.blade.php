@@ -40,7 +40,7 @@
     
     <div class="container">
         <div class="row ml-3">
-            <h1 class="text-primary">あなたが貸し出している自転車</h1>
+            <h1 class="text-primary">あなたが貸し出し中の自転車</h1>
         </div>
         <div class="row no-gutters ml-3">
             @foreach ($bikes as $bike)
@@ -56,7 +56,13 @@
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                 <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                                 <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
-                                <li class="list-group-item">{!! link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) !!}</li>
+                                <li class="list-group-item">
+                                    {!! link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) !!}
+                                    {!! Form::open(['route' => ['bikes.delete', $bike->id], 'method' => 'delete']) !!}
+                                        {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+                                    {!! Form::close() !!}
+                                    {{--{!! link_to_route('bikes.delete', '削除', ['id' => $bike->id], ['class' => 'btn btn-danger'], ['method' => 'delete'],) !!}--}}
+                                </li>
                             </ul>
                         </div> 
                     </div>

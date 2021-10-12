@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\Bike;
 use App\User;
 
@@ -87,5 +88,16 @@ class BikesController extends Controller
         $bike->save();
 
         return redirect('/users');
+    }
+    
+    public function destroy($id)
+    {
+        $bike = \App\Bike::findOrFail($id);
+        if (\Auth::id() === $bike->user_id)
+        {
+            $bike->delete();
+        }
+        
+        return back();
     }
 }

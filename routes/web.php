@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth']], function ()
         Route::get('bikes/{id}/edit', 'BikesController@edit')->name('bikes.edit'); //自転車情報変更画面表示
         Route::post('bikes/{id}', 'ReservationController@store')->name('bikes.reservation'); //自転車予約アクション
         Route::put('bikes/{id}/update', 'BikesController@update')->name('bikes.update'); //自転車情報変更
+        Route::delete('bikes/{id}/delete', 'BikesController@destroy')->name('bikes.delete'); //自転車削除
         
     //ユーザ関連
         Route::get('users', 'UsersController@index')->name('users.index'); //ユーザ情報表示

@@ -31,7 +31,7 @@
                     <div class="form-group">
                         {!! Form::file('image_path', ['class' => 'form-contorol-file']) !!}
                     </div>
-                    {!! Form::submit('登録', ['class' => 'btn btn-success btn-block']) !!}
+                    {!! Form::submit('変更', ['class' => 'btn btn-success btn-block']) !!}
                 {!! Form::close() !!}
             </div>
         </div>
