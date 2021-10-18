@@ -4,7 +4,7 @@
     @if (Auth::check())
         <div class="py-4">
             <div class="container">
-                <div id="main_visual" class="carousel slide carousel-fade" data-ride="carousel" data-wrap="true" data-interval="4000">
+                <div id="main_visual" class="carousel slide carousel-fade" data-ride="carousel" data-wrap="true">
                     {{-- インジケーター --}}
                     {{--<ol class="carousel-indicators">
                         <li data-target="main_visual" data-slide-to="0" class="active"></li>
@@ -13,18 +13,18 @@
                     </ol>--}}
                     <div class="carousel-inner">
                         {{-- スライド01 --}}
-                        <div class="carousel-item active">
-                            <img class="img-fluid" src="{{ asset('storage/wallpaper2you_576757.jpg') }}" alt="写真">
+                        {{--<div class="carousel-item active">
+                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/4C258794-084E-4148-96C8-62784E38934C_1_105_c.jpeg" alt="写真">
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
                                 {!! link_to_route('bikes.index', '貸出中バイク一覧', [], ['class' => 'btn btn-primary']) !!}
                                 <h2 class="text-dark">ようこそ自転車の世界へ！</h2>
                                 <p class="text-dark">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</p>
                             </div>
-                        </div>
+                        </div>--}}
                         {{-- スライド02 --}}
-                        <div class="carousel-item">
-                            <img class="img-fluid" src="{{ asset('storage/8C970552-653B-43CB-BEA9-7BA6A5870A75_1_105_c.jpeg') }}" alt="写真">
+                        <div class="carousel-item active">
+                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/wallpaper2you_576757.jpg" alt="写真">
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
                                 {!! link_to_route('bikes.index', '貸出中バイク一覧', [], ['class' => 'btn btn-primary']) !!}
@@ -34,7 +34,7 @@
                         </div>
                         {{-- スライド03 --}}
                         <div class="carousel-item">
-                            <img class="img-fluid" src="{{ asset('storage/gt_PC_W1920_H1080.png') }}" alt="写真">
+                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/gt_PC_W1920_H1080.png" alt="写真">
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
                                 {!! link_to_route('bikes.index', '貸出中バイク一覧', [], ['class' => 'btn btn-primary']) !!}
@@ -72,7 +72,7 @@
                         </div>
                     
                         <div class="col-md-4">
-                            <img src="{{ asset('storage/8C970552-653B-43CB-BEA9-7BA6A5870A75_1_105_c.jpeg') }}" alt="ロードバイク" class="img-fluid">
+                            <img src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/4C258794-084E-4148-96C8-62784E38934C_1_105_c.jpeg" alt="ロードバイク" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
     @else{{-- 未ログインの場合 --}}
         <div class="py-4">
             <div class="container">
-                <div id="main_visual" class="carousel slide carousel-fade" data-ride="carousel" data-wrap="true" data-interval="4000">
+                <div id="main_visual" class="carousel slide carousel-fade" data-ride="carousel" data-wrap="true">
                     {{-- インジケーター --}}
                     {{--<ol class="carousel-indicators">
                         <li data-target="main_visual" data-slide-to="0" class="active"></li>
@@ -90,18 +90,18 @@
                     </ol>--}}
                     <div class="carousel-inner">
                         {{-- スライド01 --}}
-                        <div class="carousel-item active">
-                            <img class="img-fluid" src="{{ asset('storage/wallpaper2you_576757.jpg') }}" alt="写真">
+                        {{--<div class="carousel-item active">
+                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/4C258794-084E-4148-96C8-62784E38934C_1_105_c.jpeg" alt="写真">
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-primary']) !!}
                                 {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-success']) !!}
                                 <h2 class="text-dark">ようこそ自転車の世界へ！</h2>
                                 <p class="text-dark">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</p>
                             </div>
-                        </div>
+                        </div>--}}
                         {{-- スライド02 --}}
-                        <div class="carousel-item">
-                            <img class="img-fluid" src="{{ asset('storage/8C970552-653B-43CB-BEA9-7BA6A5870A75_1_105_c.jpeg') }}" alt="写真">
+                        <div class="carousel-item active">
+                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/wallpaper2you_576757.jpg" alt="写真">
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-primary']) !!}
                                 {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-success']) !!}
@@ -111,7 +111,7 @@
                         </div>
                         {{-- スライド03 --}}
                         <div class="carousel-item">
-                            <img class="img-fluid" src="{{ asset('storage/gt_PC_W1920_H1080.png') }}" alt="写真">
+                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/gt_PC_W1920_H1080.png" alt="写真">
                             <div class="carousel-caption d-none d-md-block">
                                 {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-primary']) !!}
                                 {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-success']) !!}
@@ -149,7 +149,7 @@
                         </div>
                     
                         <div class="col-md-4">
-                            <img src="{{ asset('storage/8C970552-653B-43CB-BEA9-7BA6A5870A75_1_105_c.jpeg') }}" alt="ロードバイク" class="img-fluid">
+                            <img src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/4C258794-084E-4148-96C8-62784E38934C_1_105_c.jpeg" alt="ロードバイク" class="img-fluid">
                         </div>
                     </div>
                 </div>

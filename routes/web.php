@@ -41,4 +41,8 @@ Route::group(['middleware' => ['auth']], function ()
         Route::post('users', 'UsersController@store')->name('users.store'); //ユーザアバター登録
         Route::get('users/{id}/edit', 'UsersController@edit')->name('users.edit'); //ユーザ情報変更画面表示
         Route::put('users/{id}/update', 'UsersController@update')->name('users.update'); //ユーザ情報変更
+        
+    //チャット機能
+        Route::get('comments/{id}/index', 'CommentsController@index')->name('comments.index'); //コメント一覧表示
+        Route::post('comments/{id}/store', 'CommentsController@store')->name('comments.store'); //コメント保存
     });

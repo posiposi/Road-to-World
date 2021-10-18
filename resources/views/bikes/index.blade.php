@@ -29,6 +29,9 @@
                                         {!! Form::submit('予約', ['class' => 'btn btn-success btn-block']) !!}
                                     {!! Form::close() !!}
                                 </ul>
+                                <ul class="list-group list-unstyled mt-3">
+                                    {!! link_to_route('comments.index', 'コメント画面へ', [$bike->id], ['class' => 'btn btn-success']) !!}
+                                </ul>
                             </div>
                         </div>
                     @endforeach

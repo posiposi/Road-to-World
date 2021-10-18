@@ -11,7 +11,7 @@ class Bike extends Model
     ];
     
     /*
-    * 一対多の記述(多数のBikeを一人のUserが所有する)
+    * 一対多の記述(バイクは複数のユーザに従属)
     */
     public function user()
     {
@@ -24,5 +24,11 @@ class Bike extends Model
     public function reserved()
     {
         return $this->belongsToMany(User::class, 'reservations', 'bike_id', 'user_id');
+    }
+    
+    //一対多の記述(バイクは複数のコメントを所有)
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

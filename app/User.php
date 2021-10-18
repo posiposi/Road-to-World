@@ -62,4 +62,11 @@ class User extends Authenticatable
         return $this->reserving()->where('bike_id', $bikeId)->exists();
     }
     
+    /*
+    *一対多の記述(ユーザは複数のコメントを所有)
+    */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
