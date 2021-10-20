@@ -35,12 +35,13 @@
             </div>
         </div>
     </div>
+    
     {{-- コメント投稿フォーム --}}
-    {!! Form::open(['route' => ['comments.store', 'id' => $bike->id]]) !!}
+    {!! Form::open(['route' => ['comments.store', 'bikeId' => $bike->id, 'recieverId' => $bike->user_id]]) !!}
         <div class="container mt-3">
             <div class="row">
                 <div class="col-md-9">
-                    {!! Form::text('body', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('body', null, ['class' => 'form-control',]) !!}
                 </div>
                 <div class="col-md-3">
                     {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
@@ -48,12 +49,20 @@
             </div>
         </div>
     {!! Form::close() !!}
-    {{-- コメント表示部
     
-    @foreach ($user_comment as $comment)
+    {{-- コメント表示部 --}}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <h2>{{ $senderId->name }}のコメント</h2>
+            @foreach ($sender_comments as $sender_comment)
+                <p>{{ $sender_comment }}</p>
+            @endforeach
+        </div>
+        <div class="col-md-6">
+            <h2>{{ $senderId->name }}のコメント</h2>
+            @foreach ($sender_comments as $sender_comment)
+                <p>{{ $sender_comment }}</p>
+            @endforeach
         </div>
     </div>
-    @endforeach --}}
 @endsection

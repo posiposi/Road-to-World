@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function ()
         Route::put('users/{id}/update', 'UsersController@update')->name('users.update'); //ユーザ情報変更
         
     //チャット機能
-        Route::get('comments/{id}/index', 'CommentsController@index')->name('comments.index'); //コメント一覧表示
-        Route::post('comments/{id}/store', 'CommentsController@store')->name('comments.store'); //コメント保存
+        Route::get('comments/{bikeId}/{senderId}/{commentId}/index', 'CommentsController@index')->name('comments.index'); //コメントルーム一覧表示
+        Route::get('comments/{bikeId}/{senderId}/{commentId}/show', 'CommentsController@show')->name('comments.show'); //コメントルーム表示
+        Route::post('comments/{bikeId}/{recieverId}/store', 'CommentsController@store')->name('comments.store'); //コメント保存
     });

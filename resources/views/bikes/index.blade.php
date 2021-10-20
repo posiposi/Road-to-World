@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-   
     <div class="row text-warning">
         <h1>貸し出し可能自転車一覧</h1>
     </div>
@@ -30,8 +29,12 @@
                                     {!! Form::close() !!}
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
-                                    {!! link_to_route('comments.index', 'コメント画面へ', [$bike->id], ['class' => 'btn btn-success']) !!}
+                                    {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id, 'commentId' => $comments->id], ['class' => 'btn btn-success']) !!}
                                 </ul>
+                                {{-- 下記comments.showはcomments.indexへの移行が完了したら削除
+                                <ul class="list-group list-unstyled mt-3">
+                                    {!! link_to_route('comments.show', 'コメント画面へ', ['bikeId' => $bike->id, 'senderId' => $users->id], ['class' => 'btn btn-success']) !!}
+                                </ul>--}}
                             </div>
                         </div>
                     @endforeach

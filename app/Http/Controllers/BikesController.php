@@ -54,7 +54,10 @@ class BikesController extends Controller
     public function index(Request $request)
     {
         $bikes = \App\Bike::all();
-        return view('bikes.index', ['bikes' => $bikes]);
+        $users = \Auth::user();
+        $users_id = $users->id;
+        $comments = \App\Comment::find($users_id);
+        return view('bikes.index', ['bikes' => $bikes, 'users' => $users, 'comments' => $comments]);
     }
     
     //自転車情報変更画面表示
