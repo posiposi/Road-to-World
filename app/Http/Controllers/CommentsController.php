@@ -12,21 +12,25 @@ use Illuminate\Support\Facades\Auth;
 class CommentsController extends Controller
 {
     //コメントルーム一覧表示
-    public function index($bikeId, $senderId, $commentId)
+    public function index($bikeId, $senderId)
     {
-        $bikes = \App\Bike::find($bikeId);
-        $users = \Auth::user($senderId);
-        $comments = \App\Comment::find($commentId);
-        return view('comments.index', ['bikes' => $bikes, 'users' => $users, 'comments' => $comments,]);
+        $bikes = \App\Bike::findOrFail($bikeId);
+        $users = \App\User::all();
+        $sender = \App\User::findOrFail($senderId);
+        //$sender_comments = \App\Comment::find($senderId);
+        return view('comments.index', ['bikes' => $bikes, 'users' => $users, 'sender' => $sender, /*'sender_comments' => $sender_comments,*/]);
     }
     
     //コメントルーム表示
-    public function show($bikeId, $senderId, $commentId)
+    public function show($bikeId, $senderId)
     {
-        $bike = \App\Bike::where('id', $bikeId)->get();
-        $sender = \Auth::user($senderId);
-        $sender_comments = \App\Comment::where('sender_id', $commentId)->pluck('body');
-        return view('comments.show', ['bikes' => $bike, 'senderId' => $sender, 'sender_comments' => $sender_comments]);
+        $bike = \App\Bike::findOrFail($bikeId);
+        $reciever = \App\User::findOrFail($bike->user_id);
+        $sender = \App\User::findOrFail($senderId);
+        $sender_comments = \App\Comment::where('sender_id', $senderId)->pluck('body');
+        $reciever_comments = \App\Comment::where('reciever_id', $reciever->id)->pluck('body');
+        return view('comments.show', ['bikes' => $bike, 'sender' => $sender, 'sender_comments' => $sender_comments, 
+                    'reciever' => $reciever, 'reciever_comments' => $reciever_comments,]);
     }
     
     //コメント保存

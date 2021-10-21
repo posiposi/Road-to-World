@@ -29,7 +29,7 @@
                                     {!! Form::close() !!}
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
-                                    {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id, 'commentId' => $comments->id], ['class' => 'btn btn-success']) !!}
+                                    {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
                                 </ul>
                                 {{-- 下記comments.showはcomments.indexへの移行が完了したら削除
                                 <ul class="list-group list-unstyled mt-3">

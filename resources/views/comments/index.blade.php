@@ -14,13 +14,15 @@
             </tr>
             </thead>
             <tbody id="tbl">
+            @foreach ($users as $user)
                 <tr>
-                    <td>{{ $users->name }}</td>
-                    <td>{{ $users->created_at->format('Y.m.d') }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->created_at->format('Y.m.d') }}</td>
                     <td class="text-nowrap">
-                        {!! link_to_route('comments.show', 'コメント画面へ', ['bikeId' => $bikes->id, 'senderId' => $users->id, 'commentId' => $comments->id], ['class' => 'btn btn-info btn-sm']) !!}
+                        {!! link_to_route('comments.show', 'コメント画面へ', ['bikeId' => $bikes->id, 'senderId' => $sender->id,], ['class' => 'btn btn-info btn-sm']) !!}
                     </td>
                 </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
