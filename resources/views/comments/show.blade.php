@@ -32,20 +32,36 @@
             </div>
         </div>
     </div>
-    
     {{-- コメント投稿フォーム --}}
-    {!! Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $bikes->user_id]]) !!}
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-9">
-                    {!! Form::text('body', null, ['class' => 'form-control',]) !!}
-                </div>
-                <div class="col-md-3">
-                    {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
+    {{-- ユーザがバイク所有者でない場合 --}}
+    @if ($login_user != $bikes->user_id)
+        {!! Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $bikes->user_id,]]) !!} {{--recieverIdはバイクの所有者--}}
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-9">
+                        {!! Form::text('body', null, ['class' => 'form-control',]) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
+                    </div>
                 </div>
             </div>
-        </div>
-    {!! Form::close() !!}
+        {!! Form::close() !!}
+    {{-- ログインユーザがバイク所有者の場合 --}}
+    @else
+        {!! Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $sender->id]]) !!} {{--recieverIdはレンタル希望者--}}
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-9">
+                        {!! Form::text('body', null, ['class' => 'form-control',]) !!}
+                    </div>
+                    <div class="col-md-3">
+                        {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
+                    </div>
+                </div>
+            </div>
+        {!! Form::close() !!}
+    @endif
     
     {{-- コメント表示部 --}}
     <div class="row">
