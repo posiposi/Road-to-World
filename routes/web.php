@@ -46,4 +46,9 @@ Route::group(['middleware' => ['auth']], function ()
         Route::get('comments/{bikeId}/{senderId}/index', 'CommentsController@index')->name('comments.index'); //コメントルーム一覧表示
         Route::get('comments/{bikeId}/{senderId}/show', 'CommentsController@show')->name('comments.show'); //コメントルーム表示
         Route::post('comments/{bikeId}/{recieverId}/store', 'CommentsController@store')->name('comments.store'); //コメント保存
+        
+    //決済機能
+        Route::get('payment/index', 'PaymentsController@index')->name('index'); // 決済ボタンを表示するページ
+        Route::get('/payment', 'PaymentsController@payment')->name('payment'); // Stripeの処理
+        Route::get('/complete', 'PaymentsController@complete')->name('complete'); // 決済完了ページ
     });
