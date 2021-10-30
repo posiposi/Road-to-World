@@ -2,6 +2,7 @@
 
 @section('content')
     <form action="{{ asset('payment') }}" method="POST" class="text-center mt-5">
+        @csrf
         {{ csrf_field() }}
         <script
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"

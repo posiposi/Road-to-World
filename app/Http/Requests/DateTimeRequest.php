@@ -41,7 +41,7 @@ class DateTimeRequest extends FormRequest
             'end_date.required' => '終了日は必須です。',
             'end_time.required' => '終了時間は必須です。',
             'end_date_time.after' => '終了日時は開始日時より後日を指定してください。',
-            'start_date_time.after' => '開始日時は現在時刻よりも後日を指定してください。',
+            'start_date_time.after' => '開始日時は現在時刻よりも後を指定してください。',
         ];
     }
     

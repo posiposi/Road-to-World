@@ -22,7 +22,7 @@ class ReservationController extends Controller
         ->where('bike_id', $id) 
         ->where('start_at', '<', $reservation_end_at)
         ->where('end_at', '>', $reservation_start_at)
-        ->exists(); //希望日時が被ってるときはtrueを返す
+        ->exists(); //希望日時が被ってるときはtrueを返すメソッド
         
         
         if ($exists != true) { 
@@ -33,11 +33,13 @@ class ReservationController extends Controller
                 'start_at' => $request->start_date. ' ' .$request->start_time,
                 'end_at' => $request->end_date. ' ' .$request->end_time,
                 ]);
-            return back()->with('result', '予約が完了しました。');
+            return redirect()->route('payment.index');
+            //return back()->with('result', '予約が完了しました。');
         }
         //予約済みの場合
         else {
-            echo 'ご希望の時間は予約済みになっています。';
+            $test_alert = "<script type='text/javascript'>alert('ご希望の時間は予約済みになっています。');</script>";
+            echo $test_alert;
         }
     }
 }
