@@ -15,9 +15,16 @@ class CommentsController extends Controller
     public function index($bikeId, $senderId)
     {
         $bikes = \App\Bike::findOrFail($bikeId);
-        $users = \App\User::all(); //全ユーザの取得
-        //$sender = \App\User::findOrFail($senderId); //ログイン中ユーザの取得
-        return view('comments.index', ['bikes' => $bikes, 'users' => $users, /*'sender' => $sender*/]);
+        $users = \App\User::where('id', '!=', Auth::user()->id)->get();
+        $users_all = \App\User::where('id', '!=', $bikes->user_id)->get();
+        //dd($users_all);
+        $login_user = \Auth::id();
+        if($login_user != $bikes->user_id){
+            return view('comments.index', ['bikes' => $bikes, 'users' => $users_all]);
+        }
+        else{
+            return view('comments.index', ['bikes' => $bikes, 'users' => $users]);
+        }
     }
     
     //コメントルーム表示
@@ -32,13 +39,20 @@ class CommentsController extends Controller
         $reciever_comments = \App\Comment::where([['sender_id', $reciever->id], ['reciever_id', $sender->id], ['bike_id', $bike->id]])->pluck('body', 'id');
         //if文用インスタンス
         $login_user = \Auth::id(); //ログイン中ユーザid取得
-        if($login_user == $sender->id || $login_user == $reciever->id){
-            return view('comments.show', ['bikes' => $bike, 'login_user' => $login_user, 'sender' => $sender, 'sender_comments' => $sender_comments, 
-                    'reciever' => $reciever, 'reciever_comments' => $reciever_comments, 'login_user' => $login_user]);
+        //送信者が自転車の所有者でなければ
+        if($senderId != $bike->user_id){
+            if($login_user == $sender->id || $login_user == $reciever->id ){
+                return view('comments.show', ['bikes' => $bike, 'login_user' => $login_user, 'sender' => $sender, 'sender_comments' => $sender_comments, 
+                        'reciever' => $reciever, 'reciever_comments' => $reciever_comments, 'login_user' => $login_user]);
+            }
+            else{
+                return back();
+            }
         }
         else{
             return back();
         }
+
     }
     
     //コメント保存
