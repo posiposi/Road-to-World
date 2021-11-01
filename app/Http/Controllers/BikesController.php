@@ -27,6 +27,8 @@ class BikesController extends Controller
             'status' => 'required',
             'bike_address' => 'required',
             'image_path' => 'required | file | image | dimensions:max_width=1500,max_height=1500 | max:2048',
+            'price' => 'required | numeric',
+            'remark' => 'required | string',
         ]);
         
         //ユーザーのバイク情報登録
@@ -35,6 +37,8 @@ class BikesController extends Controller
             'name' => $request->name,
             'status' => $request->status,
             'bike_address' => $request->bike_address,
+            'price' => $request->price,
+            'remark' => $request->remark,
             'image_path' => $request->image_path,
         ]);
         
@@ -74,6 +78,8 @@ class BikesController extends Controller
             'name' => 'required',
             'status' => 'required',
             'bike_address' => 'required',
+            'price' => 'required | numeric',
+            'remark' => 'required | string',
             'image_path' => 'required | file | image | dimensions:max_width=1500,max_height=1500 | max:2048',
         ]);
         

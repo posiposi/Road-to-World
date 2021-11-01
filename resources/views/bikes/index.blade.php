@@ -20,6 +20,8 @@
                                     <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                     <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                                     <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
+                                    <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/1h </li>
+                                    <li class="list-group-item"> 説明・備考：{{ $bike->remark }} </li>
                                 </ul>
                                 <ul class="list-group list-unstyled border border-dark mt-3">
                                     {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
