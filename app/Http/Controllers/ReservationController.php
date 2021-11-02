@@ -25,7 +25,7 @@ class ReservationController extends Controller
         $start_carbon = new Carbon($reservation_start_at);
         $end_carbon = new Carbon($reservation_end_at);
         $time = $start_carbon->diffInMinutes($end_carbon);
-        //$time = $carbon_diff + (30 - $carbon_diff % 30); //30分単位で切り上げ
+        $time = $carbon_diff + (30 - $carbon_diff % 30); //30分単位で切り上げ
 
         //DB内で同一のbike_idかつ希望時間が重なるか確認、変数へ代入
         //予約確認・条件分岐
