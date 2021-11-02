@@ -20,13 +20,13 @@
                                     <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                     <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                                     <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
-                                    <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/1h </li>
+                                    <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/1分 </li>
                                     <li class="list-group-item"> 説明・備考：{{ $bike->remark }} </li>
                                 </ul>
                                 <ul class="list-group list-unstyled border border-dark mt-3">
                                     {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
-                                        <li class="list-group-item">開始時間　<input type="date" name="start_date"><input type="time" class="ml-1" name="start_time"></li>
-                                        <li class="list-group-item">終了時間　<input type="date" name="end_date"><input type="time" class="ml-1" name="end_time"></li>
+                                        <li class="list-group-item">開始時間　<input type="date" name="start_date"><input type="time" class="ml-1" name="start_time" step="900"></li>
+                                        <li class="list-group-item">終了時間　<input type="date" name="end_date"><input type="time" class="ml-1" name="end_time" step="900"></li>
                                         {!! Form::submit('予約', ['class' => 'btn btn-success btn-block']) !!}
                                     {!! Form::close() !!}
                                 </ul>

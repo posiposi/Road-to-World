@@ -9,12 +9,13 @@ use Stripe\Charge;
 
 class PaymentsController extends Controller
 {
-    public function index()
+    public function index($time, $price)
     {
-        return view('payments.index');
+        $amount = $time * $price;
+        return view('payments.index')->with('amount', $amount);
     }
     
-    public function payment(Request $request)
+    public function payment(Request $request, $amount)
     {
         try
         {
@@ -27,7 +28,7 @@ class PaymentsController extends Controller
 
             $charge = Charge::create(array(
                 'customer' => $customer->id,
-                'amount' => 1000,
+                'amount' => $amount,
                 'currency' => 'jpy'
             ));
 

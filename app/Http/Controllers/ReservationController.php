@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DateTimeRequest;
 use Carbon\Carbon;
+use App\Bike;
 
 class ReservationController extends Controller
 {
     //自転車予約メソッド
     public function store(DateTimeRequest $request, $id) {
-        
+        //自転車料金の取得
+        $bike = \App\Bike::find($id);
+        $bike_price = $bike->price;
+
         //開始日時リクエストを代入
         $reservation_start_at = $request->start_date. ' ' .$request->start_time;
         //終了日時リクエストを代入
@@ -20,8 +24,8 @@ class ReservationController extends Controller
         //Carbonメソッド使用
         $start_carbon = new Carbon($reservation_start_at);
         $end_carbon = new Carbon($reservation_end_at);
-        $carbon_diff = $start_carbon->diffInMinutes($end_carbon);
-        $time = $carbon_diff + (15 - $carbon_diff % 15); //15分単位で切り上げ
+        $time = $start_carbon->diffInMinutes($end_carbon);
+        //$time = $carbon_diff + (30 - $carbon_diff % 30); //30分単位で切り上げ
 
         //DB内で同一のbike_idかつ希望時間が重なるか確認、変数へ代入
         //予約確認・条件分岐
@@ -39,7 +43,11 @@ class ReservationController extends Controller
                 'start_at' => $request->start_date. ' ' .$request->start_time,
                 'end_at' => $request->end_date. ' ' .$request->end_time,
                 ]);
-            return redirect()->route('payment.index');
+            return redirect(route('payment.index',
+            [
+                'time' => $time,
+                'price' => $bike_price,
+            ]));
         }
         //予約済みの場合
         else {
