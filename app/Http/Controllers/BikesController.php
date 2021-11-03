@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Bike;
 use App\User;
+use Intervention\Image\Image;
 
 class BikesController extends Controller
 {
@@ -42,10 +43,16 @@ class BikesController extends Controller
             'image_path' => $request->image_path,
         ]);
         
-        //s3アップロード開始
-        $image = $bike->image_path;
+        //画像処理
+        $image = $bike->image_path; //画像取得
+        /*test = \Image::make($image)->encode('jpg'); //画像リサイズ・エンコード
+        $test->resize(10, 10, function($constraint){
+            $constraint->upsize();
+        })->save();
+        $file = $test; //request->file('image_path');*/
         // バケットの`myprefix`フォルダへアップロード
-        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $path = Storage::disk('s3')->put('myprefix/' . $name, $image, 'public');
         // アップロードした画像のフルパスを取得
         $url = Storage::disk('s3')->url($path);
         $bike->image_path = $url;
