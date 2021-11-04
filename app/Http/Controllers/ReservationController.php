@@ -24,7 +24,7 @@ class ReservationController extends Controller
         //Carbonメソッド使用
         $start_carbon = new Carbon($reservation_start_at);
         $end_carbon = new Carbon($reservation_end_at);
-        $time = $start_carbon->diffInMinutes($end_carbon);
+        $carbon_diff = $start_carbon->diffInMinutes($end_carbon);
         $time = $carbon_diff + (30 - $carbon_diff % 30); //30分単位で切り上げ
 
         //DB内で同一のbike_idかつ希望時間が重なるか確認、変数へ代入
@@ -42,6 +42,7 @@ class ReservationController extends Controller
                 [
                 'start_at' => $request->start_date. ' ' .$request->start_time,
                 'end_at' => $request->end_date. ' ' .$request->end_time,
+                'payment' => 0, //予約段階では未決済のためfalseとして0を挿入
                 ]);
             return redirect(route('payment.index',
             [
