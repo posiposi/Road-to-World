@@ -40,7 +40,7 @@ class AutoDeleteReservation extends Command
     public function handle()
     {
         $now = new Carbon('now'); //現在時刻の取得
-        $before_hour = $now->subHours(1); //現在から1時間前の取得
+        $before_hour = $now->subHours(24); //現在から24時間前の取得
         $reservations = \App\Reservation::where([['created_at', '<', $before_hour], ['payment', '=', 0]])->delete();
     }
 }
