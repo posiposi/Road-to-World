@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Reservation;
+use Carbon\Carbon;
 
 class AutoDeleteReservation extends Command
 {
@@ -38,7 +39,8 @@ class AutoDeleteReservation extends Command
      */
     public function handle()
     {
-        $reservation = \App\Reservation::where('payment', '==', 0)->get(); //未決済の予約を取得
-        $reservation->delete();
+        $now = new Carbon('now'); //現在時刻の取得
+        $before_hour = $now->subHours(24); //現在から24時間前の取得
+        $reservations = \App\Reservation::where([['created_at', '<', $before_hour], ['payment', '=', 0]])->delete();
     }
 }
