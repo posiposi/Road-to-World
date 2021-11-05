@@ -48,6 +48,9 @@ class ReservationController extends Controller
             [
                 'time' => $time,
                 'price' => $bike_price,
+                'bikeId' => $bike->id,
+                'startTime' => $start_carbon,
+                'endTime' => $end_carbon,
             ]));
         }
         //予約済みの場合

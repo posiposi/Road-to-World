@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Customer;
 use Stripe\Charge;
+use App\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentsController extends Controller
 {
-    public function index($time, $price)
+    public function index($time, $price, $bikeId, $startTime, $endTime)
     {
         $amount = $time * $price;
-        return view('payments.index')->with('amount', $amount);
+        return view('payments.index')
+        ->with(['amount' => $amount, 'bikeId' => $bikeId, 'startTime' => $startTime, 'endTime' => $endTime]);
     }
     
-    public function payment(Request $request, $amount)
+    public function payment(Request $request, $amount, $bikeId, $startTime, $endTime)
     {
         try
         {
@@ -31,6 +34,14 @@ class PaymentsController extends Controller
                 'amount' => $amount,
                 'currency' => 'jpy'
             ));
+            
+            //決済完了、DBへカラム変更の指示
+            $id = Auth::id();
+            $reservation = \App\Reservation::where([
+            ['user_id', $id], ['bike_id', $bikeId], ['start_at', $startTime], ['end_at', $endTime]
+            ])->first();
+            $reservation->payment = 1;
+            $reservation->save();
 
             return redirect()->route('complete');
         }
