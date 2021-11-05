@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('payment', ['amount' => $amount]) }}" method="POST" class="text-center mt-5">
+    <form action="{{ route('payment', ['amount' => $amount, 'bikeId' => $bikeId, 'startTime' => $startTime, 'endTime' => $endTime]) }}" 
+    method="POST" class="text-center mt-5">
         @csrf
         {{ csrf_field() }}
         <script
