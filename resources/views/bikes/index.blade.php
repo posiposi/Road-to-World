@@ -6,7 +6,7 @@
     </div>
     <div class="container">
         @if (count($bikes) > 0)
-            <div class="border border-dark card mt-3 mb-3" style="max-width: 1080px">
+            <div class="card mt-3 mb-3" style="max-width: 1080px">
                 <div class="row no-gutters ml-3">
                     @foreach ($bikes as $bike)
                         <div class="col-md-6 mt-3 mb-3">
@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="card-body">
-                                <ul class="list-group list-unstyled border border-dark">
+                                <ul class="list-group list-unstyled">
                                     <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
                                     <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
                                     <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
@@ -23,7 +23,7 @@
                                     <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/1分 </li>
                                     <li class="list-group-item"> 説明・備考：{{ $bike->remark }} </li>
                                 </ul>
-                                <ul class="list-group list-unstyled border border-dark mt-3">
+                                <ul class="list-group list-unstyled mt-3">
                                     {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
                                         <li class="list-group-item">開始時間　<input type="date" name="start_date"><input type="time" class="ml-1" name="start_time"></li>
                                         <li class="list-group-item">終了時間　<input type="date" name="end_date"><input type="time" class="ml-1" name="end_time"></li>
