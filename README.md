@@ -1,4 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+
+最初にロゴ・アイキャッチ画像などを表示
+
+# リポジトリ名
+
+概要を記述する
+
+
+## デモ
+
+![デモ](https://image-url.gif)
+
+
+## 使い方
+
+DEMOの実行方法など、"Webアプリ"の基本的な使い方を説明
+
+1. 使い方
+2. 使い方
+3. 使い方
+
+
+## 環境
+
+* 要件
+* 要件
+* 要件
+
+
+## 注意事項
+
+注意点などがあれば書く
+
+
+## 文責
+
+作成情報を列挙する
+
+* 作成者
+* 所属
+* E-mail
+* [@twitter_username](https://twitter.com/twitter_username)
+
+
+## ライセンス
+
+ライセンスを明示する
+
+"リポジトリ名" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+
+
+## 参考文献
+
+参考にした情報源（サイト・論文）などの情報、リンク
+
+```<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -76,3 +131,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
