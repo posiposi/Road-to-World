@@ -59,7 +59,7 @@
             <section id="about">
                 <div class="container">
                     <div class="row mb-4">
-                        <div class="col-md-8 mb-3">
+                        <div class="col-md-12 mb-3">
                             <h3 class="mb-3">Road to Worldについて</h3>
                             <p>このRoad to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。
                             購入・使用の敷居が高いロードバイクを借りることで新しい世界を見つけられるでしょう。
@@ -67,12 +67,6 @@
                             購入費用の回収とロードバイクの世界を多くの人に紹介する機会になります。
                             アプリ製作者の理念は上記を通じて日本の人々にロードバイクの世界を知ってもらうことにあります。</p>
                             <p>ロードバイクを借りて世界へ通じる'道'へ走り出しましょう！</p>
-                            {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
-                            {!! link_to_route('bikes.index', '貸出中バイク一覧', [], ['class' => 'btn btn-primary']) !!}
-                        </div>
-                    
-                        <div class="col-md-4">
-                            <img src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/4C258794-084E-4148-96C8-62784E38934C_1_105_c.jpeg" alt="ロードバイク" class="img-fluid">
                         </div>
                     </div>
                 </div>
