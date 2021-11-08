@@ -3,16 +3,18 @@
 @section('content')
     @if (Auth::check())
         <div class="py-4">
-            <div class="container">
-                <div id="main_visual" class="carousel slide carousel-fade" data-ride="carousel" data-wrap="true">
-                    <div class="carousel-inner">
-                        {{-- スライド01 --}}
-                        <div class="carousel-item active">
-                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/wallpaper2you_576757.jpg" alt="写真">
-                        </div>
-                        {{-- スライド02 --}}
-                        <div class="carousel-item">
-                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/gt_PC_W1920_H1080.png" alt="写真">
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="main_visual" class="col-sm-12 carousel slide carousel-fade" data-ride="carousel" data-wrap="true">
+                        <div class="carousel-inner">
+                            {{-- スライド01 --}}
+                            <div class="carousel-item active">
+                                <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/wallpaper2you_576757.jpg" alt="写真">
+                            </div>
+                            {{-- スライド02 --}}
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/gt_PC_W1920_H1080.png" alt="写真">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -20,7 +22,7 @@
         </div>
         <div class="py-4 bg-light">
             <section id="about">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <h3 class="mb-3">ようこそ自転車の世界へ！</h3>
@@ -38,16 +40,18 @@
         </div>
     @else{{-- 未ログインの場合 --}}
         <div class="py-4">
-            <div class="container">
-                <div id="main_visual" class="carousel slide carousel-fade" data-ride="carousel" data-wrap="true">
-                    <div class="carousel-inner">
-                        {{-- スライド01 --}}
-                        <div class="carousel-item active">
-                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/wallpaper2you_576757.jpg" alt="写真">
-                        </div>
-                        {{-- スライド02 --}}
-                        <div class="carousel-item">
-                            <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/gt_PC_W1920_H1080.png" alt="写真">
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="main_visual" class="col-sm-12 carousel slide carousel-fade" data-ride="carousel" data-wrap="true">
+                        <div class="carousel-inner">
+                            {{-- スライド01 --}}
+                            <div class="carousel-item active">
+                                <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/wallpaper2you_576757.jpg" alt="写真">
+                            </div>
+                            {{-- スライド02 --}}
+                            <div class="carousel-item">
+                                <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/gt_PC_W1920_H1080.png" alt="写真">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +59,7 @@
         </div>
         <div class="py-4 bg-light">
             <section id="about">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <h3 class="mb-3">ようこそ自転車の世界へ！</h3>
