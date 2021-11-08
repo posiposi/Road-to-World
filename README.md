@@ -4,11 +4,6 @@ PHP/Laravelで作成した自転車(主にロードバイクがターゲット)�
 
 ユーザは自身の自転車を登録することで貸し出し、レンタル希望者は登録された自転車を希望の時間で借りることができます。
 
-## デモ
-
-![デモ](https://image-url.gif)
-
-
 ## 使い方
 
 ここではRoad to Worldの基本的な使用方法を説明します。
@@ -26,7 +21,7 @@ PHP/Laravelで作成した自転車(主にロードバイクがターゲット)�
 
 ## 環境
 
-製作者の方で動作確認できている環境は下記です。
+動作確認できている環境は下記です。
 
 * OS：macOS BigSur 11.6
 * ブラウザ：Google Chrome 95.0.4638.69
@@ -40,19 +35,4 @@ PHP/Laravelで作成した自転車(主にロードバイクがターゲット)�
 
 ## 文責
 
-作成情報を列挙する
-
 * 作成者 Daichi Sugiyama
-* 所属
-* E-mail 
-* [@twitter_username](https://twitter.com/twitter_username)
-
-
-## ライセンス
-
-ライセンスを明示する
-
-"リポジトリ名" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
-
-
-## 参考文献
