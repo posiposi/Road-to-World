@@ -23,7 +23,7 @@
                         {{-- ユーザ一覧ページへのリンク --}}
                         {{--<li class="nav-item"><a href="#" class="nav-link">Users</a></li>--}}
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                            <a href="#" class="nav-link text-dark dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 {{-- ユーザ詳細ページへのリンク --}}
                                 <li class="dropdown-item">{!! link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-primary']) !!}</li>
