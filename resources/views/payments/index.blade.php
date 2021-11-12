@@ -11,7 +11,7 @@
             data-amount="{{ $amount }}"
             data-name="Stripe Demo"
             data-label="決済をする"
-            data-description="これはStripeのデモです。"
+            data-description="1時間以内に決済されない場合、予約はキャンセルされます。"
             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
             data-locale="auto"
             data-currency="JPY">
