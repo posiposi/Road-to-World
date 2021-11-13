@@ -29,7 +29,7 @@
                     </div>
                     
                     <div class="form-group">
-                        {!! Form::label('price', '1分あたり料金') !!}
+                        {!! Form::label('price', '料金(30分あたり)') !!}
                         {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => '価格はコンマなしで記入してください。']) !!}
                     </div>
                 
