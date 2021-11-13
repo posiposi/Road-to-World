@@ -9,9 +9,9 @@
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="{{ env('STRIPE_KEY') }}"
             data-amount="{{ $amount }}"
-            data-name="Stripe Demo"
+            data-name="決済情報入力"
             data-label="決済をする"
-            data-description="1時間以内に決済されない場合、予約はキャンセルされます。"
+            data-description="1時間以内の決済をお願いします。"
             data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
             data-locale="auto"
             data-currency="JPY">
