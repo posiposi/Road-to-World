@@ -25,13 +25,7 @@
                                 </ul>
                                 <ul class="list-group list-unstyled border border-dark mt-3">
                                     {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
-                                        <li class="list-group-item">開始時間　<input type="date" name="start_date">
-                                            <select name="start_time">
-                                                <option value="10:00">10:00</option>
-                                                <option value="10:30">10:30</option>
-                                                <option value="11:00">11:00</option>
-                                            </select>
-                                        </li>
+                                        <li class="list-group-item">開始時間　<input type="date" name="start_date"><input type="time" class="ml-1" name="start_time"></li>
                                         <li class="list-group-item">終了時間　<input type="date" name="end_date"><input type="time" class="ml-1" name="end_time"></li>
                                         {!! Form::submit('予約', ['class' => 'btn btn-success btn-block']) !!}
                                     {!! Form::close() !!}
