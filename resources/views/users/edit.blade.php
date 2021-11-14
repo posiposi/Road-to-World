@@ -28,11 +28,6 @@
                         {!! Form::password('password', ['class' => 'form-control']) !!}
                     </div>
     
-                    {{--<div class="form-group">
-                        {!! Form::label('password_confirmation', 'パスワード確認') !!}
-                        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
-                    </div>--}}
-    
                     {!! Form::submit('変更', ['class' => 'btn btn-success btn-block']) !!}
                 {!! Form::close() !!}
             </div>
