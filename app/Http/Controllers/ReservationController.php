@@ -13,6 +13,7 @@ class ReservationController extends Controller
     //自転車予約メソッド
     public function store(DateTimeRequest $request, $id) {
         //自転車料金の取得
+        dd($times);
         $bike = \App\Bike::find($id);
         $bike_price = $bike->price;
 
