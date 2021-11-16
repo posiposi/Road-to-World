@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Bike;
 use App\User;
 use Intervention\Image\Image;
+use DateTime;
+use Carbon\Carbon;
 
 class BikesController extends Controller
 {
@@ -66,7 +68,11 @@ class BikesController extends Controller
     {
         $bikes = \App\Bike::all();
         $users = Auth::user();
-        return view('bikes.index', ['bikes' => $bikes, 'users' => $users]);
+        $times = [];
+        for ($i = 0; $i < 48; $i++){
+            $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
+        };
+        return view('bikes.index', ['bikes' => $bikes, 'users' => $users, 'times' => $times]);
     }
     
     //自転車情報変更画面表示

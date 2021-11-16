@@ -26,9 +26,19 @@
                                 <ul class="list-group list-unstyled mt-3">
                                     {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
                                         <li class="list-group-item">開始時間　<input type="date" name="start_date">
-                                        <input type="time" class="ml-1" name="start_time"></li>
+                                        <select name="start_time">
+                                            @foreach($times as $time)
+                                                <option value ="{{ $time }}">{{ $time }}</option>
+                                            @endforeach
+                                        </select>
+                                        </li>
                                         <li class="list-group-item">終了時間　<input type="date" name="end_date">
-                                        <input type="time" class="ml-1" name="end_time"></li>
+                                        <select name="end_time">
+                                            @foreach($times as $time)
+                                                <option value ="{{ $time }}">{{ $time }}</option>
+                                            @endforeach
+                                        </select>
+                                        </li>
                                         {!! Form::submit('予約', ['class' => 'btn btn-success btn-block']) !!}
                                     {!! Form::close() !!}
                                 </ul>
