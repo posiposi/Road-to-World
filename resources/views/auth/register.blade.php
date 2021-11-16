@@ -21,7 +21,7 @@
                 
                 <div class="form-group">
                     {!! Form::label('tel', '電話番号') !!}
-                    {!! Form::number('tel', null, ['class' => 'form-control'])!!}
+                    {!! Form::number('tel', null, ['class' => 'form-control', 'placeholder' => '半角、ハイフン無しで入力してください。'])!!}
                 </div>
 
                 <div class="form-group">
