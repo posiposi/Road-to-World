@@ -68,11 +68,11 @@ class BikesController extends Controller
     {
         $bikes = \App\Bike::all();
         $users = Auth::user();
-        $time = [];
+        $times = [];
         for ($i = 0; $i < 48; $i++){
-            $time[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
+            $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
         };
-        return view('bikes.index', ['bikes' => $bikes, 'users' => $users, 'time' => $time]);
+        return view('bikes.index', ['bikes' => $bikes, 'users' => $users, 'times' => $times]);
     }
     
     //自転車情報変更画面表示

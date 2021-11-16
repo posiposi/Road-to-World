@@ -27,15 +27,15 @@
                                     {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
                                         <li class="list-group-item">開始時間　<input type="date" name="start_date">
                                         <select name="start_time">
-                                            @foreach($time as $times)
-                                                <option value ="time">{{ $times }}</option>
+                                            @foreach($times as $time)
+                                                <option value ="{{ $time }}">{{ $time }}</option>
                                             @endforeach
                                         </select>
                                         </li>
                                         <li class="list-group-item">終了時間　<input type="date" name="end_date">
                                         <select name="end_time">
-                                            @foreach($time as $times)
-                                                <option value ="time">{{ $times }}</option>
+                                            @foreach($times as $time)
+                                                <option value ="{{ $time }}">{{ $time }}</option>
                                             @endforeach
                                         </select>
                                         </li>
