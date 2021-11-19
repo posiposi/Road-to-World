@@ -9,7 +9,11 @@
             {{-- ユーザアバター --}}
             <div class="col-md-6">
                 <div class="card-body">
+                    @if($auth->image != null)
                     <img class="card-img img-fluid" style="max-height:1080px" src="{{ $auth->image }}" alt="ユーザアバター画像">
+                    @else
+                    <img class="card-img img-fluid" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/nc96424.jpg" alt="デフォルトアバター画像">
+                    @endif
                     <div class="form-group">
                         {!! Form::open(['route' => 'users.store', 'files' => true]) !!}
                             {!! Form::file('image', ['class' => 'form-contorol-file']) !!}
