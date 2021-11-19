@@ -31,7 +31,7 @@ PHP/Laravelで作成した自転車(主にロードバイクがターゲット)�
 
 なお、決済機能については本格的な運用を開始するまで、しばらくの間テスト状態としておきます。ご了承ください。
 
-<https://github.com/posiposi/Road-to-World/blob/main/app/Http/Controllers/ReservationController.php#L32-36>
+<https://github.com/posiposi/Road-to-World/blob/main/app/Http/Controllers/ReservationController.php#L32-L36>
 
 ## 使い方
 
