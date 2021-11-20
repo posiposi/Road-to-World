@@ -26,8 +26,8 @@ class UserRegisterRequest extends FormRequest
         return [
             'tel' => 'required | numeric | digits_between:10,11',
             'name' => 'required | string | max:255',
-            'email' => 'required | string | email | max:255 | unique:users',
-            'password' => 'required | string | min:8 | confirmed',
+            'email' => 'required | string | email | max:255',
+            'password' => 'required | string | min:8',
         ];
     }
     
@@ -39,10 +39,8 @@ class UserRegisterRequest extends FormRequest
             'email.required' => 'メールアドレスを入力してください。',
             'email.email' => '正しいメールアドレスを入力してください。',
             'email.max' => 'メールアドレスは255文字以内で入力してください。',
-            'email.unique' => 'そのメールアドレスはすでに登録されています。',
             'password.required' => 'パスワードを入力してください。',
             'password.min' => 'パスワードは最低8文字必要です。',
-            'password.confirmed' => '入力されたパスワードが一致しません。',
             'tel.required' => '電話番号を入力してください。',
             'tel.numeric' => '電話番号は半角数字、ハイフン無しで入力してください。',
             'tel.digits_between' => '電話番号は10文字、または11文字で入力してください。',

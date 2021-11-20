@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Bike;
 use Storage;
+use App\Http\Requests\UserRegisterRequest;
 
 class UsersController extends Controller
 {
