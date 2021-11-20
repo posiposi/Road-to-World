@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Bike;
 use Storage;
+use App\Http\Requests\UserRegisterRequest;
 
 class UsersController extends Controller
 {
@@ -47,7 +48,7 @@ class UsersController extends Controller
     }
     
     //ユーザ情報変更
-    public function update(Request $request, $id)
+    public function update(UserRegisterRequest $request, $id)
     {
         // 対象レコード取得
         $auth = User::findOrFail($id);
