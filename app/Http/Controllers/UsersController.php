@@ -47,7 +47,7 @@ class UsersController extends Controller
     }
     
     //ユーザ情報変更
-    public function update(Request $request, $id)
+    public function update(UserRegisterRequest $request, $id)
     {
         // 対象レコード取得
         $auth = User::findOrFail($id);
