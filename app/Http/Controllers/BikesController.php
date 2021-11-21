@@ -11,6 +11,7 @@ use App\User;
 use Intervention\Image\Image;
 use DateTime;
 use Carbon\Carbon;
+use App\Http\Requests\BikeRegisterRequest;
 
 class BikesController extends Controller
 {
@@ -21,19 +22,8 @@ class BikesController extends Controller
     }
     
     //自転車登録
-    public function store(Request $request)
+    public function store(BikeRegisterRequest $request)
     {
-        //バリデーション
-        $request->validate([
-            'brand' => 'required',
-            'name' => 'required',
-            'status' => 'required',
-            'bike_address' => 'required',
-            'image_path' => 'required | file | image | dimensions:max_width=1500,max_height=1500 | max:2048',
-            'price' => 'required | numeric',
-            'remark' => 'required | string',
-        ]);
-        
         //ユーザーのバイク情報登録
         $bike = $request->user()->bikes()->create([
             'brand' => $request->brand,
@@ -83,19 +73,8 @@ class BikesController extends Controller
     }
     
     //自転車情報変更
-    public function update(Request $request, $id)
+    public function update(BikeRegisterRequest $request, $id)
     {
-        //バリデーション
-        $request->validate([
-            'brand' => 'required',
-            'name' => 'required',
-            'status' => 'required',
-            'bike_address' => 'required',
-            'price' => 'required | numeric',
-            'remark' => 'required | string',
-            'image_path' => 'required | file | image | dimensions:max_width=1500,max_height=1500 | max:2048',
-        ]);
-        
         $bike = Bike::findOrFail($id);
         $form = $request->all();
         $bike->fill($form)->save();
