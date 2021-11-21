@@ -33,7 +33,7 @@ class ReservationController extends Controller
         ->where('bike_id', $id) 
         ->where('start_at', '<', $reservation_end_at)
         ->where('end_at', '>', $reservation_start_at)
-        ->exists(); //希望日時が被ってるときはtrueを返すメソッド
+        ->exists();
         
         if ($exists != true) { 
         //予約アクション
