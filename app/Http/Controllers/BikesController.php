@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Bike;
 use App\User;
+use App\Reservation;
 use Carbon\Carbon;
 use DateTime;
 use Intervention\Image\Image;
@@ -117,14 +118,15 @@ class BikesController extends Controller
         return back();
     }
     
-    public function calendar()
+    public function calendar($bikeId, $senderId)
     {
+        $reservations = \App\Bike::find($bikeId)->reservations;
         $times = [];
         $minutes = [];
         for ($i = 0; $i < 24; $i++){
             $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
         };
 
-        return view('calendars.index', ['times' => $times, 'minutes' => $minutes]);
+        return view('calendars.index', ['times' => $times, 'minutes' => $minutes, 'reservations' => $reservations]);
     }
 }
