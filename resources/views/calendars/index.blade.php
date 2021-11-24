@@ -39,6 +39,11 @@
     
     <body>
             <h1>予約状況カレンダー</h1>
+
+            {{ Form::submit('<<', ['class'=>'btn btn-succes']) }}
+            2021年12月
+            {{ Form::submit('>>', ['class'=>'btn btn-succes']) }}
+
         @foreach($reservations as $reservation)
             <div class="cotainer">
                 <div class="row">
