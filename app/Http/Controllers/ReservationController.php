@@ -59,4 +59,20 @@ class ReservationController extends Controller
             echo $test_alert;
         }
     }
+    
+    public function index($bikeId, $senderId)
+    {
+        $reservations = \App\Bike::find($bikeId)->reservations;
+        $now = Carbon::now();
+        $week = $now->weekNumberInMonth;
+        $month = $now->month;
+
+        $times = [];
+        $minutes = [];
+        for ($i = 0; $i < 24; $i++){
+            $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
+        };
+
+        return view('calendars.index', ['times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);
+    }
 }
