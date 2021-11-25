@@ -105,7 +105,7 @@ class ReservationController extends Controller
         $year = $nextweek->year;
         $month = $nextweek->month;
         $day = $nextweek->day;
-    
+
         $times = [];
         $minutes = [];
         for ($i = 0; $i < 24; $i++){
