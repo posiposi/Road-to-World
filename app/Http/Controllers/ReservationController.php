@@ -96,4 +96,23 @@ class ReservationController extends Controller
         return view('calendars.index', 
             ['bikeId' => $bikeId, 'year' => $year, 'day' => $day, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);
     }
+    
+    public function nextmonth($bikeId, $year, $month, $day, $week) {
+        $reservations = \App\Bike::find($bikeId)->reservations;
+        $now = Carbon::createMidnightDate($year, $month, $day);
+        $nextweek = $now->addweek();
+        $week = $nextweek->weekNumberInMonth;
+        $year = $nextweek->year;
+        $month = $nextweek->month;
+        $day = $nextweek->day;
+    
+        $times = [];
+        $minutes = [];
+        for ($i = 0; $i < 24; $i++){
+            $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
+        };
+        
+        return view('calendars.index', 
+            ['bikeId' => $bikeId, 'year' => $year, 'day' => $day, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);    
+    }
 }

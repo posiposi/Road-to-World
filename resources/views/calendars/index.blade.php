@@ -40,9 +40,9 @@
     <body>
 
             <h1>予約状況カレンダー</h1>
-
-                {!! link_to_route('calendar.last', '<<', ['year' => $year, 'month' => $month, 'day' => $day, 'week' => $week, 'bikeId' => $bikeId,]) !!}
-                {{ $month }} 月 第{{ $week }}週
+        {!! link_to_route('calendar.last', '<<', ['year' => $year, 'month' => $month, 'day' => $day, 'week' => $week, 'bikeId' => $bikeId,]) !!}
+        {{ $month }} 月 第{{ $week }}週
+        {!! link_to_route('calendar.next', '>>', ['year' => $year, 'month' => $month, 'day' => $day, 'week' => $week, 'bikeId' => $bikeId,]) !!}
 
         @foreach($reservations as $reservation)
             <div class="cotainer">
