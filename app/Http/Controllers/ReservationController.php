@@ -60,12 +60,13 @@ class ReservationController extends Controller
         }
     }
     
-    public function index($bikeId, $senderId)
-    {
+    public function index($bikeId, $senderId) {
         $reservations = \App\Bike::find($bikeId)->reservations;
         $now = Carbon::now();
         $week = $now->weekNumberInMonth;
+        $year = $now->year;
         $month = $now->month;
+        $day = $now->day;
 
         $times = [];
         $minutes = [];
@@ -73,6 +74,26 @@ class ReservationController extends Controller
             $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
         };
 
-        return view('calendars.index', ['times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);
+        return view('calendars.index', 
+            ['bikeId' => $bikeId, 'year' => $year, 'day' => $day, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);
+    }
+    
+    public function lastmonth($bikeId, $year, $month, $day, $week) {
+        $reservations = \App\Bike::find($bikeId)->reservations;
+        $now = Carbon::createMidnightDate($year, $month, $day);
+        $lastweek = $now->subweek();
+        $week = $lastweek->weekNumberInMonth;
+        $year = $lastweek->year;
+        $month = $lastweek->month;
+        $day = $lastweek->day;
+        
+        $times = [];
+        $minutes = [];
+        for ($i = 0; $i < 24; $i++){
+            $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
+        };
+        
+        return view('calendars.index', 
+            ['bikeId' => $bikeId, 'year' => $year, 'day' => $day, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);
     }
 }

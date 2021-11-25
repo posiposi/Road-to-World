@@ -38,10 +38,12 @@
     </head>
     
     <body>
+
             <h1>予約状況カレンダー</h1>
-            {{ Form::submit('<<', ['class'=>'btn btn-succes']) }}
-            {{ $month }} 月 第{{ $week }}週
-            {{ Form::submit('>>', ['class'=>'btn btn-succes']) }}
+
+                {!! link_to_route('calendar.last', '<<', ['year' => $year, 'month' => $month, 'day' => $day, 'week' => $week, 'bikeId' => $bikeId,]) !!}
+                {{ $month }} 月 第{{ $week }}週
+
         @foreach($reservations as $reservation)
             <div class="cotainer">
                 <div class="row">
