@@ -73,7 +73,6 @@ class ReservationController extends Controller
         for ($i = 0; $i < 24; $i++){
             $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
         };
-
         return view('calendars.index', 
             ['bikeId' => $bikeId, 'year' => $year, 'day' => $day, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);
     }
