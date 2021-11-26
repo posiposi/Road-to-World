@@ -12,8 +12,6 @@ use App\Reservation;
 use Carbon\Carbon;
 use DateTime;
 use Intervention\Image\Image;
-use DateTime;
-use Carbon\Carbon;
 use App\Http\Requests\BikeRegisterRequest;
 
 class BikesController extends Controller
