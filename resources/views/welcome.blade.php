@@ -24,9 +24,9 @@
                 </div>
             </div>
         </div>
-        <div class="py-4 bg-light">
+        <div class="py-4">
             <section id="about">
-                <div class="container-fluid">
+                <div class="container-fluid bg-light">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <h3 class="mb-3">ようこそ自転車の世界へ！</h3>
@@ -66,9 +66,9 @@
                 </div>
             </div>
         </div>
-        <div class="py-4 bg-light">
+        <div class="py-4">
             <section id="about">
-                <div class="container-fluid">
+                <div class="container-fluid bg-light">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
                             <h3 class="mb-3">ようこそ自転車の世界へ！</h3>
