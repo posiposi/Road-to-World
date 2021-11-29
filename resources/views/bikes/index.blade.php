@@ -11,13 +11,11 @@
     </div>
     <div class="container">
         @if (count($bikes) > 0)
-            <div class="card mt-3 mb-3" style="max-width: 1080px">
-                <div class="row no-gutters ml-3">
-                    @foreach ($bikes as $bike)
-                        <div class="col-md-6 mt-3 mb-3">
+            <div class="card-group">
+                @foreach ($bikes as $bike)
+                    <div class="card mt-3 mb-3" style="width: 50;">
+                        <div class="bd-placeholder-img card-img-top row">
                             <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
-                        </div>
-                        <div class="col-md-6">
                             <div class="card-body shadow-sm">
                                 <ul class="list-group list-unstyled">
                                     <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
@@ -55,8 +53,8 @@
                                 </ul>
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             </div>
         @else
             <h4>現在貸し出し可能な自転車はありません。</h4>
