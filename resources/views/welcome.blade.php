@@ -29,7 +29,7 @@
                 <div class="container-fluid bg-light">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <h3 class="mb-3">ようこそ自転車の世界へ！</h3>
+                            <h3 class="my-3">ようこそ自転車の世界へ！</h3>
                             <h4>一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</h4>
                             <p>このRoad to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。
                             購入・使用の敷居が高いロードバイクを借りることで新しい世界を見つけられるでしょう。
@@ -71,7 +71,7 @@
                 <div class="container-fluid bg-light">
                     <div class="row mb-4">
                         <div class="col-md-12 mb-3">
-                            <h3 class="mb-3">ようこそ自転車の世界へ！</h3>
+                            <h3 class="my-3">ようこそ自転車の世界へ！</h3>
                             <h4>一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</h4>
                             <p>このRoad to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。<br>
                             購入・使用の敷居が高いロードバイクを借りることで新しい世界を見つけられるでしょう。<br>
