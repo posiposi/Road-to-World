@@ -17,7 +17,8 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script src="jquery.datetimepicker.js"></script>
         <link rel="stylesheet" href="jquery.datetimepicker.css">
-        <link rel="stylesheet" href="{{ asset('css/welcomepage.css') }}">
+        {{-- 子ページ個別のcss読み込み --}}
+        @stack('css')
     </head>
 
     <body>
