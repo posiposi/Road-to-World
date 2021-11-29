@@ -31,4 +31,10 @@ class Bike extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    
+    //一対多の記述(バイクは複数の予約を所持)
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

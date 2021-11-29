@@ -1,78 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 自転車レンタルシェアサービス Road to World
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+PHP/Laravelで作成した自転車(主にロードバイクがターゲット)のレンタルシェアサービスです。
 
-## About Laravel
+ユーザは自身の自転車を登録することで貸し出し、レンタル希望者は登録された自転車を希望の時間で借りることができます。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+料金も貸出し側が自由に設定することができます。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 実装した主な機能
+1. Amazon S3を使用しての画像登録および表示機能
+2. Laravel CashierによるStripeでの決済機能
+3. 貸出し側、レンタル側のやり取りのためのコメント機能
+4. ログイン機能
+5. 自転車の登録・登録情報変更機能
+6. ユーザの登録・登録情報変更機能
+7. レンタルしたい日時の30分単位での指定予約機能
+8. 未決済の予約を自動削除するコマンド、タスクスケジュールの設定
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## アピールポイント
+まだまだ改善途上ではありますが、レンタルのための最低限の機能は実装できました。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+実装面では特にレンタル日時が多数ユーザで重ならないように、動的バリデーションを設定するのに苦労しました。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+下記にバリデーション該当部分のソースコードリンクを貼っておきますので、実際に見て頂けると幸いです。
 
-## Laravel Sponsors
+また、タスクスケジュールについても自動で未決済予約を削除する機能を実装しています。
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+コマンドを自分で作成する必要がありましたので、自分で調べながら解決する良い経験になりました。
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+なお、決済機能については本格的な運用を開始するまで、しばらくの間テスト状態としておきます。ご了承ください。
 
-## Contributing
+<https://github.com/posiposi/Road-to-World/blob/main/app/Http/Controllers/ReservationController.php#L32-L36>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## 修正予定ポイント
+現段階で改善を予定している点、実装機能は下記です。
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. カルーセル画像の高さ統一
+2. 自転車とユーザの登録画像オートリサイズ機能
+3. コメント更新日時の表示設定
+4. 予約状況の確認カレンダー
+5. 未決済者の決済ページへのリンク
 
-## Security Vulnerabilities
+他にも細かい修正点はあるとは思いますが、現段階ではまず上記から改善を行っていく予定です。
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+## 使い方
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+ここではRoad to Worldの基本的な使用方法を説明します。
+
+1. 初めて使用する方は上部ナビゲーションバーからユーザ登録を選択、ユーザ登録を行ってください。
+![スクリーンショット 2021-11-06 16 45 29](https://user-images.githubusercontent.com/88781098/140688243-109b2bc9-81ad-462e-9b04-9ec8f37abe83.png)
+
+2. ユーザ登録が完了したらユーザページをクリック、早速自転車を登録してみましょう。
+![スクリーンショット 2021-11-06 16 46 13](https://user-images.githubusercontent.com/88781098/140688343-4b1ef96f-a1e9-46cd-8b72-9c8ea5939a7c.png)
+
+3. 自転車を借りたい時は貸出中バイク一覧の中から、借りたい自転車をピックアップして時間指定して予約をクリック。
+![スクリーンショット 2021-11-06 16 46 36](https://user-images.githubusercontent.com/88781098/140688408-893e2565-2cf4-405f-8060-6dd004baa554.png)
+
+4. 予約ボタンをクリックすると仮予約となります。1時間以内に決済を行って予約を確定してください。
+![スクリーンショット 2021-11-13 14 58 37](https://user-images.githubusercontent.com/88781098/141607796-2c215680-2fab-4f32-bf70-56df6d89604e.png)
+
+5. 借りる前に気になる点があったら、コメントルーム一覧を選択して自分の名前をレンタル希望者欄からクリック。
+![スクリーンショット 2021-11-13 14 57 02](https://user-images.githubusercontent.com/88781098/141607733-ac4adeca-af90-4d5c-8964-fa96a7f4b69c.png)
+
+6. コメントを投稿して貸出者とやり取りをしましょう。
+![スクリーンショット 2021-11-13 14 57 35](https://user-images.githubusercontent.com/88781098/141607745-aebf1cfc-03e5-467a-a9a8-5805c72c63ba.png)
+
+
+## 環境
+
+動作確認できている環境は下記です。
+
+* OS：macOS BigSur 11.6
+* ブラウザ：Google Chrome 95.0.4638.69
+* 開発環境：PHP 7.3.31-2　Laravel 6.20.34
+
+## 文責
+
+* 作成者 Daichi Sugiyama

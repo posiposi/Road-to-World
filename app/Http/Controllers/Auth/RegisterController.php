@@ -56,8 +56,8 @@ class RegisterController extends Controller
         'password.min' => 'パスワードは最低8文字必要です。',
         'password.confirmed' => '入力されたパスワードが一致しません。',
         'tel.required' => '電話番号を入力してください。',
-        'tel.numeric' => '電話番号は数字で入力してください。',
-        'tel.digits_between' => '電話番号は10文字、あるいは11文字で入力してください。',
+        'tel.numeric' => '電話番号は半角数字、ハイフン無しで入力してください。',
+        'tel.digits_between' => '電話番号は10文字、または11文字で入力してください。',
     ];
     
     /**
@@ -68,7 +68,6 @@ class RegisterController extends Controller
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //'image' => ['required'], //登録画面に画像フォームはないがバリデーション必須？
         'tel' => ['required', 'numeric', 'digits_between:10,11'],
     ];
     
