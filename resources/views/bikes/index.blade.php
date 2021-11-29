@@ -1,12 +1,17 @@
 @extends('layouts.app')
 
+{{-- 画像リサイズ --}}
+@push('css')
+    <link href="{{ asset('/css/picture.css') }}" rel="stylesheet">
+@endpush
+
 @section('content')
     <div class="row text-warning">
         <h1>貸し出し可能自転車一覧</h1>
     </div>
     <div class="container">
         @if (count($bikes) > 0)
-            <div class="border border-dark card mt-3 mb-3" style="max-width: 1080px">
+            <div class="border border-dark card mt-3 mb-3">
                 <div class="row no-gutters ml-3">
                     @foreach ($bikes as $bike)
                         <div class="col-md-6 mt-3 mb-3">
