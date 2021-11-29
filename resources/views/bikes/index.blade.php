@@ -13,7 +13,7 @@
                             <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
                         </div>
                         <div class="col-md-6">
-                            <div class="card-body">
+                            <div class="card-body shadow-sm">
                                 <ul class="list-group list-unstyled">
                                     <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
                                     <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
