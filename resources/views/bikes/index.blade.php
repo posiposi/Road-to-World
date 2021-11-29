@@ -20,18 +20,33 @@
                                     <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                     <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                                     <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
-                                    <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/1分 </li>
+                                    <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/30分 </li>
                                     <li class="list-group-item"> 説明・備考：{{ $bike->remark }} </li>
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
                                     {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
-                                        <li class="list-group-item">開始時間　<input type="date" name="start_date"><input type="time" class="ml-1" name="start_time"></li>
-                                        <li class="list-group-item">終了時間　<input type="date" name="end_date"><input type="time" class="ml-1" name="end_time"></li>
+                                        <li class="list-group-item">開始時間　<input type="date" name="start_date">
+                                        <select name="start_time">
+                                            @foreach($times as $time)
+                                                <option value ="{{ $time }}">{{ $time }}</option>
+                                            @endforeach
+                                        </select>
+                                        </li>
+                                        <li class="list-group-item">終了時間　<input type="date" name="end_date">
+                                        <select name="end_time">
+                                            @foreach($times as $time)
+                                                <option value ="{{ $time }}">{{ $time }}</option>
+                                            @endforeach
+                                        </select>
+                                        </li>
                                         {!! Form::submit('予約', ['class' => 'btn btn-success btn-block']) !!}
                                     {!! Form::close() !!}
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
                                     {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
+                                </ul>
+                                <ul class="list-group list-unstyled mt-3">
+                                    {!! link_to_route('bikes.calendar', '予約状況カレンダー', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
                                 </ul>
                             </div>
                         </div>

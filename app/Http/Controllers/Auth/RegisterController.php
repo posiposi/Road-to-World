@@ -68,7 +68,6 @@ class RegisterController extends Controller
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //'image' => ['required'], //登録画面に画像フォームはないがバリデーション必須？
         'tel' => ['required', 'numeric', 'digits_between:10,11'],
     ];
     

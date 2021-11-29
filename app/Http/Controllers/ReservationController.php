@@ -25,7 +25,7 @@ class ReservationController extends Controller
         $start_carbon = new Carbon($reservation_start_at);
         $end_carbon = new Carbon($reservation_end_at);
         $carbon_diff = $start_carbon->diffInMinutes($end_carbon);
-        $time = $carbon_diff + (30 - $carbon_diff % 30); //30分単位で切り上げ
+        $time = $carbon_diff / 30;
 
         //DB内で同一のbike_idかつ希望時間が重なるか確認、変数へ代入
         //予約確認・条件分岐
@@ -33,7 +33,7 @@ class ReservationController extends Controller
         ->where('bike_id', $id) 
         ->where('start_at', '<', $reservation_end_at)
         ->where('end_at', '>', $reservation_start_at)
-        ->exists(); //希望日時が被ってるときはtrueを返すメソッド
+        ->exists();
         
         if ($exists != true) { 
         //予約アクション
@@ -58,5 +58,60 @@ class ReservationController extends Controller
             $test_alert = "<script type='text/javascript'>alert('ご希望の時間は予約済みになっています。');</script>";
             echo $test_alert;
         }
+    }
+    
+    public function index($bikeId, $senderId) {
+        $reservations = \App\Bike::find($bikeId)->reservations;
+        $now = Carbon::now();
+        $week = $now->weekNumberInMonth;
+        $year = $now->year;
+        $month = $now->month;
+        $day = $now->day;
+
+        $times = [];
+        $minutes = [];
+        for ($i = 0; $i < 24; $i++){
+            $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
+        };
+        return view('calendars.index', 
+            ['bikeId' => $bikeId, 'year' => $year, 'day' => $day, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);
+    }
+    
+    public function lastmonth($bikeId, $year, $month, $day, $week) {
+        $reservations = \App\Bike::find($bikeId)->reservations;
+        $now = Carbon::createMidnightDate($year, $month, $day);
+        $lastweek = $now->subweek();
+        $week = $lastweek->weekNumberInMonth;
+        $year = $lastweek->year;
+        $month = $lastweek->month;
+        $day = $lastweek->day;
+        
+        $times = [];
+        $minutes = [];
+        for ($i = 0; $i < 24; $i++){
+            $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
+        };
+        
+        return view('calendars.index', 
+            ['bikeId' => $bikeId, 'year' => $year, 'day' => $day, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);
+    }
+    
+    public function nextmonth($bikeId, $year, $month, $day, $week) {
+        $reservations = \App\Bike::find($bikeId)->reservations;
+        $now = Carbon::createMidnightDate($year, $month, $day);
+        $nextweek = $now->addweek();
+        $week = $nextweek->weekNumberInMonth;
+        $year = $nextweek->year;
+        $month = $nextweek->month;
+        $day = $nextweek->day;
+
+        $times = [];
+        $minutes = [];
+        for ($i = 0; $i < 24; $i++){
+            $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
+        };
+        
+        return view('calendars.index', 
+            ['bikeId' => $bikeId, 'year' => $year, 'day' => $day, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'month' => $month, 'week' => $week]);    
     }
 }
