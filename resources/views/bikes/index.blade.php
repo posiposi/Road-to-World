@@ -11,10 +11,12 @@
     </div>
     <div class="container">
         @if (count($bikes) > 0)
+        <div class="row">
             <div class="card-group">
                 @foreach ($bikes as $bike)
-                    <div class="card mt-3 mb-3" style="width: 50;">
-                        <div class="bd-placeholder-img card-img-top row">
+                <div class="col-sm-4">
+                    <div class="card mb-3">
+                        <div class="bd-placeholder-img card-img-top">
                             <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
                             <div class="card-body shadow-sm">
                                 <ul class="list-group list-unstyled">
@@ -54,8 +56,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
+        </div>
         @else
             <h4>現在貸し出し可能な自転車はありません。</h4>
         @endif
