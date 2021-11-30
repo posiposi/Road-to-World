@@ -11,13 +11,13 @@
     </div>
     <div class="container">
         @if (count($bikes) > 0)
-            <div class="card mt-3 mb-3" style="max-width: 1080px">
-                <div class="row no-gutters ml-3">
-                    @foreach ($bikes as $bike)
-                        <div class="col-md-6 mt-3 mb-3">
+        <div class="row">
+            <div class="card-group">
+                @foreach ($bikes as $bike)
+                <div class="col-sm-4">
+                    <div class="card mb-3">
+                        <div class="bd-placeholder-img card-img-top">
                             <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
-                        </div>
-                        <div class="col-md-6">
                             <div class="card-body shadow-sm">
                                 <ul class="list-group list-unstyled">
                                     <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
@@ -30,14 +30,16 @@
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
                                     {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
-                                        <li class="list-group-item">開始時間　<input type="date" name="start_date">
+                                        <li class="list-group-item">開始日　<input type="date" name="start_date"><br>
+                                        開始時間
                                         <select name="start_time">
                                             @foreach($times as $time)
                                                 <option value ="{{ $time }}">{{ $time }}</option>
                                             @endforeach
                                         </select>
                                         </li>
-                                        <li class="list-group-item">終了時間　<input type="date" name="end_date">
+                                        <li class="list-group-item">終了日　<input type="date" name="end_date"><br>
+                                        終了時間
                                         <select name="end_time">
                                             @foreach($times as $time)
                                                 <option value ="{{ $time }}">{{ $time }}</option>
@@ -55,9 +57,11 @@
                                 </ul>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
                 </div>
+                @endforeach
             </div>
+        </div>
         @else
             <h4>現在貸し出し可能な自転車はありません。</h4>
         @endif
