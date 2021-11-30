@@ -38,8 +38,7 @@
     </head>
     
     <body>
-
-            <h1>予約状況カレンダー</h1>
+        <h1>予約状況カレンダー</h1>
         {!! link_to_route('calendar.last', '<<', ['year' => $year, 'month' => $month, 'day' => $day, 'week' => $week, 'bikeId' => $bikeId,]) !!}
         {{ $month }} 月 第{{ $week }}週
         {!! link_to_route('calendar.next', '>>', ['year' => $year, 'month' => $month, 'day' => $day, 'week' => $week, 'bikeId' => $bikeId,]) !!}
@@ -63,23 +62,16 @@
                         <tr>
                             <td rowspan="2">{{ $time. "時" }}</td>
                             <td>00分</td>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            @for($i = 0; $i < 7; $i++)
+                                <th></th>
+                            @endfor
                         </tr>
                         
                         <tr>
                             <td>30分</td>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            @for($i = 0; $i < 7; $i++)
+                                <th></th>
+                            @endfor
                         </tr>
                         @endforeach
                         </tr>
