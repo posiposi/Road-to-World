@@ -1,10 +1,5 @@
 @extends('layouts.app')
 
-{{-- 画像リサイズ --}}
-@push('css')
-    <link href="{{ asset('/css/picture.css') }}" rel="stylesheet">
-@endpush
-
 @section('content')
     <div class="row text-warning">
         <h1>貸し出し可能自転車一覧</h1>
