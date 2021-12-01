@@ -64,8 +64,7 @@ class ReservationController extends Controller
     public function index($bikeId) {
         $reservations = \App\Bike::find($bikeId)->reservations;
         $now = Carbon::now();
-        $now2 = $now->addDays(2);
-        $start_of_week = $now2->startOfWeek();
+        $start_of_week = $now->startOfWeek();
         $tests = [];
         for($i = 0; $i < 8; $i++) {
             $tests[] = $now->addDays($i);
