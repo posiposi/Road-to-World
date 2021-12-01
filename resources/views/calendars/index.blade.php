@@ -46,15 +46,9 @@
                         <tr>
                             <th></th>
                             <th></th>
-                            @foreach($tests as $test)
-                            <th>{{ $test }}</th>
+                            @foreach($days as $day)
+                                <th>{{ $day }}</th>
                             @endforeach
-                            <th>火</th>
-                            <th>水</th>
-                            <th>木</th>
-                            <th>金</th>
-                            <th class="saturday">土</th>
-                            <th class="sunday">日</th>
                         </tr>
                         @foreach($times as $time)
                         <tr>
