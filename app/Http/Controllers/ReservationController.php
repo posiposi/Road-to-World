@@ -65,10 +65,11 @@ class ReservationController extends Controller
         $reservations = \App\Bike::find($bikeId)->reservations;
         $dt = new Carbon();
         $start_of_week = $dt->startOfWeek();
+        $monday = $start_of_week->format('m/d(D)');
         $days = [];
-        for($i = 0; $i < 7; $i++) {
+        for($i = 0; $i < 6; $i++) {
             $day = $start_of_week->addDay();
-            $days[] = $day->format('m/d');
+            $days[] = $day->format('m/d(D)');
         };
         
         $times = [];
@@ -77,6 +78,6 @@ class ReservationController extends Controller
             $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
         };
         return view('calendars.index', 
-            ['days' => $days, 'bikeId' => $bikeId, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations,]);
+            ['monday' => $monday, 'days' => $days, 'bikeId' => $bikeId, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations,]);
     }
 }

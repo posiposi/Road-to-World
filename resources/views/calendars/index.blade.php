@@ -46,6 +46,7 @@
                         <tr>
                             <th></th>
                             <th></th>
+                            <th>{{ $monday }}</th>
                             @foreach($days as $day)
                                 <th>{{ $day }}</th>
                             @endforeach
