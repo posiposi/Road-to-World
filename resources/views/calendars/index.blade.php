@@ -39,10 +39,6 @@
     
     <body>
         <h1>予約状況カレンダー</h1>
-        {!! link_to_route('calendar.last', '<<', ['year' => $year, 'month' => $month, 'day' => $day, 'week' => $week, 'bikeId' => $bikeId,]) !!}
-        {{ $month }} 月 第{{ $week }}週
-        {!! link_to_route('calendar.next', '>>', ['year' => $year, 'month' => $month, 'day' => $day, 'week' => $week, 'bikeId' => $bikeId,]) !!}
-
         <div class="cotainer">
             <div class="row">
                 <div class="col-sm-12">
@@ -50,7 +46,9 @@
                         <tr>
                             <th></th>
                             <th></th>
-                            <th>月</th>
+                            @foreach($tests as $test)
+                            <th>{{ $test }}</th>
+                            @endforeach
                             <th>火</th>
                             <th>水</th>
                             <th>木</th>
