@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function ()
         
     //予約関連
         Route::post('bikes/{id}', 'ReservationController@store')->name('bikes.reservation'); //予約アクション
-        Route::get('bikes/{bikeId}/calendar', 'ReservationController@index')->name('bikes.calendar'); //カレンダー表示
+        Route::get('bikes/{bikeId}/{week}/calendar', 'ReservationController@index')->name('bikes.calendar'); //カレンダー表示
         
     //ユーザ関連
         Route::get('users', 'UsersController@index')->name('users.index'); //ユーザ情報表示
