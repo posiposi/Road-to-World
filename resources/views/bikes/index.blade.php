@@ -48,7 +48,9 @@
                                     {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
+                                    {{--
                                     {!! link_to_route('bikes.calendar', '予約状況カレンダー', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
+                                    --}}
                                 </ul>
                             </div>
                         </div>
