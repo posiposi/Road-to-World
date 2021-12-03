@@ -63,14 +63,34 @@ class ReservationController extends Controller
     //カレンダー表示
     public function index($bikeId, $week) {
         $reservations = \App\Bike::find($bikeId)->reservations;
-        $dt = new Carbon();
-        $start_of_week = $dt->startOfWeek();
-        $monday = $start_of_week->format('m/d(D)');
-        $days = [];
-        for($i = 0; $i < 6; $i++) {
-            $day = $start_of_week->addDay();
-            $days[] = $day->format('m/d(D)');
-        };
+        if ($week = 0) {
+            $dt = new Carbon();
+            $start_of_week = $dt->startOfWeek();
+            $monday = $start_of_week->format('m/d(D)');
+            $days = [];
+            for ($i = 0; $i < 6; $i++) {
+                $day = $start_of_week->addDay();
+                $days[] = $day->format('m/d(D)');
+            };
+        } elseif ($week = 1) { //翌週へ
+            $dt = new Carbon('1 weeks');
+            $start_of_week = $dt->startOfWeek();
+            $monday = $start_of_week->format('m/d(D)');
+            $days = [];
+            for ($i = 0; $i < 6; $i++) {
+                $day = $start_of_week->addDay();
+                $days[] = $day->format('m/d(D)');
+            };
+        } else { //先週へ
+            $dt = new Carbon('-1 weeks');
+            $start_of_week = $dt->startOfWeek();
+            $monday = $start_of_week->format('m/d(D)');
+            $days = [];
+            for ($i = 0; $i < 6; $i++) {
+                $day = $start_of_week->addDay();
+                $days[] = $day->format('m/d(D)');
+            };
+        }
         
         $times = [];
         $minutes = [];
