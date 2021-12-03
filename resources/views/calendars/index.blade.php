@@ -39,6 +39,9 @@
     
     <body>
         <h1>予約状況カレンダー</h1>
+
+        {!! link_to_route('bikes.calendar', '先週へ', ['bikeId' => $bikeId, 'week' => 'last_week', 'now' => $dt]) !!}
+        {!! link_to_route('bikes.calendar', '翌週へ', ['bikeId' => $bikeId, 'week' => 'next_week', 'now' => $dt]) !!}
         <div class="cotainer">
             <div class="row">
                 <div class="col-sm-12">

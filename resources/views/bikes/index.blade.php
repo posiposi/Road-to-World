@@ -36,7 +36,7 @@
                                     {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
-                                    {!! link_to_route('bikes.calendar', '予約状況カレンダー', ['bikeId' => $bike->id, 'week' => 0], ['class' => 'btn btn-success']) !!}
+                                    {!! link_to_route('bikes.calendar', '予約状況カレンダー', ['bikeId' => $bike->id, 'week' => 'this_week', 'now' => 'today'], ['class' => 'btn btn-success']) !!}
                                 </ul>
                             </div>
                         </div>

@@ -61,36 +61,24 @@ class ReservationController extends Controller
     }
     
     //カレンダー表示
-    public function index($bikeId, $week) {
+    public function index($bikeId, $week, $now) {
         $reservations = \App\Bike::find($bikeId)->reservations;
-        if ($week = 0) {
+        if ($week == 'this_week' && $now == 'today') {
             $dt = new Carbon();
-            $start_of_week = $dt->startOfWeek();
-            $monday = $start_of_week->format('m/d(D)');
-            $days = [];
-            for ($i = 0; $i < 6; $i++) {
-                $day = $start_of_week->addDay();
-                $days[] = $day->format('m/d(D)');
-            };
-        } elseif ($week = 1) { //翌週へ
-            $dt = new Carbon('1 weeks');
-            $start_of_week = $dt->startOfWeek();
-            $monday = $start_of_week->format('m/d(D)');
-            $days = [];
-            for ($i = 0; $i < 6; $i++) {
-                $day = $start_of_week->addDay();
-                $days[] = $day->format('m/d(D)');
-            };
+        } elseif ($week == 'next_week') { //翌週へ
+            $now_week = new Carbon($now);
+            $dt = $now_week->addweek();
         } else { //先週へ
-            $dt = new Carbon('-1 weeks');
-            $start_of_week = $dt->startOfWeek();
-            $monday = $start_of_week->format('m/d(D)');
-            $days = [];
-            for ($i = 0; $i < 6; $i++) {
-                $day = $start_of_week->addDay();
-                $days[] = $day->format('m/d(D)');
-            };
+            $now_week = new Carbon($now);
+            $dt = $now_week->subweek();
         }
+        $start_of_week = $dt->startOfWeek();
+        $monday = $start_of_week->format('m/d(D)');
+        $days = [];
+        for ($i = 0; $i < 6; $i++) {
+            $day = $start_of_week->addDay();
+            $days[] = $day->format('m/d(D)');
+        };
         
         $times = [];
         $minutes = [];
@@ -98,6 +86,6 @@ class ReservationController extends Controller
             $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
         };
         return view('calendars.index', 
-            ['monday' => $monday, 'days' => $days, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations,]);
+            ['dt'=> $dt, 'monday' => $monday, 'days' => $days, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'bikeId' => $bikeId]);
     }
 }
