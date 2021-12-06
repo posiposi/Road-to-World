@@ -55,22 +55,31 @@
                             @endforeach
                         </tr>
                         @foreach($times as $time)
-                        <tr>
-                            <td rowspan="2">{{ $time. "時" }}</td>
-                            <td>00分</td>
-                            @for($i = 0; $i < 7; $i++)
-                                <th></th>
-                            @endfor
-                        </tr>
-                        
-                        <tr>
-                            <td>30分</td>
-                            @for($i = 0; $i < 7; $i++)
-                                <th></th>
-                            @endfor
-                        </tr>
+                            @foreach($reservations as $reservation)
+                                <tr>
+                                    <td rowspan="2">{{ $time. "時" }}</td>
+                                    <td>00分</td>
+                                    @for($i = 0; $i < 7; $i++)
+                                        @if ($reservation->is_just_reservations($bikeId, $day, $time) == true )
+                                            <th>あり</th>
+                                        @else
+                                            <th>なし</th>
+                                        @endif
+                                    @endfor
+                                </tr>
+                                
+                                <tr>
+                                    <td>30分</td>
+                                    @for($i = 0; $i < 7; $i++)
+                                        @if ($reservation->is_half_reservations($bikeId, $day, $time) == true )
+                                            <th>あり</th>
+                                        @else
+                                            <th>なし</th>
+                                        @endif
+                                    @endfor
+                                </tr>
+                            @endforeach
                         @endforeach
-                        </tr>
                     </table>
                 </div>
             </div>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DateTimeRequest;
 use Carbon\Carbon;
 use App\Bike;
+use App\Reservation;
 
 class ReservationController extends Controller
 {
@@ -65,10 +66,12 @@ class ReservationController extends Controller
         $reservations = \App\Bike::find($bikeId)->reservations;
         if ($week == 'this_week' && $now == 'today') {
             $dt = new Carbon();
-        } elseif ($week == 'next_week') { //翌週へ
+        //翌週へ
+        } elseif ($week == 'next_week') {
             $now_week = new Carbon($now);
             $dt = $now_week->addweek();
-        } else { //先週へ
+        //先週へ
+        } else {
             $now_week = new Carbon($now);
             $dt = $now_week->subweek();
         }

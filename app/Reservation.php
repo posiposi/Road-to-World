@@ -13,4 +13,15 @@ class Reservation extends Model
     {
         return $this->belongsTo(Bike::class);
     }
+    
+    //予約有無確認(00分台)
+    public function is_just_reservations($bikeId, $day, $time)
+    {
+        return $this->where([['bike_id', $bikeId], ['start_at', $day. ' '. $time. '00:00'], ['end_at', $day. ' '. $time. '00:00']])->exists();
+    }
+    //予約有無確認(30分台)
+    public function is_half_reservations($bikeId, $day, $time)
+    {
+        return $this->where([['bike_id', $bikeId], ['start_at', $day. ' '. $time. '30:00'], ['end_at', $day. ' '. $time. '30:00']])->exists();
+    }
 }
