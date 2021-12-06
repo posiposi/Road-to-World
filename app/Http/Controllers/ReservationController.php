@@ -76,11 +76,11 @@ class ReservationController extends Controller
             $dt = $now_week->subweek();
         }
         $start_of_week = $dt->startOfWeek();
-        $monday = $start_of_week->format('m/d(D)');
+        $monday = $start_of_week->format('m-d');
         $days = [];
         for ($i = 0; $i < 6; $i++) {
             $day = $start_of_week->addDay();
-            $days[] = $day->format('m/d(D)');
+            $days[] = $day->format('m-d');
         };
         
         $times = [];

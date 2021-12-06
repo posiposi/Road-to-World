@@ -60,10 +60,10 @@
                                     <td rowspan="2">{{ $time. "時" }}</td>
                                     <td>00分</td>
                                     @for($i = 0; $i < 7; $i++)
-                                        @if ($reservation->is_just_reservations($bikeId, $day, $time) == true )
+                                        @if ($reservation->is_just_reservations($bikeId, $day, $time) == true || $reservation->is_just_reservations($bikeId, $monday, $time) == true)
                                             <th>あり</th>
                                         @else
-                                            <th>なし</th>
+                                            <th></th>
                                         @endif
                                     @endfor
                                 </tr>
@@ -71,10 +71,10 @@
                                 <tr>
                                     <td>30分</td>
                                     @for($i = 0; $i < 7; $i++)
-                                        @if ($reservation->is_half_reservations($bikeId, $day, $time) == true )
+                                        @if ($reservation->is_half_reservations($bikeId, $day, $time) == true || $reservation->is_half_reservations($bikeId, $monday, $time) == true)
                                             <th>あり</th>
                                         @else
-                                            <th>なし</th>
+                                            <th></th>
                                         @endif
                                     @endfor
                                 </tr>
