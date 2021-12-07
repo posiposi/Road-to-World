@@ -64,23 +64,22 @@ class ReservationController extends Controller
     //カレンダー表示
     public function index($bikeId, $week, $now) {
         $reservations = \App\Bike::find($bikeId)->reservations;
+        //今週
         if ($week == 'this_week' && $now == 'today') {
             $dt = new Carbon();
         //翌週へ
         } elseif ($week == 'next_week') {
-            $now_week = new Carbon($now);
-            $dt = $now_week->addweek();
+            $day = new Carbon($now);
+            $dt = $day->addweek();
         //先週へ
         } else {
-            $now_week = new Carbon($now);
-            $dt = $now_week->subweek();
+            $day = new Carbon($now);
+            $dt = $day->subweek();
         }
-        $start_of_week = $dt->startOfWeek();
-        $monday = $start_of_week->format('m-d');
-        $days = [];
-        for ($i = 0; $i < 6; $i++) {
-            $day = $start_of_week->addDay();
-            $days[] = $day->format('m-d');
+        $days[0] = $dt->format('m/d');
+        for ($i = 0; $i < 7; $i++) {
+            $monday = $dt->startOfWeek();
+            $days[$i] = $monday->copy()->addDay($i)->format('m/d');
         };
         
         $times = [];
@@ -89,6 +88,6 @@ class ReservationController extends Controller
             $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
         };
         return view('calendars.index', 
-            ['dt'=> $dt, 'monday' => $monday, 'days' => $days, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'bikeId' => $bikeId]);
+            ['dt'=> $dt, 'days' => $days, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'bikeId' => $bikeId]);
     }
 }

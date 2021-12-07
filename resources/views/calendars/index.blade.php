@@ -46,10 +46,10 @@
             <div class="row">
                 <div class="col-sm-12">
                     <table>
+
                         <tr>
                             <th></th>
                             <th></th>
-                            <th>{{ $monday }}</th>
                             @foreach($days as $day)
                                 <th>{{ $day }}</th>
                             @endforeach
@@ -60,7 +60,7 @@
                                     <td rowspan="2">{{ $time. "時" }}</td>
                                     <td>00分</td>
                                     @for($i = 0; $i < 7; $i++)
-                                        @if ($reservation->is_just_reservations($bikeId, $day, $time) == true || $reservation->is_just_reservations($bikeId, $monday, $time) == true)
+                                        @if ($reservation->is_just_reservations($bikeId, $day, $time) == true)
                                             <th>あり</th>
                                         @else
                                             <th></th>
@@ -71,7 +71,7 @@
                                 <tr>
                                     <td>30分</td>
                                     @for($i = 0; $i < 7; $i++)
-                                        @if ($reservation->is_half_reservations($bikeId, $day, $time) == true || $reservation->is_half_reservations($bikeId, $monday, $time) == true)
+                                        @if ($reservation->is_half_reservations($bikeId, $day, $time) == true)
                                             <th>あり</th>
                                         @else
                                             <th></th>
