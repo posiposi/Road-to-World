@@ -38,16 +38,9 @@ class BikesController extends Controller
         
         //画像処理
         $image = $bike->image_path; //画像取得
-        /*test = \Image::make($image)->encode('jpg'); //画像リサイズ・エンコード
-        $test->resize(10, 10, function($constraint){
-            $constraint->upsize();
-        })->save();
-        $file = $test; //request->file('image_path');*/
-        // バケットの`myprefix`フォルダへアップロード
-        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME); // バケットの`myprefix`フォルダへアップロード
         $path = Storage::disk('s3')->put('myprefix/' . $name, $image, 'public');
-        // アップロードした画像のフルパスを取得
-        $url = Storage::disk('s3')->url($path);
+        $url = Storage::disk('s3')->url($path); // アップロードした画像のフルパスを取得
         $bike->image_path = $url;
         $bike->save();
         

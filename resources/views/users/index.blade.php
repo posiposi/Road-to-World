@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('/assets/css/picture.css') }}">
+@endpush
+
 @section('content')
     <div class="row">
         <h1 class="text-warning">My Page</h1>
