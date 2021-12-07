@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('/assets/css/picture.css') }}">
+@endpush
+
 @section('content')
     <div class="row text-warning">
         <h1>貸し出し可能自転車一覧</h1>

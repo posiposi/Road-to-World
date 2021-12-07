@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-{{-- カルーセル高さ合わせCSS --}}
 @push('css')
-    <link href="{{ asset('css/picture.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/welcomepage.css') }}">
 @endpush
 
 @section('content')
