@@ -45,7 +45,13 @@
                                     {!! Form::close() !!}
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
-                                    {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
+                                    {{-- ログインユーザがバイク所有者の場合 --}}
+                                    @if($users->id == $bike->user_id)
+                                        {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
+                                    {{-- ログインユーザが借り手側の場合 --}}
+                                    @else
+                                        {!! link_to_route('comments.show', 'コメントルームへ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
+                                    @endif
                                 </ul>
                                 <ul class="list-group list-unstyled mt-3">
                                     {{--
