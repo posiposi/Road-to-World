@@ -22,6 +22,6 @@ class Reservation extends Model
     //予約有無確認(30分台)
     public function is_half_reservations($bikeId, $day, $time)
     {
-        return $this->where([['bike_id', $bikeId], ['start_at', $day. ' '. $time. ':30:00']])->exists();
+        return $this->where('bike_id', $bikeId)->whereDate('start_at', $day)->whereTime('start_at', $time. ':30:00')->exists();
     }
 }
