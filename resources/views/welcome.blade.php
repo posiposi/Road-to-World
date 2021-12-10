@@ -32,5 +32,60 @@
                 <p>ロードバイクを借りて世界へ通じる'道'へ走り出しましょう！</p>
             </div>
         </div>
+        {{-- 利用方法 --}}
+        <div class="py-4 bg-light">
+            <section id="how to">
+                <div class="container">
+                    <div class="row mb-4">
+                        <div class="col-md-8 mb-3">
+                            <h3 class="mb-3">ご利用方法</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{-- カード1 --}}
+                        <div class="col-md-4 mb-4">
+                            <div class="card" style="width: max-width: 20rem;">
+                                <div class="card-body">
+                                    <h4 class="card-title">1.一覧から探す</h4>
+                                </div>
+                                <img class="card-img-bottom" src="" alt="画像">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="width: max-width: 20rem;">
+                                <div class="card-body">
+                                    <h4 class="card-title">2.コメントで内容確認</h4>
+                                </div>
+                                <img class="card-img-bottom" src="" alt="画像">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="width: max-width: 20rem;">
+                                <div class="card-body">
+                                    <h4 class="card-title">3.予約確定</h4>
+                                </div>
+                                <img class="card-img-bottom" src="" alt="画像">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="width: max-width: 20rem;">
+                                <div class="card-body">
+                                    <h4 class="card-title">4.自転車をレンタル</h4>
+                                </div>
+                                <img class="card-img-bottom" src="" alt="画像">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="width: max-width: 20rem;">
+                                <div class="card-body">
+                                    <h4 class="card-title">5.自転車を返却</h4>
+                                </div>
+                                <img class="card-img-bottom" src="" alt="画像">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 @endsection
