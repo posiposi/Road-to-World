@@ -63,7 +63,7 @@ class ReservationController extends Controller
     
     //カレンダー表示
     public function index($bikeId, $week, $now) {
-        $reservations = \App\Bike::find($bikeId)->reservations;
+        $bike = \App\Bike::findOrFail($bikeId);
         //今週
         if ($week == 'this_week' && $now == 'today') {
             $dt = new Carbon();
@@ -88,6 +88,6 @@ class ReservationController extends Controller
             $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
         };
         return view('calendars.index', 
-            ['dt'=> $dt, 'days' => $days, 'times' => $times, 'minutes' => $minutes, 'reservations' => $reservations, 'bikeId' => $bikeId]);
+            ['bike' => $bike, 'dt'=> $dt, 'days' => $days, 'times' => $times, 'minutes' => $minutes, /*'reservations' => $reservations,*/ 'bikeId' => $bikeId]);
     }
 }

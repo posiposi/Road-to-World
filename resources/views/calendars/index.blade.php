@@ -55,30 +55,28 @@
                         @endforeach
                         </tr>
                         @foreach($times as $time)
-                            @foreach($reservations as $reservation)
-                                <tr>
-                                <td rowspan="2">{{ $time. "時" }}</td>
-                                <td>00分</td>
-                                    @for($i = 0; $i < 7; $i++)
-                                        @if ($reservation->is_just_reservations($bikeId, $day, $time) == true)
-                                            <th>あり</th>
-                                        @else
-                                            <th></th>
-                                        @endif
-                                    @endfor
-                                </tr>
+                            <tr>
+                            <td rowspan="2">{{ $time. "時" }}</td>
+                            <td>00分</td>
+                                @for($i = 0; $i < 7; $i++)
+                                    @if ($bike->is_reservations($days[0], $time, '00', $i))
+                                        <th>あり</th>
+                                    @else
+                                        <th></th>
+                                    @endif
+                                @endfor
+                            </tr>
 
-                                <tr>
-                                    <td>30分</td>
-                                    @for($i = 0; $i < 7; $i++)
-                                        @if ($reservation->is_half_reservations($bikeId, $day, $time) == true)
-                                            <th>あり</th>
-                                        @else
-                                            <th></th>
-                                        @endif
-                                    @endfor
-                                </tr>
-                            @endforeach
+                            <tr>
+                                <td>30分</td>
+                                @for($i = 0; $i < 7; $i++)
+                                    @if ($bike->is_reservations($days[0], $time, '30', $i))
+                                        <th>あり</th>
+                                    @else
+                                        <th></th>
+                                    @endif
+                                @endfor
+                            </tr>
                         @endforeach
                     </table>
                 </div>

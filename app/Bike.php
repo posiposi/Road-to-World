@@ -37,4 +37,11 @@ class Bike extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+    
+    public function is_reservations($day, $hours, $minutes, $day_add)
+    {
+        return $this->reservations()->where([
+            ['start_at', '<', $day + $day_add. ' '. $hours + $minutes], ['end_at', '>', $day + $day_add. ' '. $hours + $minutes]
+        ])->exists();
+    }
 }
