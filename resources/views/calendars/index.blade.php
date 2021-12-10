@@ -50,15 +50,15 @@
                         <tr>
                             <th></th>
                             <th></th>
-                            @foreach($days as $day)
-                                <th>{{ $day }}</th>
-                            @endforeach
+                        @foreach($days as $day)
+                            <th>{{ $day }}</th>
+                        @endforeach
                         </tr>
                         @foreach($times as $time)
                             @foreach($reservations as $reservation)
                                 <tr>
-                                    <td rowspan="2">{{ $time. "時" }}</td>
-                                    <td>00分</td>
+                                <td rowspan="2">{{ $time. "時" }}</td>
+                                <td>00分</td>
                                     @for($i = 0; $i < 7; $i++)
                                         @if ($reservation->is_just_reservations($bikeId, $day, $time) == true)
                                             <th>あり</th>
@@ -67,7 +67,7 @@
                                         @endif
                                     @endfor
                                 </tr>
-                                
+
                                 <tr>
                                     <td>30分</td>
                                     @for($i = 0; $i < 7; $i++)
