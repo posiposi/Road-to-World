@@ -33,7 +33,7 @@
             </div>
         </div>
         {{-- 利用方法 --}}
-        <div class="py-4 bg-light">
+        <div class="py-4 bg-warning">
             <section id="how to">
                 <div class="container">
                     <div class="row mb-4">
@@ -48,39 +48,43 @@
                                 <div class="card-body">
                                     <h4 class="card-title">1.一覧から探す</h4>
                                 </div>
-                                <img class="card-img-bottom" src="" alt="画像">
+                                <img class="card-img-bottom" src="/images/how_to_1.jpg" alt="画像">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        {{-- カード2 --}}
+                        <div class="col-md-4 mb-4">
                             <div class="card" style="width: max-width: 20rem;">
                                 <div class="card-body">
                                     <h4 class="card-title">2.コメントで内容確認</h4>
                                 </div>
-                                <img class="card-img-bottom" src="" alt="画像">
+                                <img class="card-img-bottom" src="/images/how_to_2.jpg" alt="画像">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        {{-- カード3 --}}
+                        <div class="col-md-4 mb-4">
                             <div class="card" style="width: max-width: 20rem;">
                                 <div class="card-body">
                                     <h4 class="card-title">3.予約確定</h4>
                                 </div>
-                                <img class="card-img-bottom" src="" alt="画像">
+                                <img class="card-img-bottom" src="/images/how_to_3.jpg" alt="画像">
                             </div>
                         </div>
+                        {{-- カード4 --}}
                         <div class="col-md-4">
                             <div class="card" style="width: max-width: 20rem;">
                                 <div class="card-body">
                                     <h4 class="card-title">4.自転車をレンタル</h4>
                                 </div>
-                                <img class="card-img-bottom" src="" alt="画像">
+                                <img class="card-img-bottom" src="/images/how_to_4.jpg" alt="画像">
                             </div>
                         </div>
+                        {{-- カード5 --}}
                         <div class="col-md-4">
                             <div class="card" style="width: max-width: 20rem;">
                                 <div class="card-body">
                                     <h4 class="card-title">5.自転車を返却</h4>
                                 </div>
-                                <img class="card-img-bottom" src="" alt="画像">
+                                <img class="card-img-bottom" src="/images/how_to_5.jpg" alt="画像">
                             </div>
                         </div>
                     </div>
