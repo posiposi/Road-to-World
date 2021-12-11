@@ -34,11 +34,11 @@
         </div>
         {{-- 利用方法 --}}
         <div class="py-4 bg-warning">
-            <section id="how to">
+            <section id="how_to">
                 <div class="container">
                     <div class="row mb-4">
                         <div class="col-md-8 mb-3">
-                            <h3 class="mb-3">ご利用方法</h3>
+                            <h3 class="mb-3 headline">ご利用方法</h3>
                         </div>
                     </div>
                     <div class="row">
