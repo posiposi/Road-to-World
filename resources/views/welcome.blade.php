@@ -48,7 +48,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">1.一覧から探す</h4>
                                 </div>
-                                <img class="card-img-bottom" src="/images/how_to_1.jpg" alt="画像">
+                                <img class="card-img-bottom" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/how_to_1.jpg" alt="画像">
                             </div>
                         </div>
                         {{-- カード2 --}}
@@ -57,7 +57,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">2.コメントで内容確認</h4>
                                 </div>
-                                <img class="card-img-bottom" src="/images/how_to_2.jpg" alt="画像">
+                                <img class="card-img-bottom" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/how_to_2.jpg" alt="画像">
                             </div>
                         </div>
                         {{-- カード3 --}}
@@ -66,7 +66,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">3.予約確定</h4>
                                 </div>
-                                <img class="card-img-bottom" src="/images/how_to_3.jpg" alt="画像">
+                                <img class="card-img-bottom" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/how_to_3.jpg" alt="画像">
                             </div>
                         </div>
                         {{-- カード4 --}}
@@ -75,7 +75,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">4.自転車をレンタル</h4>
                                 </div>
-                                <img class="card-img-bottom" src="/images/how_to_4.jpg" alt="画像">
+                                <img class="card-img-bottom" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/how_to_4.jpg" alt="画像">
                             </div>
                         </div>
                         {{-- カード5 --}}
@@ -84,7 +84,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">5.自転車を返却</h4>
                                 </div>
-                                <img class="card-img-bottom" src="/images/how_to_5.jpg" alt="画像">
+                                <img class="card-img-bottom" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/how_to_5.jpg" alt="画像">
                             </div>
                         </div>
                     </div>
