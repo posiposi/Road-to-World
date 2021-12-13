@@ -60,7 +60,7 @@
                             <td>00分</td>
                                 @for($i = 0; $i < 7; $i++)
                                     @if ($bike->is_reservations($days[0], $time, '00', $i))
-                                        <th>あり</th>
+                                        <th>予約あり</th>
                                     @else
                                         <th></th>
                                     @endif
@@ -71,7 +71,7 @@
                                 <td>30分</td>
                                 @for($i = 0; $i < 7; $i++)
                                     @if ($bike->is_reservations($days[0], $time, '30', $i))
-                                        <th>あり</th>
+                                        <th>予約あり</th>
                                     @else
                                         <th></th>
                                     @endif

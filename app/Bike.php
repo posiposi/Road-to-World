@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Bike extends Model
 {
@@ -38,10 +39,23 @@ class Bike extends Model
         return $this->hasMany(Reservation::class);
     }
     
+    /**
+     * 予約有無の確認
+     * 
+     * 該当する予約がすでにあるかを確認するメソッド
+     * 
+     * @param string $day 週初めの月曜日の日付
+     * @param int $hours 00〜23時までの時間(1時間ずつ増加)
+     * @param string $minutes 00or30分(30分単位で増加)
+     * @param int $day_add 曜日ごとに0〜7を代入するための値(月曜なら0、火曜なら1といったように)
+     * 
+     * @return boolean 予約ありでtrue、予約なしでfalse
+     */
     public function is_reservations($day, $hours, $minutes, $day_add)
     {
-        return $this->reservations()->where([
-            ['start_at', '<', $day + $day_add. ' '. $hours + $minutes], ['end_at', '>', $day + $day_add. ' '. $hours + $minutes]
-        ])->exists();
+        $dt = Carbon::create($day)->addDay($day_add);
+        $dt->hour = $hours;
+        $dt->minute = $minutes;
+        return $this->reservations()->where([['start_at', '<=', $dt], ['end_at', '>', $dt]])->exists();
     }
 }
