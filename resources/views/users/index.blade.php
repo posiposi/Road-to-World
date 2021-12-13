@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('/assets/css/picture.css') }}">
+@endpush
+
 @section('content')
     <div class="row">
         <h1 class="text-warning">My Page</h1>
@@ -8,8 +12,12 @@
         <div class="row no-gutters ml-3">
             {{-- ユーザアバター --}}
             <div class="col-md-6">
-                <div class="card-body">
+                <div class="card-body shadow-sm">
+                    @if($auth->image != null)
                     <img class="card-img img-fluid" style="max-height:1080px" src="{{ $auth->image }}" alt="ユーザアバター画像">
+                    @else
+                    <img class="card-img img-fluid" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/nc96424.jpg" alt="デフォルトアバター画像">
+                    @endif
                     <div class="form-group">
                         {!! Form::open(['route' => 'users.store', 'files' => true]) !!}
                             {!! Form::file('image', ['class' => 'form-contorol-file']) !!}
@@ -21,14 +29,14 @@
     
             {{-- ユーザ情報表示カード --}}
             <div class="col-md-6">
-                <div class="card-body">
+                <div class="card-body shadow-sm">
                     <ul class="list-group list-unstyled">
                         <li class="list-group-item"> 氏名：{{ $auth->name }} <li>
                         <li class="list-group-item"> メールアドレス：{{ $auth->email }} </li>
                         <li class="list-group-item"> 電話番号：{{ $auth->tel }} </li>
                     </ul>
                 </div>
-                <div class='card-body'>
+                <div class='card-body shadow-sm'>
                     {{--<ul class="list-group">
                         <li class="list-group-item col-md-6">--}}
                             {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
@@ -49,7 +57,7 @@
                         <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
                     </div>
                     <div class="col-md-6">
-                        <div class="card-body">
+                        <div class="card-body shadow-sm">
                             <ul class="list-group list-unstyled border border-dark">
                                 <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
                                 <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>

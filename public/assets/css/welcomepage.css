@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+p {
+    line-height: 2;
+    font-size: 15px;
+}
+
+.headline {
+    font-weight: bold;
+}

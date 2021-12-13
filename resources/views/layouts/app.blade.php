@@ -6,12 +6,15 @@
         <meta charset="utf-8">
         <title>Road to World</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         {{-- datetimepicker読み込み --}}
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script src="jquery.datetimepicker.js"></script>
         <link rel="stylesheet" href="jquery.datetimepicker.css">
+        
+        {{-- 個別CSS読み込み --}}
+        @stack('css')
     </head>
 
     <body>
