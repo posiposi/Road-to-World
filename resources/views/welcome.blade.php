@@ -11,12 +11,12 @@
                 <div class="carousel-inner">
                     {{-- スライド01 --}}
                     <div class="carousel-item active">
-                        <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/1411880.jpg" alt="写真">
+                        <img class="img-fluid" src="/images/test2.png" alt="写真">
                     </div>
-                    {{-- スライド02 --}}
+                    {{-- スライド02 
                     <div class="carousel-item">
-                        <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/2017043.jpg" alt="写真">
-                    </div>
+                        <img class="img-fluid" src="/images/Carousel5.jpg" alt="写真">
+                    </div> --}}
                 </div>
             </div>
         </div>
