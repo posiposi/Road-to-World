@@ -47,10 +47,17 @@ class BikesController extends Controller
         return back();
     }
     
-    //貸出中自転車一覧の表示
+    /**
+     * 貸出中自転車一覧の表示
+     * 
+     * @return string $bikes 貸出中の全ての自転車
+     * @return string $users ログイン中ユーザ
+     * @return array $times 0〜24時までの時間
+     * 
+     */
     public function index(Request $request)
     {
-        $bikes = \App\Bike::paginate(6)->all();
+        $bikes = \App\Bike::paginate(6);
         $users = Auth::user();
         $times = [];
         for ($i = 0; $i < 48; $i++){
