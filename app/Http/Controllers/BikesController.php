@@ -50,7 +50,7 @@ class BikesController extends Controller
     //貸出中自転車一覧の表示
     public function index(Request $request)
     {
-        $bikes = \App\Bike::all();
+        $bikes = \App\Bike::paginate(6)->all();
         $users = Auth::user();
         $times = [];
         for ($i = 0; $i < 48; $i++){
