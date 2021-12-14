@@ -67,6 +67,7 @@
                 @endforeach
             </div>
         </div>
+        {{ $bikes->links() }}
         @else
             <h4>現在貸し出し可能な自転車はありません。</h4>
         @endif
