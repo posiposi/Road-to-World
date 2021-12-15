@@ -5,6 +5,11 @@
 @endpush
 
 @section('content')
+    <header>
+        <div class="container text-center">
+            <img src ="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/logomark.png" alt="ロゴ">
+        </div>
+    </header>
     <div class="container-fluid">
         <div class="row">
             <div id="main_visual" class="col carousel slide" data-ride="carousel" data-wrap="true">
@@ -55,7 +60,7 @@
                         <div class="col-md-4 mb-4">
                             <div class="card" style="width: max-width: 20rem;">
                                 <div class="card-body">
-                                    <h4 class="card-title">2.コメントで内容確認</h4>
+                                    <h4 class="card-title">2.登録内容を確認</h4>
                                 </div>
                                 <img class="card-img-bottom" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/how_to_2.jpg" alt="画像">
                             </div>
@@ -70,7 +75,7 @@
                             </div>
                         </div>
                         {{-- カード4 --}}
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card" style="width: max-width: 20rem;">
                                 <div class="card-body">
                                     <h4 class="card-title">4.自転車をレンタル</h4>
@@ -79,7 +84,7 @@
                             </div>
                         </div>
                         {{-- カード5 --}}
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-4">
                             <div class="card" style="width: max-width: 20rem;">
                                 <div class="card-body">
                                     <h4 class="card-title">5.自転車を返却</h4>

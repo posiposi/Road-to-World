@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="text-center">
+    <div class="text-center my-4">
         <h1>バイク登録情報変更</h1>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row my-4">
             <div class="col-sm-6 offset-sm-3">
                 {!! Form::open(['route' => ['bikes.update', 'id'=>$bikes->id], 'files' => true, 'method' => 'put',]) !!}
                     <div class="form-group">

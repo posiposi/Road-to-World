@@ -5,8 +5,8 @@
 @endpush
 
 @section('content')
-    <div class="row text-warning">
-        <h1>貸し出し可能自転車一覧</h1>
+    <div class="row text-dark my-4">
+        <h1 class="font-weight-bold">貸し出し中の自転車</h1>
     </div>
     <div class="container">
         @if (count($bikes) > 0)
