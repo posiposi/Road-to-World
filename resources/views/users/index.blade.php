@@ -5,8 +5,8 @@
 @endpush
 
 @section('content')
-    <div class="row">
-        <h1 class="text-warning">My Page</h1>
+    <div class="row my-4">
+        <h1 class="text-dark font-weight-bold">My Page</h1>
     </div>
     <div class='container'>
         <div class="row no-gutters ml-3">
@@ -47,8 +47,8 @@
     </div>
     
     <div class="container">
-        <div class="row ml-3">
-            <h1 class="text-primary">あなたが貸し出し中の自転車</h1>
+        <div class="row my-4">
+            <h1 class="text-dark">あなたが貸し出し中の自転車</h1>
         </div>
         <div class="row no-gutters ml-3">
             @foreach ($bikes as $bike)
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-body shadow-sm">
-                            <ul class="list-group list-unstyled border border-dark">
+                            <ul class="list-group list-unstyled">
                                 <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
                                 <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>

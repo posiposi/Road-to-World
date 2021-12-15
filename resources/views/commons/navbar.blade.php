@@ -1,8 +1,16 @@
+<head>
+    <style>
+        body { 
+            padding-top: 60px; 
+        }
+    </style>    
+</head>
+
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-warning sticky-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-warning fixed-top">
         <div class="container">
             {{-- ブランド --}}
-            <a class="navbar-brand" href="/">Road to World</a>
+            <a class="navbar-brand" href="/"><img src ="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/nav_logo2.png" alt="ロゴ"></a>
             {{-- 切り替えボタン --}}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-bar">
                 <span class="navbar-toggler-icon"></span>
