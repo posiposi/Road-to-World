@@ -61,6 +61,7 @@
                         <div class="card-body shadow-sm">
                             <ul class="list-group list-unstyled">
                                 <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
+                                <li class='list-group-item'> 所有者：{{ $bike->user->nickname }}</li>
                                 <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                 <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
