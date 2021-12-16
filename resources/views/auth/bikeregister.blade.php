@@ -21,7 +21,7 @@
                 
                 <div class="form-group">
                     {!! Form::label('status', '保管状態') !!}
-                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+                    {{Form::select('status', ['良い' => '良い', '普通' => '普通', '悪い' => '悪い'], '普通', ['class' => 'form-control'])}}
                 </div>
 
                 <div class="form-group">
