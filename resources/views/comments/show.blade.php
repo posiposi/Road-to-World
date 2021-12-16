@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-            <h1>{{ $bikes->name }} の予約コメントページ</h1>
+            <h1 class="mt-3">{{ $bikes->name }} の予約コメントページ</h1>
         </div>
         <div class="mt-3 mb-3" style="max-width: 1080px">
             <div class="row no-gutters ml-3">
