@@ -64,12 +64,13 @@
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                 <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                                 <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
+                            </ul>    
+                            <ul class="list-group list-unstyled">
                                 <li class="list-group-item">
                                     {!! link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) !!}
                                     {!! Form::open(['route' => ['bikes.delete', $bike->id], 'method' => 'delete']) !!}
                                         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
                                     {!! Form::close() !!}
-                                    {{--{!! link_to_route('bikes.delete', '削除', ['id' => $bike->id], ['class' => 'btn btn-danger'], ['method' => 'delete'],) !!}--}}
                                 </li>
                             </ul>
                         </div> 

@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 
 @section('content')
-    <div class="text-center">
+    <div class="text-center my-4">
         <h1>ユーザ登録</h1>
     </div>
 
