@@ -25,7 +25,18 @@ class BikesController extends Controller
     //自転車登録
     public function store(BikeRegisterRequest $request)
     {
-        //ユーザーのバイク情報登録
+        /**
+         * ユーザ情報リクエスト
+         *
+         * @var array{
+         *   brand: string,
+         *   name: string,
+         *   status: string,
+         *   bike_address: string,
+         *   price: int,
+         *   remark: string,
+         * } $bike
+        */
         $bike = $request->user()->bikes()->create([
             'brand' => $request->brand,
             'name' => $request->name,
@@ -44,7 +55,7 @@ class BikesController extends Controller
         $bike->image_path = $url;
         $bike->save();
         
-        return back();
+        return redirect('/users');
     }
     
     /**
