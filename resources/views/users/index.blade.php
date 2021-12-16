@@ -20,7 +20,7 @@
                     @endif
                     <div class="form-group">
                         {!! Form::open(['route' => 'users.store', 'files' => true]) !!}
-                            {!! Form::file('image', ['class' => 'form-contorol-file']) !!}
+                            {!! Form::file('image', ['class' => 'form-contorol-file my-2']) !!}
                             {!! Form::submit('アバター登録', ['class' => 'btn btn-success btn-block']) !!}
                         {!! Form::close() !!}
                     </div>
