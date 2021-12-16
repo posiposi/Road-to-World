@@ -48,6 +48,8 @@ class RegisterController extends Controller
     protected $messages = [
         'name.required' => '名前を入力してください。',
         'name.max' => '名前は255文字以内で入力してください。',
+        'nickname.required' => 'ニックネームを入力してください。',
+        'nickname.max' => 'ニックネームは255文字以内で入力してください。',
         'email.required' => 'メールアドレスを入力してください。',
         'email.email' => '正しいメールアドレスを入力してください。',
         'email.max' => 'メールアドレスは255文字以内で入力してください。',
@@ -66,6 +68,7 @@ class RegisterController extends Controller
      
     protected $rules = [
         'name' => ['required', 'string', 'max:255'],
+        'nickname' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
         'tel' => ['required', 'numeric', 'digits_between:10,11'],
@@ -93,6 +96,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'nickname' => $data['nickname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'tel' => $data['tel'],
