@@ -13,6 +13,11 @@
                     {!! Form::label('name', '氏名') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
                 </div>
+                
+                <div class="form-group">
+                    {!! Form::label('nickname', 'ニックネーム') !!}
+                    {!! Form::text('nickname', null, ['class' => 'form-control']) !!}
+                </div>
 
                 <div class="form-group">
                     {!! Form::label('email', 'メールアドレス') !!}

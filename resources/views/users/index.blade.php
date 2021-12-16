@@ -20,7 +20,7 @@
                     @endif
                     <div class="form-group">
                         {!! Form::open(['route' => 'users.store', 'files' => true]) !!}
-                            {!! Form::file('image', ['class' => 'form-contorol-file']) !!}
+                            {!! Form::file('image', ['class' => 'form-contorol-file my-2']) !!}
                             {!! Form::submit('アバター登録', ['class' => 'btn btn-success btn-block']) !!}
                         {!! Form::close() !!}
                     </div>
@@ -32,6 +32,7 @@
                 <div class="card-body shadow-sm">
                     <ul class="list-group list-unstyled">
                         <li class="list-group-item"> 氏名：{{ $auth->name }} <li>
+                        <li class="list-group-item"> ニックネーム：{{ $auth->nickname }}</li>
                         <li class="list-group-item"> メールアドレス：{{ $auth->email }} </li>
                         <li class="list-group-item"> 電話番号：{{ $auth->tel }} </li>
                     </ul>
@@ -60,6 +61,7 @@
                         <div class="card-body shadow-sm">
                             <ul class="list-group list-unstyled">
                                 <li class='list-group-item'> 所有者：{{ $bike->user->name }}</li>
+                                <li class='list-group-item'> 所有者：{{ $bike->user->nickname }}</li>
                                 <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                 <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
