@@ -32,6 +32,7 @@
                 <div class="card-body shadow-sm">
                     <ul class="list-group list-unstyled">
                         <li class="list-group-item"> 氏名：{{ $auth->name }} <li>
+                        <li class="list-group-item"> ニックネーム：{{ $auth->nickname }}</li>
                         <li class="list-group-item"> メールアドレス：{{ $auth->email }} </li>
                         <li class="list-group-item"> 電話番号：{{ $auth->tel }} </li>
                     </ul>
