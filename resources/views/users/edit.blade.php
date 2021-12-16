@@ -12,6 +12,11 @@
                         {!! Form::label('name', '氏名') !!}
                         {!! Form::text('name', old('name', $auth->name), ['class' => 'form-control']) !!}
                     </div>
+                    
+                    <div class="form-group">
+                        {!! Form::label('nickname', 'ニックネーム') !!}
+                        {!! Form::text('nickname', old('nickname', $auth->nickname), ['class' => 'form-control']) !!}
+                    </div>
     
                     <div class="form-group">
                         {!! Form::label('email', 'メールアドレス') !!}
