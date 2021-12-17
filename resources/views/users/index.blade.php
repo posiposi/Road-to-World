@@ -70,9 +70,19 @@
                             <ul class="list-group list-unstyled">
                                 <li class="list-group-item">
                                     {!! link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) !!}
-                                    {!! Form::open(['route' => ['bikes.delete', $bike->id], 'method' => 'delete']) !!}
+                                    <script>
+                                        function confirm_test() {
+                                            var select = confirm("問い合わせますか？n「OK」で送信n「キャンセル」で送信中止");
+                                            return select;
+                                        }
+                                    </script>
+                                    <form action="{{ route('bikes.delete', $bike->id)}}" method="delete" onsubmit="return confirm_test()">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">削除</button>
+                                    </form>
+                                    {{-- {!! Form::open(['route' => ['bikes.delete', $bike->id], 'method' => 'delete']) !!}
                                         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-                                    {!! Form::close() !!}
+                                    {!! Form::close() !!} --}}
                                 </li>
                             </ul>
                         </div> 
