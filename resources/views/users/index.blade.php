@@ -70,9 +70,17 @@
                             <ul class="list-group list-unstyled">
                                 <li class="list-group-item">
                                     {!! link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) !!}
-                                    {!! Form::open(['route' => ['bikes.delete', $bike->id], 'method' => 'delete']) !!}
-                                        {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-                                    {!! Form::close() !!}
+                                    <script>
+                                        function confirm_delete() {
+                                            var select = confirm("削除してもよろしいですか？");
+                                            return select;
+                                        }
+                                    </script>
+                                    <form action="{{ route('bikes.delete', $bike->id)}}" method="post" onsubmit="return confirm_delete()">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger mt-2">削除</button>
+                                    </form>
                                 </li>
                             </ul>
                         </div> 
