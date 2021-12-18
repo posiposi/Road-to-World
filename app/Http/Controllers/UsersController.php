@@ -47,7 +47,11 @@ class UsersController extends Controller
         return back();
     }
     
-    //ユーザ情報変更
+    /**
+     * ユーザ情報変更
+     * 
+     * @param int $id ログイン中ユーザのid
+     */
     public function update(UserRegisterRequest $request, $id)
     {
         // 対象レコード取得
@@ -57,7 +61,8 @@ class UsersController extends Controller
         unset($form['_token']);
         // レコードアップデート
         $auth->fill($form)->save();
-        $auth->fill(['password' => Hash::make($request->password)])->save(); //パスワードハッシュ化
+        //パスワードハッシュ化
+        $auth->fill(['password' => Hash::make($request->password)])->save();
         
         return redirect('/users');
     }

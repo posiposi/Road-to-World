@@ -26,6 +26,7 @@ class UserRegisterRequest extends FormRequest
         return [
             'tel' => 'required | numeric | digits_between:10,11',
             'name' => 'required | string | max:255',
+            'nickname' => ['required', 'string', 'max:255'],
             'email' => 'required | string | email | max:255',
             'password' => 'required | string | min:8',
         ];
@@ -36,6 +37,8 @@ class UserRegisterRequest extends FormRequest
         return [
             'name.required' => '名前を入力してください。',
             'name.max' => '名前は255文字以内で入力してください。',
+            'nickname.required' => 'ニックネームを入力してください。',
+            'nickname.max' => 'ニックネームは255文字以内で入力してください。',
             'email.required' => 'メールアドレスを入力してください。',
             'email.email' => '正しいメールアドレスを入力してください。',
             'email.max' => 'メールアドレスは255文字以内で入力してください。',
