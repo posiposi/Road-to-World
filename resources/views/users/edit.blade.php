@@ -30,7 +30,7 @@
     
                     <div class="form-group">
                         {!! Form::label('password', 'パスワード') !!}
-                        {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '新しく設定したいパスワードを入力して下さい。']) !!}
+                        {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '新しく設定したいパスワードを8文字以上で入力して下さい。']) !!}
                     </div>
     
                     {!! Form::submit('変更', ['class' => 'btn btn-success btn-block']) !!}
