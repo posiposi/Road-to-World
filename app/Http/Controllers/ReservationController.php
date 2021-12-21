@@ -30,11 +30,9 @@ class ReservationController extends Controller
 
         //DB内で同一のbike_idかつ希望時間が重なるか確認、変数へ代入
         //予約確認・条件分岐
-        $exists = DB::table('reservations')
-        ->where('bike_id', $id) 
-        ->where('start_at', '<', $reservation_end_at)
-        ->where('end_at', '>', $reservation_start_at)
-        ->exists();
+        $exists = DB::table('reservations')->where([
+            ['bike_id', $id], ['start_at', '<', $reservation_end_at], ['start_at', '<', $reservation_end_at]
+        ])->exists();
         
         if ($exists != true) { 
         //予約アクション
