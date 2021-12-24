@@ -85,4 +85,3 @@ CacooにてワイヤーフレームやER図を公開しております。
 * OS：macOS BigSur 11.6
 * ブラウザ：Google Chrome 95.0.4638.69
 * 開発環境：PHP 7.3.31-2　Laravel 6.20.34
-* 
