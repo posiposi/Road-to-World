@@ -4,23 +4,22 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Reservation;
-use Carbon\Carbon;
 
-class AutoDeleteReservation extends Command
+class AutoDeleteCompletedReservations extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:AutoDelete';
+    protected $signature = 'command:AutoDeleteCompletedReservations';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Auto delete nonpayment reservation after certain time';
+    protected $description = 'Auto Delete Completed Reservations after users reserved time';
 
     /**
      * Create a new command instance.
@@ -34,7 +33,6 @@ class AutoDeleteReservation extends Command
 
     /**
      * Execute the console command.
-     * 
      */
     public function handle()
     {
@@ -44,18 +42,11 @@ class AutoDeleteReservation extends Command
          * @var string 現在の時刻取得
          */
         $now = new Carbon('now');
-        
+
         /**
-         * 現在から1時間前の時刻取得
-         * 
-         * @var string 1時間前の時刻
-         */
-        $before_hour = $now->subHours(1);
-        
-        /**
-         * 1時間前かつ未決済の予約を削除
+         * 予約終了日時が現在日時と一致した場合、予約を削除
          * 
          */
-        $reservations = \App\Reservation::where([['created_at', '<', $before_hour], ['payment', '=', 0]])->delete();
+        $reservations = \App\Reservation::where('end_at', '=', $now)->delete();
     }
 }
