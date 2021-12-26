@@ -12,14 +12,14 @@ class AutoDeleteCompletedReservations extends Command
      *
      * @var string
      */
-    protected $signature = 'command:AutoDeleteCompletedReservations';
+    protected $signature = 'command:AutoDeleteClosedReservations';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Auto Delete Completed Reservations after users reserved time';
+    protected $description = 'Auto delete completed reservations after users reserved time';
 
     /**
      * Create a new command instance.
