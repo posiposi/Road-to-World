@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Reservation;
+use Carbon\Carbon;
 
 class AutoDeleteCompletedReservations extends Command
 {
@@ -44,9 +45,8 @@ class AutoDeleteCompletedReservations extends Command
         $now = new Carbon('now');
 
         /**
-         * 予約終了日時が現在日時と一致した場合、予約を削除
-         * 
+         * 現在以前の予約を削除
          */
-        $reservations = \App\Reservation::where('end_at', '=', $now)->delete();
+        $reservations = \App\Reservation::where('end_at', '<=', $now)->delete();
     }
 }
