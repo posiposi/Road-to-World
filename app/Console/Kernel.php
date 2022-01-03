@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\AutoDeleteReservation::class
+        Commands\AutoDeleteReservation::class,
+        Commands\AutoDeleteCompletedReservations::class
     ];
 
     /**
@@ -26,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('command:AutoDelete')->everyMinute();
-        $schedule->command('command:AutoDeleteClosedReservations')->everyThirtyMinutes();
+        $schedule->command('command:AutoDeleteClosedReservations')->everyMinute();
     }
 
     /**
