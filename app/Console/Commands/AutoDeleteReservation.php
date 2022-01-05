@@ -41,14 +41,14 @@ class AutoDeleteReservation extends Command
         /**
          * 現在時刻の取得
          * 
-         * @var string 現在の時刻取得
+         * @property \Illuminate\Support\Carbon $now 現在の時刻取得
          */
         $now = new Carbon('now');
         
         /**
          * 現在から1時間前の時刻取得
          * 
-         * @var string 1時間前の時刻
+         * @property \Illuminate\Support\Carbon $before_hour 1時間前の時刻
          */
         $before_hour = $now->subHours(1);
         
