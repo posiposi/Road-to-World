@@ -16,13 +16,22 @@ use App\Http\Requests\BikeRegisterRequest;
 
 class BikesController extends Controller
 {
-    //自転車登録画面表示
+    /**
+     * コメントルーム一覧表示
+     *
+     * @return void
+     */
     public function show()
     {
         return view('auth.bikeregister');
     }
     
-    //自転車登録
+    /**
+     * 貸出自転車の登録
+     *
+     * @param BikeRegisterRequest $request 
+     * @return void
+     */
     public function store(BikeRegisterRequest $request)
     {
         /**
@@ -47,11 +56,10 @@ class BikesController extends Controller
             'image_path' => $request->image_path,
         ]);
         
-        //画像処理
-        $image = $bike->image_path; //画像取得
-        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME); // バケットの`myprefix`フォルダへアップロード
+        $image = $bike->image_path;
+        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
         $path = Storage::disk('s3')->put('myprefix/' . $name, $image, 'public');
-        $url = Storage::disk('s3')->url($path); // アップロードした画像のフルパスを取得
+        $url = Storage::disk('s3')->url($path);
         $bike->image_path = $url;
         $bike->save();
         
@@ -61,9 +69,9 @@ class BikesController extends Controller
     /**
      * 貸出中自転車一覧の表示
      * 
-     * @return string $bikes 貸出中の全ての自転車
-     * @return string $users ログイン中ユーザ
-     * @return array $times 0〜24時までの時間
+     * @var string $bikes 貸出中の全ての自転車
+     * @var string $users ログイン中ユーザ
+     * @var array $times 0〜24時までの時間
      * 
      */
     public function index(Request $request)
@@ -77,14 +85,25 @@ class BikesController extends Controller
         return view('bikes.index', ['bikes' => $bikes, 'users' => $users, 'times' => $times]);
     }
     
-    //自転車情報変更画面表示
+    /**
+     * 自転車情報の変更
+     *
+     * @param int $id 対象自転車のid
+     * @return void
+     */
     public function edit($id)
     {
         $bikes = Bike::findOrFail($id);
         return view('bikes.edit', ['bikes' => $bikes]);
     }
     
-    //自転車情報変更
+    /**
+     * 自転車の変更保存
+     *
+     * @param BikeRegisterRequest $request
+     * @param int $id 対象自転車のid
+     * @return void
+     */
     public function update(BikeRegisterRequest $request, $id)
     {
         $bike = Bike::findOrFail($id);

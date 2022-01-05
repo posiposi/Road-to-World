@@ -11,13 +11,24 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
-    //コメントルーム一覧表示
+    /**
+     * コメントルーム一覧表示
+     *
+     * @param int $bikeId 対象となる自転車のid
+     * @param int $senderId ログイン中ユーザのid
+     * @return void
+     */
     public function index($bikeId, $senderId)
     {
+        /**
+         * @var string $bikes 対象となる自転車
+         * @var string $sender ログイン中ユーザ
+         * @var string $users_all 対象となる自転車の所有者以外のユーザ
+         * @var string $login_user ログイン中ユーザのid
+         */
         $bikes = \App\Bike::findOrFail($bikeId);
         $users = \App\User::where('id', '!=', Auth::user()->id)->get();
         $users_all = \App\User::where('id', '!=', $bikes->user_id)->get();
-        //dd($users_all);
         $login_user = \Auth::id();
         if($login_user != $bikes->user_id){
             return view('comments.index', ['bikes' => $bikes, 'users' => $users_all]);
@@ -27,19 +38,33 @@ class CommentsController extends Controller
         }
     }
     
-    //コメントルーム表示
+    /**
+     * コメントルームの表示
+     *
+     * @param int $bikeId 対象となる自転車のid
+     * @param int $senderId ログイン中ユーザのid
+     * @return void
+     */
     public function show($bikeId, $senderId)
     {
+        /**
+         * @var string $bike 対象となる自転車
+         * @var string $sender ログイン中ユーザ
+         * @var string $sender_comments レンタル希望者のコメント
+         */
         $bike = \App\Bike::findOrFail($bikeId);
-        //レンタル希望者、コメントの取得
         $sender = \App\User::findOrFail($senderId);
         $sender_comments = \App\Comment::where([['sender_id', $senderId], ['reciever_id', $bike->user_id], ['bike_id', $bike->id]])->pluck('body', 'id');
-        //貸し出し主、コメントの取得
+        /**
+         * @var string $reciever 対象となる自転車
+         * @var string $receiver_comments 対象となる自転車の所有者のコメント
+         */
         $reciever = \App\User::findOrFail($bike->user_id);
         $reciever_comments = \App\Comment::where([['sender_id', $reciever->id], ['reciever_id', $sender->id], ['bike_id', $bike->id]])->pluck('body', 'id');
-        //if文用インスタンス
-        $login_user = \Auth::id(); //ログイン中ユーザid取得
-        //送信者が自転車の所有者でなければ
+        /**
+         * @var $login_user ログイン中ユーザのid
+         */
+        $login_user = \Auth::id();
         if($senderId != $bike->user_id){
             if($login_user == $sender->id || $login_user == $reciever->id ){
                 return view('comments.show', ['bikes' => $bike, 'login_user' => $login_user, 'sender' => $sender, 'sender_comments' => $sender_comments, 
@@ -55,13 +80,24 @@ class CommentsController extends Controller
 
     }
     
-    //コメント保存
+    /**
+     * コメントの保存
+     *
+     * @param Request $request
+     * @param int $bikeId 対象となる自転車のid
+     * @param int $recieverId レンタル希望者のid
+     * @return void
+     */
     public function store(Request $request, $bikeId, $recieverId)
     {
+        /**
+         * @var string $user ログイン中ユーザ
+         * @var string $bike 対象となる自転車
+         */
         $user = \Auth::user();
         $bike = \App\Bike::where('id', $bikeId)->get();
-
-        //コメント内容
+        
+        /**コメントの内容 */
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->sender_id = $user->id;
