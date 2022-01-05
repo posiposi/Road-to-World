@@ -35,11 +35,17 @@ class PaymentsController extends Controller
                 'currency' => 'jpy'
             ));
             
-            //決済完了、DBへカラム変更の指示
+            /**
+             * 決済完了、DBへカラム変更の指示
+             * 
+             * @var int $id ログイン中ユーザのid
+             * @var string $reservation 該当の予約
+             */ 
             $id = Auth::id();
             $reservation = \App\Reservation::where([
             ['user_id', $id], ['bike_id', $bikeId], ['start_at', $startTime], ['end_at', $endTime]
             ])->first();
+            /* 決済完了時はpaymentカラムに1を代入 */
             $reservation->payment = 1;
             $reservation->save();
 

@@ -33,6 +33,7 @@
                                             <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/30分 </li>
                                             <li class="list-group-item"> 説明・備考：{{ $bike->remark }} </li>
                                         </ul>
+                                        {{-- 予約リクエストフォーム --}}
                                         <ul class="list-group list-unstyled mt-3">
                                             {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
                                                 <li class="list-group-item">開始日　<input type="date" name="start_date"><br>
