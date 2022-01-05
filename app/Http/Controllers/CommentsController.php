@@ -62,13 +62,22 @@ class CommentsController extends Controller
         $reciever = \App\User::findOrFail($bike->user_id);
         $reciever_comments = \App\Comment::where([['sender_id', $reciever->id], ['reciever_id', $sender->id], ['bike_id', $bike->id]])->pluck('body', 'id');
         /**
+         * ログインユーザのidチェックと条件分岐
+         * 
          * @var $login_user ログイン中ユーザのid
          */
         $login_user = \Auth::id();
         if($senderId != $bike->user_id){
             if($login_user == $sender->id || $login_user == $reciever->id ){
+                /**
+                 * @var array $times カレンダー項目表示のための0〜24時までの時間
+                 */
+                $times = [];
+                for ($i = 0; $i < 48; $i++){
+                    $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
+                };
                 return view('comments.show', ['bikes' => $bike, 'login_user' => $login_user, 'sender' => $sender, 'sender_comments' => $sender_comments, 
-                        'reciever' => $reciever, 'reciever_comments' => $reciever_comments, 'login_user' => $login_user]);
+                        'reciever' => $reciever, 'reciever_comments' => $reciever_comments, 'login_user' => $login_user, 'times' => $times]);
             }
             else{
                 return back();
@@ -97,7 +106,7 @@ class CommentsController extends Controller
         $user = \Auth::user();
         $bike = \App\Bike::where('id', $bikeId)->get();
         
-        /**コメントの内容 */
+        /* コメントの内容 */
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->sender_id = $user->id;

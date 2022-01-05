@@ -71,7 +71,7 @@ class BikesController extends Controller
      * 
      * @var string $bikes 貸出中の全ての自転車
      * @var string $users ログイン中ユーザ
-     * @var array $times 0〜24時までの時間
+     * @var array $times カレンダー項目表示のための0〜24時までの時間
      * 
      */
     public function index(Request $request)
