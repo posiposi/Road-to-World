@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4.21",
+        "barryvdh/laravel-ide-helper": "^2.1",
         "doctrine/dbal": "2.*",
         "fideloper/proxy": "^4.4",
         "intervention/image": "^2.6",
