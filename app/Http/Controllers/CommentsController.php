@@ -21,7 +21,7 @@ class CommentsController extends Controller
     public function index($bikeId, $senderId)
     {
         /**
-         * @var string $bikes 対象となる自転車
+         * @var object $bikes 対象となる自転車
          * @var string $sender ログイン中ユーザ
          * @var string $users_all 対象となる自転車の所有者以外のユーザ
          * @var string $login_user ログイン中ユーザのid
@@ -48,16 +48,16 @@ class CommentsController extends Controller
     public function show($bikeId, $senderId)
     {
         /**
-         * @var string $bike 対象となる自転車
-         * @var string $sender ログイン中ユーザ
-         * @var string $sender_comments レンタル希望者のコメント
+         * @var object $bike 対象となる自転車
+         * @var object $sender ログイン中ユーザ
+         * @var object $sender_comments レンタル希望者のコメント
          */
         $bike = \App\Bike::findOrFail($bikeId);
         $sender = \App\User::findOrFail($senderId);
         $sender_comments = \App\Comment::where([['sender_id', $senderId], ['reciever_id', $bike->user_id], ['bike_id', $bike->id]])->pluck('body', 'id');
         /**
-         * @var string $reciever 対象となる自転車
-         * @var string $receiver_comments 対象となる自転車の所有者のコメント
+         * @var object $reciever 対象となる自転車
+         * @var object $receiver_comments 対象となる自転車の所有者のコメント
          */
         $reciever = \App\User::findOrFail($bike->user_id);
         $reciever_comments = \App\Comment::where([['sender_id', $reciever->id], ['reciever_id', $sender->id], ['bike_id', $bike->id]])->pluck('body', 'id');
@@ -100,8 +100,8 @@ class CommentsController extends Controller
     public function store(Request $request, $bikeId, $recieverId)
     {
         /**
-         * @var string $user ログイン中ユーザ
-         * @var string $bike 対象となる自転車
+         * @var object $user ログイン中ユーザ
+         * @var object $bike 対象となる自転車
          */
         $user = \Auth::user();
         $bike = \App\Bike::where('id', $bikeId)->get();

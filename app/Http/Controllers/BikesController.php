@@ -44,7 +44,7 @@ class BikesController extends Controller
          *   bike_address: string,
          *   price: int,
          *   remark: string,
-         * } $bike
+         * } 
         */
         $bike = $request->user()->bikes()->create([
             'brand' => $request->brand,
@@ -56,9 +56,17 @@ class BikesController extends Controller
             'image_path' => $request->image_path,
         ]);
         
+        /**
+         * 自転車登録の情報
+         * 
+         * @var object $bike 登録する自転車
+         */
         $image = $bike->image_path;
         $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
         $path = Storage::disk('s3')->put('myprefix/' . $name, $image, 'public');
+        /**
+         * @method string Illuminate\Support\Facades url()
+         */
         $url = Storage::disk('s3')->url($path);
         $bike->image_path = $url;
         $bike->save();
@@ -106,11 +114,16 @@ class BikesController extends Controller
      */
     public function update(BikeRegisterRequest $request, $id)
     {
+        /**
+         * 登録内容変更する自転車の情報
+         * 
+         */
         $bike = Bike::findOrFail($id);
         $form = $request->all();
         $bike->fill($form)->save();
         //画像S3アップロード
         $image = $request->image_path;
+
         $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
         // アップロードした画像のフルパスを取得
         $url = Storage::disk('s3')->url($path);

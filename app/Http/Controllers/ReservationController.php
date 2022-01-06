@@ -20,7 +20,7 @@ class ReservationController extends Controller
         /**
          * storeメソッド内の変数の説明
          * 
-         * @var array $bike 予約対象自転車の情報
+         * @var object $bike 予約対象自転車の情報
          * @var int $bike_price 予約対象自転車の料金
          * @var string $reservation_start_at 開始日時リクエスト
          * @var string $reservation_end_at 終了日時リクエスト
@@ -33,8 +33,8 @@ class ReservationController extends Controller
         /**
          * 予約確認と条件分岐のために必要な変数の説明
          * 
-         * @var string $start_carbon 開始日時リクエストのCarbon化
-         * @var string $end_carbon 終了日時リクエストのCarbon化
+         * @var object $start_carbon 開始日時リクエストのCarbon化
+         * @var object $end_carbon 終了日時リクエストのCarbon化
          * @var int $carbon_diff 開始日時と終了日時の時間差
          * @var int $time 上記時間差を30分単位で割り出し
          */
