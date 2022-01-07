@@ -38,34 +38,36 @@ class User extends Authenticatable
         'tel' => 'string'
     ];
     
-    /*
-    *一対多の記述(このUserは多数のBikeを所持する)
-    */
+    /** 一対多の記述(このUserは多数のBikeを所持する) */
     public function bikes()
     {
         return $this->hasMany(Bike::class);
     }
     
-    /*
-    *多対多の記述(多数のユーザが中間テーブルを通して多数の自転車を予約する。)
-    */
-    
+    /**
+     * 多対多の記述(多数のユーザが中間テーブルを通して多数の自転車を予約する。)
+     * 
+     * @param object reservations 予約テーブル
+     * @param int user_id レンタル希望者のユーザid
+     * @param int bike_id 対象自転車のid
+     */    
     public function reserving()
     {
         return $this->belongsToMany(Bike::class, 'reservations', 'user_id', 'bike_id')->withTimestamps();
     }
     
-    /*
-    *予約している自転車の中に$bikeIdを持つ自転車があるか確認(重複回避のため)
-    */
+    /**
+     * 予約している自転車の中に対象の自転車があるか確認
+     * 
+     * @param int $bikeId 対象自転車のid
+     * @return boolean 自転車が存在するか
+     */
     public function is_reserving($bikeId)
     {
         return $this->reserving()->where('bike_id', $bikeId)->exists();
     }
     
-    /*
-    *一対多の記述(ユーザは複数のコメントを所有)
-    */
+    /** 一対多の記述(ユーザは複数のコメントを所有) */
     public function comments()
     {
         return $this->hasMany(Comment::class);
