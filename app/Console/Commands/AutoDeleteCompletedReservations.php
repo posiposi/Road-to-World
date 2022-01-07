@@ -40,7 +40,7 @@ class AutoDeleteCompletedReservations extends Command
         /**
          * 現在時刻の取得
          * 
-         * @var string 現在の時刻取得
+         * @property \Illuminate\Support\Carbon $now 現在の時刻取得
          */
         $now = new Carbon('now');
 
