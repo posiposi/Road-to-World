@@ -54,4 +54,8 @@ Route::group(['middleware' => ['auth']], function ()
         Route::get('payment/{time}/{price}/{bikeId}/{startTime}/{endTime}/index', 'PaymentsController@index')->name('payment.index'); // 決済ボタンを表示するページ
         Route::post('/{amount}/{bikeId}/{startTime}/{endTime}/payment', 'PaymentsController@payment')->name('payment'); // Stripeの処理
         Route::get('/complete', 'PaymentsController@complete')->name('complete'); // 決済完了ページ
+    
+    //検索機能
+        Route::get('search', 'SearchController@show')->name('search.show'); //検索フォームページ表示
+        Route::get('search/index', 'SearchController@index')->name('search.index'); //検索結果表示
     });
