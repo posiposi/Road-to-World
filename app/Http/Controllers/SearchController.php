@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Bike;
 
 class SearchController extends Controller
 {
@@ -13,7 +14,7 @@ class SearchController extends Controller
      */
     public function show()
     {
-        return view('search.show');
+        return view('searches.show');
     }
 
     /**
@@ -21,8 +22,9 @@ class SearchController extends Controller
      *
      * @return void
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('search.index');
+        $bikes = Bike::all();
+        return view('searches.index');
     }
 }
