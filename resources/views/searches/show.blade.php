@@ -7,14 +7,13 @@
 <div class="container">
     <div class="row my-4">
         <div class="col-sm-6 offset-sm-3">
-            {!! Form::open(['route' => 'search.index']) !!}
-                <div class="form-group">
-                    {!! Form::label('name', 'バイク名') !!}
-                    {!! Form::text('name', '@if (isset($search)) {{ $search }} @endif', ['class' => 'form-control']) !!}
+            <form method='GET' action="{{ route('search.index') }}">
+                @csrf
+                <input class="form-control my-2 mr-5" type="search" placeholder="車種名を入力して下さい。" name="search" value="@if (isset($search)) {{ $search }} @endif">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary my-2" type="submit">検索</button>
                 </div>
-                {!! Form::submit('検索', ['class' => 'btn btn-success']) !!}
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
-</div>
 @endsection

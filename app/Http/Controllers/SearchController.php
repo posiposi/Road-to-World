@@ -25,6 +25,20 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $bikes = Bike::all();
-        return view('searches.index');
+        $search = $request->input('search');
+        $query = Bike::query();
+        if ($search != null) {
+            $spaceConversion = mb_convert_kana($search, 's');
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+            foreach($wordArraySearched as $value) {
+                $query->where('name', 'like', '%'.$value.'%');
+            }
+            $users = $query->paginate(20);
+        }
+        return view('searches.index')
+            ->with([
+                'bikes' => $bikes,
+                'search' => $search,
+            ]);
     }
 }
