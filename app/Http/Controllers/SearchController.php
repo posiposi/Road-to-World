@@ -24,16 +24,12 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        $bikes = Bike::all();
         $search = $request->input('search');
-        $query = Bike::query();
         if ($search != null) {
-            $spaceConversion = mb_convert_kana($search, 's');
-            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-            foreach($wordArraySearched as $value) {
-                $query->where('name', 'like', '%'.$value.'%');
+            $array_search = array($search);
+            foreach($array_search as $word) {
+                $bikes = Bike::where('name', 'like', '%'.$word.'%')->paginate(10);
             }
-            $users = $query->paginate(20);
         }
         return view('searches.index')
             ->with([
