@@ -24,7 +24,14 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
+        /**
+         * @var string $search 検索ワード
+         */
         $search = $request->input('search');
+        /**
+         * @var string[] $array_search 配列化された検索ワード
+         * @var object[] $bikes 検索ワードに該当する自転車
+         */
         if ($search != null) {
             $array_search = array($search);
             foreach($array_search as $word) {
