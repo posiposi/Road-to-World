@@ -24,29 +24,29 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        /**
-         * @var string $search 検索ワード
-         */
-        $search = $request->input('search');
-        /**
-         * @var string[] $array_search 配列化された検索ワード
-         * @var object[] $bikes 検索ワードに該当する自転車
-         */
-        if ($search != null) {
-            $array_search = array($search);
-            foreach($array_search as $word) {
-                    $bikes = Bike::where('name', 'like', '%'.$word.'%')->paginate(10);
-                    if (count($bikes) >= 1) {
-                        return view('searches.index')->with([
-                            'bikes' => $bikes,
-                            'search' => $search,
-                        ]);
-                    } else {
-                        return redirect('search')->with('flash_message', '該当する自転車がありませんでした。');
-                    }
-            }
-        } else {
-            return redirect('search')->with('flash_message', '検索ワードを入力して下さい。');
+        $query = Bike::query();
+        $search_name = $request->input('search_name');
+        $search_brand = $request->input('search_brand');
+        $search_address = $request->input('search_address');
+        $search_price = $request->input('search_price');
+
+        if (!empty('search_name')) {
+            $query->where('name', 'like', '%'.$search_name.'%');
         }
+        if (!empty('search_brand')) {
+            $query->where('brand', 'like', '%'.$search_brand.'%');
+        }
+        if (!empty('search_address')) {
+            $query->where('bike_address', 'like', '%'.$search_address.'%');
+        }
+        if (!empty('search_price')) {
+            $query->where('price', 'like', '%'.$search_price.'%');
+        }
+        $bikes = $query->get();
+            if (count($bikes) >= 1) {
+                return view('searches.index', compact('bikes', 'search_name', 'search_brand', 'search_address', 'search_price'));
+            } else {
+                return redirect('search')->with('flash_message', '該当する自転車がありませんでした。');
+            }
     }
 }
