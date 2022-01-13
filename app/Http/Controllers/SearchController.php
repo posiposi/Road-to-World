@@ -28,13 +28,18 @@ class SearchController extends Controller
         if ($search != null) {
             $array_search = array($search);
             foreach($array_search as $word) {
-                $bikes = Bike::where('name', 'like', '%'.$word.'%')->paginate(10);
+                    $bikes = Bike::where('name', 'like', '%'.$word.'%')->paginate(10);
+                    if (count($bikes) >= 1) {
+                        return view('searches.index')->with([
+                            'bikes' => $bikes,
+                            'search' => $search,
+                        ]);
+                    } else {
+                        return redirect('search')->with('flash_message', '該当する自転車がありませんでした。');
+                    }
             }
+        } else {
+            return redirect('search')->with('flash_message', '検索ワードを入力して下さい。');
         }
-        return view('searches.index')
-            ->with([
-                'bikes' => $bikes,
-                'search' => $search,
-            ]);
     }
 }

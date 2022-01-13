@@ -40,7 +40,7 @@ class Bike extends Model
      * 
      * 該当する予約がすでにあるかを確認するメソッド
      * 
-     * @param string $day 週初めの月曜日の日付
+     * @param array $day 週初めの月曜日の日付
      * @param int $hours 00〜23時までの時間(1時間ずつ増加)
      * @param string $minutes 00or30分(30分単位で増加)
      * @param int $day_add 曜日ごとに0〜7を代入するための値(月曜なら0、火曜なら1といったように)

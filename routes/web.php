@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\SearchController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -56,6 +58,6 @@ Route::group(['middleware' => ['auth']], function ()
         Route::get('/complete', 'PaymentsController@complete')->name('complete'); // 決済完了ページ
     
     //検索機能
-        Route::get('search', 'SearchController@show')->name('search.show'); //検索フォームページ表示
+        Route::get('search', 'SearchController@show')->name('search'); //検索画面表示
         Route::get('search/index', 'SearchController@index')->name('search.index'); //検索結果表示
     });
