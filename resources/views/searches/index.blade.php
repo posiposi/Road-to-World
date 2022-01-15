@@ -21,6 +21,7 @@
                         <button class="btn btn-primary my-2" type="submit">検索</button>
                     </div>
                 </form>
+                <p class="text-center my-4">※全項目未入力の場合は全自転車が表示されます。</p>
             </div>
         </div>
     </div>
