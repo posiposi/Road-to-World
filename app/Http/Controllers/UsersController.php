@@ -12,10 +12,16 @@ use App\Http\Requests\UserRegisterRequest;
 
 class UsersController extends Controller
 {
+    /**
+     * ユーザアバター登録
+     *
+     * @param Request $request 画像リクエスト
+     * @return void
+     * @var object $user ログインユーザのレコード
+     */
     public function store(Request $request)
     {
         $user = \Auth::user();
-
         //s3アップロード開始
         $image = $request->file('image');
         // バケットの`myprefix`フォルダへアップロード
@@ -28,7 +34,13 @@ class UsersController extends Controller
         return back();
     }
     
-    //ユーザ情報表示(MyPage表示)
+    /**
+     * ユーザのMyPage表示
+     *
+     * @return void
+     * @var object $auth ログインユーザのレコード
+     * @var array $bikes 登録されている全自転車
+     */
     public function index()
     {
         $auths = \Auth::user();
@@ -36,7 +48,13 @@ class UsersController extends Controller
         return view('users.index', ['auth' => $auths, 'bikes' => $bikes]);
     }
     
-    //ユーザ情報変更画面表示
+    /**
+     * ユーザ情報変更画面の表示
+     *
+     * @param int $id ログインユーザのid
+     * @return void
+     * @var array $auth ログインユーザのレコード
+     */
     public function edit($id)
     {
         $auth = User::findOrFail($id);
@@ -50,11 +68,13 @@ class UsersController extends Controller
     /**
      * ユーザ情報変更
      * 
-     * @param int $id ログイン中ユーザのid
+     * @return void
+     * @param int $id ログインユーザのid
+     * @property object $auth ログインユーザのレコード
+     * @property array $form 変更リクエスト
      */
     public function update(UserRegisterRequest $request, $id)
     {
-        // 対象レコード取得
         $auth = User::findOrFail($id);
         $form = $request->all();
         // フォームトークン削除
