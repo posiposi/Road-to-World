@@ -12,6 +12,15 @@ use App\Http\Requests\UserRegisterRequest;
 
 class UsersController extends Controller
 {
+    /**
+     * ユーザアバターの登録
+     *
+     * @param Request $request 登録リクエスト
+     * @return void
+     * @var object $user ログインユーザ
+     * @var object $image 登録する画像
+     * @var string $url 登録する画像のURLパス
+     */
     public function store(Request $request)
     {
         $user = \Auth::user();
@@ -28,7 +37,13 @@ class UsersController extends Controller
         return back();
     }
     
-    //ユーザ情報表示(MyPage表示)
+    /**
+     * ユーザページの表示
+     *
+     * @return void
+     * @var object $auths ログインユーザ
+     * @var object $bikes 登録中の全ての自転車
+     */
     public function index()
     {
         $auths = \Auth::user();
@@ -36,7 +51,13 @@ class UsersController extends Controller
         return view('users.index', ['auth' => $auths, 'bikes' => $bikes]);
     }
     
-    //ユーザ情報変更画面表示
+    /**
+     * ユーザ情報変更画面の表示
+     *
+     * @param int $id ユーザid
+     * @return void
+     * @var object $auth ログインユーザのレコード
+     */
     public function edit($id)
     {
         $auth = User::findOrFail($id);
@@ -51,6 +72,8 @@ class UsersController extends Controller
      * ユーザ情報変更
      * 
      * @param int $id ログイン中ユーザのid
+     * @return void
+     * @var object $auth ログインユーザのレコード
      */
     public function update(UserRegisterRequest $request, $id)
     {
