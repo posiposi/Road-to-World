@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Bike;
 use Storage;
+use App\Reservation;
 use App\Http\Requests\UserRegisterRequest;
 
 class UsersController extends Controller
@@ -43,12 +44,14 @@ class UsersController extends Controller
      * @return void
      * @var object $auths ログインユーザ
      * @var object $bikes 登録中の全ての自転車
+     * @var object $reservations ログインユーザの全予約
      */
     public function index()
     {
         $auths = \Auth::user();
         $bikes = \App\Bike::all();
-        return view('users.index', ['auth' => $auths, 'bikes' => $bikes]);
+        $reservations = Reservation::where('user_id', $auths->id)->get();
+        return view('users.index', ['auth' => $auths, 'bikes' => $bikes, 'reservations' => $reservations]);
     }
     
     /**
