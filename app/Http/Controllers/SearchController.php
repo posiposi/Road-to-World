@@ -21,6 +21,10 @@ class SearchController extends Controller
      * 検索結果表示
      *
      * @return void
+     * @var string $search_name 検索モデル名
+     * @var string $search_brand 検索ブランド名
+     * @var string $search_address 検索受け渡し場所
+     * @var int $search_price 検索価格
      */
     public function index(Request $request)
     {
