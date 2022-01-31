@@ -95,8 +95,8 @@
             <h2 class="text-dark">予約表</h2>
         </div>
         <div class="row">
-            <div class="col-sm-12 my-2">
-                <table class="table-bordered">
+            <div class="col-sm-12 mt-2 mb-4">
+                <table>
                     <tr>
                         <th>モデル名</th>
                         <th>貸出者</th>
