@@ -46,10 +46,11 @@
             </div>
         </div>
     </div>
-    
+
+    {{-- ユーザの貸出中自転車の一覧表示 --}}
     <div class="container">
         <div class="row my-4">
-            <h1 class="text-dark">あなたが貸し出し中の自転車</h1>
+            <h2 class="text-dark">あなたが貸し出し中の自転車</h2>
         </div>
         <div class="row no-gutters ml-3">
             @foreach ($bikes as $bike)
@@ -85,6 +86,35 @@
                     </div>
                 @endif
             @endforeach
+        </div>
+    </div>
+
+    {{-- ユーザの予約一覧表 --}}
+    <div class="container">
+        <div class="row my-2">
+            <h2 class="text-dark">予約表</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 mt-2 mb-4">
+                <table>
+                    <tr>
+                        <th>モデル名</th>
+                        <th>貸出者</th>
+                        <th>受け渡し場所</th>
+                        <th>開始日時</th>
+                        <th>終了日時</th>
+                    </tr>
+                    @foreach ($reservations as $reservation)
+                    <tr>
+                        <td> {{ $reservation->bike->name }} </td>
+                        <td> {{ $reservation->bike->user->nickname }} </td>
+                        <td> {{ $reservation->bike->bike_address }} </td>
+                        <td> {{ $reservation->start_at }} </td>
+                        <td> {{ $reservation->end_at }} </td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
     </div>
 @endsection

@@ -128,6 +128,13 @@ class BikesController extends Controller
         return redirect('/users');
     }
     
+    /**
+     * 登録自転車の削除
+     *
+     * @param int $id 自転車のid
+     * @var object $bike 対象の自転車レコード
+     * @return void
+     */
     public function destroy($id)
     {
         $bike = \App\Bike::findOrFail($id);

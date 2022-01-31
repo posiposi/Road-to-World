@@ -8,16 +8,20 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Bike;
 use Storage;
+use App\Reservation;
 use App\Http\Requests\UserRegisterRequest;
 
 class UsersController extends Controller
 {
     /**
-     * ユーザアバター登録
+     * ユーザアバターの登録
      *
-     * @param Request $request 画像リクエスト
+     * @param Request $request 登録リクエスト
      * @return void
-     * @var object $user ログインユーザのレコード
+     * @var object $user ログインユーザ
+     * @var object $image 登録する画像
+     * @var string $url 登録する画像のURLパス
+
      */
     public function store(Request $request)
     {
@@ -35,25 +39,27 @@ class UsersController extends Controller
     }
     
     /**
-     * ユーザのMyPage表示
+     * ユーザページの表示
      *
      * @return void
-     * @var object $auth ログインユーザのレコード
-     * @var array $bikes 登録されている全自転車
+     * @var object $auths ログインユーザ
+     * @var object $bikes 登録中の全ての自転車
+     * @var object $reservations ログインユーザの全予約
      */
     public function index()
     {
         $auths = \Auth::user();
         $bikes = \App\Bike::all();
-        return view('users.index', ['auth' => $auths, 'bikes' => $bikes]);
+        $reservations = Reservation::where('user_id', $auths->id)->get();
+        return view('users.index', ['auth' => $auths, 'bikes' => $bikes, 'reservations' => $reservations]);
     }
     
     /**
      * ユーザ情報変更画面の表示
      *
-     * @param int $id ログインユーザのid
+     * @param int $id ユーザid
      * @return void
-     * @var array $auth ログインユーザのレコード
+     * @var object $auth ログインユーザのレコード
      */
     public function edit($id)
     {
@@ -68,10 +74,9 @@ class UsersController extends Controller
     /**
      * ユーザ情報変更
      * 
+     * @param int $id ログイン中ユーザのid
      * @return void
-     * @param int $id ログインユーザのid
-     * @property object $auth ログインユーザのレコード
-     * @property array $form 変更リクエスト
+     * @var object $auth ログインユーザのレコード
      */
     public function update(UserRegisterRequest $request, $id)
     {
