@@ -21,11 +21,11 @@ class UsersController extends Controller
      * @var object $user ログインユーザ
      * @var object $image 登録する画像
      * @var string $url 登録する画像のURLパス
+
      */
     public function store(Request $request)
     {
         $user = \Auth::user();
-
         //s3アップロード開始
         $image = $request->file('image');
         // バケットの`myprefix`フォルダへアップロード
@@ -80,7 +80,6 @@ class UsersController extends Controller
      */
     public function update(UserRegisterRequest $request, $id)
     {
-        // 対象レコード取得
         $auth = User::findOrFail($id);
         $form = $request->all();
         // フォームトークン削除

@@ -5,7 +5,7 @@
         <h1>バイク登録</h1>
     </div>
 
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-sm-6 offset-sm-3">
 
             {!! Form::open(['route' => 'bikes.store', 'files' => true]) !!}

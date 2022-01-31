@@ -48,7 +48,7 @@ class ReservationController extends Controller
          * 
          * @var bool $exists 対象自転車の予約リクエストが重複するかの確認
          */
-        $exists = DB::table('reservations')->where([
+        $exists = Reservation::where([
             ['bike_id', $id], ['start_at', '<', $reservation_end_at], ['end_at', '>', $reservation_start_at]
         ])->exists();
         /**
@@ -60,7 +60,7 @@ class ReservationController extends Controller
                 [
                 'start_at' => $request->start_date. ' ' .$request->start_time,
                 'end_at' => $request->end_date. ' ' .$request->end_time,
-                'payment' => 0, //予約段階では未決済のためfalseとして0を挿入
+                'payment' => 0,
                 ]);
             return redirect(route('payment.index',
             [
@@ -84,8 +84,8 @@ class ReservationController extends Controller
      * 予約状況カレンダーの表示アクション
      * 
      * @param int $bikeId 対象自転車のID
-     * @param string $week
-     * @param string $now
+     * @param string $week カレンダー表示のための暫定ワード
+     * @param string $now カレンダー表示のための暫定ワード
      */
     public function index($bikeId, $week, $now) {
         $bike = \App\Bike::findOrFail($bikeId);
