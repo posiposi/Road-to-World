@@ -25,6 +25,7 @@ class ReservationController extends Controller
          * @var string $reservation_start_at 開始日時リクエスト
          * @var string $reservation_end_at 終了日時リクエスト
          */
+        $auth_id = \Auth::id();
         $bike = \App\Bike::find($id);
         $bike_price = $bike->price;
         $reservation_start_at = $request->start_date. ' ' .$request->start_time;
@@ -51,29 +52,31 @@ class ReservationController extends Controller
         $exists = Reservation::where([
             ['bike_id', $id], ['start_at', '<', $reservation_end_at], ['end_at', '>', $reservation_start_at]
         ])->exists();
-        /**
-         * 重複する予約がない場合
-         */
+        
+        //重複する予約がない場合
         if ($exists != true) { 
-            $reservation = $request->user()->reserving()->attach(
-                $id,
+            // 自転車が予約希望者の自転車ではない場合
+            if ($auth_id != $bike->user_id) {
+                $reservation = $request->user()->reserving()->attach(
+                    $id,
+                    [
+                    'start_at' => $request->start_date. ' ' .$request->start_time,
+                    'end_at' => $request->end_date. ' ' .$request->end_time,
+                    'payment' => 0,
+                    ]);
+                return redirect(route('payment.index',
                 [
-                'start_at' => $request->start_date. ' ' .$request->start_time,
-                'end_at' => $request->end_date. ' ' .$request->end_time,
-                'payment' => 0,
-                ]);
-            return redirect(route('payment.index',
-            [
-                'time' => $time,
-                'price' => $bike_price,
-                'bikeId' => $bike->id,
-                'startTime' => $start_carbon,
-                'endTime' => $end_carbon,
-            ]));
+                    'time' => $time,
+                    'price' => $bike_price,
+                    'bikeId' => $bike->id,
+                    'startTime' => $start_carbon,
+                    'endTime' => $end_carbon,
+                ]));
+            } else {
+                return back()->with('flash_message', 'あなた自身の自転車は借りることが出来ません。');
+            }
         }
-        /**
-         * 重複する予約がある場合
-         */
+        // 重複する予約がある場合
         else {
             $test_alert = "<script type='text/javascript'>alert('ご希望の時間は予約済みになっています。');</script>";
             echo $test_alert;
