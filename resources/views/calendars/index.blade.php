@@ -42,7 +42,7 @@
 
         {!! link_to_route('bikes.calendar', '先週へ', ['bikeId' => $bikeId, 'week' => 'last_week', 'now' => $dt]) !!}
         {!! link_to_route('bikes.calendar', '翌週へ', ['bikeId' => $bikeId, 'week' => 'next_week', 'now' => $dt]) !!}
-        <div class="cotainer">
+        <div class="cotainer-fluid">
             <div class="row">
                 <div class="col-sm-12">
                     <table>
@@ -53,6 +53,17 @@
                         @foreach($days as $day)
                             <th>{{ $day }}</th>
                         @endforeach
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th class="text-center">月</th>
+                            <th class="text-center">火</th>
+                            <th class="text-center">水</th>
+                            <th class="text-center">木</th>
+                            <th class="text-center">金</th>
+                            <th class="text-center text-primary">土</th>
+                            <th class="text-center text-danger">日</th>
                         </tr>
                         @foreach($times as $time)
                             <tr>
