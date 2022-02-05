@@ -24,11 +24,11 @@ class UserRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'tel' => 'required | numeric | digits_between:10,11',
-            'name' => 'required | string | max:255',
+            'tel' => ['required', 'numeric', 'digits_between:10,11'],
+            'name' => ['required', 'string', 'max:255'],
             'nickname' => ['required', 'string', 'max:255'],
-            'email' => 'required | string | email | max:255',
-            'password' => 'required | string | min:8',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
         ];
     }
     
