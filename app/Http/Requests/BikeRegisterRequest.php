@@ -24,12 +24,12 @@ class BikeRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'brand' => 'required',
-            'name' => 'required',
-            'status' => 'required',
-            'bike_address' => 'required',
-            'image_path' => 'required | file | image | dimensions:max_width=1500,max_height=1500',
-            'price' => 'required | numeric',
+            'brand' => ['required'],
+            'name' => ['required'],
+            'status' => ['required'],
+            'bike_address' => ['required'],
+            'image_path' => ['required','file', 'image', 'dimensions:max_width=1500,max_height=1500'],
+            'price' => ['required', 'numeric'],
         ];
     }
     
