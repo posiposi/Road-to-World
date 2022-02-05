@@ -53,4 +53,24 @@ class SearchController extends Controller
                 return redirect('search')->with('flash_message', '該当する自転車がありませんでした。');
             }
     }
+
+    /**
+     * 名称検索画面表示
+     *
+     * @return void
+     */
+    public function name()
+    {
+        return view('searches.name',);
+    }
+
+    /**
+     * ブランド検索画面表示
+     *
+     * @return void
+     */
+    public function brand()
+    {
+        return view('searches.brand',);
+    }
 }

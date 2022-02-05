@@ -27,7 +27,22 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col mb-3 bg-light">
+            <div class="left-side col-sm-3 mt-3 bg-primary">
+                <div class="search-title">
+                    <h4 class="font-weight-bold mt-2">検索フォーム</h4>
+                </div>
+                <div class="search-body">
+                    <ul class="search-body-list">
+                        <li class="search-body-list-item">
+                            <p>モデル名で自転車を探す</p>
+                        </li>
+                        <li>
+                            <p>ブランド名で自転車を探す</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-9 mb-3 bg-white">
                 <h4 class="mt-3">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</h4>
                 <p>このRoad to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。<br>
                 購入・使用の敷居が高いロードバイクを借りることで新しい世界を見つけられるでしょう。<br>
@@ -39,7 +54,7 @@
         </div>
         {{-- 利用方法 --}}
         <div class="py-4 bg-warning">
-            <section id="how_to">
+            <section class="how_to">
                 <div class="container">
                     <div class="row mb-4">
                         <div class="col-md-8 mb-3">
