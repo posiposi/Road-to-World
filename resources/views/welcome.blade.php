@@ -5,29 +5,17 @@
 @endpush
 
 @section('content')
-    <header>
+    <main>
         <div class="container text-center">
             <img src ="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/logomark.png" alt="ロゴ">
-            <h3>ようこそ自転車の世界へ！</h3>
         </div>
-    </header>
-    <div class="container-fluid">
-        <div class="row">
-            <div id="main_visual" class="col carousel slide" data-ride="carousel" data-wrap="true">
-                <div class="carousel-inner">
-                    {{-- スライド01 --}}
-                    <div class="carousel-item active">
-                        <img class="img-fluid" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/1411880.jpg" alt="写真">
-                    </div>
-                    {{-- スライド02 
-                    <div class="carousel-item">
-                        <img class="img-fluid" src="/images/Carousel5.jpg" alt="写真">
-                    </div> --}}
-                </div>
+        <div class="jumbotron">
+            <div class="container">
+                <h2 class="main_visual_text">ようこそロードバイクの世界へ</h2>
             </div>
         </div>
         <div class="row mb-4">
-            <div class="left-side col-sm-3 mt-3 bg-primary">
+            <div class="left-side col-sm-3 mt-3">
                 <div class="search-title">
                     <h4 class="font-weight-bold mt-2">検索フォーム</h4>
                 </div>
@@ -53,15 +41,15 @@
             </div>
         </div>
         {{-- 利用方法 --}}
-        <div class="py-4 bg-warning">
-            <section class="how_to">
-                <div class="container">
+        <div class="row">
+            <div class="py-4 bg-warning">
+                <section class="how_to">
                     <div class="row mb-4">
                         <div class="col-md-8 mb-3">
-                            <h3 class="mb-3 headline">ご利用方法</h3>
+                            <h3 class="headline ml-2">ご利用方法</h3>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mx-2">
                         {{-- カード1 --}}
                         <div class="col-md-4 mb-4">
                             <div class="card" style="width: max-width: 20rem;">
@@ -108,8 +96,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
-    </div>
+    </main>
 @endsection

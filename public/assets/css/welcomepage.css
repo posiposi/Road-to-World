@@ -5,6 +5,18 @@ p {
     font-size: 15px;
 }
 
-.headline {
-    font-weight: bold;
+.jumbotron {
+    background:url(/images/main_visual_2.jpg) center no-repeat; background-size: cover;
+    height: 300px;
+    position: relative;
+}
+
+.main_visual_text {
+    color: yellow;
+    font-weight: 500;
+    font-size: 50px;
+    text-shadow:0 5px 5px black;
+    position: absolute;
+    top: 60px;
+    left: 5px;
 }
