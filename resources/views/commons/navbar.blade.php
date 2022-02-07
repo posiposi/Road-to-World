@@ -23,9 +23,9 @@
                     {{-- 左側メニュー --}}
                     <ul class="navbar-nav mr-auto">
                         <div class="btn-bikeregister">
-                            {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
-                            {!! link_to_route('bikes.index', '貸出中バイク一覧', [], ['class' => 'btn btn-primary']) !!}
-                            {!! link_to_route('search', 'バイク検索', [], ['class' => 'btn btn-info']) !!}
+                            {!! link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn btn-success']) !!}
+                            {!! link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn btn-primary']) !!}
+                            {!! link_to_route('search', '自転車を検索', [], ['class' => 'btn btn-info']) !!}
                         </div>
                     </ul>
                     {{-- 右側メニュー --}}
