@@ -98,8 +98,6 @@
                                         <div class="card-body">
                                             <h4 class="card-title">5.自転車を返却</h4>
                                         </div>
-                                        <i class="fas fa-undo-alt"></i>
-                                        <i class="fas fa-undo-alt"></i>
                                         <img class="card-img-bottom" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/how_to_5.jpg" alt="画像">
                                     </div>
                                 </div>
