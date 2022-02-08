@@ -47,27 +47,23 @@
                 </div>
             </section>
         @endguest
+        @auth
         <section>
             <div class="container mt-4">
                 <div class="row mb-4">
-                    <div class="home-search left-side col-sm-3 mt-3">
-                        <div class="home-search-header">
-                            <h4 class="font-weight-bold mt-2">検索フォーム</h4>
-                        </div>
-                        <div class="search-body">
-                            <ul class="search-body-list">
-                                <li class="search-body-list-item">
-                                    {!! link_to_route('search', 'モデル名で検索', [], ['class' => 'btn']) !!}
-                                </li>
-                                <li>
-                                    {!! link_to_route('search', 'ブランド名で検索', [], ['class' => 'btn']) !!}
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="col mb-3 bg-white">
+                        <h4 class="mt-3">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</h4>
+                        <p>このRoad to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。<br>
+                        購入・使用の敷居が高いロードバイクを借りることで新しい世界を見つけられるでしょう。<br>
+                        また、複数自転車を所有している人にはレンタル自転車を登録することで、
+                        購入費用の回収とロードバイクの世界を多くの人に紹介する機会になります。<br>
+                        アプリ製作者の理念は上記を通じて日本の人々にロードバイクの世界を知ってもらうことにあります。</p>
+                        <p>ロードバイクを借りて世界へ通じる'道'へ走り出しましょう！</p>
                     </div>
                 </div>
             </div>
         </section>
+        @endauth
         {{-- 利用方法 --}}
         <section>
             <div class="container">
