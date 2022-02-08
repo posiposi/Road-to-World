@@ -42,14 +42,13 @@
                             </ul>
                         </li>
                     </ul>
-                
                 {{-- 未ログインの場合 --}}
                 @else
                     <ul class="navbar-nav mr-auto">
-                            <div class="btn-signup">
-                                {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-success']) !!}
-                                {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-primary']) !!}
-                            </div>
+                        <div>
+                            {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-success']) !!}
+                            {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-primary']) !!}
+                        </div>
                     </ul>
                 @endif
             </div>

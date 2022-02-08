@@ -29,3 +29,22 @@ p {
     list-style: none;
     opacity: 0.9;
 }
+
+.btn-list {
+    display: flex;
+    align-items: center;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+.btn-lg {
+    width: 500px;
+    height: 100px;
+}
+
+.btn-signup {
+    text-decoration:underline;
+    text-decoration-color:black;
+}
