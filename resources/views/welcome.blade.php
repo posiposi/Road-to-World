@@ -14,8 +14,18 @@
                 <h2 class="main_visual_text">ようこそロードバイクの世界へ</h2>
             </div>
         </div>
+        @guest
+            <section>
+                <div class="container">
+                    <div class="row">
+                        {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-success btn-lg btn-block']) !!}
+                        {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-primary btn-lg btn-block']) !!}
+                    </div>
+                </div>
+            </section>
+        @endguest
         <section>
-            <div class="container">
+            <div class="container mt-4">
                 <div class="row mb-4">
                     <div class="left-side col-sm-3 mt-3">
                         <div class="search-title">
