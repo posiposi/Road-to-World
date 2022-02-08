@@ -24,3 +24,8 @@ p {
 .left-side {
     background-color: lightgreen;
 }
+
+.search-body-list {
+    list-style: none;
+    opacity: 0.9;
+}

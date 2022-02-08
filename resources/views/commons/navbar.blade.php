@@ -17,7 +17,6 @@
             </button>
             {{-- ナビゲーション --}}
             <div class="collapse navbar-collapse" id="nav-bar">
-                {{-- ナビゲーションメニュー --}}
                 {{-- ログイン中の場合 --}}
                 @if(Auth::check())
                     {{-- 左側メニュー --}}

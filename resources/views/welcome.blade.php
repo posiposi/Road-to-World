@@ -27,17 +27,17 @@
         <section>
             <div class="container mt-4">
                 <div class="row mb-4">
-                    <div class="left-side col-sm-3 mt-3">
-                        <div class="search-title">
+                    <div class="home-search left-side col-sm-3 mt-3">
+                        <div class="home-search-header">
                             <h4 class="font-weight-bold mt-2">検索フォーム</h4>
                         </div>
                         <div class="search-body">
                             <ul class="search-body-list">
                                 <li class="search-body-list-item">
-                                    <p>モデル名で自転車を探す</p>
+                                    {!! link_to_route('search', 'モデル名で検索', [], ['class' => 'btn']) !!}
                                 </li>
                                 <li>
-                                    <p>ブランド名で自転車を探す</p>
+                                    {!! link_to_route('search', 'ブランド名で検索', [], ['class' => 'btn']) !!}
                                 </li>
                             </ul>
                         </div>
@@ -62,7 +62,7 @@
                         <section class="how_to">
                             <div class="row mb-4">
                                 <div class="col-md-8 mb-3">
-                                    <h3 class="headline ml-2">ご利用方法</h3>
+                                    <h3 class="headline font-weight-bold ml-2">ご利用方法</h3>
                                 </div>
                             </div>
                             <div class="row mx-2">
