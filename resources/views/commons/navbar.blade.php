@@ -17,15 +17,14 @@
             </button>
             {{-- ナビゲーション --}}
             <div class="collapse navbar-collapse" id="nav-bar">
-                {{-- ナビゲーションメニュー --}}
                 {{-- ログイン中の場合 --}}
                 @if(Auth::check())
                     {{-- 左側メニュー --}}
                     <ul class="navbar-nav mr-auto">
                         <div class="btn-bikeregister">
-                            {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
-                            {!! link_to_route('bikes.index', '貸出中バイク一覧', [], ['class' => 'btn btn-primary']) !!}
-                            {!! link_to_route('search', 'バイク検索', [], ['class' => 'btn btn-info']) !!}
+                            {!! link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn btn-success']) !!}
+                            {!! link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn btn-primary']) !!}
+                            {!! link_to_route('search', '自転車を検索', [], ['class' => 'btn btn-info']) !!}
                         </div>
                     </ul>
                     {{-- 右側メニュー --}}
@@ -43,14 +42,13 @@
                             </ul>
                         </li>
                     </ul>
-                
                 {{-- 未ログインの場合 --}}
                 @else
                     <ul class="navbar-nav mr-auto">
-                            <div class="btn-signup">
-                                {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-success']) !!}
-                                {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-primary']) !!}
-                            </div>
+                        <div>
+                            {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-success']) !!}
+                            {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-primary']) !!}
+                        </div>
                     </ul>
                 @endif
             </div>

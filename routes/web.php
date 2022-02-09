@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\SearchController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,4 +61,6 @@ Route::group(['middleware' => ['auth']], function ()
     //検索機能
         Route::get('search', 'SearchController@show')->name('search'); //検索画面表示
         Route::get('search/index', 'SearchController@index')->name('search.index'); //検索結果表示
+        Route::get('search/name', 'SearchController@name')->name('search.name'); //名称検索画面
+        Route::get('search/brand', 'SearchController@brand')->name('search.brand'); //ブランド検索画面
     });
