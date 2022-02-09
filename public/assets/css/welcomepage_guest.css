@@ -6,7 +6,7 @@ p {
 }
 
 .jumbotron {
-    background:url(/images/main_visual_2.jpg) center no-repeat; background-size: cover;
+    background:url(https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/main_visual_2.jpg) center no-repeat; background-size: cover;
     height: 275px;
     position: relative;
 }
