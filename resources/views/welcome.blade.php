@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/welcomepage.css') }}">
+    @auth
+        <link rel="stylesheet" href="{{ asset('assets/css/welcomepage.css') }}">
+    @endauth
+    @guest
+        <link rel="stylesheet" href="{{ asset('assets/css/welcomepage_guest.css') }}">
+    @endguest
 @endpush
 
 @section('content')
@@ -36,7 +41,7 @@
                         </div>
                         <div class="col-sm-9 mb-3 bg-white">
                             <h4 class="mt-3">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</h4>
-                            <p>このRoad to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。<br>
+                            <p>Road to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。<br>
                             購入・使用の敷居が高いロードバイクを借りることで新しい世界を見つけられるでしょう。<br>
                             また、複数自転車を所有している人にはレンタル自転車を登録することで、
                             購入費用の回収とロードバイクの世界を多くの人に紹介する機会になります。<br>
@@ -53,7 +58,7 @@
                 <div class="row mb-4">
                     <div class="col mb-3 bg-white">
                         <h4 class="mt-3">一覧の中から気になった自転車をレンタル！世界へ漕ぎ出しましょう！</h4>
-                        <p>このRoad to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。<br>
+                        <p>Road to Worldは自転車レンタルを通じて世界へ走り出す人々の手助けをします。<br>
                         購入・使用の敷居が高いロードバイクを借りることで新しい世界を見つけられるでしょう。<br>
                         また、複数自転車を所有している人にはレンタル自転車を登録することで、
                         購入費用の回収とロードバイクの世界を多くの人に紹介する機会になります。<br>

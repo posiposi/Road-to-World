@@ -6,8 +6,8 @@ p {
 }
 
 .jumbotron {
-    background:url(/images/main_visual_3.jpg) center no-repeat; background-size: cover;
-    height: 280px;
+    background:url(/images/main_visual_2.jpg) center no-repeat; background-size: cover;
+    height: 275px;
     position: relative;
 }
 
