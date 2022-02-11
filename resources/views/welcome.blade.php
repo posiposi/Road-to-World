@@ -51,6 +51,14 @@
                     </div>
                 </div>
             </section>
+            <section>
+                <ul class="navbar-nav">
+                    <div class="btn-bikeregister mx-auto d-block mb-4">
+                        {!! link_to_route('bikes.index', '貸出中の自転車はこちらから', [], ['class' => 'btn btn-primary']) !!}
+                        {!! link_to_route('search', '貸出中の自転車を検索する', [], ['class' => 'btn btn-info']) !!}
+                    </div>
+                </ul>
+            </section>
         @endguest
         @auth
         <section>
