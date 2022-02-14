@@ -43,9 +43,6 @@ class SearchController extends Controller
         if (!empty('search_address')) {
             $query->where('bike_address', 'like', '%'.$search_address.'%');
         }
-        if (!empty('search_price')) {
-            $query->where('price', 'like', '%'.$search_price.'%');
-        }
         $bikes = $query->get();
             if (count($bikes) >= 1) {
                 return view('searches.index', compact('bikes', 'search_name', 'search_brand', 'search_address', 'search_price'));
