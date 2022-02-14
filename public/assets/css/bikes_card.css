@@ -1,0 +1,12 @@
+.list-group {
+    word-break: break-word;
+    width: 360px;
+}
+
+.card-body {
+    width: 360px;
+}
+
+.card-remark {
+    height: 300px;
+}

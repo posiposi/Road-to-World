@@ -2,6 +2,7 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('/assets/css/picture.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/bikes_card.css') }}">
 @endpush
 
 @section('content')
@@ -31,7 +32,9 @@
                                         <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                                         <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
                                         <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/30分 </li>
-                                        <li class="list-group-item"> 説明・備考：{{ $bike->remark }} </li>
+                                        <li class="list-group-item card-remark"> 説明・備考</br>
+                                            <p class="mt-2">{{ $bike->remark }}</p>
+                                        </li>
                                     </ul>
                                     @auth
                                         {{-- 予約リクエストフォーム --}}
