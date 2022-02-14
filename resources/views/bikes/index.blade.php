@@ -36,7 +36,7 @@
                                     @auth
                                         {{-- 予約リクエストフォーム --}}
                                         <ul class="list-group list-unstyled mt-3">
-                                            {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
+                                            {{ Form::open(['route' => ['bikes.reservation', $bike->id]]) }}
                                                 <li class="list-group-item">開始日　<input type="date" name="start_date"><br>
                                                 開始時間
                                                 <select name="start_time">
@@ -53,20 +53,20 @@
                                                     @endforeach
                                                 </select>
                                                 </li>
-                                                {!! Form::submit('予約', ['class' => 'btn btn-success btn-block']) !!}
-                                            {!! Form::close() !!}
+                                                {{ Form::submit('予約', ['class' => 'btn btn-success btn-block']) }}
+                                            {{ Form::close() }}
                                         </ul>
                                         <ul class="list-group list-unstyled mt-3">
                                             {{-- ログインユーザがバイク所有者の場合 --}}
                                             @if($users->id == $bike->user_id)
-                                                {!! link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
+                                                {{ link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) }}
                                             {{-- ログインユーザが借り手側の場合 --}}
                                             @else
-                                                {!! link_to_route('comments.show', 'コメントルームへ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) !!}
+                                                {{ link_to_route('comments.show', 'コメントルームへ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) }}
                                             @endif
                                         </ul>
                                         <ul class="list-group list-unstyled mt-3">
-                                            {!! link_to_route('bikes.calendar', '予約状況カレンダー', ['bikeId' => $bike->id, 'week' => 'this_week', 'now' => 'today'], ['class' => 'btn btn-success']) !!}
+                                            {{ link_to_route('bikes.calendar', '予約状況カレンダー', ['bikeId' => $bike->id, 'week' => 'this_week', 'now' => 'today'], ['class' => 'btn btn-success']) }}
                                         </ul>
                                     @endauth
                                 </div>

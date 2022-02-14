@@ -24,19 +24,19 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3">
-                            {!! Form::open(['route' => 'login.post']) !!}
+                            {{ Form::open(['route' => 'login.post']) }}
                                 <div class="form-group">
-                                    {!! Form::label('email', 'メールアドレス') !!}
-                                    {!! Form::email('email', null, ['class' => 'form-control']) !!}
+                                    {{ Form::label('email', 'メールアドレス') }}
+                                    {{ Form::email('email', null, ['class' => 'form-control']) }}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::label('password', 'パスワード') !!}
-                                    {!! Form::password('password', ['class' => 'form-control']) !!}
+                                    {{ Form::label('password', 'パスワード') }}
+                                    {{ Form::password('password', ['class' => 'form-control']) }}
                                 </div>
-                                {!! Form::submit('ログイン', ['class' => 'btn btn-primary btn-block']) !!}
-                            {!! Form::close() !!}
+                                {{ Form::submit('ログイン', ['class' => 'btn btn-primary btn-block']) }}
+                            {{ Form::close() }}
                             <div class="text-right">
-                                {!! link_to_route('signup.get', '初めての方はこちら', [], ['class' => 'btn btn-signup']) !!}
+                                {{ link_to_route('signup.get', '初めての方はこちら', [], ['class' => 'btn btn-signup']) }}
                             </div>
                         </div>
                         <div class="col-sm-9 mb-3 bg-white">
@@ -54,8 +54,8 @@
             <section>
                 <ul class="navbar-nav">
                     <div class="btn-bikeregister mx-auto d-block mb-4">
-                        {!! link_to_route('bikes.index', '貸出中の自転車はこちらから', [], ['class' => 'btn btn-primary']) !!}
-                        {!! link_to_route('search', '貸出中の自転車を検索する', [], ['class' => 'btn btn-info']) !!}
+                        {{ link_to_route('bikes.index', '貸出中の自転車はこちらから', [], ['class' => 'btn btn-primary']) }}
+                        {{ link_to_route('search', '貸出中の自転車を検索する', [], ['class' => 'btn btn-info']) }}
                     </div>
                 </ul>
             </section>

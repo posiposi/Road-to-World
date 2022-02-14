@@ -21,7 +21,7 @@
                             <li class="list-group-item"> 引き渡し場所：{{ $bikes->bike_address }} </li>
                         </ul>
                         <ul class="list-group list-unstyled mt-3">
-                            {!! Form::open(['route' => ['bikes.reservation', $bikes->id]]) !!}
+                            {{ Form::open(['route' => ['bikes.reservation', $bikes->id]]) }}
                                 <li class="list-group-item">開始日　<input type="date" name="start_date"><br>
                                 開始時間
                                 <select name="start_time">
@@ -38,8 +38,8 @@
                                     @endforeach
                                 </select>
                                 </li>
-                                {!! Form::submit('予約', ['class' => 'btn btn-success btn-block']) !!}
-                            {!! Form::close() !!}
+                                {{ Form::submit('予約', ['class' => 'btn btn-success btn-block']) }}
+                            {{ Form::close() }}
                         </ul>
                     </div>
                 </div>
@@ -49,32 +49,32 @@
     {{-- コメント投稿フォーム --}}
     {{-- ユーザがバイク所有者でない場合 --}}
     @if ($login_user != $bikes->user_id)
-        {!! Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $bikes->user_id,]]) !!}
+        {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $bikes->user_id,]]) }}
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-9">
-                        {!! Form::text('body', null, ['class' => 'form-control',]) !!}
+                        {{ Form::text('body', null, ['class' => 'form-control',]) }}
                     </div>
                     <div class="col-md-3">
-                        {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
+                        {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) }}
                     </div>
                 </div>
             </div>
-        {!! Form::close() !!}
+        {{ Form::close() }}
     {{-- ログインユーザがバイク所有者の場合 --}}
     @else
-        {!! Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $sender->id]]) !!} {{--recieverIdはレンタル希望者--}}
+        {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $sender->id]]) }} {{--recieverIdはレンタル希望者--}}
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-9">
-                        {!! Form::text('body', null, ['class' => 'form-control',]) !!}
+                        {{ Form::text('body', null, ['class' => 'form-control',]) }}
                     </div>
                     <div class="col-md-3">
-                        {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
+                        {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) }}
                     </div>
                 </div>
             </div>
-        {!! Form::close() !!}
+        {{ Form::close() }}
     @endif
     
     {{-- コメント表示部 --}}

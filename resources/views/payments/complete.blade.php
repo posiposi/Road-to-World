@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto">
-                {!! link_to_route('bikes.index', '貸出中バイク一覧へ戻る', [], ['class' => 'btn btn-primary']) !!}
+                {{ link_to_route('bikes.index', '貸出中バイク一覧へ戻る', [], ['class' => 'btn btn-primary']) }}
             </div>
         </div>
     </div>
