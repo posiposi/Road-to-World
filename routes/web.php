@@ -27,13 +27,21 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
+//検索機能
+Route::get('search', 'SearchController@show')->name('search'); //検索画面表示
+Route::get('search/index', 'SearchController@index')->name('search.index'); //検索結果表示
+Route::get('search/name', 'SearchController@name')->name('search.name'); //名称検索画面
+Route::get('search/brand', 'SearchController@brand')->name('search.brand'); //ブランド検索画面
+
+//貸出中自転車一覧表示
+Route::get('bikes', 'BikesController@index')->name('bikes.index');
+
 //ログイン認証
 Route::group(['middleware' => ['auth']], function ()
     {
     //自転車関連
         Route::get('bikeregister', 'BikesController@show')->name('bikes.get'); //自転車登録画面表示
         Route::post('bikeregister', 'BikesController@store')->name('bikes.store'); //新規自転車登録
-        Route::get('bikes', 'BikesController@index')->name('bikes.index'); //貸出中自転車一覧表示
         Route::get('bikes/{id}/edit', 'BikesController@edit')->name('bikes.edit'); //自転車情報変更画面表示
         Route::put('bikes/{id}/update', 'BikesController@update')->name('bikes.update'); //自転車情報変更
         Route::delete('bikes/{id}/delete', 'BikesController@destroy')->name('bikes.delete'); //自転車削除
@@ -57,10 +65,4 @@ Route::group(['middleware' => ['auth']], function ()
         Route::get('payment/{time}/{price}/{bikeId}/{startTime}/{endTime}/index', 'PaymentsController@index')->name('payment.index'); // 決済ボタンを表示するページ
         Route::post('/{amount}/{bikeId}/{startTime}/{endTime}/payment', 'PaymentsController@payment')->name('payment'); // Stripeの処理
         Route::get('/complete', 'PaymentsController@complete')->name('complete'); // 決済完了ページ
-    
-    //検索機能
-        Route::get('search', 'SearchController@show')->name('search'); //検索画面表示
-        Route::get('search/index', 'SearchController@index')->name('search.index'); //検索結果表示
-        Route::get('search/name', 'SearchController@name')->name('search.name'); //名称検索画面
-        Route::get('search/brand', 'SearchController@brand')->name('search.brand'); //ブランド検索画面
     });

@@ -20,19 +20,20 @@
                     @else
                         <div class="col-md-4">
                     @endif
-                            <div class="card mb-3">
-                                <div class="bd-placeholder-img card-img-top">
-                                    <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
-                                    <div class="card-body shadow-sm">
-                                        <ul class="list-group list-unstyled">
-                                            <li class='list-group-item'> 所有者：{{ $bike->user->nickname }}</li>
-                                            <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
-                                            <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
-                                            <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
-                                            <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
-                                            <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/30分 </li>
-                                            <li class="list-group-item"> 説明・備考：{{ $bike->remark }} </li>
-                                        </ul>
+                        <div class="card mb-3">
+                            <div class="bd-placeholder-img card-img-top">
+                                <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
+                                <div class="card-body shadow-sm">
+                                    <ul class="list-group list-unstyled">
+                                        <li class='list-group-item'> 所有者：{{ $bike->user->nickname }}</li>
+                                        <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
+                                        <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
+                                        <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
+                                        <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
+                                        <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/30分 </li>
+                                        <li class="list-group-item"> 説明・備考：{{ $bike->remark }} </li>
+                                    </ul>
+                                    @auth
                                         {{-- 予約リクエストフォーム --}}
                                         <ul class="list-group list-unstyled mt-3">
                                             {!! Form::open(['route' => ['bikes.reservation', $bike->id]]) !!}
@@ -67,10 +68,11 @@
                                         <ul class="list-group list-unstyled mt-3">
                                             {!! link_to_route('bikes.calendar', '予約状況カレンダー', ['bikeId' => $bike->id, 'week' => 'this_week', 'now' => 'today'], ['class' => 'btn btn-success']) !!}
                                         </ul>
-                                    </div>
+                                    @endauth
                                 </div>
                             </div>
                         </div>
+                    </div>
                 @endforeach
             </div>
         </div>
