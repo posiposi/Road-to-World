@@ -19,10 +19,10 @@
                     <img class="card-img img-fluid" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/nc96424.jpg" alt="デフォルトアバター画像">
                     @endif
                     <div class="form-group">
-                        {!! Form::open(['route' => 'users.store', 'files' => true]) !!}
-                            {!! Form::file('image', ['class' => 'form-contorol-file my-2']) !!}
-                            {!! Form::submit('アバター登録', ['class' => 'btn btn-success btn-block']) !!}
-                        {!! Form::close() !!}
+                        {{ Form::open(['route' => 'users.store', 'files' => true]) }}
+                            {{ Form::file('image', ['class' => 'form-contorol-file my-2']) }}
+                            {{ Form::submit('アバター登録', ['class' => 'btn btn-success btn-block']) }}
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>
@@ -40,8 +40,8 @@
                 <div class='card-body shadow-sm'>
                     {{--<ul class="list-group">
                         <li class="list-group-item col-md-6">--}}
-                            {!! link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) !!}
-                            {!! link_to_route('users.edit', 'ユーザ登録内容変更', ['id' => $auth->id], ['class' => 'btn btn-success'],) !!}
+                            {{ link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) }}
+                            {{ link_to_route('users.edit', 'ユーザ登録内容変更', ['id' => $auth->id], ['class' => 'btn btn-success'],) }}
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
                             </ul>    
                             <ul class="list-group list-unstyled">
                                 <li class="list-group-item">
-                                    {!! link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) !!}
+                                    {{ link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) }}
                                     <script>
                                         function confirm_delete() {
                                             var select = confirm("削除してもよろしいですか？");

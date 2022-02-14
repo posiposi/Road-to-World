@@ -19,7 +19,7 @@
                     <td>{{ $user->nickname }}</td>
                     {{--<td>{{ $user->updated_at->format('Y.m.d') }}</td>--}}
                     <td class="text-nowrap">
-                        {!! link_to_route('comments.show', 'コメント画面へ', ['bikeId' => $bikes->id, 'senderId' => $user->id], ['class' => 'btn btn-info btn-sm']) !!}
+                        {{ link_to_route('comments.show', 'コメント画面へ', ['bikeId' => $bikes->id, 'senderId' => $user->id], ['class' => 'btn btn-info btn-sm']) }}
                     </td>
                 </tr>
             @endforeach

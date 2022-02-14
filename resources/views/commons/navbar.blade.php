@@ -22,9 +22,9 @@
                     {{-- 左側メニュー --}}
                     <ul class="navbar-nav mr-auto">
                         <div class="btn-bikeregister">
-                            {!! link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn btn-success']) !!}
-                            {!! link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn btn-primary']) !!}
-                            {!! link_to_route('search', '自転車を検索', [], ['class' => 'btn btn-info']) !!}
+                            {{ link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn btn-success']) }}
+                            {{ link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn btn-primary']) }}
+                            {{ link_to_route('search', '自転車を検索', [], ['class' => 'btn btn-info']) }}
                         </div>
                     </ul>
                     {{-- 右側メニュー --}}
@@ -35,10 +35,10 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 {{-- ユーザ詳細ページへのリンク --}}
-                                <li class="dropdown-item">{!! link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-primary']) !!}</li>
+                                <li class="dropdown-item">{{ link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-primary']) }}</li>
                                 <li class="dropdown-divider"></li>
                                 {{-- ログアウトへのリンク --}}
-                                <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
+                                <li class="dropdown-item">{{ link_to_route('logout.get', 'ログアウト') }}</li>
                             </ul>
                         </li>
                     </ul>
@@ -46,8 +46,8 @@
                 @else
                     <ul class="navbar-nav mr-auto">
                         <div>
-                            {!! link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-success']) !!}
-                            {!! link_to_route('login', 'ログイン', [], ['class' => 'btn btn-primary']) !!}
+                            {{ link_to_route('signup.get', 'ユーザ登録', [], ['class' => 'btn btn-success']) }}
+                            {{ link_to_route('login', 'ログイン', [], ['class' => 'btn btn-primary']) }}
                         </div>
                     </ul>
                 @endif
