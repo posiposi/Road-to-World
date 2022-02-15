@@ -65,6 +65,9 @@
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                 <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                                 <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
+                                <li class="list-group-item card-remark"> 説明・備考</br>
+                                    <p class="mt-2">{{ $bike->remark }}</p>
+                                </li>
                             </ul>    
                             <ul class="list-group list-unstyled">
                                 <li class="list-group-item">
