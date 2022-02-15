@@ -10,3 +10,7 @@
 .card-remark {
     height: 300px;
 }
+
+.card-remark p {
+    white-space: pre-wrap;
+}
