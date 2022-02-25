@@ -35,7 +35,7 @@
                 
                     <div class="form-group">
                         {{ Form::label('remark', '説明・備考') }}
-                        {{ Form::textarea('remark', old('textarea', $bikes->textarea), ['class' => 'form-control']) }}
+                        {{ Form::textarea('remark', old('textarea', $bikes->remark), ['class' => 'form-control']) }}
                     </div>
                     
                     <div class="form-group">
