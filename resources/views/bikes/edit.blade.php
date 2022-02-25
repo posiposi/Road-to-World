@@ -46,4 +46,4 @@
             </div>
         </div>
     </div>
-@endsection('content')
+@endsection
