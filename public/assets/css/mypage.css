@@ -1,0 +1,27 @@
+.list-group {
+    word-break: break-word;
+    width: 360px;
+}
+
+.card-body {
+    width: 360px;
+}
+
+.card-remark {
+    height: 300px;
+}
+
+.card-remark p {
+    white-space: pre-wrap;
+}
+
+.user-bike-card-remark p {
+    white-space: pre-wrap;
+    height: 100px;
+}
+
+.user-bike-img {
+    height: 400px; 
+    width: 500px;
+    border-radius: 30px;
+}

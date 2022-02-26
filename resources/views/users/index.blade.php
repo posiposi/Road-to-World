@@ -2,6 +2,7 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('/assets/css/picture.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/mypage.css') }}">
 @endpush
 
 @section('content')
@@ -56,7 +57,7 @@
             @foreach ($bikes as $bike)
                 @if($bike->user_id == $auth->id)
                     <div class="col-md-6 mt-3 mb-3">
-                        <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
+                        <img class="card-img img-fluid user-bike-img" src="{{ $bike->image_path }}" alt="自転車画像">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body shadow-sm">
@@ -65,7 +66,7 @@
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                                 <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                                 <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
-                                <li class="list-group-item card-remark"> 説明・備考</br>
+                                <li class="list-group-item user-bike-card-remark"> 説明・備考</br>
                                     <p class="mt-2">{{ $bike->remark }}</p>
                                 </li>
                             </ul>    
