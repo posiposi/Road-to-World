@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('/assets/css/picture.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/mypage.css') }}">
 @endpush
 
@@ -30,7 +29,7 @@
     
             {{-- ユーザ情報表示カード --}}
             <div class="col-md-6">
-                <div class="card-body shadow-sm">
+                <div class="card-body">
                     <ul class="list-group list-unstyled">
                         <li class="list-group-item"> 氏名：{{ $auth->name }} <li>
                         <li class="list-group-item"> ニックネーム：{{ $auth->nickname }}</li>
@@ -38,7 +37,7 @@
                         <li class="list-group-item"> 電話番号：{{ $auth->tel }} </li>
                     </ul>
                 </div>
-                <div class='card-body shadow-sm'>
+                <div class='card-body'>
                     {{ link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) }}
                     {{ link_to_route('users.edit', 'ユーザ登録内容変更', ['id' => $auth->id], ['class' => 'btn btn-success'],) }}
                 </div>
@@ -58,7 +57,7 @@
                         <img class="card-img img-fluid user-bike-img" src="{{ $bike->image_path }}" alt="自転車画像">
                     </div>
                     <div class="col-md-6">
-                        <div class="card-body shadow-sm">
+                        <div class="card-body">
                             <ul class="list-group list-unstyled">
                                 <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
