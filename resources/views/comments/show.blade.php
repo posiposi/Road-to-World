@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('/assets/css/comments_show.css') }}">
+@endpush
+
 @section('content')
 
     <div class="container">
@@ -19,6 +23,9 @@
                             <li class="list-group-item"> モデル名：{{ $bikes->name }} </li>
                             <li class="list-group-item"> 保管状態：{{ $bikes->status }} </li>
                             <li class="list-group-item"> 引き渡し場所：{{ $bikes->bike_address }} </li>
+                            <li class="list-group-item card-remark"> 説明・備考</br>
+                                <p class="mt-2">{{ $bikes->remark }}</p>
+                            </li>
                         </ul>
                         <ul class="list-group list-unstyled mt-3">
                             {{ Form::open(['route' => ['bikes.reservation', $bikes->id]]) }}

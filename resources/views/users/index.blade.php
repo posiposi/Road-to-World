@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('/assets/css/picture.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/mypage.css') }}">
 @endpush
 
@@ -13,11 +12,11 @@
         <div class="row no-gutters ml-3">
             {{-- ユーザアバター --}}
             <div class="col-md-6">
-                <div class="card-body shadow-sm">
+                <div class="card-body shadow-sm contents-avatar">
                     @if($auth->image != null)
-                    <img class="card-img img-fluid" style="max-height:1080px" src="{{ $auth->image }}" alt="ユーザアバター画像">
+                    <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="{{ $auth->image }}" alt="ユーザアバター画像">
                     @else
-                    <img class="card-img img-fluid" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/nc96424.jpg" alt="デフォルトアバター画像">
+                    <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/nc96424.jpg" alt="デフォルトアバター画像">
                     @endif
                     <div class="form-group">
                         {{ Form::open(['route' => 'users.store', 'files' => true]) }}
@@ -30,7 +29,7 @@
     
             {{-- ユーザ情報表示カード --}}
             <div class="col-md-6">
-                <div class="card-body shadow-sm">
+                <div class="card-body">
                     <ul class="list-group list-unstyled">
                         <li class="list-group-item"> 氏名：{{ $auth->name }} <li>
                         <li class="list-group-item"> ニックネーム：{{ $auth->nickname }}</li>
@@ -38,11 +37,9 @@
                         <li class="list-group-item"> 電話番号：{{ $auth->tel }} </li>
                     </ul>
                 </div>
-                <div class='card-body shadow-sm'>
-                    {{--<ul class="list-group">
-                        <li class="list-group-item col-md-6">--}}
-                            {{ link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) }}
-                            {{ link_to_route('users.edit', 'ユーザ登録内容変更', ['id' => $auth->id], ['class' => 'btn btn-success'],) }}
+                <div class='card-body'>
+                    {{ link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) }}
+                    {{ link_to_route('users.edit', 'ユーザ登録内容変更', ['id' => $auth->id], ['class' => 'btn btn-success'],) }}
                 </div>
             </div>
         </div>
@@ -60,7 +57,7 @@
                         <img class="card-img img-fluid user-bike-img" src="{{ $bike->image_path }}" alt="自転車画像">
                     </div>
                     <div class="col-md-6">
-                        <div class="card-body shadow-sm">
+                        <div class="card-body">
                             <ul class="list-group list-unstyled">
                                 <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
                                 <li class="list-group-item"> モデル名：{{ $bike->name }} </li>

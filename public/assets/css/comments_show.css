@@ -1,3 +1,9 @@
+.card-img {
+    width: 450px;
+    height: 300px;
+    border-radius: 30px;
+}
+
 .list-group {
     word-break: break-word;
     width: 360px;
@@ -8,7 +14,7 @@
 }
 
 .card-remark {
-    height: 300px;
+    height: 200px;
 }
 
 .card-remark p {

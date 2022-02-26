@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('/assets/css/picture.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/css/bikes_card.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/bikes_index.css') }}">
 @endpush
 
 @section('content')
@@ -21,10 +20,10 @@
                     @else
                         <div class="col-md-4">
                     @endif
-                        <div class="card mb-3">
+                        <div class="card mb-3 border border-0">
                             <div class="bd-placeholder-img card-img-top">
-                                <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
-                                <div class="card-body shadow-sm">
+                                <img class="card-img img-fluid mt-4" src="{{ $bike->image_path }}" alt="自転車画像">
+                                <div class="card-body">
                                     <ul class="list-group list-unstyled">
                                         <li class='list-group-item'> 所有者：{{ $bike->user->nickname }}</li>
                                         <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
