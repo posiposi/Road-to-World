@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-     <div class="row text-warning">
+    <div class="row text-warning">
         <h1>{{ $bikes->name }}の予約コメントルーム一覧</h1>
     </div>
     <div class="table-responsive">
@@ -17,7 +17,6 @@
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->nickname }}</td>
-                    {{--<td>{{ $user->updated_at->format('Y.m.d') }}</td>--}}
                     <td class="text-nowrap">
                         {{ link_to_route('comments.show', 'コメント画面へ', ['bikeId' => $bikes->id, 'senderId' => $user->id], ['class' => 'btn btn-info btn-sm']) }}
                     </td>

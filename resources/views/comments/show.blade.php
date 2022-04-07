@@ -45,7 +45,7 @@
                                     @endforeach
                                 </select>
                                 </li>
-                                {{ Form::submit('予約', ['class' => 'btn btn-success btn-block']) }}
+                                {{ Form::submit('予約', ['class' => 'btn btn-success btn-block mt-2']) }}
                             {{ Form::close() }}
                         </ul>
                     </div>
