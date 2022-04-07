@@ -8,6 +8,7 @@ use App\User;
 use App\Bike;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentPostRequest;
 
 class CommentsController extends Controller
 {
@@ -97,7 +98,7 @@ class CommentsController extends Controller
      * @param int $recieverId レンタル希望者のid
      * @return void
      */
-    public function store(Request $request, $bikeId, $recieverId)
+    public function store(CommentPostRequest $request, $bikeId, $recieverId)
     {
         /**
          * @var object $user ログイン中ユーザ
