@@ -99,4 +99,14 @@
             @endforeach
         </div>
     </div>
+
+    {{-- 非同期コメントテストフォーム --}}
+    <div class="row my-3">
+        <div class="col-md-3">
+            <input type="text" id="comment-form">
+            <button id="comment-button">テスト</button>
+        </div>
+        <p id="comment-view"></p>
+    </div>
+    
 @endsection
