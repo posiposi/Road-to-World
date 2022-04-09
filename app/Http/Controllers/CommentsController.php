@@ -115,6 +115,6 @@ class CommentsController extends Controller
         $comment->reciever_id = $recieverId; 
         $comment->save();
         
-        return back();
+        // return back();
     }
 }

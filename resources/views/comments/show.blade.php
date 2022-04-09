@@ -106,7 +106,10 @@
             <input type="text" id="comment-form">
             <button id="comment-button">テスト</button>
         </div>
-        <p id="comment-view"></p>
     </div>
-    
+    <div class="row my-2">
+        <div class="col-md-3">
+            <p id="comment-view"></p>
+        </div>
+    </div>
 @endsection
