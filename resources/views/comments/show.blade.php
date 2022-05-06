@@ -60,24 +60,24 @@
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-9">
-                        {{ Form::text('body', null, ['class' => 'form-control',]) }}
+                        {{ Form::text('body', null, ['class' => 'form-control comment-body']) }}
                     </div>
                     <div class="col-md-3">
-                        {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) }}
+                        {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block comment-post']) }}
                     </div>
                 </div>
             </div>
         {{ Form::close() }}
     {{-- ログインユーザがバイク所有者の場合 --}}
     @else
-        {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $sender->id]]) }} {{--recieverIdはレンタル希望者--}}
+        {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $sender->id]]) }}
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-9">
-                        {{ Form::text('body', null, ['class' => 'form-control',]) }}
+                        {{ Form::text('body', null, ['class' => 'form-control comment-body']) }}
                     </div>
                     <div class="col-md-3">
-                        {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) }}
+                        {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block comment-post']) }}
                     </div>
                 </div>
             </div>
@@ -103,8 +103,8 @@
     {{-- 非同期コメントテストフォーム --}}
     <div class="row my-3">
         <div class="col-md-3">
-            <input type="text" id="comment-form">
-            <button id="comment-button">テスト</button>
+            <input type="text" id="comment-form" class="comment-body">
+            <button id="comment-button" class="comment-post">テスト</button>
         </div>
     </div>
     <div class="row my-2">
