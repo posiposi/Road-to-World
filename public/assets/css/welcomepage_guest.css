@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+p {
+    line-height: 2;
+    font-size: 15px;
+}
+
+.jumbotron {
+    background:url(https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/main_visual_2.jpg) center no-repeat; background-size: cover;
+    height: 275px;
+    position: relative;
+}
+
+.main_visual_text {
+    color: yellow;
+    font-weight: 500;
+    font-size: 50px;
+    text-shadow:0 5px 5px black;
+    position: absolute;
+    top: 60px;
+    left: 5px;
+}
+
+.left-side {
+    background-color: lightgreen;
+}
+
+.search-body-list {
+    list-style: none;
+    opacity: 0.9;
+}
+
+.btn-list {
+    display: flex;
+    align-items: center;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+.btn-lg {
+    width: 500px;
+    height: 100px;
+}
+
+.btn-signup {
+    text-decoration:underline;
+    text-decoration-color:black;
+}
