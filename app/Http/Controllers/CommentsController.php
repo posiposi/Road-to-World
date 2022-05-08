@@ -115,7 +115,7 @@ class CommentsController extends Controller
         $comment->reciever_id = $recieverId; 
         $comment->save();
         
-        return response()->json('hoge');
+        return response()->json($comment);
         // return back();
     }
 }
