@@ -5,10 +5,9 @@ const { received } = require("laravel-mix/src/Log");
 $(function () {
     $('#comment-button').on('click', function(){
         let user_comment = $("#comment-form").val();
-        let location_url = $(location).attr('href'); //アクセスURLを取得
-        let split_url = location_url.split('/', 6); //取得URLを/で分割して配列化
-        let bikeId = split_url[4];
-        let receiverId = split_url[5];
+        let location_url = $(location).attr('href').split('/', 6); //アクセスURLを取得
+        let bikeId = location_url[4];
+        let receiverId = location_url[5];
 
         $.ajax({
             headers: {

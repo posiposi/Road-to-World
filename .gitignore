@@ -12,3 +12,7 @@ npm-debug.log
 yarn-error.log
 .DS_Store
 _ide_helper_models.php
+public/css/app.css
+public/js/app.js
+public/js/comment.js
+public/mix-manifest.json
