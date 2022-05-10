@@ -17,10 +17,9 @@ $(function () {
             type: 'POST',
             data: {'bikeId' : bikeId, 'receiverId' : receiverId, 'body' : user_comment},
             dataType: 'json',
-        }).done(function() {
-            console.log(user_comment);
-            console.log(bikeId);
-            console.log(receiverId);
+        }).done(function(data) {
+            $('#comment-view').html(data);
+            console.log(data);
         }).fail(function() {
             console.log('error');
         });

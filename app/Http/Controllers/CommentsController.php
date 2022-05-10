@@ -115,7 +115,9 @@ class CommentsController extends Controller
         $comment->reciever_id = $recieverId; 
         $comment->save();
         
-        return response()->json($comment);
+        return response()->json([
+            'data' => Comment::where('bike_id', $bikeId)->where('reciever_id', $recieverId)->where('sender_id', $user->id)->get()
+        ]);
         // return back();
     }
 }
