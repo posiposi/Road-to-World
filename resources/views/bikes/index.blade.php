@@ -64,7 +64,7 @@
                                                 {{ link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) }}
                                             {{-- ログインユーザが借り手側の場合 --}}
                                             @else
-                                                {{ link_to_route('comments.show', 'コメントルームへ', ['bikeId' => $bike->id, 'senderId' => $users->id,], ['class' => 'btn btn-success']) }}
+                                                {{ link_to_route('comments.show', 'コメントルームへ', ['bikeId' => $bike->id, 'borrowerId' => $users->id, 'lenderId' => $bike->user_id], ['class' => 'btn btn-success']) }}
                                             @endif
                                         </ul>
                                         <ul class="list-group list-unstyled mt-3">

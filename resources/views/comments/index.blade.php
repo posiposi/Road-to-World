@@ -9,7 +9,6 @@
             <thead>
             <tr>
                 <th>レンタル希望者氏名</th>
-                {{--<th>コメント更新日時</th>--}}
                 <th></th>
             </tr>
             </thead>
@@ -18,7 +17,11 @@
                 <tr>
                     <td>{{ $user->nickname }}</td>
                     <td class="text-nowrap">
-                        {{ link_to_route('comments.show', 'コメント画面へ', ['bikeId' => $bikes->id, 'senderId' => $user->id], ['class' => 'btn btn-info btn-sm']) }}
+                        {{ link_to_route(
+                            'comments.show', 'コメント画面へ', 
+                            ['bikeId' => $bikes->id, 'borrowerId' => $user->id, 'lenderId' => $bikes->user_id],
+                            ['class' => 'btn btn-info btn-sm']
+                        )}}
                     </td>
                 </tr>
             @endforeach

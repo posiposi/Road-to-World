@@ -31,6 +31,7 @@ class CommentsController extends Controller
         $users = \App\User::where('id', '!=', Auth::user()->id)->get();
         $users_all = \App\User::where('id', '!=', $bikes->user_id)->get();
         $login_user = \Auth::id();
+        /*ログインユーザーがバイク所有者でない場合 */
         if($login_user != $bikes->user_id){
             return view('comments.index', ['bikes' => $bikes, 'users' => $users_all]);
         }
@@ -43,10 +44,11 @@ class CommentsController extends Controller
      * コメントルームの表示
      *
      * @param int $bikeId 対象となる自転車のid
-     * @param int $senderId ログイン中ユーザのid
+     * @param int $borrowerId ログイン中ユーザのid
+     * @param int $lenderId 対象となる自転車の保有者id
      * @return void
      */
-    public function show($bikeId, $senderId)
+    public function show($bikeId, $borrowerId, $lenderId)
     {
         /**
          * @var object $bike 対象となる自転車
@@ -54,8 +56,8 @@ class CommentsController extends Controller
          * @var object $sender_comments レンタル希望者のコメント
          */
         $bike = \App\Bike::findOrFail($bikeId);
-        $sender = \App\User::findOrFail($senderId);
-        $sender_comments = \App\Comment::where([['sender_id', $senderId], ['reciever_id', $bike->user_id], ['bike_id', $bike->id]])->pluck('body', 'id');
+        $sender = \App\User::findOrFail($borrowerId);
+        $sender_comments = \App\Comment::where([['sender_id', $borrowerId], ['reciever_id', $bike->user_id], ['bike_id', $bike->id]])->pluck('body', 'id');
         /**
          * @var object $reciever 対象となる自転車
          * @var object $receiver_comments 対象となる自転車の所有者のコメント
@@ -68,7 +70,7 @@ class CommentsController extends Controller
          * @var $login_user ログイン中ユーザのid
          */
         $login_user = \Auth::id();
-        if($senderId != $bike->user_id){
+        if($borrowerId != $bike->user_id){
             if($login_user == $sender->id || $login_user == $reciever->id ){
                 /**
                  * @var array $times カレンダー項目表示のための0〜24時までの時間
