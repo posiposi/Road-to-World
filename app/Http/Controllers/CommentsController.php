@@ -16,14 +16,13 @@ class CommentsController extends Controller
      * コメントルーム一覧表示
      *
      * @param int $bikeId 対象となる自転車のid
-     * @param int $senderId ログイン中ユーザのid
+     * @param int $lenderId ログイン中ユーザ(対象となる自転車の所有者)
      * @return void
      */
-    public function index($bikeId, $senderId)
+    public function index($bikeId, $lenderId)
     {
         /**
          * @var object $bikes 対象となる自転車
-         * @var string $sender ログイン中ユーザ
          * @var string $users_all 対象となる自転車の所有者以外のユーザ
          * @var string $login_user ログイン中ユーザのid
          */
