@@ -51,14 +51,14 @@ class CommentsController extends Controller
     {
         /**
          * @var object $bike 対象となる自転車
-         * @var object $sender ログイン中ユーザ
+         * @var object $sender レンタル希望者
          * @var object $sender_comments レンタル希望者のコメント
          */
         $bike = \App\Bike::findOrFail($bikeId);
         $sender = \App\User::findOrFail($borrowerId);
         $sender_comments = \App\Comment::where([['sender_id', $borrowerId], ['reciever_id', $bike->user_id], ['bike_id', $bike->id]])->pluck('body', 'id');
         /**
-         * @var object $reciever 対象となる自転車
+         * @var object $reciever 対象となる自転車の所有者
          * @var object $receiver_comments 対象となる自転車の所有者のコメント
          */
         $reciever = \App\User::findOrFail($bike->user_id);
