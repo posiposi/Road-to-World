@@ -54,35 +54,18 @@
         </div>
     </div>
     {{-- コメント投稿フォーム --}}
-    {{-- ユーザがバイク所有者でない場合 --}}
-    @if ($login_user != $bikes->user_id)
-        {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'recieverId' => $reciever->id]]) }}
-            <div class="container mt-3">
-                <div class="row">
-                    <div class="col-md-9">
-                        {{ Form::text('body', null, ['class' => 'form-control comment-body']) }}
-                    </div>
-                    <div class="col-md-3">
-                        {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block comment-post']) }}
-                    </div>
+    {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'recieverId' => $reciever->id]]) }}
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-9">
+                    {{ Form::text('body', null, ['class' => 'form-control comment-body']) }}
+                </div>
+                <div class="col-md-3">
+                    {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block comment-post']) }}
                 </div>
             </div>
-        {{ Form::close() }}
-    {{-- ログインユーザがバイク所有者の場合 --}}
-    @else
-        {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'recieverId' => $reciever->id]]) }}
-            <div class="container mt-3">
-                <div class="row">
-                    <div class="col-md-9">
-                        {{ Form::text('body', null, ['class' => 'form-control comment-body']) }}
-                    </div>
-                    <div class="col-md-3">
-                        {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block comment-post']) }}
-                    </div>
-                </div>
-            </div>
-        {{ Form::close() }}
-    @endif
+        </div>
+    {{ Form::close() }}
     
     {{-- コメント表示部 --}}
     <div class="row my-3">
