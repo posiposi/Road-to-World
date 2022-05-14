@@ -100,7 +100,7 @@ class CommentsController extends Controller
      * @param int $recieverId レンタル希望者のid
      * @return void
      */
-    public function store(CommentPostRequest $request, $bikeId, $recieverId)
+    public function store(CommentPostRequest $request, $bikeId, $senderId, $recieverId)
     {
         /**
          * @var object $user ログイン中ユーザ
@@ -112,14 +112,14 @@ class CommentsController extends Controller
         /* コメントの内容 */
         $comment = new Comment;
         $comment->body = $request->body;
-        $comment->sender_id = $user->id;
+        $comment->sender_id = $senderId;
         $comment->bike_id = $bikeId;
         $comment->reciever_id = $recieverId; 
         $comment->save();
         
-        // return response()->json([
-        //     'data' => Comment::where('bike_id', $bikeId)->where('reciever_id', $recieverId)->where('sender_id', $user->id)->get()
-        // ]);
-        return back();
+        return response()->json([
+            'data' => Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $recieverId]])->get()
+        ]);
+        // return back();
     }
 }
