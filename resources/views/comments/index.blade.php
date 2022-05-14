@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row text-warning">
-        <h1>{{ $bikes->name }}の予約コメントルーム一覧</h1>
+        <h1 class="mt-4">{{ $bikes->name }}の予約コメントルーム一覧</h1>
     </div>
     <div class="table-responsive">
         <table class="table table-hover">
@@ -19,7 +19,7 @@
                     <td class="text-nowrap">
                         {{ link_to_route(
                             'comments.show', 'コメント画面へ', 
-                            ['bikeId' => $bikes->id, 'borrowerId' => $user->id, 'lenderId' => $bikes->user_id],
+                            ['bikeId' => $bikes->id, 'receiverId' => $user->id, 'senderId' => $bikes->user_id],
                             ['class' => 'btn btn-info btn-sm']
                         )}}
                     </td>

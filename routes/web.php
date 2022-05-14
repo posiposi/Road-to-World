@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth']], function ()
         //チャット機能
         Route::controller(\CommentsController::class)->prefix('comments')->group(function() {
             Route::get('/{bikeId}/{lenderId}/index', 'index')->name('comments.index'); //コメントルーム一覧表示
-            Route::get('/{bikeId}/{borrowerId}/{lenderId}/show', 'show')->name('comments.show'); //コメントルーム表示
+            Route::get('/{bikeId}/{senderId}/{receiverId}/show', 'show')->name('comments.show'); //コメントルーム表示
             Route::post('/{bikeId}/{recieverId}/store', 'store')->name('comments.store'); //コメント保存
         });
 

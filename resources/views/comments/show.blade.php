@@ -70,7 +70,7 @@
         {{ Form::close() }}
     {{-- ログインユーザがバイク所有者の場合 --}}
     @else
-        {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $sender->id]]) }}
+        {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'recieverId' => $reciever->id]]) }}
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-9">
