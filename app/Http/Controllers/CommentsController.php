@@ -117,8 +117,15 @@ class CommentsController extends Controller
         $comment->reciever_id = $recieverId; 
         $comment->save();
         
+        $sender_allcomments = \App\Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $recieverId]])->pluck('body');
+        $reciever_allcomments = \App\Comment::where([['bike_id', $bikeId], ['sender_id', $recieverId], ['reciever_id', $senderId]])->pluck('body');
+
+        // foreach($sender_allcomments as $sender_allcomment){
+        //     $sender_comment[] = $sender_allcomment->body;
+        // };
+
         return response()->json([
-            'data' => Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $recieverId]])->get()
+            $sender_allcomments, $reciever_allcomments
         ]);
         // return back();
     }

@@ -92,7 +92,7 @@
     </div>
     <div class="row my-2">
         <div class="col-md-3">
-            <p id="comment-view"></p>
+            <div id="comment-view"></div>
         </div>
     </div>
 @endsection
