@@ -26,9 +26,9 @@ class CommentsController extends Controller
          * @var string $users_all 対象となる自転車の所有者以外のユーザ
          * @var string $login_user ログイン中ユーザのid
          */
-        $bikes = \App\Bike::findOrFail($bikeId);
-        $users = \App\User::where('id', '!=', $lenderId)->get();
-        $login_user = \Auth::id();
+        $bikes = Bike::findOrFail($bikeId);
+        $users = User::where('id', '!=', $lenderId)->get();
+        $login_user = Auth::id();
         /*ログインユーザーがバイク所有者でない場合 */
         if($login_user != $bikes->user_id){
             return view('comments.index', ['bikes' => $bikes, 'users' => $users]);
@@ -56,12 +56,12 @@ class CommentsController extends Controller
          * @var object $reciever レンタル対象となる自転車の所有者
          * @var object $receiver_comments レンタル対象となる自転車の所有者コメント
          */
-        $bike = \App\Bike::findOrFail($bikeId);
-        $login_user = \Auth::id();
-        $sender = \App\User::findOrFail($senderId);
-        $sender_comments = \App\Comment::where([['sender_id', $senderId], ['reciever_id', $receiverId], ['bike_id', $bike->id]])->pluck('body', 'id');
-        $reciever = \App\User::findOrFail($receiverId);
-        $reciever_comments = \App\Comment::where([['sender_id', $receiverId], ['reciever_id', $senderId], ['bike_id', $bike->id]])->pluck('body', 'id');
+        $bike = Bike::findOrFail($bikeId);
+        $login_user = Auth::id();
+        $sender = User::findOrFail($senderId);
+        $sender_comments = Comment::where([['sender_id', $senderId], ['reciever_id', $receiverId], ['bike_id', $bike->id]])->pluck('body', 'id');
+        $reciever = User::findOrFail($receiverId);
+        $reciever_comments = Comment::where([['sender_id', $receiverId], ['reciever_id', $senderId], ['bike_id', $bike->id]])->pluck('body', 'id');
         /*
          * ログインユーザのidチェックと条件分岐
          * ログインユーザーがコメント送信者か受信者であり、
@@ -106,8 +106,8 @@ class CommentsController extends Controller
          * @var object $user ログイン中ユーザ
          * @var object $bike 対象となる自転車
          */
-        $user = \Auth::user();
-        $bike = \App\Bike::where('id', $bikeId)->get();
+        $user = Auth::user();
+        $bike = Bike::where('id', $bikeId)->get();
         
         /* コメントの内容 */
         $comment = new Comment;
@@ -117,16 +117,11 @@ class CommentsController extends Controller
         $comment->reciever_id = $recieverId; 
         $comment->save();
         
-        $sender_allcomments = \App\Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $recieverId]])->pluck('body');
-        $reciever_allcomments = \App\Comment::where([['bike_id', $bikeId], ['sender_id', $recieverId], ['reciever_id', $senderId]])->pluck('body');
+        //json用に送信者・受信者の最新コメントを取得する
+        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $recieverId]])->latest()->value('body');
+        $reciever_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $recieverId], ['reciever_id', $senderId]])->latest()->value('body');
 
-        // foreach($sender_allcomments as $sender_allcomment){
-        //     $sender_comment[] = $sender_allcomment->body;
-        // };
-
-        return response()->json([
-            $sender_allcomments, $reciever_allcomments
-        ]);
-        // return back();
+        return response()->json([$sender_allcomments]);
+        return back();
     }
 }
