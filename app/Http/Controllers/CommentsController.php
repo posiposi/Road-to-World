@@ -118,10 +118,10 @@ class CommentsController extends Controller
         $comment->save();
         
         //json用に送信者・受信者の最新コメントを取得する
-        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $recieverId]])->latest()->value('body');
-        $reciever_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $recieverId], ['reciever_id', $senderId]])->latest()->value('body');
+        // $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $recieverId]])->latest()->value('body');
+        // $reciever_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $recieverId], ['reciever_id', $senderId]])->latest()->value('body');
 
-        return response()->json([$sender_allcomments]);
-        return back();
+        // return response()->json([$sender_allcomments]);
+        // return back();
     }
 }
