@@ -54,7 +54,7 @@
         </div>
     </div>
     {{-- コメント投稿フォーム --}}
-    {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'recieverId' => $reciever->id]]) }}
+    {{-- {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'recieverId' => $reciever->id]]) }}
         <div class="container mt-3">
             <div class="row">
                 <div class="col-md-9">
@@ -65,14 +65,14 @@
                 </div>
             </div>
         </div>
-    {{ Form::close() }}
+    {{ Form::close() }} --}}
     
     {{-- コメント表示部 --}}
-    <div class="row my-3">
+    {{-- <div class="row my-3">
         <div class="col-md-6">
             <h2>{{ $sender->nickname }}のコメント</h2>
             @foreach ($sender_comments as $sender_comment)
-                <p>{{ $sender_comment }}</p>
+                <p id="comment-view">{{ $sender_comment }}</p>
             @endforeach
         </div>
         <div class="col-md-6">
@@ -81,18 +81,23 @@
                 <p>{{ $reciever_comment }}</p>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 
-    {{-- 非同期コメントテストフォーム --}}
-    <div class="row my-3">
-        <div class="col-md-3">
-            <input type="text" id="comment-form" class="comment-body">
-            <button id="comment-button" class="comment-post">テスト</button>
+    {{-- 非同期通信コメント表示部分 --}}
+    <div class="chat-container row justify-content-center">
+        <div class="col-md-10 chat-area">
+            <div class="card">
+                <div class="card-header">Comment</div>
+                <div class="card-body chat-card">
+                    <div id="comment-view"></div>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="comment-form" class="comment-body">
+                    <button id="comment-button" class="comment-post">テスト</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row my-2">
-        <div class="col-md-3">
-            <div id="comment-view"></div>
-        </div>
-    </div>
+    
+    <script src="{{ mix('js/comment.js') }}"></script>
 @endsection

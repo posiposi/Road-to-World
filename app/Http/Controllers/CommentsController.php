@@ -62,7 +62,7 @@ class CommentsController extends Controller
         $sender_comments = Comment::where([['sender_id', $senderId], ['reciever_id', $receiverId], ['bike_id', $bike->id]])->pluck('body', 'id');
         $reciever = User::findOrFail($receiverId);
         $reciever_comments = Comment::where([['sender_id', $receiverId], ['reciever_id', $senderId], ['bike_id', $bike->id]])->pluck('body', 'id');
-        /*
+        /**
          * ログインユーザのidチェックと条件分岐
          * ログインユーザーがコメント送信者か受信者であり、
          * なおかつレンタル対象自転車のユーザーidがコメント送信者か受信者ならばコメントページへ変遷させる
@@ -117,11 +117,23 @@ class CommentsController extends Controller
         $comment->reciever_id = $recieverId; 
         $comment->save();
         
-        //json用に送信者・受信者の最新コメントを取得する
-        // $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $recieverId]])->latest()->value('body');
-        // $reciever_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $recieverId], ['reciever_id', $senderId]])->latest()->value('body');
-
-        // return response()->json([$sender_allcomments]);
         // return back();
+    }
+
+    /**
+     * コメント送信者と受信者のコメントを取得
+     *
+     * @param int $bikeId
+     * @param int $senderId
+     * @param int $receiverId
+     * @return void
+     */
+    public function getData($bikeId, $senderId, $receiverId)
+    {
+        //json用に送信者・受信者の最新コメントを取得する
+        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['reciever_id', $receiverId]])->pluck('body');
+        $reciever_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['reciever_id', $senderId]])->latest()->value('body');
+
+        return response()->json([$sender_allcomments]);
     }
 }
