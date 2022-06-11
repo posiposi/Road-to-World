@@ -85,15 +85,29 @@
 
     {{-- 非同期通信コメント表示部分 --}}
     <div class="chat-container row justify-content-center">
-        <div class="col-md-10 chat-area">
+        {{-- ログイン中ユーザーのコメント表示部分 --}}
+        <div class="col-md-6 chat-area">
             <div class="card">
-                <div class="card-header">Comment</div>
+                <div class="card-header">{{ $sender->nickname }}のComment</div>
                 <div class="card-body chat-card">
-                    <div id="comment-view"></div>
+                    <div class="comment-view"></div>
                 </div>
                 <div class="card-body">
                     <input type="text" id="comment-form" class="comment-body">
-                    <button id="comment-button" class="comment-post">テスト</button>
+                    <button id="comment-button" class="comment-post">送信</button>
+                </div>
+            </div>
+        </div>
+        {{-- 相手側コメント表示部分 --}}
+        <div class="col-md-6 chat-area">
+            <div class="card">
+                <div class="card-header">{{ $reciever->nickname }}のComment</div>
+                <div class="card-body chat-card">
+                    <div class="comment-view"></div>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="comment-form" class="comment-body">
+                    <button id="comment-button" class="comment-post">送信</button>
                 </div>
             </div>
         </div>

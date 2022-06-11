@@ -49,11 +49,9 @@ function comments_load(){
         data: {'bikeId' : bikeId, 'senderId' : senderId, 'receiverId' : recieverId},
         dataType: 'json',
     }).done(function(data){
-        console.log('非同期ページ変遷完了');
         for(let i in data){
-            console.log(data[i])
-            $('#comment-view').empty();
-            $('#comment-view').append('<p>' + data[i] + '</p>');
+            $('.comment-view').empty();
+            $('.comment-view').append('<p>' + data[i] + '</p>');
         }
     }).fail(function(){
         console.log("コメント表示エラー");
