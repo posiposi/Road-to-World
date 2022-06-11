@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $fillable = [
-        'body', 'sender_id', 'reciever_id', 'bike_id',
+        'body', 'sender_id', 'receiver_id', 'bike_id',
     ];
     
     /** 一対多の記述(コメントは一人のユーザに従属) */

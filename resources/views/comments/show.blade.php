@@ -54,7 +54,7 @@
         </div>
     </div>
     {{-- コメント投稿フォーム --}}
-    {{-- {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'recieverId' => $reciever->id]]) }}
+    {{-- {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'receiverId' => $receiver->id]]) }}
         <div class="container mt-3">
             <div class="row">
                 <div class="col-md-9">
@@ -76,9 +76,9 @@
             @endforeach
         </div>
         <div class="col-md-6">
-            <h2>{{ $reciever->nickname }}のコメント</h2>
-            @foreach ($reciever_comments as $reciever_comment)
-                <p>{{ $reciever_comment }}</p>
+            <h2>{{ $receiver->nickname }}のコメント</h2>
+            @foreach ($receiver_comments as $receiver_comment)
+                <p>{{ $receiver_comment }}</p>
             @endforeach
         </div>
     </div> --}}
@@ -101,7 +101,7 @@
         {{-- 相手側コメント表示部分 --}}
         <div class="col-md-6 chat-area">
             <div class="card">
-                <div class="card-header">{{ $reciever->nickname }}のComment</div>
+                <div class="card-header">{{ $receiver->nickname }}のComment</div>
                 <div class="card-body chat-card">
                     <div class="comment-view"></div>
                 </div>
