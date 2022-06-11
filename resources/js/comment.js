@@ -18,14 +18,14 @@ function post_comments(){
     const location_url = $(location).attr('href').split('/', 7);
     const bikeId = location_url[4];
     const senderId = location_url[5];
-    const recieverId = location_url[6];
+    const receiverId = location_url[6];
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: '/comments/' + bikeId + '/' + senderId + '/' + recieverId + '/store',
+        url: '/comments/' + bikeId + '/' + senderId + '/' + receiverId + '/store',
         type: 'POST',
-        data: {'bikeId' : bikeId, 'senderId' : senderId, 'recieverId' : recieverId, 'body' : user_comment},
+        data: {'bikeId' : bikeId, 'senderId' : senderId, 'receiverId' : receiverId, 'body' : user_comment},
         // dataType: 'json',
     }).done(function() {
         console.log('post_success');
@@ -39,14 +39,14 @@ function comments_load(){
     const location_url = $(location).attr('href').split('/', 7);
     const bikeId = location_url[4];
     const senderId = location_url[5];
-    const recieverId = location_url[6];
+    const receiverId = location_url[6];
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: '/comments/' + bikeId + '/' + senderId + '/' + recieverId + '/' + 'get',
+        url: '/comments/' + bikeId + '/' + senderId + '/' + receiverId + '/' + 'get',
         type: 'GET',
-        data: {'bikeId' : bikeId, 'senderId' : senderId, 'receiverId' : recieverId},
+        data: {'bikeId' : bikeId, 'senderId' : senderId, 'receiverId' : receiverId},
         dataType: 'json',
     }).done(function(data){
         for(let i in data){
