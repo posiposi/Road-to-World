@@ -84,7 +84,7 @@ class BikesController extends Controller
      */
     public function index(Request $request)
     {
-        $bikes = \App\Bike::paginate(6);
+        $bikes = Bike::paginate(6);
         $users = Auth::user();
         $times = [];
         for ($i = 0; $i < 48; $i++){
@@ -137,8 +137,8 @@ class BikesController extends Controller
      */
     public function destroy($id)
     {
-        $bike = \App\Bike::findOrFail($id);
-        if (\Auth::id() === $bike->user_id)
+        $bike = Bike::findOrFail($id);
+        if (Auth::id() === $bike->user_id)
         {
             $bike->delete();
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DateTimeRequest;
 use Carbon\Carbon;
 use App\Bike;
@@ -25,8 +26,8 @@ class ReservationController extends Controller
          * @var string $reservation_start_at 開始日時リクエスト
          * @var string $reservation_end_at 終了日時リクエスト
          */
-        $auth_id = \Auth::id();
-        $bike = \App\Bike::find($id);
+        $auth_id = Auth::id();
+        $bike = Bike::find($id);
         $bike_price = $bike->price;
         $reservation_start_at = $request->start_date. ' ' .$request->start_time;
         $reservation_end_at = $request->end_date. ' ' .$request->end_time;
@@ -91,7 +92,7 @@ class ReservationController extends Controller
      * @param string $now カレンダー表示のための暫定ワード
      */
     public function index($bikeId, $week, $now) {
-        $bike = \App\Bike::findOrFail($bikeId);
+        $bike = Bike::findOrFail($bikeId);
         //今週
         if ($week == 'this_week' && $now == 'today') {
             $dt = new Carbon();

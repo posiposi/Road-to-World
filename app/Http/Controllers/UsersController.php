@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         //s3アップロード開始
         $image = $request->file('image');
         // バケットの`myprefix`フォルダへアップロード
@@ -48,8 +48,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $auths = \Auth::user();
-        $bikes = \App\Bike::all();
+        $auths = Auth::user();
+        $bikes = Bike::all();
         $reservations = Reservation::where('user_id', $auths->id)->get();
         return view('users.index', ['auth' => $auths, 'bikes' => $bikes, 'reservations' => $reservations]);
     }
@@ -64,7 +64,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $auth = User::findOrFail($id);
-        if (\Auth::id() === $auth->id){
+        if (Auth::id() === $auth->id){
             return view('users.edit', ['auth' => $auth]);
         }
         
