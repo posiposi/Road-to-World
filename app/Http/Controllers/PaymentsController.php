@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+// TODO 不要なuse宣言を削除する
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Customer;

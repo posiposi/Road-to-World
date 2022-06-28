@@ -60,9 +60,9 @@ class User extends Authenticatable
      * 予約している自転車の中に対象の自転車があるか確認
      * 
      * @param int $bikeId 対象自転車のid
-     * @return boolean 自転車が存在するか
+     * @return boolean 存在する:true 存在しない:false
      */
-    public function is_reserving($bikeId)
+    public function is_reserving(int $bikeId)
     {
         return $this->reserving()->where('bike_id', $bikeId)->exists();
     }
