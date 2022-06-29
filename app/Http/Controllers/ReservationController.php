@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DateTimeRequest;
 use Carbon\Carbon;
@@ -17,7 +15,7 @@ class ReservationController extends Controller
      * 
      * @param int $id 予約対象自転車のid
      */
-    public function store(DateTimeRequest $request, $id) {
+    public function store(DateTimeRequest $request, int $id) {
         /**
          * storeメソッド内の変数の説明
          * 
@@ -91,7 +89,7 @@ class ReservationController extends Controller
      * @param string $week カレンダー表示のための暫定ワード
      * @param string $now カレンダー表示のための暫定ワード
      */
-    public function index($bikeId, $week, $now) {
+    public function index(int $bikeId, string $week, string $now) {
         $bike = Bike::findOrFail($bikeId);
         //今週
         if ($week == 'this_week' && $now == 'today') {

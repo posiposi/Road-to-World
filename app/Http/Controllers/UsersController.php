@@ -51,6 +51,7 @@ class UsersController extends Controller
         $auths = Auth::user();
         $bikes = Bike::all();
         $reservations = Reservation::where('user_id', $auths->id)->get();
+
         return view('users.index', ['auth' => $auths, 'bikes' => $bikes, 'reservations' => $reservations]);
     }
     
@@ -61,9 +62,11 @@ class UsersController extends Controller
      * @return void
      * @var object $auth ログインユーザのレコード
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $auth = User::findOrFail($id);
+
+        //ログインユーザーとログインユーザーのレコードが一致する場合
         if (Auth::id() === $auth->id){
             return view('users.edit', ['auth' => $auth]);
         }
@@ -78,10 +81,11 @@ class UsersController extends Controller
      * @return void
      * @var object $auth ログインユーザのレコード
      */
-    public function update(UserRegisterRequest $request, $id)
+    public function update(UserRegisterRequest $request, int $id)
     {
         $auth = User::findOrFail($id);
         $form = $request->all();
+        
         // フォームトークン削除
         unset($form['_token']);
         // レコードアップデート

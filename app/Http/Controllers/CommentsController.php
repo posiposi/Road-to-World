@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Bike;
 use App\Comment;
@@ -19,7 +18,7 @@ class CommentsController extends Controller
      * @param int $lenderId ログイン中ユーザ(対象となる自転車の所有者)
      * @return void
      */
-    public function index($bikeId, $lenderId)
+    public function index(int $bikeId, int $lenderId)
     {
         /**
          * @var object $bikes 対象となる自転車
@@ -29,6 +28,7 @@ class CommentsController extends Controller
         $bikes = Bike::findOrFail($bikeId);
         $users = User::where('id', '!=', $lenderId)->get();
         $login_user = Auth::id();
+        
         /*ログインユーザーがバイク所有者でない場合 */
         if($login_user != $bikes->user_id){
             return view('comments.index', ['bikes' => $bikes, 'users' => $users]);
@@ -46,7 +46,7 @@ class CommentsController extends Controller
      * @param int $lenderId 対象となる自転車の保有者id
      * @return void
      */
-    public function show($bikeId, $senderId, $receiverId)
+    public function show(int $bikeId, int $senderId, int $receiverId)
     {
         /**
          * @var object $bike レンタル対象となる自転車
@@ -100,7 +100,7 @@ class CommentsController extends Controller
      * @param int $receiverId レンタル希望者のid
      * @return void
      */
-    public function store(CommentPostRequest $request, $bikeId, $senderId, $receiverId)
+    public function store(CommentPostRequest $request, int $bikeId, int $senderId, int $receiverId)
     {
         /**
          * @var object $user ログイン中ユーザ
@@ -116,8 +116,6 @@ class CommentsController extends Controller
         $comment->bike_id = $bikeId;
         $comment->receiver_id = $receiverId; 
         $comment->save();
-        
-        // return back();
     }
 
     /**
@@ -128,7 +126,7 @@ class CommentsController extends Controller
      * @param int $receiverId
      * @return void
      */
-    public function getData($bikeId, $senderId, $receiverId)
+    public function getData(int $bikeId, int $senderId, int $receiverId)
     {
         //json用に送信者・受信者の最新コメントを取得する
         $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]])->pluck('body');

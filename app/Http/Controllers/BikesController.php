@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Bike;
-use App\User;
-use App\Reservation;
-use Carbon\Carbon;
-use DateTime;
-use Intervention\Image\Facades\Image;
 use App\Http\Requests\BikeRegisterRequest;
 
 class BikesController extends Controller
@@ -84,9 +78,12 @@ class BikesController extends Controller
      */
     public function index(Request $request)
     {
+        //表示する自転車のページネーション
         $bikes = Bike::paginate(6);
         $users = Auth::user();
         $times = [];
+
+        //カレンダーに表示する日付・時刻を配列に代入
         for ($i = 0; $i < 48; $i++){
             $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
         };
@@ -97,9 +94,10 @@ class BikesController extends Controller
      * 自転車情報の変更
      *
      * @param int $id 対象自転車のid
+     * @var object $bikes 対象となる自転車
      * @return void
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $bikes = Bike::findOrFail($id);
         return view('bikes.edit', ['bikes' => $bikes]);
@@ -110,18 +108,21 @@ class BikesController extends Controller
      *
      * @param BikeRegisterRequest $request
      * @param int $id 対象自転車のid
+     * @param array $form 自転車の変更情報
      * @return void
      */
-    public function update(BikeRegisterRequest $request, $id)
+    public function update(BikeRegisterRequest $request, int $id)
     {
         $bike = Bike::findOrFail($id);
         $form = $request->all();
         $bike->fill($form)->save();
+
         //画像S3アップロード
         $image = $request->image_path;
         $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
-        // アップロードした画像のフルパスを取得
+        //アップロードした画像のフルパスを取得
         $url = Storage::disk('s3')->url($path);
+        //自転車画像のパスに上記フルパスを代入
         $bike->image_path = $url;
         $bike->save();
 
@@ -135,9 +136,11 @@ class BikesController extends Controller
      * @var object $bike 対象の自転車レコード
      * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $bike = Bike::findOrFail($id);
+        
+        //ログインユーザーと削除対象自転車の所有者が同一の場合
         if (Auth::id() === $bike->user_id)
         {
             $bike->delete();
