@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-// TODO 不要なuse宣言を削除する
+
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Customer;
@@ -42,7 +42,7 @@ class PaymentsController extends Controller
              * @var string $reservation 該当の予約
              */ 
             $id = Auth::id();
-            $reservation = \App\Reservation::where([
+            $reservation = Reservation::where([
             ['user_id', $id], ['bike_id', $bikeId], ['start_at', $startTime], ['end_at', $endTime]
             ])->first();
             /* 決済完了時はpaymentカラムに1を代入 */

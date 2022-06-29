@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-// TODO 不要なuse宣言を削除する
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Bike;
 use App\Comment;

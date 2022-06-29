@@ -1,17 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-// TODO 不要なuse宣言を削除する
+
 use Illuminate\Http\Request;
-// use Illuminate\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Bike;
-// use App\User;
-// use App\Reservation;
-// use Carbon\Carbon;
-// use DateTime;
-// use Intervention\Image\Facades\Image;
 use App\Http\Requests\BikeRegisterRequest;
 
 class BikesController extends Controller
