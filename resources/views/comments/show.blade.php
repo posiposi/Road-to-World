@@ -53,8 +53,8 @@
             </div>
         </div>
     </div>
-    
-    {{-- 非同期通信コメント表示部分 --}}
+
+    {{-- コメント表示部分 --}}
     <div class="chat-container row justify-content-center">
         {{-- ログイン中ユーザーのコメント表示部分 --}}
         <div class="col-md-6 chat-area">
@@ -63,8 +63,11 @@
                 <div class="card-body chat-card">
                     <div class="comment-view"></div>
                 </div>
+                {{-- 入力フォームと送信ボタン表示部 --}}
                 <div class="card-body">
+                    {{-- 入力フォーム --}}
                     <input type="text" id="comment-form" class="comment-body">
+                    {{-- 送信ボタン --}}
                     <button id="comment-button" class="comment-post">送信</button>
                 </div>
             </div>

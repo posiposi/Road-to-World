@@ -1,6 +1,7 @@
 const { data } = require("jquery");
 const { received } = require("laravel-mix/src/Log");
 
+// TODO readyの記述要否を検討する
 //画面ロード時に既存コメントを読み込み
 $(function(){
     comments_load();
@@ -56,4 +57,23 @@ function comments_load(){
     }).fail(function(){
         console.log("コメント表示エラー");
     });
+}
+
+//送信ボタンの不活性化処理
+function disableSenderButton(){
+    //コメントフォームの入力がされた場合、イベント発火
+    $("#comment-form").on("input", function(){
+        //入力されたコメントを取得
+        let inputComment = ($this).val();
+        
+        //コメントが入力されている場合
+        // TODO ボタンカラー変更を追加
+        if(inputComment){
+            //送信ボタンを活性化
+            $("#comment-button").prop('disabled', false);
+        }else{
+            //送信ボタンを非活性化
+            $("comment-button").prop('disabled', true);
+        }
+    })
 }
