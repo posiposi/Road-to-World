@@ -1,10 +1,12 @@
 const { data } = require("jquery");
 const { received } = require("laravel-mix/src/Log");
 
-// TODO readyの記述要否を検討する
-//画面ロード時に既存コメントを読み込み
+//画面ロード
 $(function(){
+    //既存コメントロード
     comments_load();
+    //ボタン活性・非活性
+    disableSenderButton();
 });
 
 //ボタンクリック時にコメント保存・読み込みイベント発火
@@ -15,7 +17,7 @@ $('#comment-button').on('click', function(){
 
 //コメントの非同期保存アクション
 function post_comments(){
-    const user_comment = $("#comment-form").val();
+    const user_comment = $("#comment-input").val();
     const location_url = $(location).attr('href').split('/', 7);
     const bikeId = location_url[4];
     const senderId = location_url[5];
@@ -62,18 +64,19 @@ function comments_load(){
 //送信ボタンの不活性化処理
 function disableSenderButton(){
     //コメントフォームの入力がされた場合、イベント発火
-    $("#comment-form").on("input", function(){
+    $("#comment-input").on("input", function(){
         //入力されたコメントを取得
-        let inputComment = ($this).val();
-        
+        let inputComment = $(this).val();
+        //送信ボタンを定数に定義
+        const SENDER_BUTTON = $("#comment-button")
+
         //コメントが入力されている場合
-        // TODO ボタンカラー変更を追加
         if(inputComment){
             //送信ボタンを活性化
-            $("#comment-button").prop('disabled', false);
+            SENDER_BUTTON.prop('disabled', false);
         }else{
             //送信ボタンを非活性化
-            $("comment-button").prop('disabled', true);
+            SENDER_BUTTON.prop('disabled', true);
         }
     })
 }

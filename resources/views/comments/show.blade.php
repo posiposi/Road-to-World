@@ -29,7 +29,7 @@
                         </ul>
                         <ul class="list-group list-unstyled mt-3">
                             {{ Form::open(['route' => ['bikes.reservation', $bikes->id]]) }}
-                                <li class="list-group-item">開始日　<input type="date" name="start_date"><br>
+                                <li class="list-group-item">開始日 <input type="date" name="start_date"><br>
                                 開始時間
                                 <select name="start_time">
                                     @foreach($times as $time)
@@ -37,7 +37,7 @@
                                     @endforeach
                                 </select>
                                 </li>
-                                <li class="list-group-item">終了日　<input type="date" name="end_date"><br>
+                                <li class="list-group-item">終了日 <input type="date" name="end_date"><br>
                                 終了時間
                                 <select name="end_time">
                                     @foreach($times as $time)
@@ -66,9 +66,9 @@
                 {{-- 入力フォームと送信ボタン表示部 --}}
                 <div class="card-body">
                     {{-- 入力フォーム --}}
-                    <input type="text" id="comment-form" class="comment-body">
+                    <input type="text" id="comment-input" class="comment-body form-control">
                     {{-- 送信ボタン --}}
-                    <button id="comment-button" class="comment-post">送信</button>
+                    <button disabled id="comment-button" class="comment-post btn btn-primary mt-2">送信</button>
                 </div>
             </div>
         </div>
