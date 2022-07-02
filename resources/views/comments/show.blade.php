@@ -105,10 +105,10 @@
                 <div class="card-body chat-card">
                     <div class="comment-view"></div>
                 </div>
-                <div class="card-body">
+                {{-- <div class="card-body">
                     <input type="text" id="comment-form" class="comment-body">
                     <button id="comment-button" class="comment-post">送信</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
