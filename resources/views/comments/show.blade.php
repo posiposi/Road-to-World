@@ -53,36 +53,7 @@
             </div>
         </div>
     </div>
-    {{-- コメント投稿フォーム --}}
-    {{-- {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'receiverId' => $receiver->id]]) }}
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-9">
-                    {{ Form::text('body', null, ['class' => 'form-control comment-body']) }}
-                </div>
-                <div class="col-md-3">
-                    {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block comment-post']) }}
-                </div>
-            </div>
-        </div>
-    {{ Form::close() }} --}}
     
-    {{-- コメント表示部 --}}
-    {{-- <div class="row my-3">
-        <div class="col-md-6">
-            <h2>{{ $sender->nickname }}のコメント</h2>
-            @foreach ($sender_comments as $sender_comment)
-                <p id="comment-view">{{ $sender_comment }}</p>
-            @endforeach
-        </div>
-        <div class="col-md-6">
-            <h2>{{ $receiver->nickname }}のコメント</h2>
-            @foreach ($receiver_comments as $receiver_comment)
-                <p>{{ $receiver_comment }}</p>
-            @endforeach
-        </div>
-    </div> --}}
-
     {{-- 非同期通信コメント表示部分 --}}
     <div class="chat-container row justify-content-center">
         {{-- ログイン中ユーザーのコメント表示部分 --}}
@@ -105,10 +76,6 @@
                 <div class="card-body chat-card">
                     <div class="comment-view"></div>
                 </div>
-                {{-- <div class="card-body">
-                    <input type="text" id="comment-form" class="comment-body">
-                    <button id="comment-button" class="comment-post">送信</button>
-                </div> --}}
             </div>
         </div>
     </div>
