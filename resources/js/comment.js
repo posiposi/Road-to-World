@@ -15,12 +15,17 @@ $('#comment-button').on('click', function(){
     comments_load();
 });
 
-//コメントの非同期保存アクション
+/** サーバー側コメント保存メソッドを呼び出す */
 function post_comments(){
+    /** @type {string} フォームに入力されたユーザーのコメント */
     const user_comment = $("#comment-input").val();
+    /** @type {string} ajax通信用URLパラメータ */
     const location_url = $(location).attr('href').split('/', 7);
+    /** @type {string} 対象自転車のID */
     const bikeId = location_url[4];
+    /** @type {string} ログインユーザーのID */
     const senderId = location_url[5];
+    /** @type {string} 対象自転車の保有ユーザーID */
     const receiverId = location_url[6];
     $.ajax({
         headers: {
@@ -29,7 +34,6 @@ function post_comments(){
         url: '/comments/' + bikeId + '/' + senderId + '/' + receiverId + '/store',
         type: 'POST',
         data: {'bikeId' : bikeId, 'senderId' : senderId, 'receiverId' : receiverId, 'body' : user_comment},
-        // dataType: 'json',
     }).done(function() {
         console.log('post_success');
     }).fail(function() {
@@ -37,11 +41,15 @@ function post_comments(){
     });
 }
 
-//既存コメントの表示
+/** 既存コメントをロードする */
 function comments_load(){
+    /** @type {string} ajax通信用URLパラメータ */
     const location_url = $(location).attr('href').split('/', 7);
+    /** @type {string} 対象自転車のID */
     const bikeId = location_url[4];
+    /** @type {string} ログインユーザーのID */
     const senderId = location_url[5];
+    /** @type {string} 対象自転車の保有ユーザーID */
     const receiverId = location_url[6];
     $.ajax({
         headers: {
@@ -52,6 +60,7 @@ function comments_load(){
         data: {'bikeId' : bikeId, 'senderId' : senderId, 'receiverId' : receiverId},
         dataType: 'json',
     }).done(function(data){
+        //通信成功した場合はサーバーから受け取ったjsonをループ処理して表示する
         for(let i in data){
             $('.comment-view').empty();
             $('.comment-view').append('<p>' + data[i] + '</p>');
@@ -61,13 +70,13 @@ function comments_load(){
     });
 }
 
-//送信ボタンの不活性化処理
+/** 送信ボタンの活性・不活性を決定する */
 function disableSenderButton(){
-    //コメントフォームの入力がされた場合、イベント発火
+    //コメントフォームの入力がされた時点でイベント発火
     $("#comment-input").on("input", function(){
-        //入力されたコメントを取得
+        /** @type {string} フォームに入力されたコメント */
         let inputComment = $(this).val();
-        //送信ボタンを定数に定義
+        /** @type {HTMLElement} 送信ボタンの要素 */
         const SENDER_BUTTON = $("#comment-button")
 
         //コメントが入力されている場合
