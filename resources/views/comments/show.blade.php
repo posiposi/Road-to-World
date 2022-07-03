@@ -29,7 +29,7 @@
                         </ul>
                         <ul class="list-group list-unstyled mt-3">
                             {{ Form::open(['route' => ['bikes.reservation', $bikes->id]]) }}
-                                <li class="list-group-item">開始日　<input type="date" name="start_date"><br>
+                                <li class="list-group-item">開始日 <input type="date" name="start_date"><br>
                                 開始時間
                                 <select name="start_time">
                                     @foreach($times as $time)
@@ -37,7 +37,7 @@
                                     @endforeach
                                 </select>
                                 </li>
-                                <li class="list-group-item">終了日　<input type="date" name="end_date"><br>
+                                <li class="list-group-item">終了日 <input type="date" name="end_date"><br>
                                 終了時間
                                 <select name="end_time">
                                     @foreach($times as $time)
@@ -53,48 +53,22 @@
             </div>
         </div>
     </div>
-    {{-- コメント投稿フォーム --}}
-    {{-- {{ Form::open(['route' => ['comments.store', 'bikeId' => $bikes->id, 'senderId' => $sender->id, 'receiverId' => $receiver->id]]) }}
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-9">
-                    {{ Form::text('body', null, ['class' => 'form-control comment-body']) }}
-                </div>
-                <div class="col-md-3">
-                    {{ Form::submit('投稿', ['class' => 'btn btn-primary btn-block comment-post']) }}
-                </div>
-            </div>
-        </div>
-    {{ Form::close() }} --}}
-    
-    {{-- コメント表示部 --}}
-    {{-- <div class="row my-3">
-        <div class="col-md-6">
-            <h2>{{ $sender->nickname }}のコメント</h2>
-            @foreach ($sender_comments as $sender_comment)
-                <p id="comment-view">{{ $sender_comment }}</p>
-            @endforeach
-        </div>
-        <div class="col-md-6">
-            <h2>{{ $receiver->nickname }}のコメント</h2>
-            @foreach ($receiver_comments as $receiver_comment)
-                <p>{{ $receiver_comment }}</p>
-            @endforeach
-        </div>
-    </div> --}}
 
-    {{-- 非同期通信コメント表示部分 --}}
+    {{-- コメント表示部分 --}}
     <div class="chat-container row justify-content-center">
         {{-- ログイン中ユーザーのコメント表示部分 --}}
         <div class="col-md-6 chat-area">
             <div class="card">
                 <div class="card-header">{{ $sender->nickname }}のComment</div>
                 <div class="card-body chat-card">
-                    <div class="comment-view"></div>
+                    <div class="sendercomment-view"></div>
                 </div>
+                {{-- 入力フォームと送信ボタン表示部 --}}
                 <div class="card-body">
-                    <input type="text" id="comment-form" class="comment-body">
-                    <button id="comment-button" class="comment-post">送信</button>
+                    {{-- 入力フォーム --}}
+                    <input type="text" id="comment-input" class="comment-body form-control">
+                    {{-- 送信ボタン --}}
+                    <button disabled id="comment-button" class="comment-post btn btn-primary mt-2">送信</button>
                 </div>
             </div>
         </div>
@@ -103,11 +77,7 @@
             <div class="card">
                 <div class="card-header">{{ $receiver->nickname }}のComment</div>
                 <div class="card-body chat-card">
-                    <div class="comment-view"></div>
-                </div>
-                <div class="card-body">
-                    <input type="text" id="comment-form" class="comment-body">
-                    <button id="comment-button" class="comment-post">送信</button>
+                    <div class="receivercomment-view"></div>
                 </div>
             </div>
         </div>
