@@ -62,8 +62,9 @@ function comments_load(){
     }).done(function(data){
         //通信成功した場合はサーバーから受け取ったjsonをループ処理して表示する
         for(let i in data){
-            $('.comment-view').empty();
-            $('.comment-view').append('<p>' + data[i] + '</p>');
+            //表示中コメントを消去し、サーバから受け取ったコメントを表示する
+            $('.sendercomment-view').empty();
+            $('.sendercomment-view').append('<p>' + data[i] + '</p>');
         }
     }).fail(function(){
         console.log("コメント表示エラー");

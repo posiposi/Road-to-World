@@ -61,7 +61,7 @@
             <div class="card">
                 <div class="card-header">{{ $sender->nickname }}のComment</div>
                 <div class="card-body chat-card">
-                    <div class="comment-view"></div>
+                    <div class="sendercomment-view"></div>
                 </div>
                 {{-- 入力フォームと送信ボタン表示部 --}}
                 <div class="card-body">
@@ -77,7 +77,7 @@
             <div class="card">
                 <div class="card-header">{{ $receiver->nickname }}のComment</div>
                 <div class="card-body chat-card">
-                    <div class="comment-view"></div>
+                    <div class="receivercomment-view"></div>
                 </div>
             </div>
         </div>
