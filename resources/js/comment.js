@@ -9,9 +9,11 @@ $(function(){
     disableSenderButton();
 });
 
-//ボタンクリック時にコメント保存・読み込みイベント発火
+//送信ボタン押下時アクション
 $('#comment-button').on('click', function(){
+    //コメント保存
     post_comments();
+    //DBに保存されているコメントを表示
     comments_load();
 });
 
@@ -27,6 +29,8 @@ function post_comments(){
     const senderId = location_url[5];
     /** @type {string} 対象自転車の保有ユーザーID */
     const receiverId = location_url[6];
+    
+    //ajaxでコメントをDBに保存する
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -51,6 +55,8 @@ function comments_load(){
     const senderId = location_url[5];
     /** @type {string} 対象自転車の保有ユーザーID */
     const receiverId = location_url[6];
+
+    //ajaxで対象のコメントを表示する
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -60,12 +66,15 @@ function comments_load(){
         data: {'bikeId' : bikeId, 'senderId' : senderId, 'receiverId' : receiverId},
         dataType: 'json',
     }).done(function(data){
-        //通信成功した場合はサーバーから受け取ったjsonをループ処理して表示する
-        for(let i in data){
-            //表示中コメントを消去し、サーバから受け取ったコメントを表示する
-            $('.sendercomment-view').empty();
-            $('.sendercomment-view').append('<p>' + data[i] + '</p>');
-        }
+        //送信者側の表示コメントを削除
+        $('.sendercomment-view').empty();
+        //送信者側の最新コメントを表示
+        $('.sendercomment-view').append('<p>' + data.sender_allcomments + '</p>');
+        //受信者側の表示コメントを削除
+        $('.receivercomment-view').empty();
+        //受信者側の最新コメントを表示
+        $('.receivercomment-view').append('<p>' + data.receiver_allcomments + '</p>');
+        console.log(data);
     }).fail(function(){
         console.log("コメント表示エラー");
     });
