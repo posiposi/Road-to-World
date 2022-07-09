@@ -13,8 +13,10 @@ $(function(){
 $('#comment-button').on('click', function(){
     //コメント保存
     post_comments();
-    //DBに保存されているコメントを表示
-    comments_load();
+    //表示ラグを避けるために遅延実行でコメント表示をする
+    setTimeout(function(){
+        comments_load();
+    }, 300);
 });
 
 /** サーバー側コメント保存メソッドを呼び出す */
