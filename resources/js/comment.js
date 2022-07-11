@@ -13,13 +13,13 @@ $(function(){
 $('#comment-button').on('click', function(){
     //コメント保存
     post_comments();
-    //表示ラグを避けるために遅延実行でコメント表示をする
+    //表示ラグを避けるために0.3秒遅延実行でコメント表示をする
     setTimeout(function(){
         comments_load();
     }, 300);
 });
 
-/** サーバー側コメント保存メソッドを呼び出す */
+/** サーバー側のコメント保存メソッドを呼び出す */
 function post_comments(){
     /** @type {string} フォームに入力されたユーザーのコメント */
     const user_comment = $("#comment-input").val();
@@ -32,7 +32,7 @@ function post_comments(){
     /** @type {string} 対象自転車の保有ユーザーID */
     const receiverId = location_url[6];
     
-    //ajaxでコメントをDBに保存する
+    //非同期通信でコメントをDBに保存する
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -47,7 +47,7 @@ function post_comments(){
     });
 }
 
-/** 既存コメントをロードする */
+/** DB内コメントをロードする */
 function comments_load(){
     /** @type {string} ajax通信用URLパラメータ */
     const location_url = $(location).attr('href').split('/', 7);
@@ -58,7 +58,7 @@ function comments_load(){
     /** @type {string} 対象自転車の保有ユーザーID */
     const receiverId = location_url[6];
 
-    //ajaxで対象のコメントを表示する
+    //非同期通信で対象のコメントを表示する
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -68,15 +68,25 @@ function comments_load(){
         data: {'bikeId' : bikeId, 'senderId' : senderId, 'receiverId' : receiverId},
         dataType: 'json',
     }).done(function(data){
+        //サーバから受け取ったJSONを代入
+        /** @type {Array} DB内のログインユーザーコメント */
+        let sender_allcomments = data.sender_allcomments;
+        /** @type {Array} DB内の相手側コメント */
+        let receiver_allcomments = data.receiver_allcomments;
+
         //送信者側の表示コメントを削除
         $('.sendercomment-view').empty();
-        //送信者側の最新コメントを表示
-        $('.sendercomment-view').append('<p>' + data.sender_allcomments + '</p>');
-        //受信者側の表示コメントを削除
+        for(let i=0; i < sender_allcomments.length; i++){
+            //DBから受け取ったログインユーザー側のコメントを表示
+            $('.sendercomment-view').append('<ul>' + sender_allcomments[i] + '</ul>');
+        }
+        
+        //DBから受け取った相手側の表示コメントを削除
         $('.receivercomment-view').empty();
-        //受信者側の最新コメントを表示
-        $('.receivercomment-view').append('<p>' + data.receiver_allcomments + '</p>');
-        console.log(data);
+        for(let i=0; i < receiver_allcomments.length; i++){
+            //受信者側の最新コメントを表示
+            $('.receivercomment-view').append('<ul>' + receiver_allcomments[i] + '</ul>');
+        }
     }).fail(function(){
         console.log("コメント表示エラー");
     });
