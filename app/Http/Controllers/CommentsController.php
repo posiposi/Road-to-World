@@ -123,8 +123,8 @@ class CommentsController extends Controller
     public function getData(int $bikeId, int $senderId, int $receiverId)
     {
         //json用に送信者・受信者の最新コメントを取得する
-        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]])->pluck('body');
-        $receiver_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->pluck('body');
+        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]])->latest()->pluck('body');
+        $receiver_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->latest()->pluck('body');
 
         return response()->json(["sender_allcomments" => $sender_allcomments, "receiver_allcomments" => $receiver_allcomments]);
     }
