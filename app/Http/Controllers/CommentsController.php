@@ -97,19 +97,13 @@ class CommentsController extends Controller
      *
      * @param Request $request
      * @param int $bikeId 対象となる自転車のid
-     * @param int $receiverId レンタル希望者のid
+     * @param int $senderId コメント送信者のユーザーid
+     * @param int $receiverId コメント受信者のユーザーid
      * @return void
      */
     public function store(CommentPostRequest $request, int $bikeId, int $senderId, int $receiverId)
     {
-        /**
-         * @var object $user ログイン中ユーザ
-         * @var object $bike 対象となる自転車
-         */
-        $user = Auth::user();
-        $bike = Bike::where('id', $bikeId)->get();
-        
-        /* コメントの内容 */
+        /* DBに保存するコメントデータ */
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->sender_id = $senderId;
