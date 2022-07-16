@@ -28,8 +28,8 @@ class UsersController extends Controller
         $user = Auth::user();
         //s3アップロード開始
         $image = $request->file('image');
-        // バケットの`myprefix`フォルダへアップロード
-        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        // バケットの`avatars`フォルダへアップロード
+        $path = Storage::disk('s3')->putFile('avatars', $image, 'public');
         // アップロードした画像のフルパスを取得
         $url = Storage::disk('s3')->url($path);
         $user->image = $url;
