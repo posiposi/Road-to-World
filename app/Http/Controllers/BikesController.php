@@ -57,7 +57,7 @@ class BikesController extends Controller
          */
         $image = $bike->image_path;
         $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-        $path = Storage::disk('s3')->put('myprefix/' . $name, $image, 'public');
+        $path = Storage::disk('s3')->put('bikes/' . $name, $image, 'public');
         /**
          * @method string Illuminate\Support\Facades url()
          */
@@ -119,7 +119,7 @@ class BikesController extends Controller
 
         //画像S3アップロード
         $image = $request->image_path;
-        $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+        $path = Storage::disk('s3')->putFile('bikes', $image, 'public');
         //アップロードした画像のフルパスを取得
         $url = Storage::disk('s3')->url($path);
         //自転車画像のパスに上記フルパスを代入
