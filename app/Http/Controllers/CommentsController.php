@@ -97,19 +97,13 @@ class CommentsController extends Controller
      *
      * @param Request $request
      * @param int $bikeId 対象となる自転車のid
-     * @param int $receiverId レンタル希望者のid
+     * @param int $senderId コメント送信者のユーザーid
+     * @param int $receiverId コメント受信者のユーザーid
      * @return void
      */
     public function store(CommentPostRequest $request, int $bikeId, int $senderId, int $receiverId)
     {
-        /**
-         * @var object $user ログイン中ユーザ
-         * @var object $bike 対象となる自転車
-         */
-        $user = Auth::user();
-        $bike = Bike::where('id', $bikeId)->get();
-        
-        /* コメントの内容 */
+        /* DBに保存するコメントデータ */
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->sender_id = $senderId;
@@ -129,8 +123,8 @@ class CommentsController extends Controller
     public function getData(int $bikeId, int $senderId, int $receiverId)
     {
         //json用に送信者・受信者の最新コメントを取得する
-        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]])->pluck('body');
-        $receiver_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->pluck('body');
+        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]])->orderByDesc('created_at')->get();
+        $receiver_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->orderByDesc('created_at')->get();
 
         return response()->json(["sender_allcomments" => $sender_allcomments, "receiver_allcomments" => $receiver_allcomments]);
     }
