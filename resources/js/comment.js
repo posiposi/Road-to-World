@@ -73,19 +73,22 @@ function comments_load(){
         let sender_allcomments = data.sender_allcomments;
         /** @type {Array} DB内の相手側コメント */
         let receiver_allcomments = data.receiver_allcomments;
+        /** 日時取得のテストデータ */
+        let test = data.test;
+        let time = data.time;
 
         //送信者側の表示コメントを削除
         $('.sendercomment-view').empty();
         for(let i=0; i < sender_allcomments.length; i++){
             //DBから受け取ったログインユーザー側のコメントを表示
-            $('.sendercomment-view').append('<ul>' + sender_allcomments[i] + '</ul>');
+            $('.sendercomment-view').append('<ul>' + sender_allcomments[i].created_at + '：' + sender_allcomments[i].body + '</ul>');
         }
         
         //DBから受け取った相手側の表示コメントを削除
         $('.receivercomment-view').empty();
         for(let i=0; i < receiver_allcomments.length; i++){
             //受信者側の最新コメントを表示
-            $('.receivercomment-view').append('<ul>' + receiver_allcomments[i] + '</ul>');
+            $('.receivercomment-view').append('<ul>' + receiver_allcomments[i].created_at + '：' + receiver_allcomments[i].body + '</ul>');
         }
     }).fail(function(){
         console.log("コメント表示エラー");
