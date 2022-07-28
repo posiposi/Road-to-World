@@ -116,6 +116,8 @@ class BikesController extends Controller
         $bike = Bike::findOrFail($id);
         $form = $request->all();
         $bike->fill($form)->save();
+        
+        //TODO 画像削除機能を実装する
 
         //画像S3アップロード
         $image = $request->image_path;
