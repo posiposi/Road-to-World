@@ -73,9 +73,6 @@ function comments_load(){
         let sender_allcomments = data.sender_allcomments;
         /** @type {Array} DB内の相手側コメント */
         let receiver_allcomments = data.receiver_allcomments;
-        /** 日時取得のテストデータ */
-        let test = data.test;
-        let time = data.time;
 
         //送信者側の表示コメントを削除
         $('.sendercomment-view').empty();
@@ -97,7 +94,7 @@ function comments_load(){
 
 /** 送信ボタンの活性・不活性を決定する */
 function disableSenderButton(){
-    //コメントフォームの入力がされた時点でイベント発火
+    //コメントフォームに入力がされた際にイベント発火
     $("#comment-input").on("input", function(){
         /** @type {string} フォームに入力されたコメント */
         let inputComment = $(this).val();
