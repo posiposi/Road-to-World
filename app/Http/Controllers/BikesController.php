@@ -109,15 +109,21 @@ class BikesController extends Controller
      * @param BikeRegisterRequest $request
      * @param int $id 対象自転車のid
      * @param array $form 自転車の変更情報
+     * @var object $bike 対象となる既存自転車の登録情報
      * @return void
      */
     public function update(BikeRegisterRequest $request, int $id)
     {
+        //変更対象自転車の既存情報を取得する
         $bike = Bike::findOrFail($id);
+        //ユーザー側の変更リクエストを取得する
         $form = $request->all();
+        //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
+        $image_keypath = str_replace('https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/', '', $bike->image_path);
+        //該当するs3上の既存画像を削除する
+        Storage::disk('s3')->delete($image_keypath);
+        //自転車の変更リクエストDBに保存する
         $bike->fill($form)->save();
-        
-        //TODO 画像削除機能を実装する
 
         //画像S3アップロード
         $image = $request->image_path;
@@ -128,6 +134,7 @@ class BikesController extends Controller
         $bike->image_path = $url;
         $bike->save();
 
+        //ユーザー情報画面へ画面変遷する
         return redirect('/users');
     }
     
@@ -140,14 +147,22 @@ class BikesController extends Controller
      */
     public function destroy(int $id)
     {
+        //変更対象自転車の既存情報を取得する
         $bike = Bike::findOrFail($id);
         
         //ログインユーザーと削除対象自転車の所有者が同一の場合
         if (Auth::id() === $bike->user_id)
         {
+            //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
+            $image_keypath = str_replace('https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/', '', $bike->image_path);
+            
+            //該当するs3上の既存画像を削除する
+            Storage::disk('s3')->delete($image_keypath);
+            //DB上の既存自転車の情報を削除する
             $bike->delete();
         }
         
+        //遷移元へ画面変遷する
         return back();
     }
 }

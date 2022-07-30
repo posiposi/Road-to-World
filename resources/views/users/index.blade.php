@@ -70,14 +70,12 @@
                             <ul class="list-group list-unstyled">
                                 <li class="list-group-item">
                                     {{ link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) }}
-                                    TODO 下記JS記述を分離する
                                     <script>
                                         function confirm_delete() {
                                             var select = confirm("削除してもよろしいですか？");
                                             return select;
                                         }
                                     </script>
-                                    TODO 上記JS記述分離と併せてイベントトリガーも変更する
                                     <form action="{{ route('bikes.delete', $bike->id)}}" method="post" onsubmit="return confirm_delete()">
                                         @method('DELETE')
                                         @csrf
