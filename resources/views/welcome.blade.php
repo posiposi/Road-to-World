@@ -35,8 +35,8 @@
                                 </div>
                                 {{ Form::submit('ログイン', ['class' => 'btn btn-primary btn-block']) }}
                             {{ Form::close() }}
-                            <div class="text-right">
-                                {{ link_to_route('signup.get', '初めての方はこちら', [], ['class' => 'btn btn-signup']) }}
+                            <div class="text-right mt-2">
+                                {{ link_to_route('signup.get', '初めての方はこちら', [], ['class' => 'text-dark']) }}
                             </div>
                         </div>
                         <div class="col-sm-9 mb-3 bg-white">
