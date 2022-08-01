@@ -71,12 +71,14 @@ class ReservationController extends Controller
                     'startTime' => $start_carbon,
                     'endTime' => $end_carbon,
                 ]));
+            //TODO フラッシュメッセージを分離化する
             } else {
                 return back()->with('flash_message', 'あなた自身の自転車は借りることが出来ません。');
             }
         }
         // 重複する予約がある場合
         else {
+            //TODO 下記JSをファイルとして分離化する
             $test_alert = "<script type='text/javascript'>alert('ご希望の時間は予約済みになっています。');</script>";
             echo $test_alert;
         }
