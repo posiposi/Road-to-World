@@ -53,7 +53,7 @@ class ReservationController extends Controller
         ])->exists();
         
         //重複する予約がない場合
-        if ($exists != true) { 
+        if (!$exists) { 
             // 自転車が予約希望者の自転車ではない場合
             if ($auth_id != $bike->user_id) {
                 $reservation = $request->user()->reserving()->attach(
@@ -71,14 +71,15 @@ class ReservationController extends Controller
                     'startTime' => $start_carbon,
                     'endTime' => $end_carbon,
                 ]));
-            } else {
+            }
+            //予約対象が予約者自身の所有自転車の場合
+            else {
                 return back()->with('flash_message', 'あなた自身の自転車は借りることが出来ません。');
             }
         }
         // 重複する予約がある場合
         else {
-            $test_alert = "<script type='text/javascript'>alert('ご希望の時間は予約済みになっています。');</script>";
-            echo $test_alert;
+            return back()->with('flash_message', 'ご希望の時間は予約済みになっています。');
         }
     }
     
