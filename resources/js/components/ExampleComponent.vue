@@ -2,6 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <div>{{ message }}</div>
                 <div class="card">
                     <div class="card-header">Example Component</div>
 
@@ -15,9 +16,18 @@
 </template>
 
 <script>
+    import { ref } from "vue";
     export default {
+        setup() {
+            const message = ref("Hello Laravel Vue 3");
+
+            return {
+                message
+            };
+        },
+
         mounted() {
             console.log('Component mounted.')
         }
     }
-</script>
+</script>    
