@@ -54,7 +54,7 @@
 
         {{-- コメントフォーム --}}
         <div id="app" class="comment-area row mb-4">
-            <async-comment></async-comment>
+            <async-comment v-bind:data="{sender: {{$sender}}, bikes: {{$bikes}}}"></async-comment>
         </div>
     </div>
 

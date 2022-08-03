@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div>{{ message }}</div>
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
+                <div class="card initsender">
+                    <div class="card-header">
+                        <p>{{ data.sender.nickname }}</p>
+                    </div>
                     <div class="card-body">
                         I'm an example component.
                     </div>
@@ -18,11 +18,13 @@
 <script>
     import { ref } from "vue";
     export default {
-        setup() {
-            const message = ref("Hello Laravel Vue 3");
+        props:['data'],
+        setup(props) {
+            const data = ref(props.data);
+            console.log(props.data);
 
             return {
-                message
+                data
             };
         },
 
