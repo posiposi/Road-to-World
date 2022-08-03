@@ -6,11 +6,12 @@
 
 require('./bootstrap');
 
+// import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import { createApp } from 'vue'
-import ExampleComponent from './components/ExampleComponent.vue'
+import AsyncComment from './components/AsyncComment.vue'
 
 createApp({
     components:{
-        ExampleComponent
+        AsyncComment
     }
 }).mount('#app')
