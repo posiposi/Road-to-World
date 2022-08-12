@@ -18,7 +18,7 @@
                         <!-- 入力フォーム -->
                             <input type="text" class="form-control" v-model="comment_input">
                         <!-- 送信ボタン -->
-                            <button @click="loadComment" :disabled="disabled.value" ref="comment-button" class="comment-post btn btn-primary mt-2">送信</button>
+                            <button @click="postAndLoad" :disabled="disabled.value" ref="comment-button" class="comment-post btn btn-primary mt-2">送信</button>
                     </div>
                 </div>
             </div>
@@ -47,9 +47,7 @@ import { reactive, ref, watch, onMounted } from "vue";
             // レンタル希望者コメントを用意
             let sendercommentjson = ref();
 
-            /**
-             * 既存コメントの表示
-             */
+            /** 既存コメントの表示 */
             const loadComment = () => {
                 // 既存コメント取得APIをキックする
                 axios.get('/' + url.value[0] + '/' + url.value[1] + '/' + url.value[2] + '/' + url.value[3] + '/get')
@@ -58,9 +56,23 @@ import { reactive, ref, watch, onMounted } from "vue";
                     .catch(response => console.log(response))
             }
 
-            /**
-             * 送信ボタンの活性切り替えを行う
-             */
+            /** コメント保存API呼び出し */
+            const postComment = () => {
+                //コメント保存APIをキックする
+                axios.post('/' + url.value[0] + '/' + url.value[1] + '/' + url.value[2] + '/' + url.value[3] + '/store', {
+                    body: comment_input.value
+                })
+                .then(() => {console.log('保存通信成功')})
+                .catch(() => {console.log('保存通信失敗')})
+            }
+
+            /** コメント保存・コメント表示のラッパー関数 */
+            const postAndLoad = () => {
+                postComment(),
+                loadComment()
+            }
+
+            /** 送信ボタンの活性切り替えを行う */
             const Active = () => {
                 // コメント入力フォームがブランクの場合はボタン非活性
                 if(comment_input.value == ''){
@@ -71,11 +83,6 @@ import { reactive, ref, watch, onMounted } from "vue";
                     disabled.value = ref(false);
                     console.log(comment_input.value);
                 }
-            }
-
-            
-            const postComment = () => {
-                
             }
 
             //画面ロード時
@@ -100,6 +107,8 @@ import { reactive, ref, watch, onMounted } from "vue";
                 url,
                 loadComment,
                 sendercommentjson,
+                postComment,
+                postAndLoad,
             };
         }
     }

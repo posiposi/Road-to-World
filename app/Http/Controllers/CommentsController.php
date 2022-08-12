@@ -126,6 +126,7 @@ class CommentsController extends Controller
         //json用に送信者・受信者の最新コメントを取得する
         $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]])->orderByDesc('created_at')->get();
         $receiver_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->orderByDesc('created_at')->get();
+        // TODO 上記2点の変数結果をUNIONすることを検討
 
         return response()->json(["sender_allcomments" => $sender_allcomments, "receiver_allcomments" => $receiver_allcomments]);
     }
