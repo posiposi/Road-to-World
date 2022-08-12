@@ -120,6 +120,7 @@ class CommentsController extends Controller
      * @param int $receiverId
      * @return void
      */
+    // TODO 関数名が何を取得するのか分からないため、名称を変更する
     public function getData(int $bikeId, int $senderId, int $receiverId)
     {
         //json用に送信者・受信者の最新コメントを取得する
