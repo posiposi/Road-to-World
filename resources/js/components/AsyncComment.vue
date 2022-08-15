@@ -8,6 +8,7 @@
                     </div>
                     <!-- ログインユーザー側コメント表示部 -->
                     <div class="card-body comment-view" v-for="(value) in sendercommentjson">
+                    <!-- TODO コメント発信者の表示方法を検討する -->
                         {{ data.sender.nickname }} : {{ value.body }}
                     </div>
                     <!-- 自転車所有ユーザー側コメント表示部 -->
@@ -16,9 +17,9 @@
                     </div> -->
                     <div class="card-body">
                         <!-- 入力フォーム -->
-                            <input type="text" class="form-control" v-model="comment_input">
+                            <input type="text" class="form-control" v-model="comment_input" ref="comment_form">
                         <!-- 送信ボタン -->
-                            <button @click="postAndLoad" :disabled="disabled.value" ref="comment-button" class="comment-post btn btn-primary mt-2">送信</button>
+                            <button @click="clickCommentButton" :disabled="disabled.value" ref="comment-button" class="btn btn-primary mt-2">送信</button>
                     </div>
                 </div>
             </div>
@@ -31,6 +32,7 @@
 import { is } from "@babel/types";
 import { computed } from "@vue/reactivity";
 import axios from "axios";
+import { comment } from "postcss";
 import { reactive, ref, watch, onMounted } from "vue";
     export default {
         props:['data'],
@@ -39,11 +41,10 @@ import { reactive, ref, watch, onMounted } from "vue";
             const data = ref(props.data);
             // コメントフォーム入力初期値の設定(初期値：ブランク)
             const comment_input = ref('');
-            //ボタンの活性状態を定義(初期状態：非活性)
+            // ボタンの活性状態を定義(初期状態：非活性)
             const disabled = ref(true);
             // URLパラメータ取得
             let url = ref(location.pathname.substring(1).split('/'));
-
             // レンタル希望者コメントを用意
             let sendercommentjson = ref();
 
@@ -51,8 +52,7 @@ import { reactive, ref, watch, onMounted } from "vue";
             const loadComment = () => {
                 // 既存コメント取得APIをキックする
                 axios.get('/' + url.value[0] + '/' + url.value[1] + '/' + url.value[2] + '/' + url.value[3] + '/get')
-                    // 予約希望者の既存コメントを定義する
-                    .then(response => sendercommentjson.value = response.data.sender_allcomments)
+                    .then(response => sendercommentjson.value = response.data.login_user_and_owner_comments)
                     .catch(response => console.log(response))
             }
 
@@ -66,10 +66,12 @@ import { reactive, ref, watch, onMounted } from "vue";
                 .catch(() => {console.log('保存通信失敗')})
             }
 
-            /** コメント保存・コメント表示のラッパー関数 */
-            const postAndLoad = () => {
+            /** 送信ボタン押下時アクション */
+            const clickCommentButton = () => {
                 postComment(),
-                loadComment()
+                setTimeout(() => loadComment(),100),
+                // 入力フォームの値を空白にする
+                comment_input.value = ''
             }
 
             /** 送信ボタンの活性切り替えを行う */
@@ -108,7 +110,7 @@ import { reactive, ref, watch, onMounted } from "vue";
                 loadComment,
                 sendercommentjson,
                 postComment,
-                postAndLoad,
+                clickCommentButton,
             };
         }
     }

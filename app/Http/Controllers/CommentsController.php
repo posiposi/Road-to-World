@@ -113,21 +113,21 @@ class CommentsController extends Controller
     }
 
     /**
-     * コメント送信者と受信者のコメントを取得
+     * ログインユーザーと自転車所有者のコメントをJSONで返却する
      *
      * @param int $bikeId
      * @param int $senderId
      * @param int $receiverId
-     * @return void
+     * @return array
      */
-    // TODO 関数名が何を取得するのか分からないため、名称を変更する
-    public function getData(int $bikeId, int $senderId, int $receiverId)
-    {
-        //json用に送信者・受信者の最新コメントを取得する
-        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]])->orderByDesc('created_at')->get();
-        $receiver_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->orderByDesc('created_at')->get();
-        // TODO 上記2点の変数結果をUNIONすることを検討
+    public function getSenderAndReceiverComment(int $bikeId, int $senderId, int $receiverId)
+    {        
+        // 対象自転車所有者向けのログインユーザーコメントを取得する
+        $login_user_comments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]]);
+        // ログインユーザー向けの自転車所有者コメントを取得し、結合する
+        $login_user_and_owner_comments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->union($login_user_comments)->orderBy('created_at')->get();
 
-        return response()->json(["sender_allcomments" => $sender_allcomments, "receiver_allcomments" => $receiver_allcomments]);
+        // 上記で結合したコメントをJSON形式で返却する
+        return response()->json(["login_user_and_owner_comments" => $login_user_and_owner_comments]);
     }
 }
