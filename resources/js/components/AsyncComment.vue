@@ -2,6 +2,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <div class="alert alert-danger" v-if="error_message">
+                    コメントの送信ができませんでした。時間が経ってから再送信してください。
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <div>コメント一覧</div>
@@ -47,6 +50,17 @@ import { reactive, ref, watch, onMounted } from "vue";
             let url = ref(location.pathname.substring(1).split('/'));
             // レンタル希望者コメントを用意
             let sendercommentjson = ref();
+            // エラーメッセージ表示フラグを定義(初期状態：非表示)
+            const error_message = ref(false);
+
+            /** エラーメッセージ表示メソッド */
+            const showErrorMessage = () => {
+                // エラーメッセージ表示フラグをON
+                error_message.value = true,
+                setTimeout(() => {
+                    error_message.value = false
+                }, 3000)
+            }
 
             /** 既存コメントの表示 */
             const loadComment = () => {
@@ -63,7 +77,8 @@ import { reactive, ref, watch, onMounted } from "vue";
                     body: comment_input.value
                 })
                 .then(() => {console.log('保存通信成功')})
-                .catch(() => {console.log('保存通信失敗')})
+                // コメント保存失敗時にエラーメッセージを表示する
+                .catch(() => {showErrorMessage()})
             }
 
             /** 送信ボタン押下時アクション */
@@ -111,7 +126,9 @@ import { reactive, ref, watch, onMounted } from "vue";
                 sendercommentjson,
                 postComment,
                 clickCommentButton,
+                error_message,
+                showErrorMessage,
             };
         }
     }
-</script>    
+</script>
