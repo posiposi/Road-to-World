@@ -92,6 +92,7 @@ class CommentsController extends Controller
         }
     }
     
+    // TODO Modelへ分離する
     /**
      * コメントの保存
      *
@@ -104,28 +105,39 @@ class CommentsController extends Controller
     public function store(CommentPostRequest $request, int $bikeId, int $senderId, int $receiverId)
     {
         /* DBに保存するコメントデータ */
+        // TODO 下記アクションに保存日時を明示的に追加する
+
+        /* コメントクラスのインスタンス化 */
         $comment = new Comment;
+        /* コメント本文 */
         $comment->body = $request->body;
+        /* コメント送信者ID */
         $comment->sender_id = $senderId;
+        /* レンタル対象自転車ID */
         $comment->bike_id = $bikeId;
+        /* コメント受信者ID */
         $comment->receiver_id = $receiverId; 
+        /* DB保存アクション */
         $comment->save();
     }
 
+    // TODO Modelへ分離する
     /**
-     * コメント送信者と受信者のコメントを取得
+     * ログインユーザーと自転車所有者のコメントをJSONで返却する
      *
      * @param int $bikeId
      * @param int $senderId
      * @param int $receiverId
-     * @return void
+     * @return array
      */
-    public function getData(int $bikeId, int $senderId, int $receiverId)
-    {
-        //json用に送信者・受信者の最新コメントを取得する
-        $sender_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]])->orderByDesc('created_at')->get();
-        $receiver_allcomments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->orderByDesc('created_at')->get();
+    public function getSenderAndReceiverComment(int $bikeId, int $senderId, int $receiverId)
+    {        
+        // 対象自転車所有者向けのログインユーザーコメントを取得する
+        $login_user_comments = Comment::where([['bike_id', $bikeId], ['sender_id', $senderId], ['receiver_id', $receiverId]]);
+        // ログインユーザー向けの自転車所有者コメントを取得し、結合する
+        $login_user_and_owner_comments = Comment::where([['bike_id', $bikeId], ['sender_id', $receiverId], ['receiver_id', $senderId]])->union($login_user_comments)->orderBy('created_at')->get();
 
-        return response()->json(["sender_allcomments" => $sender_allcomments, "receiver_allcomments" => $receiver_allcomments]);
+        // 上記で結合したコメントをJSON形式で返却する
+        return response()->json(["login_user_and_owner_comments" => $login_user_and_owner_comments]);
     }
 }

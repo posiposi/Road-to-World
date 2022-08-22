@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth']], function ()
             Route::get('/{bikeId}/{lenderId}/index', 'index')->name('comments.index'); //コメントルーム一覧表示
             Route::get('/{bikeId}/{senderId}/{receiverId}/show', 'show')->name('comments.show'); //コメントルーム表示
             Route::post('/{bikeId}/{senderId}/{receiverId}/store', 'store')->name('comments.store'); //コメント保存
-            Route::get('/{bikeId}/{senderId}/{receiverId}/get', 'getData')->name('comments.get'); //コメント取得
+            Route::get('/{bikeId}/{senderId}/{receiverId}/get', 'getSenderAndReceiverComment')->name('comments.get'); //コメント取得
         });
 
         //決済機能
