@@ -2,24 +2,25 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <!-- コメント送信失敗時のエラーメッセージ表示 -->
                 <div class="alert alert-danger" v-if="error_message">
                     コメントの送信ができませんでした。時間が経ってから再送信してください。
                 </div>
+
+                <!-- コメント表示部 -->
                 <div class="card">
                     <div class="card-header">
                         <div>コメント一覧</div>
                     </div>
-                    <!-- ログインユーザー側コメント表示部 -->
-                    <div class="card-body comment-view" v-for="(value) in sendercommentjson">
-                    <!-- TODO コメント発信者の表示方法を検討する -->
-                        {{ data.sender.nickname }} : {{ value.body }}
+                    <!-- ログインユーザーと自転車所有者のコメントをループ表示させる -->
+                    <div class="card-body comment-view" v-for="(comments) in loginUserAndOwnerComments">
+                        <!-- 表示するコメントがログインユーザーのコメントの場合 -->
+                        <div v-if="comments.sender_id == data.sender.id">{{ data.sender.nickname }} : {{ comments.body }}</div>
+                        <!-- 表示するコメントがバイク所有者のコメントの場合 -->
+                        <div v-else>{{ data.receiver.nickname }} : {{ comments.body }}</div>
                     </div>
-                    <!-- 自転車所有ユーザー側コメント表示部 -->
-                    <!-- <div class="card-body" v-for="(value) in receivercommentjson">
-                        {{ data.receiver.nickname }} : {{ value.body }}
-                    </div> -->
                     <div class="card-body">
-                        <!-- 入力フォーム -->
+                        <!-- コメント入力フォーム -->
                             <input type="text" class="form-control" v-model="comment_input" ref="comment_form">
                         <!-- 送信ボタン -->
                             <button @click="clickCommentButton" :disabled="disabled.value" ref="comment-button" class="btn btn-primary mt-2">送信</button>
@@ -31,7 +32,6 @@
 </template>
 
 <script>
-// TODO 実装後に不要なimportは削除する
 import { is } from "@babel/types";
 import { computed } from "@vue/reactivity";
 import axios from "axios";
@@ -49,7 +49,7 @@ import { reactive, ref, watch, onMounted } from "vue";
             // URLパラメータ取得
             let url = ref(location.pathname.substring(1).split('/'));
             // レンタル希望者コメントを用意
-            let sendercommentjson = ref();
+            let loginUserAndOwnerComments = ref();
             // エラーメッセージ表示フラグを定義(初期状態：非表示)
             const error_message = ref(false);
 
@@ -66,13 +66,13 @@ import { reactive, ref, watch, onMounted } from "vue";
             const loadComment = () => {
                 // 既存コメント取得APIをキックする
                 axios.get('/' + url.value[0] + '/' + url.value[1] + '/' + url.value[2] + '/' + url.value[3] + '/get')
-                    .then(response => sendercommentjson.value = response.data.login_user_and_owner_comments)
+                    .then(response => loginUserAndOwnerComments.value = response.data.login_user_and_owner_comments)
                     .catch(response => console.log(response))
             }
 
             /** コメント保存API呼び出し */
             const postComment = () => {
-                //コメント保存APIをキックする
+                // コメント保存APIをキックする
                 axios.post('/' + url.value[0] + '/' + url.value[1] + '/' + url.value[2] + '/' + url.value[3] + '/store', {
                     body: comment_input.value
                 })
@@ -90,7 +90,7 @@ import { reactive, ref, watch, onMounted } from "vue";
             }
 
             /** 送信ボタンの活性切り替えを行う */
-            const Active = () => {
+            const changeSendButtonActivity = () => {
                 // コメント入力フォームがブランクの場合はボタン非活性
                 if(comment_input.value == ''){
                     disabled.value = ref(true);
@@ -102,28 +102,28 @@ import { reactive, ref, watch, onMounted } from "vue";
                 }
             }
 
-            //画面ロード時
+            // 画面ロード時
             onMounted(() => {
-                //送信ボタン活性を切り替える
-                Active(),
-                //既存コメントをロードする
+                // 送信ボタン活性を切り替える
+                changeSendButtonActivity(),
+                // 既存コメントをロードする
                 loadComment()
             })
 
-            //コメント入力フォームを監視
+            // コメント入力フォームを監視
             watch(comment_input, () => {
-                //送信ボタン活性を切り替える
-                Active();
+                // 送信ボタン活性を切り替える
+                changeSendButtonActivity();
             })
 
             return {
                 data,
                 disabled,
                 comment_input,
-                Active,
+                changeSendButtonActivity,
                 url,
                 loadComment,
-                sendercommentjson,
+                loginUserAndOwnerComments,
                 postComment,
                 clickCommentButton,
                 error_message,

@@ -92,6 +92,7 @@ class CommentsController extends Controller
         }
     }
     
+    // TODO Modelへ分離する
     /**
      * コメントの保存
      *
@@ -104,14 +105,23 @@ class CommentsController extends Controller
     public function store(CommentPostRequest $request, int $bikeId, int $senderId, int $receiverId)
     {
         /* DBに保存するコメントデータ */
+        // TODO 下記アクションに保存日時を明示的に追加する
+
+        /* コメントクラスのインスタンス化 */
         $comment = new Comment;
+        /* コメント本文 */
         $comment->body = $request->body;
+        /* コメント送信者ID */
         $comment->sender_id = $senderId;
+        /* レンタル対象自転車ID */
         $comment->bike_id = $bikeId;
+        /* コメント受信者ID */
         $comment->receiver_id = $receiverId; 
+        /* DB保存アクション */
         $comment->save();
     }
 
+    // TODO Modelへ分離する
     /**
      * ログインユーザーと自転車所有者のコメントをJSONで返却する
      *
