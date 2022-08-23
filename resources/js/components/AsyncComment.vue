@@ -15,9 +15,9 @@
                     <!-- ログインユーザーと自転車所有者のコメントをループ表示させる -->
                     <div class="card-body comment-view" v-for="(comments) in loginUserAndOwnerComments">
                         <!-- 表示するコメントがログインユーザーのコメントの場合 -->
-                        <div v-if="comments.sender_id == data.sender.id">{{ data.sender.nickname }} : {{ comments.body }}</div>
+                        <div v-if="comments.sender_id == data.sender.id">{{ data.sender.nickname }} : {{ comments.body }} : {{ comments.created_at }}</div>
                         <!-- 表示するコメントがバイク所有者のコメントの場合 -->
-                        <div v-else>{{ data.receiver.nickname }} : {{ comments.body }}</div>
+                        <div v-else>{{ data.receiver.nickname }} : {{ comments.body }} : {{ comments.created_at }}</div>
                     </div>
                     <div class="card-body">
                         <!-- コメント入力フォーム -->
