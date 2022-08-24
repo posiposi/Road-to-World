@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Comment extends Model
 {
@@ -26,5 +27,15 @@ class Comment extends Model
     public function riplies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    /** コメント作成日時をフォーマットする(アクセサ) */
+    public function getCreatedAtAttribute($datetime)
+    {
+        // 国際標準時を取得し、日本時間に合致させるために9時間を追加する
+        $date = Carbon::parse($datetime);
+        $date->addHours(9);
+        // 時刻をフォーマットしてカラムに返却
+        return $date->format('m-d H:i');
     }
 }
