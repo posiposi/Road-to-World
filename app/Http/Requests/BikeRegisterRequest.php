@@ -29,7 +29,7 @@ class BikeRegisterRequest extends FormRequest
             'status' => ['required'],
             'bike_address' => ['required'],
             'image_path' => ['required','file', 'image', 'dimensions:max_width=1500,max_height=1500'],
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:50'],
         ];
     }
     
@@ -42,8 +42,9 @@ class BikeRegisterRequest extends FormRequest
             'bike_address.required' => '受け渡し場所を入力してください。',
             'price.required' => '料金を入力してください。',
             'price.numeric' => '料金は数値で入力してください。',
+            'price.min' => '料金は¥50以上で入力してください',
             'image_path.required' => '画像を選択してください。',
-            'image_path.dimensions' => '画像サイズは1,500×1,500が上限となります。',
+            'image_path.dimensions' => '画像サイズは1,500×1,500が上限となります。'
         ];
     }
 }
