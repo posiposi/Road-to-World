@@ -65,6 +65,7 @@ class BikesController extends Controller
      * @var object $bikes 対象となる自転車
      * @return void
      */
+    // TODO Modelへ分離する
     public function edit(int $id)
     {
         $bikes = Bike::findOrFail($id);
@@ -80,6 +81,7 @@ class BikesController extends Controller
      * @var object $bike 対象となる既存自転車の登録情報
      * @return void
      */
+    // TODO Modelへ分離する(自転車削除メソッドを作成した後に行う)
     public function update(BikeRegisterRequest $request, int $id)
     {
         //変更対象自転車の既存情報を取得する
@@ -109,28 +111,14 @@ class BikesController extends Controller
     /**
      * 登録自転車の削除
      *
-     * @param int $id 自転車のid
-     * @var object $bike 対象の自転車レコード
+     * @param int $bike_id 削除する自転車のid
      * @return void
      */
-    public function destroy(int $id)
+    public function destroy(Bike $bike, int $bike_id)
     {
-        //変更対象自転車の既存情報を取得する
-        $bike = Bike::findOrFail($id);
-        
-        //ログインユーザーと削除対象自転車の所有者が同一の場合
-        if (Auth::id() === $bike->user_id)
-        {
-            //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
-            $image_keypath = str_replace('https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/', '', $bike->image_path);
-            
-            //該当するs3上の既存画像を削除する
-            Storage::disk('s3')->delete($image_keypath);
-            //DB上の既存自転車の情報を削除する
-            $bike->delete();
-        }
-        
-        //遷移元へ画面変遷する
+        // 該当するidの自転車を削除する
+        $bike->deleteRegisteredBike($bike_id);
+        // 遷移元へ画面変遷する
         return back();
     }
 }
