@@ -11,63 +11,31 @@ use App\Http\Requests\BikeRegisterRequest;
 class BikesController extends Controller
 {
     /**
-     * コメントルーム一覧表示
+     * 自転車登録画面表示
      *
      * @return void
      */
     public function show()
     {
+        // 自転車登録画面へ変遷する
         return view('auth.bikeregister');
     }
     
     /**
-     * 貸出自転車の登録
+     * 貸し出しする自転車の登録
      *
      * @param BikeRegisterRequest $request 
      * @return void
      */
-    public function store(BikeRegisterRequest $request)
+    public function store(BikeRegisterRequest $request, Bike $bike)
     {
-        /**
-         * ユーザ情報リクエスト
-         *
-         * @var array{
-         *   brand: string,
-         *   name: string,
-         *   status: string,
-         *   bike_address: string,
-         *   price: int,
-         *   remark: string,
-         * } 
-        */
-        $bike = $request->user()->bikes()->create([
-            'brand' => $request->brand,
-            'name' => $request->name,
-            'status' => $request->status,
-            'bike_address' => $request->bike_address,
-            'price' => $request->price,
-            'remark' => $request->remark,
-            'image_path' => $request->image_path,
-        ]);
-        
-        /**
-         * 自転車登録の情報
-         * 
-         * @var object $bike 登録する自転車
-         */
-        $image = $bike->image_path;
-        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-        $path = Storage::disk('s3')->put('bikes/' . $name, $image, 'public');
-        /**
-         * @method string Illuminate\Support\Facades url()
-         */
-        $url = Storage::disk('s3')->url($path);
-        $bike->image_path = $url;
-        $bike->save();
-        
+        // 自転車を登録する
+        $bike->registerBike($request);
+        // ログインユーザーのマイページへ画面変遷
         return redirect('/users');
     }
     
+    // TODO Modelへ分離する
     /**
      * 貸出中自転車一覧の表示
      * 

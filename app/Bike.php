@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class Bike extends Model
 {
@@ -53,5 +54,37 @@ class Bike extends Model
         $dt->hour = $hours;
         $dt->minute = $minutes;
         return $this->reservations()->where([['start_at', '<=', $dt], ['end_at', '>', $dt]])->exists();
+    }
+
+    /**
+     * 自転車を登録する
+     *
+     * @param object $request 登録する自転車の情報
+     * @return void
+     */
+    public function registerBike($request)
+    {
+        // リクエストから登録する自転車のインスタンスを生成
+        $bike = $request->user()->bikes()->create([
+            'brand' => $request->brand,
+            'name' => $request->name,
+            'status' => $request->status,
+            'bike_address' => $request->bike_address,
+            'price' => $request->price,
+            'remark' => $request->remark,
+            'image_path' => $request->image_path,
+        ]);
+        
+        // 登録する自転車の画像を変数に代入
+        $image = $bike->image_path;
+        // 自転車画像を保存するS3フォルダ名を生成
+        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        // S3へ画像をアップロード
+        $path = Storage::disk('s3')->put('bikes/' . $name, $image, 'public');
+
+        // S3に保存した画像へのURLパスを生成し、DBへ登録する
+        $url = Storage::disk('s3')->url($path);
+        $bike->image_path = $url;
+        $bike->save();
     }
 }
