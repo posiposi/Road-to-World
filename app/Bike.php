@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Consts\Url;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -89,6 +90,12 @@ class Bike extends Model
         $bike->save();
     }
 
+    /**
+     * 登録自転車を削除する
+     *
+     * @param integer $bike_id 削除対象自転車のid
+     * @return void
+     */
     public function deleteRegisteredBike(int $bike_id)
     {
         //変更対象自転車の既存情報を取得する
@@ -98,8 +105,7 @@ class Bike extends Model
         if (Auth::id() === $registered_bike->user_id)
         {
             //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
-            // TODO URLパスを定数定義する
-            $image_keypath = str_replace('https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/', '', $registered_bike->image_path);
+            $image_keypath = str_replace(Url::URLLIST['s3'], '', $registered_bike->image_path);
             
             //該当するs3上の既存画像を削除する
             Storage::disk('s3')->delete($image_keypath);
