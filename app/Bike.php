@@ -79,8 +79,7 @@ class Bike extends Model
         
         // S3へ画像をアップロードする
         $image = $bike->image_path;
-        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-        $path = Storage::disk('s3')->putFile('bikes/' . $name, $image, 'public');
+        $path = Storage::disk('s3')->putFile('bikes', $image, 'public');
         $url = Storage::disk('s3')->url($path);
         $bike->image_path = $url;
         $bike->save();
@@ -131,8 +130,7 @@ class Bike extends Model
 
         // S3へ画像をアップロードする
         $image = $request->image_path;
-        $name = time() . pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-        $path = Storage::disk('s3')->putFile('bikes/' . $name, $image, 'public');
+        $path = Storage::disk('s3')->putFile('bikes', $image, 'public');
         $url = Storage::disk('s3')->url($path);
         $bike->image_path = $url;
         $bike->save();
