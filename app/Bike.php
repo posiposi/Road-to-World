@@ -143,4 +143,26 @@ class Bike extends Model
         // 自転車情報をDBへ保存する
         $bike->save();
     }
+
+    /**
+     * 貸出中自転車の一覧を表示する
+     *
+     * @return void
+     */
+    public function showBikesIndex()
+    {
+        // 表示する自転車を取得(1ページ6台表示)
+        $bikes = Self::paginate(6);
+        // ログインユーザーを取得
+        $users = Auth::user();
+        // カレンダーに表示する時間の空配列を設定
+        $times = [];
+
+        //カレンダーに表示する日付・時刻を配列に代入
+        for ($i = 0; $i < 48; $i++){
+            $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
+        };
+        // 上記で設定した変数を配列で返却
+        return [$bikes, $users, $times];
+    }
 }
