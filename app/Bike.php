@@ -147,7 +147,7 @@ class Bike extends Model
     /**
      * 貸出中自転車の一覧を表示する
      *
-     * @return void
+     * @return array {$bikes: object, $users: object, $times: array}
      */
     public function showBikesIndex()
     {
