@@ -39,6 +39,19 @@ class Bike extends Model
     }
     
     /**
+     * S3へ自転車の画像を保存する
+     *
+     * @param string $image_path 保存する画像のパス
+     * @return string $url 保存した画像のS3パス
+     */
+    private function uploadBikeImage(string $image_path)
+    {
+        $path = Storage::disk('s3')->putFile('bikes', $image_path, 'public');
+        $url = Storage::disk('s3')->url($path);
+        return $url;
+    }
+
+    /**
      * 予約有無の確認
      * 
      * 該当する予約がすでにあるかを確認する
@@ -74,14 +87,11 @@ class Bike extends Model
             'bike_address' => $request->bike_address,
             'price' => $request->price,
             'remark' => $request->remark,
-            'image_path' => $request->image_path,
         ]);
         
         // S3へ画像をアップロードする
-        $image = $bike->image_path;
-        $path = Storage::disk('s3')->putFile('bikes', $image, 'public');
-        $url = Storage::disk('s3')->url($path);
-        $bike->image_path = $url;
+        $bike->image_path = self::uploadBikeImage($request->image_path);
+        // 自転車情報をDBへ保存する
         $bike->save();
     }
 
@@ -117,22 +127,20 @@ class Bike extends Model
      */
     public function updateRegisteredBike($request, int $bike_id)
     {
-        //変更対象自転車の既存情報を取得する
+        // 変更対象自転車の既存情報を取得する
         $bike = Bike::findOrFail($bike_id);
-        //ユーザー側の変更リクエストを取得する
+        // ユーザー側の変更リクエストを取得する
         $form = $request->all();
-        //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
+        // DBに保存されている画像のフルパスからs3のURLパラメータを削除する
         $image_keypath = str_replace(Url::URLLIST['s3'], '', $bike->image_path);
-        //該当するs3上の既存画像を削除する
+        // 該当するs3上の既存画像を削除する
         Storage::disk('s3')->delete($image_keypath);
-        //自転車の変更リクエストDBに保存する
+        // 画像以外の自転車変更リクエストをDBに保存する
         $bike->fill($form)->save();
 
         // S3へ画像をアップロードする
-        $image = $request->image_path;
-        $path = Storage::disk('s3')->putFile('bikes', $image, 'public');
-        $url = Storage::disk('s3')->url($path);
-        $bike->image_path = $url;
+        $bike->image_path = self::uploadBikeImage($request->image_path);
+        // 自転車情報をDBへ保存する
         $bike->save();
     }
 }
