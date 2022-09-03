@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth']], function ()
         Route::controller(\BikesController::class)->group(function() {
             Route::get('bikeregister', 'show')->name('bikes.get'); //自転車登録画面表示
             Route::post('bikeregister', 'store')->name('bikes.store'); //新規自転車登録
-            Route::get('bikes/{id}/edit', 'edit')->name('bikes.edit'); //自転車情報変更画面表示
+            Route::get('bikes/{bike_id}/edit', 'edit')->name('bikes.edit'); //自転車情報変更画面表示
             Route::put('bikes/{id}/update', 'update')->name('bikes.update'); //自転車情報変更
             Route::delete('bikes/{id}/delete', 'destroy')->name('bikes.delete'); //自転車削除
         });

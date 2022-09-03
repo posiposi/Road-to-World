@@ -69,7 +69,7 @@
                             </ul>    
                             <ul class="list-group list-unstyled">
                                 <li class="list-group-item">
-                                    {{ link_to_route('bikes.edit', '登録内容変更', ['id' => $bike->id], ['class' => 'btn btn-success'],) }}
+                                    {{ link_to_route('bikes.edit', '登録内容変更', ['bike_id' => $bike->id], ['class' => 'btn btn-success'],) }}
                                     <script>
                                         function confirm_delete() {
                                             var select = confirm("削除してもよろしいですか？");

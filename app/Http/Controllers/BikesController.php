@@ -59,15 +59,14 @@ class BikesController extends Controller
     /**
      * 自転車情報の変更
      *
-     * @param int $id 対象自転車のid
-     * @var object $bikes 対象となる自転車
+     * @param int $bike_id 対象自転車のid
+     * @var object $bike 対象となる自転車
      * @return void
      */
-    // TODO Modelへ分離する
-    public function edit(int $id)
+    public function edit(int $bike_id)
     {
-        $bikes = Bike::findOrFail($id);
-        return view('bikes.edit', ['bikes' => $bikes]);
+        $bike = Bike::findOrFail($bike_id);
+        return view('bikes.edit', ['bike' => $bike]);
     }
     
     /**
