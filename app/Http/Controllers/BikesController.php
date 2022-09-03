@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Bike;
 use App\Http\Requests\BikeRegisterRequest;
 
@@ -64,8 +63,6 @@ class BikesController extends Controller
      *
      * @param BikeRegisterRequest $request 変更する自転車の情報リクエスト
      * @param int $id 対象自転車のid
-     * @param array $form 自転車の変更情報
-     * @var object $bike 対象となる既存自転車の登録情報
      * @return void
      */
     public function update(BikeRegisterRequest $request, Bike $bike, int $id)
