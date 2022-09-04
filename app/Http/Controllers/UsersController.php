@@ -21,7 +21,6 @@ class UsersController extends Controller
      * @var object $user ログインユーザ
      * @var object $image 登録する画像
      * @var string $url 登録する画像のURLパス
-
      */
     public function store(Request $request)
     {
@@ -57,21 +56,14 @@ class UsersController extends Controller
     
     /**
      * ユーザ情報変更画面の表示
-     *
-     * @param int $id ユーザid
+     * 
      * @return void
-     * @var object $auth ログインユーザのレコード
      */
-    public function edit(int $id)
+    public function edit()
     {
-        $auth = User::findOrFail($id);
-
-        //ログインユーザーとログインユーザーのレコードが一致する場合
-        if (Auth::id() === $auth->id){
-            return view('users.edit', ['auth' => $auth]);
-        }
-        
-        return back();
+        // ログインユーザーを取得する
+        $login_user = Auth::user();
+        return view('users.edit', compact('login_user'));
     }
     
     /**

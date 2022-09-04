@@ -39,7 +39,7 @@
                 </div>
                 <div class='card-body'>
                     {{ link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) }}
-                    {{ link_to_route('users.edit', 'ユーザ登録内容変更', ['id' => $auth->id], ['class' => 'btn btn-success'],) }}
+                    {{ link_to_route('users.edit', 'ユーザ登録内容変更', [], ['class' => 'btn btn-success'],) }}
                 </div>
             </div>
         </div>

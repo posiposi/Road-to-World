@@ -73,6 +73,7 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    /** リレーション：1人のユーザーは多数の予約を所有する */
     public function reservations()
     {
         return $this->hasMany(Reservation::class);

@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth']], function ()
         Route::controller(\UsersController::class)->prefix('users')->group(function() {
             Route::get('/', 'index')->name('users.index'); //ユーザ情報表示
             Route::post('/', 'store')->name('users.store'); //ユーザアバター登録
-            Route::get('/{id}/edit', 'edit')->name('users.edit'); //ユーザ情報変更画面表示
+            Route::get('/edit', 'edit')->name('users.edit'); //ユーザ情報変更画面表示
             Route::put('/{id}/update', 'update')->name('users.update'); //ユーザ情報変更
         });
         
