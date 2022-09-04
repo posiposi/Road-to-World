@@ -6,13 +6,12 @@ use App\Http\Requests\DateTimeRequest;
 use Carbon\Carbon;
 use App\Bike;
 use App\Reservation;
-use App\Consts;
 use App\Consts\Message;
 
 class ReservationController extends Controller
 {
     /**
-     * 自転車予約アクション
+     * 自転車を予約する
      * 
      * @param int $bike_id 予約対象自転車のid
      */
@@ -51,7 +50,7 @@ class ReservationController extends Controller
     }
     
     /**
-     * 予約状況カレンダーの表示アクション
+     * 予約状況カレンダーを表示する
      * 
      * @param int $bikeId 対象自転車のID
      * @param string $week カレンダー表示のための暫定ワード
@@ -78,7 +77,7 @@ class ReservationController extends Controller
         };
         
         /**
-         * view側の表を作成するための変数についての説明
+         * view側の表を作成するための変数
          * 
          * @var array $times 0〜24時までを1時間毎で配列化
          * @var array $minutes viewで@foreachを使用するために空配列を作成
