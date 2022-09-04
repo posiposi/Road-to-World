@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DateTimeRequest;
-use Carbon\Carbon;
-use App\Bike;
 use App\Reservation;
 use App\Consts\Message;
-use App\Consts\Date;
-use App\Consts\Time;
 
 class ReservationController extends Controller
 {
@@ -58,38 +54,10 @@ class ReservationController extends Controller
      * @param string $week カレンダー表示のための暫定ワード
      * @param string $now カレンダー表示のための暫定ワード
      */
-    public function index(int $bikeId, string $week, string $now) {
-        $bike = Bike::findOrFail($bikeId);
-        //今週
-        if ($week == Date::DATE_TYPE_LIST['this_week'] && $now == Date::DATE_TYPE_LIST['today']) {
-            $dt = new Carbon();
-        //翌週へ
-        } elseif ($week == Date::DATE_TYPE_LIST['next_week']) {
-            $day = new Carbon($now);
-            $dt = $day->addweek();
-        //先週へ
-        } else {
-            $day = new Carbon($now);
-            $dt = $day->subweek();
-        }
-        $days[0] = $dt->format('m/d');
-        for ($i = 0; $i < 7; $i++) {
-            $monday = $dt->startOfWeek();
-            $days[$i] = $monday->copy()->addDay($i)->format('m/d');
-        };
-        
-        /**
-         * view側の表を作成するための変数
-         * 
-         * @var array $times 0〜24時までを1時間毎で配列化
-         * @var array $minutes viewで@foreachを使用するために空配列を作成
-         */
-        $times = [];
-        $minutes = [];
-        for ($i = 0; $i < 24; $i++){
-            $times[] = date("H", strtotime("+". $i * 60 . Time::TIME_TYPE_LIST['minute'], (-3600*9)));
-        };
+    public function index(int $bikeId, string $week, string $now, Reservation $reservation) {
+        [$bike, $days, $times, $dt] = $reservation->showReservationStatusCalendar($bikeId, $week, $now);
+
         return view('calendars.index', 
-            ['bike' => $bike, 'dt'=> $dt, 'days' => $days, 'times' => $times, 'minutes' => $minutes, 'bikeId' => $bikeId]);
+            ['bike' => $bike, 'dt'=> $dt, 'days' => $days, 'times' => $times]);
     }
 }

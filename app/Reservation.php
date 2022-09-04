@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Bike;
+use App\Consts\{Date, Time};
 
 class Reservation extends Model
 {
@@ -57,5 +58,40 @@ class Reservation extends Model
         ])->exists();
 
         return [$auth_id, $bike, $start_time, $end_time, $time, $exists];
+    }
+
+    /**
+     * 予約状況カレンダーを表示する
+     *
+     * @param integer $bikeId 該当自転車のid
+     * @param string $week 画面遷移後に表示する週
+     * @param string $now 現在表示中の週
+     * @return array 画面表示に必要な各種変数
+     */
+    public function showReservationStatusCalendar(int $bikeId, string $week, string $now){
+        $bike = Bike::findOrFail($bikeId);
+        //今週
+        if ($week == Date::DATE_TYPE_LIST['this_week'] && $now == Date::DATE_TYPE_LIST['today']) {
+            $dt = new Carbon();
+        //翌週へ
+        } elseif ($week == Date::DATE_TYPE_LIST['next_week']) {
+            $day = new Carbon($now);
+            $dt = $day->addweek();
+        //先週へ
+        } else {
+            $day = new Carbon($now);
+            $dt = $day->subweek();
+        }
+        $days[0] = $dt->format('m/d');
+        for ($i = 0; $i < 7; $i++) {
+            $monday = $dt->startOfWeek();
+            $days[$i] = $monday->copy()->addDay($i)->format('m/d');
+        };
+        // 時間を24時、各時間30分ずつで表示するために配列へ時・分を設定する
+        for ($i = 0; $i < 24; $i++){
+            $times[] = date("H", strtotime("+". $i * 60 . Time::TIME_TYPE_LIST['minute'], (-3600*9)));
+        };
+
+        return [$bike, $days, $times, $dt];
     }
 }
