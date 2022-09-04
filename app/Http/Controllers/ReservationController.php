@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DateTimeRequest;
 use Carbon\Carbon;
 use App\Bike;
@@ -13,63 +12,29 @@ class ReservationController extends Controller
     /**
      * 自転車予約アクション
      * 
-     * @param int $id 予約対象自転車のid
+     * @param int $bike_id 予約対象自転車のid
      */
-    public function store(DateTimeRequest $request, int $id) {
-        /**
-         * storeメソッド内の変数の説明
-         * 
-         * @var object $bike 予約対象自転車の情報
-         * @var int $bike_price 予約対象自転車の料金
-         * @var string $reservation_start_at 開始日時リクエスト
-         * @var string $reservation_end_at 終了日時リクエスト
-         */
-        $auth_id = Auth::id();
-        $bike = Bike::find($id);
-        $bike_price = $bike->price;
-        $reservation_start_at = $request->start_date. ' ' .$request->start_time;
-        $reservation_end_at = $request->end_date. ' ' .$request->end_time;
-        
-        /**
-         * 予約確認と条件分岐のために必要な変数の説明
-         * 
-         * @var object $start_carbon 開始日時リクエストのCarbon化
-         * @var object $end_carbon 終了日時リクエストのCarbon化
-         * @var int $carbon_diff 開始日時と終了日時の時間差
-         * @var int $time 上記時間差を30分単位で割り出し
-         */
-        $start_carbon = new Carbon($reservation_start_at);
-        $end_carbon = new Carbon($reservation_end_at);
-        $carbon_diff = $start_carbon->diffInMinutes($end_carbon);
-        $time = $carbon_diff / 30;
+    public function store(DateTimeRequest $request, int $bike_id, Reservation $reservation) {
+        [$auth_id, $bike, $start_time, $end_time, $time, $exists] = $reservation->isExistsBikeReserved($request, $bike_id);
 
-        /**
-         * 予約確認と条件分岐
-         * 
-         * @var bool $exists 対象自転車の予約リクエストが重複するかの確認
-         */
-        $exists = Reservation::where([
-            ['bike_id', $id], ['start_at', '<', $reservation_end_at], ['end_at', '>', $reservation_start_at]
-        ])->exists();
-        
         //重複する予約がない場合
         if (!$exists) { 
             // 自転車が予約希望者の自転車ではない場合
             if ($auth_id != $bike->user_id) {
                 $reservation = $request->user()->reserving()->attach(
-                    $id,
+                    $bike_id,
                     [
-                    'start_at' => $request->start_date. ' ' .$request->start_time,
-                    'end_at' => $request->end_date. ' ' .$request->end_time,
-                    'payment' => 0,
+                        'start_at' => $start_time,
+                        'end_at' => $end_time,
+                        'payment' => 0,
                     ]);
                 return redirect(route('payment.index',
                 [
                     'time' => $time,
-                    'price' => $bike_price,
+                    'price' => $bike->price,
                     'bikeId' => $bike->id,
-                    'startTime' => $start_carbon,
-                    'endTime' => $end_carbon,
+                    'startTime' => $start_time,
+                    'endTime' => $end_time,
                 ]));
             }
             //予約対象が予約者自身の所有自転車の場合
