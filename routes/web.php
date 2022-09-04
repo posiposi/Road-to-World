@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth']], function ()
         
         //予約関連
         Route::controller(\ReservationController::class)->prefix('bikes')->group(function() {
-            Route::post('/{id}', 'store')->name('bikes.reservation'); //予約アクション
+            Route::post('/{bikeId}', 'store')->name('bikes.reservation'); //予約アクション
             Route::get('/{bikeId}/{week}/{now}/calendar', 'index')->name('bikes.calendar'); //カレンダー表示
         });
 
