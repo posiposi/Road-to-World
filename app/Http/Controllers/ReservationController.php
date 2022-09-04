@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use App\Bike;
 use App\Reservation;
 use App\Consts\Message;
+use App\Consts\Date;
+use App\Consts\Time;
 
 class ReservationController extends Controller
 {
@@ -59,10 +61,10 @@ class ReservationController extends Controller
     public function index(int $bikeId, string $week, string $now) {
         $bike = Bike::findOrFail($bikeId);
         //今週
-        if ($week == 'this_week' && $now == 'today') {
+        if ($week == Date::DATE_TYPE_LIST['this_week'] && $now == Date::DATE_TYPE_LIST['today']) {
             $dt = new Carbon();
         //翌週へ
-        } elseif ($week == 'next_week') {
+        } elseif ($week == Date::DATE_TYPE_LIST['next_week']) {
             $day = new Carbon($now);
             $dt = $day->addweek();
         //先週へ
@@ -85,7 +87,7 @@ class ReservationController extends Controller
         $times = [];
         $minutes = [];
         for ($i = 0; $i < 24; $i++){
-            $times[] = date("H", strtotime("+". $i * 60 . "minute", (-3600*9)));
+            $times[] = date("H", strtotime("+". $i * 60 . Time::TIME_TYPE_LIST['minute'], (-3600*9)));
         };
         return view('calendars.index', 
             ['bike' => $bike, 'dt'=> $dt, 'days' => $days, 'times' => $times, 'minutes' => $minutes, 'bikeId' => $bikeId]);
