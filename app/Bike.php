@@ -110,7 +110,7 @@ class Bike extends Model
         if (Auth::id() === $registered_bike->user_id)
         {
             //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
-            $image_keypath = str_replace(Url::URLLIST['s3'], '', $registered_bike->image_path);
+            $image_keypath = str_replace(Url::URL_LIST['s3'], '', $registered_bike->image_path);
             //該当するs3上の既存画像を削除する
             Storage::disk('s3')->delete($image_keypath);
             //DB上の既存自転車の情報を削除する
@@ -132,7 +132,7 @@ class Bike extends Model
         // ユーザー側の変更リクエストを取得する
         $form = $request->all();
         // DBに保存されている画像のフルパスからs3のURLパラメータを削除する
-        $image_keypath = str_replace(Url::URLLIST['s3'], '', $bike->image_path);
+        $image_keypath = str_replace(Url::URL_LIST['s3'], '', $bike->image_path);
         // 該当するs3上の既存画像を削除する
         Storage::disk('s3')->delete($image_keypath);
         // 画像以外の自転車変更リクエストをDBに保存する

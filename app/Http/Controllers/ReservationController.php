@@ -6,6 +6,8 @@ use App\Http\Requests\DateTimeRequest;
 use Carbon\Carbon;
 use App\Bike;
 use App\Reservation;
+use App\Consts;
+use App\Consts\Message;
 
 class ReservationController extends Controller
 {
@@ -39,12 +41,12 @@ class ReservationController extends Controller
             }
             //予約対象が予約者自身の所有自転車の場合
             else {
-                return back()->with('flash_message', 'あなた自身の自転車は借りることが出来ません。');
+                return back()->with(Message::SHOW_MESSAGE_TYPE['flash'], Message::MESSAGE_LIST['rental_self_bike']);
             }
         }
         // 重複する予約がある場合
         else {
-            return back()->with('flash_message', 'ご希望の時間は予約済みになっています。');
+            return back()->with(Message::SHOW_MESSAGE_TYPE['flash'], Message::MESSAGE_LIST['reserved']);
         }
     }
     
