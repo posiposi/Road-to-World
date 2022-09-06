@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{Auth, Hash};
 use Storage;
 use App\Consts\Url;
 
@@ -102,5 +102,26 @@ class User extends Authenticatable
         // アップロードした画像のフルパスを取得
         $user->image = Storage::disk('s3')->url($path);
         $user->save();
+    }
+
+    /**
+     * ログインユーザーの情報を変更する
+     *
+     * @param object $request ログインユーザーの情報変更リクエスト
+     * @param int $user_id ログインユーザーのid
+     * @return void
+     */
+    public function updateUserInfo($request, $user_id){
+        // ログインユーザーを取得する
+        $login_user = User::findOrFail($user_id);
+        // 情報変更リクエストを変数に代入
+        $form = $request->all();
+        
+        // フォームトークン削除
+        unset($form['_token']);
+        // ログインユーザーの情報を更新する
+        $login_user->fill($form)->save();
+        //パスワードをハッシュ化して更新する
+        $login_user->fill(['password' => Hash::make($request->password)])->save();
     }
 }

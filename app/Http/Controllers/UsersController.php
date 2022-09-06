@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\{User, Bike, Reservation};
 use App\Http\Requests\UserRegisterRequest;
 
@@ -57,24 +56,18 @@ class UsersController extends Controller
     }
     
     /**
-     * ユーザ情報変更
-     * 
-     * @param int $id ログイン中ユーザのid
+     * ユーザーの情報を変更する
+     *
+     * @param UserRegisterRequest $request 情報変更リクエスト
+     * @param integer $user_id ログインユーザーid
+     * @param User $user Userモデルのインスタンス
      * @return void
-     * @var object $auth ログインユーザのレコード
      */
-    public function update(UserRegisterRequest $request, int $id)
+    public function update(UserRegisterRequest $request, int $user_id, User $user)
     {
-        $auth = User::findOrFail($id);
-        $form = $request->all();
-        
-        // フォームトークン削除
-        unset($form['_token']);
-        // レコードアップデート
-        $auth->fill($form)->save();
-        //パスワードハッシュ化
-        $auth->fill(['password' => Hash::make($request->password)])->save();
-        
+        // ログインユーザーの情報を更新する
+        $user->updateUserInfo($request, $user_id);
+        // ユーザーマイページへ画面変遷する
         return redirect('/users');
     }
 }
