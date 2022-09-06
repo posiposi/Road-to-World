@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\{Auth, Hash};
+use Storage;
+use App\Consts\Url;
 
 class User extends Authenticatable
 {
@@ -77,5 +80,48 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    /**
+     * ユーザーのアバターをDBとS3バケットへ保存する
+     *
+     * @param object $request 登録するアバター画像
+     * @return void
+     */
+    public function registerUserAvatar($request){
+        // ログインユーザーを取得する
+        $user = Auth::user();
+        // 削除するs3の画像特定のためにDBに保存されているs3の画像パスを取得する
+        $image_keypath = str_replace(Url::URL_LIST['s3'], '', $user->image);
+        // S3上の既存アバター画像を削除する
+        Storage::disk('s3')->delete($image_keypath);
+        // S3アップロード開始
+        $image = $request->file('image');
+        // バケットの`avatars`フォルダへアップロード
+        $path = Storage::disk('s3')->putFile('avatars', $image, 'public');
+        // アップロードした画像のフルパスを取得
+        $user->image = Storage::disk('s3')->url($path);
+        $user->save();
+    }
+
+    /**
+     * ログインユーザーの情報を変更する
+     *
+     * @param object $request ログインユーザーの情報変更リクエスト
+     * @param int $user_id ログインユーザーのid
+     * @return void
+     */
+    public function updateUserInfo($request, $user_id){
+        // ログインユーザーを取得する
+        $login_user = User::findOrFail($user_id);
+        // 情報変更リクエストを変数に代入
+        $form = $request->all();
+        
+        // フォームトークン削除
+        unset($form['_token']);
+        // ログインユーザーの情報を更新する
+        $login_user->fill($form)->save();
+        //パスワードをハッシュ化して更新する
+        $login_user->fill(['password' => Hash::make($request->password)])->save();
     }
 }

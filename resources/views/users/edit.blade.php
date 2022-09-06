@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
-                {{ Form::open(['route' => ['users.update', 'id'=>$login_user->id], 'method' => 'put', ]) }}
+                {{ Form::open(['route' => ['users.update', 'userId'=>$login_user->id], 'method' => 'put', ]) }}
                     <div class="form-group">
                         {{ Form::label('name', '氏名') }}
                         {{ Form::text('name', old('name', $login_user->name), ['class' => 'form-control']) }}
