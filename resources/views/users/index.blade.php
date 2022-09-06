@@ -13,8 +13,8 @@
             {{-- ユーザアバター --}}
             <div class="col-md-6">
                 <div class="card-body shadow-sm contents-avatar">
-                    @if($auth->image != null)
-                    <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="{{ $auth->image }}" alt="ユーザアバター画像">
+                    @if($login_user->image != null)
+                    <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="{{ $login_user->image }}" alt="ユーザアバター画像">
                     @else
                     <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/avatars/nc96424.jpg" alt="デフォルトアバター画像">
                     @endif
@@ -31,10 +31,10 @@
             <div class="col-md-6">
                 <div class="card-body">
                     <ul class="list-group list-unstyled">
-                        <li class="list-group-item"> 氏名：{{ $auth->name }} <li>
-                        <li class="list-group-item"> ニックネーム：{{ $auth->nickname }}</li>
-                        <li class="list-group-item"> メールアドレス：{{ $auth->email }} </li>
-                        <li class="list-group-item"> 電話番号：{{ $auth->tel }} </li>
+                        <li class="list-group-item"> 氏名：{{ $login_user->name }} <li>
+                        <li class="list-group-item"> ニックネーム：{{ $login_user->nickname }}</li>
+                        <li class="list-group-item"> メールアドレス：{{ $login_user->email }} </li>
+                        <li class="list-group-item"> 電話番号：{{ $login_user->tel }} </li>
                     </ul>
                 </div>
                 <div class='card-body'>
@@ -52,7 +52,7 @@
         </div>
         <div class="row no-gutters ml-3">
             @foreach ($bikes as $bike)
-                @if($bike->user_id == $auth->id)
+                @if($bike->user_id == $login_user->id)
                     <div class="col-md-6 mt-3 mb-3">
                         <img class="card-img img-fluid user-bike-img" src="{{ $bike->image_path }}" alt="自転車画像">
                     </div>

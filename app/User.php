@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Storage;
+use App\Consts\Url;
 
 class User extends Authenticatable
 {
@@ -77,5 +80,27 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    /**
+     * ユーザーのアバターをDBとS3バケットへ保存する
+     *
+     * @param object $request 登録するアバター画像
+     * @return void
+     */
+    public function registerUserAvatar($request){
+        // ログインユーザーを取得する
+        $user = Auth::user();
+        // 削除するs3の画像特定のためにDBに保存されているs3の画像パスを取得する
+        $image_keypath = str_replace(Url::URL_LIST['s3'], '', $user->image);
+        // S3上の既存アバター画像を削除する
+        Storage::disk('s3')->delete($image_keypath);
+        // S3アップロード開始
+        $image = $request->file('image');
+        // バケットの`avatars`フォルダへアップロード
+        $path = Storage::disk('s3')->putFile('avatars', $image, 'public');
+        // アップロードした画像のフルパスを取得
+        $user->image = Storage::disk('s3')->url($path);
+        $user->save();
     }
 }

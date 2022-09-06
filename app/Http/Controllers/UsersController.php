@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\User;
-use App\Bike;
-use Storage;
-use App\Reservation;
+use App\{User, Bike, Reservation};
 use App\Http\Requests\UserRegisterRequest;
 
 class UsersController extends Controller
@@ -18,22 +15,14 @@ class UsersController extends Controller
      *
      * @param Request $request 登録リクエスト
      * @return void
-     * @var object $user ログインユーザ
+     * @var object $user ログインユーザー
      * @var object $image 登録する画像
      * @var string $url 登録する画像のURLパス
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        $user = Auth::user();
-        //s3アップロード開始
-        $image = $request->file('image');
-        // バケットの`avatars`フォルダへアップロード
-        $path = Storage::disk('s3')->putFile('avatars', $image, 'public');
-        // アップロードした画像のフルパスを取得
-        $url = Storage::disk('s3')->url($path);
-        $user->image = $url;
-        $user->save();
-
+        // アバター画像をDBとS3に登録する
+        $user->registerUserAvatar($request);
         return back();
     }
     
@@ -41,21 +30,22 @@ class UsersController extends Controller
      * ユーザページの表示
      *
      * @return void
-     * @var object $auths ログインユーザ
+     * @var object $login_user ログインユーザー
      * @var object $bikes 登録中の全ての自転車
      * @var object $reservations ログインユーザの全予約
      */
     public function index()
     {
-        $auths = Auth::user();
+        $login_user = Auth::user();
         $bikes = Bike::all();
-        $reservations = Reservation::where('user_id', $auths->id)->get();
+        $reservations = Reservation::where('user_id', $login_user->id)->get();
 
-        return view('users.index', ['auth' => $auths, 'bikes' => $bikes, 'reservations' => $reservations]);
+        return view('users.index', compact('login_user', 'bikes', 'reservations'));
     }
     
     /**
      * ユーザ情報変更画面の表示
+     * @var object $login_user ログインユーザー
      * 
      * @return void
      */
