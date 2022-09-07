@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\{Bike, User};
 
 class Comment extends Model
 {
@@ -37,5 +39,22 @@ class Comment extends Model
         $date->addHours(9);
         // 時刻をフォーマットしてカラムに返却
         return $date->format('m-d H:i');
+    }
+
+    /**
+     * コメントルームで表示する情報を取得する
+     *
+     * @param int $bikeId 対象の自転車id
+     * @param int $lenderId 借り手側ユーザーid
+     * @return array 
+     */
+    public function getInfoForBikesIndex($bikeId, $lenderId){
+        /**
+         * @var object $bikes 対象となる自転車
+         * @var string $users_all 対象となる自転車の所有者以外のユーザー
+         */
+        $bike = Bike::findOrFail($bikeId);
+        $user = User::where('id', '!=', $lenderId)->get();
+        return [$bike, $user];
     }
 }

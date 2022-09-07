@@ -11,7 +11,6 @@ use App\Http\Requests\CommentPostRequest;
 
 class CommentsController extends Controller
 {
-    // TODO Modelへ分離する
     /**
      * コメントルーム一覧表示
      *
@@ -19,24 +18,22 @@ class CommentsController extends Controller
      * @param int $lenderId ログイン中ユーザ(対象となる自転車の所有者)
      * @return void
      */
-    public function index(int $bikeId, int $lenderId)
+    public function index(int $bikeId, int $lenderId, Comment $comment)
     {
         /**
-         * @var object $bikes 対象となる自転車
-         * @var string $users_all 対象となる自転車の所有者以外のユーザ
-         * @var string $login_user ログイン中ユーザのid
+         * コメントルーム一覧で必要な情報を取得し、配列化する
+         * 
+         * @var object $bike 対象自転車のインスタンス
+         * @var object $user 対象自転車を所有していないユーザーのインスタンス
          */
-        $bikes = Bike::findOrFail($bikeId);
-        $users = User::where('id', '!=', $lenderId)->get();
-        $login_user = Auth::id();
-        
-        /*ログインユーザーがバイク所有者でない場合 */
-        if($login_user != $bikes->user_id){
-            return view('comments.index', ['bikes' => $bikes, 'users' => $users]);
+        [$bike, $user] = $comment->getInfoForBikesIndex($bikeId, $lenderId);
+
+        // ログインユーザーが対象自転車の所有者の場合はコメントルーム一覧に画面変遷する
+        if(Auth::id() == $bike->user_id){
+            return view('comments.index', compact('bike', 'user'));
         }
-        else{
-            return view('comments.index', ['bikes' => $bikes, 'users' => $users]);
-        }
+        // ログインユーザーが対象自転車の所有者でない場合は直前画面へリダイレクトする
+        return back();
     }
     
     // TODO Modelへ分離する
