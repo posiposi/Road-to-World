@@ -36,7 +36,6 @@ class CommentsController extends Controller
         return back();
     }
     
-    // TODO Modelへ分離する
     /**
      * コメントルームの表示
      *
@@ -91,7 +90,6 @@ class CommentsController extends Controller
         }
     }
     
-    // TODO Modelへ分離する
     /**
      * コメントの保存
      *
@@ -117,7 +115,6 @@ class CommentsController extends Controller
         $comment->save();
     }
 
-    // TODO Modelへ分離する
     /**
      * ログインユーザーと自転車所有者のコメントをJSONで返却する
      *

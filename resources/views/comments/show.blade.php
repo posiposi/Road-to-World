@@ -57,35 +57,4 @@
             <async-comment v-bind:data="{sender: {{ $sender }}, sendercomments: {{ $sender_comments }}, receiver: {{ $receiver }}, receivercomments: {{ $receiver_comments }}}"></async-comment>
         </div>
     </div>
-
-    {{-- コメント表示部分 
-    <div class="chat-container row justify-content-center">
-        {{-- ログイン中ユーザーのコメント表示部分
-        <div class="col-md-6 chat-area">
-            <div class="card">
-                <div class="card-header">{{ $sender->nickname }}のComment</div>
-                <div class="card-body chat-card">
-                    <div class="sendercomment-view"></div>
-                </div>
-                {{-- 入力フォームと送信ボタン表示部
-                <div class="card-body">
-                    {{-- 入力フォーム 
-                    <input type="text" id="comment-input" class="comment-body form-control">
-                    {{-- 送信ボタン 
-                    <button disabled id="comment-button" class="comment-post btn btn-primary mt-2">送信</button>
-                </div>
-            </div>
-        </div>
-        {{-- 相手側コメント表示部分 
-        <div class="col-md-6 chat-area">
-            <div class="card">
-                <div class="card-header">{{ $receiver->nickname }}のComment</div>
-                <div class="card-body chat-card">
-                    <div class="receivercomment-view"></div>
-                </div>
-            </div>
-        </div>
-    </div>--}}
-
-    {{-- <script src="{{ mix('js/comment.js') }}"></script> --}}
 @endsection
