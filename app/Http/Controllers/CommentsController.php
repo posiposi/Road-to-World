@@ -64,13 +64,16 @@ class CommentsController extends Controller
                         'comments.show', 
                         compact('bike', 'login_user', 'sender', 'sender_comments', 'receiver', 'receiver_comments', 'times')
                     );
-                } else{
+                }
+                else {
                     return back();
                 }
-            } else{
+            }
+            else {
                 return back();
             }
-        } else{
+        }
+        else {
             return back();
         }
     }

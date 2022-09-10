@@ -165,4 +165,31 @@ class Bike extends Model
         // 上記で設定した変数を配列で返却
         return [$bikes, $user, $times];
     }
+
+    /**
+     * 自転車を検索する
+     *
+     * @param object $request 検索条件
+     * @return array 検索結果
+     */
+    public function doSearchBikes($request){
+        $query = Bike::query();
+        $search_name = $request->input('search_name');
+        $search_brand = $request->input('search_brand');
+        $search_address = $request->input('search_address');
+        $search_price = $request->input('search_price');
+
+        if (!empty('search_name')) {
+            $query->where('name', 'like', '%'.$search_name.'%');
+        }
+        if (!empty('search_brand')) {
+            $query->where('brand', 'like', '%'.$search_brand.'%');
+        }
+        if (!empty('search_address')) {
+            $query->where('bike_address', 'like', '%'.$search_address.'%');
+        }
+        $bikes = $query->get();
+        // 検索結果を配列にして返却する
+        return [$bikes, $search_name, $search_brand, $search_address, $search_price];
+    }
 }
