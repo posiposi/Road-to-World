@@ -49,10 +49,6 @@ class Comment extends Model
      * @return array 
      */
     public function getInfoForBikesIndex($bikeId, $lenderId){
-        /**
-         * @var object $bikes 対象となる自転車
-         * @var string $users_all 対象となる自転車の所有者以外のユーザー
-         */
         $bike = Bike::findOrFail($bikeId);
         $user = User::where('id', '!=', $lenderId)->get();
         return [$bike, $user];
@@ -74,5 +70,27 @@ class Comment extends Model
         $receiver = User::findOrFail($receiverId);
         $receiver_comments = Comment::where([['sender_id', $receiverId], ['receiver_id', $senderId], ['bike_id', $bike->id]])->pluck('body', 'id');
         return [$bike, $login_user, $sender, $sender_comments, $receiver, $receiver_comments];
+    }
+
+    /**
+     * DBにコメントを保存する
+     *
+     * @param object $request コメント本文を含むオブジェクト
+     * @param int $bikeId 対象自転車のid
+     * @param int $senderId コメント送信者id
+     * @param int $receiverId コメント受信者id
+     * @return void
+     */
+    public function saveComment($request, $bikeId, $senderId, $receiverId){
+        /* コメント本文 */
+        $this->body = $request->body;
+        /* コメント送信者ID */
+        $this->sender_id = $senderId;
+        /* レンタル対象自転車ID */
+        $this->bike_id = $bikeId;
+        /* コメント受信者ID */
+        $this->receiver_id = $receiverId;
+        /* DBにコメント情報を保存する */
+        $this->save();
     }
 }

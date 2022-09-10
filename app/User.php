@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\{Auth, Hash};
 use Storage;
 use App\Consts\Url;
+use App\{Bike, Reservation};
 
 class User extends Authenticatable
 {
@@ -101,6 +102,7 @@ class User extends Authenticatable
         $path = Storage::disk('s3')->putFile('avatars', $image, 'public');
         // アップロードした画像のフルパスを取得
         $user->image = Storage::disk('s3')->url($path);
+        // DBにアバターを保存する
         $user->save();
     }
 
@@ -123,5 +125,18 @@ class User extends Authenticatable
         $login_user->fill($form)->save();
         //パスワードをハッシュ化して更新する
         $login_user->fill(['password' => Hash::make($request->password)])->save();
+    }
+
+    /**
+     * ユーザーマイページ表示用の情報を取得する
+     *
+     * @return array マイページ表示用情報
+     */
+    public function getUserPageInfo(){
+        $login_user = Auth::user();
+        $bikes = Bike::all();
+        $reservations = Reservation::where('user_id', $login_user->id)->get();
+        
+        return [$login_user, $bikes, $reservations];
     }
 }

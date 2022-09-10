@@ -8,6 +8,12 @@ use App\Consts\Message;
 
 class SearchController extends Controller
 {
+    // コンストラクタインジェクション
+    public function __construct(Bike $bike)
+    {
+        $this->bike = $bike;
+    }
+
     /**
      * 検索フォームページの表示
      *
@@ -25,10 +31,10 @@ class SearchController extends Controller
      * @param Bike $bike メソッドインジェクション
      * @return void
      */
-    public function index(Request $request, Bike $bike)
+    public function index(Request $request)
     {
         // 検索結果を配列化
-        [$bikes, $search_name, $search_brand, $search_address, $search_price] = $bike->doSearchBikes($request);
+        [$bikes, $search_name, $search_brand, $search_address, $search_price] = $this->bike->doSearchBikes($request);
         
         /*
         検索結果が1件でもある場合は検索結果を表示する。

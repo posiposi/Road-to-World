@@ -7,6 +7,12 @@ use App\Http\Requests\BikeRegisterRequest;
 
 class BikesController extends Controller
 {
+    //コンストラクタインジェクション
+    public function __construct(Bike $bike)
+    {
+        $this->bike = $bike;
+    }
+    
     /**
      * 自転車登録画面表示
      *
@@ -24,10 +30,10 @@ class BikesController extends Controller
      * @param BikeRegisterRequest $request 登録する自転車の情報リクエスト
      * @return void
      */
-    public function store(BikeRegisterRequest $request, Bike $bike)
+    public function store(BikeRegisterRequest $request)
     {
         // 自転車を登録する
-        $bike->registerBike($request);
+        $this->bike->registerBike($request);
         // ログインユーザーのマイページへ画面変遷
         return redirect('/users');
     }
@@ -37,12 +43,12 @@ class BikesController extends Controller
      * 
      * @return void 
      */
-    public function index(Bike $bike)
+    public function index()
     {
         // メソッドで返却された配列を分割代入する
-        [$bikes, $user, $times] = $bike->showBikesIndex();
+        [$bikes, $user, $times] = $this->bike->showBikesIndex();
         // 自転車一覧画面へ変遷する
-        return view('bikes.index', ['bikes' => $bikes, 'user' => $user, 'times' => $times]);
+        return view('bikes.index', compact('bikes', 'user', 'times'));
     }
     
     /**
@@ -55,7 +61,7 @@ class BikesController extends Controller
     public function edit(int $bike_id)
     {
         $bike = Bike::findOrFail($bike_id);
-        return view('bikes.edit', ['bike' => $bike]);
+        return view('bikes.edit', compact('bike'));
     }
     
     /**
@@ -65,10 +71,10 @@ class BikesController extends Controller
      * @param int $id 対象自転車のid
      * @return void
      */
-    public function update(BikeRegisterRequest $request, Bike $bike, int $id)
+    public function update(BikeRegisterRequest $request, int $id)
     {
         // idで該当自転車を検索し、登録情報を変更する
-        $bike->updateRegisteredBike($request, $id);
+        $this->bike->updateRegisteredBike($request, $id);
         // ユーザー情報画面へ画面変遷する
         return redirect('/users');
     }
@@ -79,10 +85,10 @@ class BikesController extends Controller
      * @param int $bike_id 削除する自転車のid
      * @return void
      */
-    public function destroy(Bike $bike, int $bike_id)
+    public function destroy(int $bike_id)
     {
         // 該当するidの自転車を削除する
-        $bike->deleteRegisteredBike($bike_id);
+        $this->bike->deleteRegisteredBike($bike_id);
         // 遷移元へ画面変遷する
         return back();
     }

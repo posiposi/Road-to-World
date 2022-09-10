@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Bike;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentPostRequest;
 
 class CommentsController extends Controller
 {
+    // コンストラクタインジェクション
+    public function __construct(Comment $comment)
+    {
+        $this->comment = $comment;
+    }
+
+
     /**
      * コメントルーム一覧表示
      *
@@ -18,7 +23,7 @@ class CommentsController extends Controller
      * @param int $lenderId ログイン中ユーザ(対象となる自転車の所有者)
      * @return void
      */
-    public function index(int $bikeId, int $lenderId, Comment $comment)
+    public function index(int $bikeId, int $lenderId)
     {
         /**
          * コメントルーム一覧で必要な情報を取得し、配列化する
@@ -26,7 +31,7 @@ class CommentsController extends Controller
          * @var object $bike 対象自転車のインスタンス
          * @var object $user 対象自転車を所有していないユーザーのインスタンス
          */
-        [$bike, $user] = $comment->getInfoForBikesIndex($bikeId, $lenderId);
+        [$bike, $user] = $this->comment->getInfoForBikesIndex($bikeId, $lenderId);
 
         // ログインユーザーが対象自転車の所有者の場合はコメントルーム一覧に画面変遷する
         if(Auth::id() == $bike->user_id){
@@ -44,9 +49,9 @@ class CommentsController extends Controller
      * @param int $lenderId 対象となる自転車の保有者id
      * @return void
      */
-    public function show(int $bikeId, int $senderId, int $receiverId, Comment $comment)
+    public function show(int $bikeId, int $senderId, int $receiverId)
     {
-        [$bike, $login_user, $sender, $sender_comments, $receiver, $receiver_comments] = $comment->getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId);
+        [$bike, $login_user, $sender, $sender_comments, $receiver, $receiver_comments] = $this->comment->getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId);
 
         /*
          * ログインユーザのidチェックと条件分岐
@@ -61,8 +66,7 @@ class CommentsController extends Controller
                         $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
                     };
                     return view(
-                        'comments.show', 
-                        compact('bike', 'login_user', 'sender', 'sender_comments', 'receiver', 'receiver_comments', 'times')
+                        'comments.show', compact('bike', 'login_user', 'sender', 'sender_comments', 'receiver', 'receiver_comments', 'times')
                     );
                 }
                 else {
@@ -81,7 +85,7 @@ class CommentsController extends Controller
     /**
      * コメントの保存
      *
-     * @param Request $request
+     * @param Request $request コメント本文
      * @param int $bikeId 対象となる自転車のid
      * @param int $senderId コメント送信者のユーザーid
      * @param int $receiverId コメント受信者のユーザーid
@@ -89,27 +93,17 @@ class CommentsController extends Controller
      */
     public function store(CommentPostRequest $request, int $bikeId, int $senderId, int $receiverId)
     {
-        /* コメントクラスのインスタンス化 */
-        $comment = new Comment;
-        /* コメント本文 */
-        $comment->body = $request->body;
-        /* コメント送信者ID */
-        $comment->sender_id = $senderId;
-        /* レンタル対象自転車ID */
-        $comment->bike_id = $bikeId;
-        /* コメント受信者ID */
-        $comment->receiver_id = $receiverId;
-        /* DB保存アクション */
-        $comment->save();
+        // コメントを保存する
+        $this->comment->saveComment($request, $bikeId, $senderId, $receiverId);
     }
 
     /**
      * ログインユーザーと自転車所有者のコメントをJSONで返却する
      *
-     * @param int $bikeId
-     * @param int $senderId
-     * @param int $receiverId
-     * @return array
+     * @param int $bikeId 対象自転車のid
+     * @param int $senderId コメント送信者のid
+     * @param int $receiverId コメント受信者のid
+     * @return array コメント送信者と受信者のコメントのJSON
      */
     public function getSenderAndReceiverComment(int $bikeId, int $senderId, int $receiverId)
     {        

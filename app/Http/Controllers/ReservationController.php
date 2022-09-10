@@ -8,13 +8,19 @@ use App\Consts\Message;
 
 class ReservationController extends Controller
 {
+    //コンストラクタインジェクション
+    public function __construct(Reservation $reservation)
+    {
+        $this->reservation = $reservation;
+    }
+
     /**
      * 自転車を予約する
      * 
      * @param int $bike_id 予約対象自転車のid
      */
-    public function store(DateTimeRequest $request, int $bike_id, Reservation $reservation) {
-        [$auth_id, $bike, $start_time, $end_time, $time, $exists] = $reservation->isExistsBikeReserved($request, $bike_id);
+    public function store(DateTimeRequest $request, int $bike_id) {
+        [$auth_id, $bike, $start_time, $end_time, $time, $exists] = $this->reservation->isExistsBikeReserved($request, $bike_id);
 
         //重複する予約がない場合
         if (!$exists) { 
@@ -54,10 +60,9 @@ class ReservationController extends Controller
      * @param string $week カレンダー表示のための暫定ワード
      * @param string $now カレンダー表示のための暫定ワード
      */
-    public function index(int $bikeId, string $week, string $now, Reservation $reservation) {
-        [$bike, $days, $times, $dt] = $reservation->showReservationStatusCalendar($bikeId, $week, $now);
+    public function index(int $bikeId, string $week, string $now) {
+        [$bike, $days, $times, $dt] = $this->reservation->showReservationStatusCalendar($bikeId, $week, $now);
 
-        return view('calendars.index', 
-            ['bike' => $bike, 'dt'=> $dt, 'days' => $days, 'times' => $times]);
+        return view('calendars.index', compact('bike', 'dt', 'days', 'times'));
     }
 }
