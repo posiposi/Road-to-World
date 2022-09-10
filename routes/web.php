@@ -38,8 +38,6 @@ Route::controller(Auth\LoginController::class)->group(function() {
 Route::controller(\SearchController::class)->prefix('search')->group(function() {
     Route::get('/', 'show')->name('search'); //検索画面表示
     Route::get('/index', 'index')->name('search.index'); //検索結果表示
-    Route::get('/name', 'name')->name('search.name'); //名称検索画面
-    Route::get('/brand', 'brand')->name('search.brand'); //ブランド検索画面
 });
 
 //貸出中自転車一覧表示
