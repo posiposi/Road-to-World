@@ -40,9 +40,9 @@ class BikesController extends Controller
     public function index(Bike $bike)
     {
         // メソッドで返却された配列を分割代入する
-        [$bikes, $users, $times] = $bike->showBikesIndex();
+        [$bikes, $user, $times] = $bike->showBikesIndex();
         // 自転車一覧画面へ変遷する
-        return view('bikes.index', ['bikes' => $bikes, 'users' => $users, 'times' => $times]);
+        return view('bikes.index', ['bikes' => $bikes, 'user' => $user, 'times' => $times]);
     }
     
     /**

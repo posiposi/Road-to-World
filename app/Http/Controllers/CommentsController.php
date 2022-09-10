@@ -44,28 +44,14 @@ class CommentsController extends Controller
      * @param int $lenderId 対象となる自転車の保有者id
      * @return void
      */
-    public function show(int $bikeId, int $senderId, int $receiverId)
+    public function show(int $bikeId, int $senderId, int $receiverId, Comment $comment)
     {
-        /**
-         * @var object $bike レンタル対象となる自転車
-         * @var int    $login_user ログイン中ユーザのid
-         * @var object $sender コメント送信者
-         * @var object $sender_comments レンタル希望者のコメント
-         * @var object $receiver レンタル対象となる自転車の所有者
-         * @var object $receiver_comments レンタル対象となる自転車の所有者コメント
-         */
-        $bike = Bike::findOrFail($bikeId);
-        $login_user = Auth::id();
-        $sender = User::findOrFail($senderId);
-        $sender_comments = Comment::where([['sender_id', $senderId], ['receiver_id', $receiverId], ['bike_id', $bike->id]])->pluck('body', 'id');
-        $receiver = User::findOrFail($receiverId);
-        $receiver_comments = Comment::where([['sender_id', $receiverId], ['receiver_id', $senderId], ['bike_id', $bike->id]])->pluck('body', 'id');
-        /**
+        [$bike, $login_user, $sender, $sender_comments, $receiver, $receiver_comments] = $comment->getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId);
+
+        /*
          * ログインユーザのidチェックと条件分岐
          * ログインユーザーがコメント送信者か受信者であり、
          * なおかつレンタル対象自転車のユーザーidがコメント送信者か受信者ならばコメントページへ変遷させる
-         * 
-         * @var array $times カレンダー項目表示のための0〜24時までの時間(h)
          */
         if($login_user == $sender->id || $login_user == $receiver->id ){
             if($bike->user_id == $senderId || $bike->user_id == $receiverId){
@@ -76,8 +62,7 @@ class CommentsController extends Controller
                     };
                     return view(
                         'comments.show', 
-                        ['bikes' => $bike, 'login_user' => $login_user, 'sender' => $sender, 'sender_comments' => $sender_comments, 
-                        'receiver' => $receiver, 'receiver_comments' => $receiver_comments, 'login_user' => $login_user, 'times' => $times]
+                        compact('bike', 'login_user', 'sender', 'sender_comments', 'receiver', 'receiver_comments', 'times')
                     );
                 } else{
                     return back();

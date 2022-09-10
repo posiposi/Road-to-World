@@ -154,7 +154,7 @@ class Bike extends Model
         // 表示する自転車を取得(1ページ6台表示)
         $bikes = Self::paginate(6);
         // ログインユーザーを取得
-        $users = Auth::user();
+        $user = Auth::user();
         // カレンダーに表示する時間の空配列を設定
         $times = [];
 
@@ -163,6 +163,6 @@ class Bike extends Model
             $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
         };
         // 上記で設定した変数を配列で返却
-        return [$bikes, $users, $times];
+        return [$bikes, $user, $times];
     }
 }

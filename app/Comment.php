@@ -42,7 +42,7 @@ class Comment extends Model
     }
 
     /**
-     * コメントルームで表示する情報を取得する
+     * コメントルーム一覧で表示する情報を取得する
      *
      * @param int $bikeId 対象の自転車id
      * @param int $lenderId 借り手側ユーザーid
@@ -56,5 +56,23 @@ class Comment extends Model
         $bike = Bike::findOrFail($bikeId);
         $user = User::where('id', '!=', $lenderId)->get();
         return [$bike, $user];
+    }
+
+    /**
+     * コメントルーム表示用の情報を取得する
+     *
+     * @param int $bikeId 対象自転車のid
+     * @param int $senderId 借り手側ユーザーのid
+     * @param int $receiverId 貸し手側ユーザーのid
+     * @return array コメントルーム一覧表示用の情報
+     */
+    public function getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId){
+        $bike = Bike::findOrFail($bikeId);
+        $login_user = Auth::id();
+        $sender = User::findOrFail($senderId);
+        $sender_comments = Comment::where([['sender_id', $senderId], ['receiver_id', $receiverId], ['bike_id', $bike->id]])->pluck('body', 'id');
+        $receiver = User::findOrFail($receiverId);
+        $receiver_comments = Comment::where([['sender_id', $receiverId], ['receiver_id', $senderId], ['bike_id', $bike->id]])->pluck('body', 'id');
+        return [$bike, $login_user, $sender, $sender_comments, $receiver, $receiver_comments];
     }
 }
