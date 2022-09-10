@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row text-warning">
-        <h1 class="mt-4">{{ $bikes->name }}の予約コメントルーム一覧</h1>
+        <h1 class="mt-4">{{ $bike->name }}の予約コメントルーム一覧</h1>
     </div>
     <div class="table-responsive">
         <table class="table table-hover">
@@ -13,13 +13,13 @@
             </tr>
             </thead>
             <tbody id="tbl">
-            @foreach ($users as $user)
+            @foreach ($user as $user_info)
                 <tr>
-                    <td>{{ $user->nickname }}</td>
+                    <td>{{ $user_info->nickname }}</td>
                     <td class="text-nowrap">
                         {{ link_to_route(
                             'comments.show', 'コメント画面へ', 
-                            ['bikeId' => $bikes->id, 'receiverId' => $user->id, 'senderId' => $bikes->user_id],
+                            ['bikeId' => $bike->id, 'receiverId' => $user_info->id, 'senderId' => $bike->user_id],
                             ['class' => 'btn btn-info btn-sm']
                         )}}
                     </td>

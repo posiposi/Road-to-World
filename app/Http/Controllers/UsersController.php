@@ -4,24 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\{User, Bike, Reservation};
+use App\User;
 use App\Http\Requests\UserRegisterRequest;
 
 class UsersController extends Controller
 {
+    // コンストラクタインジェクション
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * ユーザアバターの登録
      *
      * @param Request $request 登録リクエスト
      * @return void
-     * @var object $user ログインユーザー
-     * @var object $image 登録する画像
-     * @var string $url 登録する画像のURLパス
      */
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
         // アバター画像をDBとS3に登録する
-        $user->registerUserAvatar($request);
+        $this->user->registerUserAvatar($request);
         return back();
     }
     
@@ -29,23 +32,18 @@ class UsersController extends Controller
      * ユーザページの表示
      *
      * @return void
-     * @var object $login_user ログインユーザー
-     * @var object $bikes 登録中の全ての自転車
-     * @var object $reservations ログインユーザの全予約
      */
     public function index()
     {
-        $login_user = Auth::user();
-        $bikes = Bike::all();
-        $reservations = Reservation::where('user_id', $login_user->id)->get();
+        [$login_user, $bikes, $reservations] = $this->user->getUserPageInfo();
 
         return view('users.index', compact('login_user', 'bikes', 'reservations'));
     }
     
     /**
      * ユーザ情報変更画面の表示
-     * @var object $login_user ログインユーザー
      * 
+     * @var object $login_user ログインユーザー
      * @return void
      */
     public function edit()
@@ -60,13 +58,12 @@ class UsersController extends Controller
      *
      * @param UserRegisterRequest $request 情報変更リクエスト
      * @param integer $user_id ログインユーザーid
-     * @param User $user Userモデルのインスタンス
      * @return void
      */
-    public function update(UserRegisterRequest $request, int $user_id, User $user)
+    public function update(UserRegisterRequest $request, int $user_id)
     {
         // ログインユーザーの情報を更新する
-        $user->updateUserInfo($request, $user_id);
+        $this->user->updateUserInfo($request, $user_id);
         // ユーザーマイページへ画面変遷する
         return redirect('/users');
     }

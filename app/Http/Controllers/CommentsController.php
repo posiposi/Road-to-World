@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Bike;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CommentPostRequest;
 
 class CommentsController extends Controller
 {
-    // TODO Modelへ分離する
+    // コンストラクタインジェクション
+    public function __construct(Comment $comment)
+    {
+        $this->comment = $comment;
+    }
+
+
     /**
      * コメントルーム一覧表示
      *
@@ -22,24 +26,21 @@ class CommentsController extends Controller
     public function index(int $bikeId, int $lenderId)
     {
         /**
-         * @var object $bikes 対象となる自転車
-         * @var string $users_all 対象となる自転車の所有者以外のユーザ
-         * @var string $login_user ログイン中ユーザのid
+         * コメントルーム一覧で必要な情報を取得し、配列化する
+         * 
+         * @var object $bike 対象自転車のインスタンス
+         * @var object $user 対象自転車を所有していないユーザーのインスタンス
          */
-        $bikes = Bike::findOrFail($bikeId);
-        $users = User::where('id', '!=', $lenderId)->get();
-        $login_user = Auth::id();
-        
-        /*ログインユーザーがバイク所有者でない場合 */
-        if($login_user != $bikes->user_id){
-            return view('comments.index', ['bikes' => $bikes, 'users' => $users]);
+        [$bike, $user] = $this->comment->getInfoForBikesIndex($bikeId, $lenderId);
+
+        // ログインユーザーが対象自転車の所有者の場合はコメントルーム一覧に画面変遷する
+        if(Auth::id() == $bike->user_id){
+            return view('comments.index', compact('bike', 'user'));
         }
-        else{
-            return view('comments.index', ['bikes' => $bikes, 'users' => $users]);
-        }
+        // ログインユーザーが対象自転車の所有者でない場合は直前画面へリダイレクトする
+        return back();
     }
     
-    // TODO Modelへ分離する
     /**
      * コメントルームの表示
      *
@@ -50,26 +51,12 @@ class CommentsController extends Controller
      */
     public function show(int $bikeId, int $senderId, int $receiverId)
     {
-        /**
-         * @var object $bike レンタル対象となる自転車
-         * @var int    $login_user ログイン中ユーザのid
-         * @var object $sender コメント送信者
-         * @var object $sender_comments レンタル希望者のコメント
-         * @var object $receiver レンタル対象となる自転車の所有者
-         * @var object $receiver_comments レンタル対象となる自転車の所有者コメント
-         */
-        $bike = Bike::findOrFail($bikeId);
-        $login_user = Auth::id();
-        $sender = User::findOrFail($senderId);
-        $sender_comments = Comment::where([['sender_id', $senderId], ['receiver_id', $receiverId], ['bike_id', $bike->id]])->pluck('body', 'id');
-        $receiver = User::findOrFail($receiverId);
-        $receiver_comments = Comment::where([['sender_id', $receiverId], ['receiver_id', $senderId], ['bike_id', $bike->id]])->pluck('body', 'id');
-        /**
+        [$bike, $login_user, $sender, $sender_comments, $receiver, $receiver_comments] = $this->comment->getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId);
+
+        /*
          * ログインユーザのidチェックと条件分岐
          * ログインユーザーがコメント送信者か受信者であり、
          * なおかつレンタル対象自転車のユーザーidがコメント送信者か受信者ならばコメントページへ変遷させる
-         * 
-         * @var array $times カレンダー項目表示のための0〜24時までの時間(h)
          */
         if($login_user == $sender->id || $login_user == $receiver->id ){
             if($bike->user_id == $senderId || $bike->user_id == $receiverId){
@@ -79,26 +66,26 @@ class CommentsController extends Controller
                         $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
                     };
                     return view(
-                        'comments.show', 
-                        ['bikes' => $bike, 'login_user' => $login_user, 'sender' => $sender, 'sender_comments' => $sender_comments, 
-                        'receiver' => $receiver, 'receiver_comments' => $receiver_comments, 'login_user' => $login_user, 'times' => $times]
+                        'comments.show', compact('bike', 'login_user', 'sender', 'sender_comments', 'receiver', 'receiver_comments', 'times')
                     );
-                } else{
+                }
+                else {
                     return back();
                 }
-            } else{
+            }
+            else {
                 return back();
             }
-        } else{
+        }
+        else {
             return back();
         }
     }
     
-    // TODO Modelへ分離する
     /**
      * コメントの保存
      *
-     * @param Request $request
+     * @param Request $request コメント本文
      * @param int $bikeId 対象となる自転車のid
      * @param int $senderId コメント送信者のユーザーid
      * @param int $receiverId コメント受信者のユーザーid
@@ -106,28 +93,17 @@ class CommentsController extends Controller
      */
     public function store(CommentPostRequest $request, int $bikeId, int $senderId, int $receiverId)
     {
-        /* コメントクラスのインスタンス化 */
-        $comment = new Comment;
-        /* コメント本文 */
-        $comment->body = $request->body;
-        /* コメント送信者ID */
-        $comment->sender_id = $senderId;
-        /* レンタル対象自転車ID */
-        $comment->bike_id = $bikeId;
-        /* コメント受信者ID */
-        $comment->receiver_id = $receiverId;
-        /* DB保存アクション */
-        $comment->save();
+        // コメントを保存する
+        $this->comment->saveComment($request, $bikeId, $senderId, $receiverId);
     }
 
-    // TODO Modelへ分離する
     /**
      * ログインユーザーと自転車所有者のコメントをJSONで返却する
      *
-     * @param int $bikeId
-     * @param int $senderId
-     * @param int $receiverId
-     * @return array
+     * @param int $bikeId 対象自転車のid
+     * @param int $senderId コメント送信者のid
+     * @param int $receiverId コメント受信者のid
+     * @return array コメント送信者と受信者のコメントのJSON
      */
     public function getSenderAndReceiverComment(int $bikeId, int $senderId, int $receiverId)
     {        
