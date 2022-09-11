@@ -38,7 +38,7 @@ class Comment extends Model
         $date = Carbon::parse($datetime);
         $date->addHours(9);
         // 時刻をフォーマットしてカラムに返却
-        return $date->format('m-d H:i');
+        return $date->format('m/d H:i');
     }
 
     /**
