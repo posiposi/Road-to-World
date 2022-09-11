@@ -107,10 +107,10 @@ Stripeでの支払いも本番環境においてもテストモードで動作�
 
 ## 開発環境
 
-* OS：macOS BigSur 11.6
-* ブラウザ：Google Chrome 95.0.4638.69
-* 開発環境の変遷は下記の通りです。
-* 最初期から2021/12月末まで：cloud9による開発
-* 2021/1/1〜1/20：MAMPでの開発 Mysql 5.7.34(MAMP) Apache 2.4.46(MAMP) PHP 7.3.31-2 Laravel 6.20.34 
-* 2021/1/20〜1/24：Dockerでの開発 Mysql 5.7 PHP 7.3.29 Laravel 6.20.34 nginx
-* 2021/1/24〜現在：Laravel SailによるDocker環境構築
+- OS：macOS BigSur 11.6
+- ブラウザ：Google Chrome 95.0.4638.69
+- 開発環境の変遷は下記の通りです。
+- 最初期から2021/12月末まで：cloud9による開発
+- 2021/1/1〜1/20：MAMPでの開発 Mysql 5.7.34(MAMP) Apache 2.4.46(MAMP) PHP 7.3.31-2 Laravel 6.20.34 
+- 2021/1/20〜1/24：Dockerでの開発 Mysql 5.7 PHP 7.3.29 Laravel 6.20.34 nginx
+- 2021/1/24〜現在：Laravel SailによるDocker環境構築
