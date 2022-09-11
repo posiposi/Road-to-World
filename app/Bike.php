@@ -173,23 +173,41 @@ class Bike extends Model
      * @return array 検索結果
      */
     public function doSearchBikes($request){
+        // Bikeモデルのクエリ発行用インスタンス生成
         $query = Bike::query();
+        // 検索条件:自転車モデル名
         $search_name = $request->input('search_name');
+        // 検索条件:ブランド名
         $search_brand = $request->input('search_brand');
+        // 検索条件:引き渡し場所
         $search_address = $request->input('search_address');
+        // 検索条件:価格
         $search_price = $request->input('search_price');
-
         if (!empty('search_name')) {
-            $query->where('name', 'like', '%'.$search_name.'%');
+            $query->where('name', 'like', '%'.$this->escapeWord($search_name).'%');
         }
         if (!empty('search_brand')) {
-            $query->where('brand', 'like', '%'.$search_brand.'%');
+            $query->where('brand', 'like', '%'.$this->escapeWord($search_brand).'%');
         }
         if (!empty('search_address')) {
-            $query->where('bike_address', 'like', '%'.$search_address.'%');
+            $query->where('bike_address', 'like', '%'.$this->escapeWord($search_address).'%');
         }
         $bikes = $query->get();
         // 検索結果を配列にして返却する
         return [$bikes, $search_name, $search_brand, $search_address, $search_price];
+    }
+
+    /**
+     * like検索時にエスケープワードを設定する
+     *
+     * @param string $search_word エスケープをする検索語句 
+     * @return array エスケープ処理を行った検索語句
+     */
+    private function escapeWord($search_word, string $char = '\\'){
+        return str_replace(
+            [$char, '%', '_'],
+            [$char.$char, $char.'%', $char.'_'],
+            $search_word
+        );
     }
 }
