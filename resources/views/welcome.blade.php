@@ -10,10 +10,11 @@
 @endpush
 
 @section('content')
-    <main>
+    <main id="app">
         <div class="container text-center">
-            <img src="{{ Url::URL_LIST['s3'] . Url::PICTURE_ACCESS_LIST['welcome_logo'] }}"
+            <img src="{{ Url::URL_LIST['s3'] . Url::PICTURE_ACCESS_LIST['welcome_logo'] }}">
         </div>
+        <how-to-section></how-to-section>
         <div class="jumbotron">
             <div class="container">
                 <h2 class="main_visual_text">{{ Message::MAINPAGE_TEXT['main_title'] }}</h2>
