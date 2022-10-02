@@ -1,71 +1,75 @@
 <template>
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="bg-warning py-4">
-                    <section class="how_to_title">
-                        <div class="row mb-4">
-                            <div class="col-md-8 mb-3">
-                                <h3 class="headline font-weight-bold ml-2">ご利用方法</h3>
-                            </div>
-                        </div>
-                        <div class="row mx-2">
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div v-for="(message) in Messages">
-                                            <h4 class="card-title">{{ message.id }} {{ message.text }}</h4>
-                                            <div v-for="(image) in ImagesForHowTo" :key="image.id">
-                                                <img :src=image alt="画像" class="card-img-bottom">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </section>
+  <Carousel :items-to-show="2.5" :wrap-around="true" v-if="Images.length!==0">
+    <Slide v-for="slide in Images" :key="slide">
+      <div class="carousel__item">
+        <img :src="slide" alt="画像">
+      </div>
+    </Slide>
+
+    <template #addons>
+      <Navigation />
+      <Pagination />
+    </template>
+  </Carousel>
 </template>
 
 <script>
 import axios from "axios";
 import { reactive, ref, watch, onMounted } from "vue";
-    export default{
+import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
+import { defineComponent } from 'vue'
+
+import 'vue3-carousel/dist/carousel.css';
+
+    export default defineComponent({
+        components: {Carousel, Navigation, Slide, Pagination},
         props:['data'],
         setup(props) {
             const data = ref(props.data);
             // 使用方法エリアの画像を初期化し、設定する
-            let ImagesForHowTo = ref();
-            // 使用方法エリアで使用するテキストを設定する
-            let Messages = ref([
-                {id: 1, text: '一覧から探す'},
-                {id: 2, text: '登録内容を確認する'},
-                {id: 3, text: '予約確定'},
-                {id: 4, text: '自転車をレンタル'},
-                {id: 5, text: '自転車を返却'}
-            ]);
+            const Images = ref([]);
 
             const getImagesForHowTo = () => {
                 axios.get('/' + 'service/' + 'show')
-                .then(response => ImagesForHowTo.value = response.data.how_to_images)
+                .then(response => Images.value = response.data.how_to_images)
                 .catch(response => console.log('画像取得エラー'))
             }
 
             // 画面ロード時
             onMounted(() => {
-                // 使用方法説明部の画像を取得する
+                // 使用方法説明部の画像パスを取得する
                 getImagesForHowTo();
             })
 
             return {
                 data,
-                ImagesForHowTo,
                 getImagesForHowTo,
-                Messages
+                Images
             };
         }
-    }
+    });
 </script>
+
+<style>
+  .carousel__item {
+    min-height: 200px;
+    width: 100%;
+    background-color: var(--vc-clr-primary);
+    color:  var(--vc-clr-white);
+    font-size: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .carousel__slide {
+    padding: 10px;
+  }
+  
+  .carousel__prev,
+  .carousel__next {
+    box-sizing: content-box;
+    border: 5px solid white;
+  }
+  </style>

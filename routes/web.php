@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth']], function ()
             Route::get('/{bikeId}/{week}/{now}/calendar', 'index')->name('bikes.calendar'); //カレンダー表示
         });
 
-        //ユーザー関連
+        // ユーザー関連
         Route::controller(\UsersController::class)->prefix('users')->group(function() {
             Route::get('/', 'index')->name('users.index'); //ユーザ情報表示
             Route::post('/', 'store')->name('users.store'); //ユーザアバター登録
