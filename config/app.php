@@ -227,6 +227,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'InterventionImage' => Intervention\Image\Facades\Image::class,
+        'Message' => App\Consts\Message::class,
+        'Url' => App\Consts\Url::class,
+        'Word' => App\Consts\Word::class,
 
     ],
 
