@@ -22,6 +22,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Full-Calendarテスト
+Route::get('/calendar', function(){
+    return view('calendar');
+});
+
 // ユーザー登録
 Route::controller(Auth\RegisterController::class)->prefix('signup')->group(function() {
     Route::get('/', 'showRegistrationForm')->name('signup.get');
