@@ -6,10 +6,11 @@
 
 require('./bootstrap');
 
-// import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import { createApp } from 'vue'
 import AsyncComment from './components/AsyncComment.vue'
 import HowToSection from './components/HowToSection.vue'
+// FullCalendarテストのために読み込み
+import './calendar';
 
 createApp({
     components:{
