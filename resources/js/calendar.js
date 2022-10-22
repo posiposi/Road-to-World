@@ -1,3 +1,4 @@
+import '@fullcalendar/core/vdom'; // for Vite
 import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
