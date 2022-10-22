@@ -23,9 +23,10 @@ Route::get('/', function () {
 });
 
 // Full-Calendarテスト
-Route::get('/calendar', function(){
-    return view('calendar');
-});
+// 前月、次月への変遷技術調査が完了するまでコメントアウト
+// Route::get('/calendar', function(){
+//     return view('calendar');
+// });
 
 // ユーザー登録
 Route::controller(Auth\RegisterController::class)->prefix('signup')->group(function() {

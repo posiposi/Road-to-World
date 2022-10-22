@@ -9,12 +9,12 @@ require('./bootstrap');
 import { createApp } from 'vue'
 import AsyncComment from './components/AsyncComment.vue'
 import HowToSection from './components/HowToSection.vue'
-// FullCalendarテストのために読み込み
-import './calendar';
+import FullCalendarComponent from './components/FullCalendarComponent.vue';
 
 createApp({
     components:{
         AsyncComment,
-        HowToSection
+        HowToSection,
+        FullCalendarComponent
     }
 }).mount('#app')
