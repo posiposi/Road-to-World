@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Payment;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Customer;
@@ -46,7 +47,7 @@ class PaymentsController extends Controller
             ['user_id', $id], ['bike_id', $bikeId], ['start_at', $startTime], ['end_at', $endTime]
             ])->first();
             /* 決済完了時はpaymentカラムに1を代入 */
-            $reservation->payment = 1;
+            $reservation->payment = Payment::Already;
             $reservation->save();
 
             return redirect()->route('complete');
