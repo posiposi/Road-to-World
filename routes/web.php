@@ -54,7 +54,7 @@ Route::controller(\BikesController::class)->prefix('bikes')->group(function() {
 
 // サービスクラス呼び出し
 Route::controller(\ServiceController::class)->prefix('service')->group(function() {
-    // 画像取得
+    // S3から画像取得
     Route::get('/show', 'show')->name('service.show');
 });
 

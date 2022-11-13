@@ -29,6 +29,7 @@ import 'vue3-carousel/dist/carousel.css';
             // 使用方法エリアの画像を初期化し、設定する
             const Images = ref([]);
 
+            // S3から画像を取得する
             const getImagesForHowTo = () => {
                 axios.get('/' + 'service/' + 'show')
                 .then(response => Images.value = response.data.how_to_images)
