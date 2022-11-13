@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DateTimeRequest;
 use App\Reservation;
 use App\Consts\Message;
+use App\Enums\Payment;
 
 class ReservationController extends Controller
 {
@@ -31,7 +32,7 @@ class ReservationController extends Controller
                     [
                         'start_at' => $start_time,
                         'end_at' => $end_time,
-                        'payment' => 0,
+                        'payment' => Payment::Still,
                     ]);
                 return redirect(route('payment.index',
                 [
