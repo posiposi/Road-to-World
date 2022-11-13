@@ -7,10 +7,10 @@
 </head>
 
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-warning fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: olivedrab">
         <div class="container">
             {{-- ブランド --}}
-            <a class="navbar-brand" href="/"><img src ="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/nav_logo2.png" alt="ロゴ"></a>
+            <a class="navbar-brand" href="/">Home</a>
             {{-- 切り替えボタン --}}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-bar">
                 <span class="navbar-toggler-icon"></span>
@@ -22,9 +22,9 @@
                     {{-- 左側メニュー --}}
                     <ul class="navbar-nav mr-auto">
                         <div class="btn-bikeregister">
-                            {{ link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn btn-success']) }}
-                            {{ link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn btn-primary']) }}
-                            {{ link_to_route('search', '自転車を検索', [], ['class' => 'btn btn-info']) }}
+                            {{ link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn text-white']) }}
+                            {{ link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn text-white']) }}
+                            {{ link_to_route('search', '自転車を検索', [], ['class' => 'btn text-white']) }}
                         </div>
                     </ul>
                     {{-- 右側メニュー --}}

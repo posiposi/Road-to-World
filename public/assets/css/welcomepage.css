@@ -5,20 +5,22 @@ p {
     font-size: 15px;
 }
 
-.jumbotron {
-    background:url(https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/main_visual_3.jpg) center no-repeat; background-size: cover;
-    height: 280px;
+.main-visual {
+    background:url(https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/main_visual.webp) center no-repeat;
+    background-size: 100% auto;
+    height: 480px;
     position: relative;
 }
 
 .main_visual_text {
-    color: yellow;
+    color: white;
     font-weight: 500;
     font-size: 50px;
     text-shadow:0 5px 5px black;
-    position: absolute;
     top: 60px;
     left: 5px;
+    text-align: center;
+    font-weight: 900;
 }
 
 .left-side {

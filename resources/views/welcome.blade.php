@@ -11,12 +11,12 @@
 
 @section('content')
     <main id="app">
-        <div class="container text-center">
+        <div class="container-fluid text-center">
             <img src="{{ Url::URL_LIST['s3'] . Url::PICTURE_ACCESS_LIST['welcome_logo'] }}">
         </div>
-        <div class="jumbotron">
+        <div class="main-visual">
             <div class="container">
-                <h2 class="main_visual_text">{{ Message::MAINPAGE_TEXT['main_title'] }}</h2>
+                {{-- <h2 class="main_visual_text">{{ Message::MAINPAGE_TEXT['main_title'] }}</h2> --}}
             </div>
         </div>
         @guest
