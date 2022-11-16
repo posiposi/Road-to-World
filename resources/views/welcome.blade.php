@@ -9,11 +9,15 @@
         <div class="container-fluid text-center">
             <img src="{{ Url::URL_LIST['s3'] . Url::PICTURE_ACCESS_LIST['welcome_logo'] }}">
         </div>
-        <div class="main-visual">
-            <div class="container">
-                {{-- <h2 class="main_visual_text">{{ Message::MAINPAGE_TEXT['main_title'] }}</h2> --}}
-            </div>
+        <div>
+            <main-page-visual></main-page-visual>
         </div>
+        {{-- メイン画像:ソロ --}}
+        {{-- <div class="main-visual">
+            <div class="container">
+                <h2 class="main_visual_text">{{ Message::MAINPAGE_TEXT['main_title'] }}</h2>
+            </div>
+        </div> --}}
         @guest
             <section>
                 <div class="container">
@@ -62,7 +66,5 @@
             </div>
         </section>
         @endauth
-        {{-- 利用方法 --}}
-        <how-to-section></how-to-section>
     </main>
 @endsection
