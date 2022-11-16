@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
 @push('css')
-    @auth
-        <link rel="stylesheet" href="{{ asset('assets/css/welcomepage.css') }}">
-    @endauth
-    @guest
-        <link rel="stylesheet" href="{{ asset('assets/css/welcomepage_guest.css') }}">
-    @endguest
+    <link rel="stylesheet" href="{{ asset('assets/css/welcomepage.css') }}">
 @endpush
 
 @section('content')
