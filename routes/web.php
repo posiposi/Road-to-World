@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 use App\Http\Controllers\TopPageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
@@ -41,9 +30,11 @@ Route::controller(Auth\LoginController::class)->group(function() {
 });
 
 // 検索機能
-Route::controller(\SearchController::class)->prefix('search')->group(function() {
-    Route::get('/', 'show')->name('search'); //検索画面表示
-    Route::get('/index', 'index')->name('search.index'); //検索結果表示
+Route::controller(SearchController::class)->prefix('search')->group(function() {
+     // 検索画面表示
+    Route::get('/', 'show')->name('search');
+    // 検索結果表示
+    Route::get('/index', 'index')->name('search.index');
 });
 
 // 貸出中自転車一覧表示
@@ -62,39 +53,57 @@ Route::group(['middleware' => ['auth']], function ()
     {
         // 自転車関連
         Route::controller(\BikesController::class)->group(function() {
-            Route::get('bikeregister', 'show')->name('bikes.get'); //自転車登録画面表示
-            Route::post('bikeregister', 'store')->name('bikes.store'); //新規自転車登録
-            Route::get('bikes/{bike_id}/edit', 'edit')->name('bikes.edit'); //自転車情報変更画面表示
-            Route::put('bikes/{id}/update', 'update')->name('bikes.update'); //自転車情報変更
-            Route::delete('bikes/{id}/delete', 'destroy')->name('bikes.delete'); //自転車削除
+            // 自転車登録画面表示
+            Route::get('bikeregister', 'show')->name('bikes.get');
+            // 新規自転車登録
+            Route::post('bikeregister', 'store')->name('bikes.store');
+            // 自転車情報変更画面表示
+            Route::get('bikes/{bike_id}/edit', 'edit')->name('bikes.edit');
+            // 自転車情報変更
+            Route::put('bikes/{id}/update', 'update')->name('bikes.update');
+            // 自転車削除
+            Route::delete('bikes/{id}/delete', 'destroy')->name('bikes.delete');
         });
         
         // 予約関連
         Route::controller(\ReservationController::class)->prefix('bikes')->group(function() {
-            Route::post('/{bikeId}', 'store')->name('bikes.reservation'); //予約アクション
-            Route::get('/{bikeId}/{week}/{now}/calendar', 'index')->name('bikes.calendar'); //カレンダー表示
+            // 予約アクション
+            Route::post('/{bikeId}', 'store')->name('bikes.reservation');
+            // カレンダー表示
+            Route::get('/{bikeId}/{week}/{now}/calendar', 'index')->name('bikes.calendar');
         });
 
         // ユーザー関連
         Route::controller(\UsersController::class)->prefix('users')->group(function() {
-            Route::get('/', 'index')->name('users.index'); //ユーザ情報表示
-            Route::post('/', 'store')->name('users.store'); //ユーザアバター登録
-            Route::get('/edit', 'edit')->name('users.edit'); //ユーザ情報変更画面表示
-            Route::put('/{userId}/update', 'update')->name('users.update'); //ユーザ情報変更
+            // ユーザ情報表示
+            Route::get('/', 'index')->name('users.index');
+            // ユーザアバター登録
+            Route::post('/', 'store')->name('users.store');
+            // ユーザ情報変更画面表示
+            Route::get('/edit', 'edit')->name('users.edit');
+            // ユーザ情報変更
+            Route::put('/{userId}/update', 'update')->name('users.update');
         });
         
         // チャット機能
         Route::controller(\CommentsController::class)->prefix('comments')->group(function() {
-            Route::get('/{bikeId}/{lenderId}/index', 'index')->name('comments.index'); //コメントルーム一覧表示
-            Route::get('/{bikeId}/{senderId}/{receiverId}/show', 'show')->name('comments.show'); //コメントルーム表示
-            Route::post('/{bikeId}/{senderId}/{receiverId}/store', 'store')->name('comments.store'); //コメント保存
-            Route::get('/{bikeId}/{senderId}/{receiverId}/get', 'getSenderAndReceiverComment')->name('comments.get'); //コメント取得
+            // コメントルーム一覧表示
+            Route::get('/{bikeId}/{lenderId}/index', 'index')->name('comments.index');
+            // コメントルーム表示
+            Route::get('/{bikeId}/{senderId}/{receiverId}/show', 'show')->name('comments.show');
+            // コメント保存
+            Route::post('/{bikeId}/{senderId}/{receiverId}/store', 'store')->name('comments.store');
+            // コメント取得
+            Route::get('/{bikeId}/{senderId}/{receiverId}/get', 'getSenderAndReceiverComment')->name('comments.get');
         });
 
         // 決済機能
         Route::controller(\PaymentsController::class)->group(function() {
-            Route::get('payment/{time}/{price}/{bikeId}/{startTime}/{endTime}/index', 'index')->name('payment.index'); // 決済ボタンを表示するページ
-            Route::post('/{amount}/{bikeId}/{startTime}/{endTime}/payment', 'payment')->name('payment'); // Stripeの処理
-            Route::get('/complete', 'complete')->name('complete'); // 決済完了ページ
+            // 決済ボタン画面表示
+            Route::get('payment/{time}/{price}/{bikeId}/{startTime}/{endTime}/index', 'index')->name('payment.index');
+            // 決済処理
+            Route::post('/{amount}/{bikeId}/{startTime}/{endTime}/payment', 'payment')->name('payment');
+            // 決済完了ページ表示
+            Route::get('/complete', 'complete')->name('complete');
         });
     });
