@@ -46,10 +46,13 @@
                     </div>
                 </div>
             </section>
+            {{-- 画像下部リンクボタンセクション --}}
             <section>
                 <ul class="navbar-nav">
                     <div class="btn-bikeregister mx-auto d-block mb-4">
+                        {{-- 自転車一覧リンクボタン --}}
                         {{ link_to_route('bikes.index', Word::WORD_LIST['bikes_index'], [], ['class' => 'btn btn-primary']) }}
+                        {{-- 自転車検索画面リンクボタン --}}
                         {{ link_to_route('search', Word::WORD_LIST['search'], [], ['class' => 'btn btn-info']) }}
                     </div>
                 </ul>
