@@ -12,9 +12,9 @@ class CommentsController extends Controller
     // コンストラクタインジェクション
     public function __construct(Comment $comment)
     {
+        // コメントクラスのインスタンスを生成
         $this->comment = $comment;
     }
-
 
     /**
      * コメントルーム一覧表示
@@ -65,6 +65,7 @@ class CommentsController extends Controller
                     for ($i = 0; $i < 48; $i++){
                         $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
                     };
+                    // コメントページを表示するための変数を同時に渡す
                     return view(
                         'comments.show', compact('bike', 'login_user', 'sender', 'sender_comments', 'receiver', 'receiver_comments', 'times')
                     );

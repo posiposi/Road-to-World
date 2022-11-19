@@ -38,6 +38,7 @@
                                 {{ link_to_route('signup.get', Word::WORD_LIST['signup'], [], ['class' => 'text-dark']) }}
                             </div>
                         </div>
+                        {{-- サイト説明文章 --}}
                         <div class="col-sm-9 mb-3 bg-white">
                             <h4 class="mt-3">{{ Message::MAINPAGE_TEXT['sub_title'] }}</h4>
                             <p>{!! nl2br(e(Message::MAINPAGE_TEXT['main_text'])) !!}</p>
@@ -58,6 +59,7 @@
         <section>
             <div class="container mt-4">
                 <div class="row mb-4">
+                    {{-- サイト説明文章 --}}
                     <div class="col mb-3 bg-white">
                         <h4 class="mt-3">{{ Message::MAINPAGE_TEXT['sub_title'] }}</h4>
                         <p>{!! nl2br(e(Message::MAINPAGE_TEXT['main_text'])) !!}</p>
