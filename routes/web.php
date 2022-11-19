@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\TopPageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
@@ -18,9 +19,7 @@ use App\Http\Controllers\BikesController;
 use App\Http\Controllers\SearchController;
 
 // メインページ
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TopPageController::class, 'index']);
 
 // Full-Calendarテスト
 // 前月、次月への変遷技術調査が完了するまでコメントアウト
