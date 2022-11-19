@@ -6,18 +6,9 @@
 
 @section('content')
     <main id="app">
-        <div class="container-fluid text-center">
-            <img src="{{ Url::URL_LIST['s3'] . Url::PICTURE_ACCESS_LIST['welcome_logo'] }}">
-        </div>
         <div>
-            <main-page-visual></main-page-visual>
+            <main-page-visual welcome_logo_path="{{ $welcome_logo_path }}"></main-page-visual>
         </div>
-        {{-- メイン画像:ソロ --}}
-        {{-- <div class="main-visual">
-            <div class="container">
-                <h2 class="main_visual_text">{{ Message::MAINPAGE_TEXT['main_title'] }}</h2>
-            </div>
-        </div> --}}
         @guest
             <section>
                 <div class="container">

@@ -1,4 +1,8 @@
 <template>
+    <div class="container-fluid text-center">
+      <img :src=welcome_logo_path>
+    </div>
+
     <Carousel :wrap-around="true" v-if="Images.length !== 0">
       <Slide v-for="slide in Images" :key="slide">
         <div class="carousel__item" v-cloak>
@@ -23,11 +27,17 @@ import 'vue3-carousel/dist/carousel.css';
 
     export default defineComponent({
         components: {Carousel, Navigation, Slide, Pagination},
-        props:['data'],
+        props:['data', 'welcome_logo_path'],
         setup(props) {
             const data = ref(props.data);
+
+            // メインロゴのURL
+            const welcome_logo_path = ref(props.welcome_logo_path);
+
             // 使用方法エリアの画像を初期化し、設定する
             const Images = ref([]);
+
+            // const logo_path = ref([props.path]);
 
             // S3から画像を取得する
             const getImagesForHowTo = () => {
@@ -45,7 +55,8 @@ import 'vue3-carousel/dist/carousel.css';
             return {
                 data,
                 getImagesForHowTo,
-                Images
+                Images,
+                welcome_logo_path
             };
         }
     });
