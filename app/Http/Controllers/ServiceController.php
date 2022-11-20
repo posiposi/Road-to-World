@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Services\Image\S3Service;
+use App\Services\MessageService;
 
+/**
+ * サービスコントローラクラス
+ */
 class ServiceController extends Controller
 {
     /**
@@ -23,5 +27,15 @@ class ServiceController extends Controller
     public function getMainPageLogo(){
         // S3サービスクラスのメインページロゴURL取得メソッドを呼び出し
         return S3Service::getMainPageLogoUrl();
+    }
+
+    /**
+     * メインページに表示する文章を取得する
+     *
+     * @return array サブタイトルとメインテキスト
+     */
+    public function getMainPageText(){
+        // メッセージサービスクラスのメインページテキスト取得メソッドを呼び出し
+        return response()->json(["texts" => MessageService::getMainPageText()]);
     }
 }

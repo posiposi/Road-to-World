@@ -45,6 +45,8 @@ Route::controller(\BikesController::class)->prefix('bikes')->group(function() {
 Route::controller(\ServiceController::class)->prefix('service')->group(function() {
     // S3から画像取得
     Route::get('/show', 'show')->name('service.show');
+    // メインページ内のテキスト取得
+    Route::get('/getText', 'getMainPageText')->name('service.getText');
 });
 
 // ログイン認証

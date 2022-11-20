@@ -13,7 +13,7 @@ class S3Service{
      * @return array string S3に保存されている画像パス
      */
     public static function getImages(){
-        return 
+        return
         [
             '1' => URL::URL_LIST['s3'] . URL::PICTURE_ACCESS_LIST['how_to_picuture1'],
             //TODO 下記2〜4はネタ画像のためカルーセル実装完了後に削除 or 差し替えをすること

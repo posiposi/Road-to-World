@@ -29,34 +29,51 @@ import 'vue3-carousel/dist/carousel.css';
         components: {Carousel, Navigation, Slide, Pagination},
         props:['data', 'welcome_logo_path'],
         setup(props) {
+            // カルーセル画像
             const data = ref(props.data);
-
             // メインロゴのURL
             const welcome_logo_path = ref(props.welcome_logo_path);
-
             // 使用方法エリアの画像を初期化し、設定する
             const Images = ref([]);
+            // サブタイトル、メインテキスト用変数を初期化
+            const texts = ref([]);
 
-            // const logo_path = ref([props.path]);
-
-            // S3から画像を取得する
+            /**
+             * S3から画像を取得する
+             * 
+             * @return {array} how_to_images S3に保存されている画像URL
+             */
             const getImagesForHowTo = () => {
                 axios.get('/' + 'service/' + 'show')
                 .then(response => Images.value = response.data.how_to_images)
                 .catch(response => console.log('画像取得エラー'))
             }
+            
+            /**
+             * メインページに表示するテキストを取得する
+             * 
+             * @return {array} texts 表示するテキスト類
+             */
+            const getText = () => {
+              axios.get('/' + 'service/' + 'getText')
+              .then(response => texts.value = response.data.texts)
+              .catch(response =>console.log('テキスト取得エラー'))
+            }
 
             // 画面ロード時
             onMounted(() => {
                 // 使用方法説明部の画像パスを取得する
-                getImagesForHowTo();
+                getImagesForHowTo(),
+                getText()
             })
 
             return {
                 data,
                 getImagesForHowTo,
                 Images,
-                welcome_logo_path
+                welcome_logo_path,
+                getText,
+                texts
             };
         }
     });
