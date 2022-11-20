@@ -14,4 +14,14 @@ class ServiceController extends Controller
     public function show(){
         return response()->json(["how_to_images" => S3Service::getImages()]);
     }
+
+    /**
+     * メインページのロゴを取得する
+     *
+     * @return string メインページのロゴURL
+     */
+    public function getMainPageLogo(){
+        // S3サービスクラスのメインページロゴURL取得メソッドを呼び出し
+        return S3Service::getMainPageLogoUrl();
+    }
 }

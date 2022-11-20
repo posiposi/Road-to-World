@@ -23,4 +23,14 @@ class S3Service{
             // '5' => URL::URL_LIST['s3'] . URL::PICTURE_ACCESS_LIST['how_to_picuture5']
         ];
     }
+
+    /**
+     * S3に保存されているメインページロゴのパスを取得する
+     *
+     * @return string メインページロゴのパス
+     */
+    public static function getMainPageLogoUrl()
+    {
+        return Url::URL_LIST['s3'] . Url::PICTURE_ACCESS_LIST['welcome_logo'];
+    }
 }

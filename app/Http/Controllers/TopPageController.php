@@ -3,29 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Consts\Url;
+use App\Services\Image\S3Service;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ServiceController;
 
+/**
+ * トップページコントローラクラス
+ */
 class TopPageController extends Controller
 {
-    // TODO サービスクラスへメソッド分離をする
-    /**
-     * メインページに表示するロゴのS3パスを取得する
-     *
-     * @return string $welcome_logo_path メインページ上部ロゴのS3パス
-     */
-    public function getMainPageLogoUrl() : string
-    {
-        // S3パスを取得し返却する
-        return Url::URL_LIST['s3'] . Url::PICTURE_ACCESS_LIST['welcome_logo'];
-    }
-
     /**
      * メインページを表示する
      */
     public function index()
     {
-        // メインページ表示時にメインページロゴパスを同時に渡す
-        $welcome_logo_path = self::getMainPageLogoUrl();
+        // S3に保存されているメインページのロゴURLを取得する
+        $welcome_logo_path = app()->make(ServiceController::class)->getMainPageLogo();
+        // メインページを表示する
         return view('welcome', compact('welcome_logo_path'));
     }
 }
