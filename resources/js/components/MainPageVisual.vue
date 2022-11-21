@@ -1,20 +1,38 @@
 <template>
-    <div class="container-fluid text-center">
-      <img :src=welcome_logo_path>
-    </div>
+    <div class="container text-center">
+      <!-- メインロゴ -->
+      <div class="row">
+        <img :src=welcome_logo_path>
+      </div>
 
-    <Carousel :wrap-around="true" v-if="Images.length !== 0">
-      <Slide v-for="slide in Images" :key="slide">
-        <div class="carousel__item" v-cloak>
-          <img :src="slide" alt="画像">
+      <!-- カルーセル -->
+      <div class="row">
+        <div class="col-sm-12">
+          <Carousel :wrap-around="true" v-if="Images.length !== 0">
+            <Slide v-for="slide in Images" :key="slide">
+              <div class="carousel__item" v-cloak>
+                <img :src="slide" alt="画像">
+              </div>
+            </Slide>
+
+            <template #addons>
+              <Navigation />
+              <Pagination />
+            </template>
+          </Carousel>
         </div>
-      </Slide>
+      </div>
 
-      <template #addons>
-        <Navigation />
-        <Pagination />
-      </template>
-    </Carousel>
+      <!-- サイト説明文 -->
+      <div class="row introduction_texts">
+        <div class="col-sm-12">
+          <h3>{{ texts.main_title }}</h3>
+        </div>
+        <div class="col-sm-12 mb-3 bg-white">
+          <h4 class="mt-3">{{ texts.sub_title }}</h4>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -80,6 +98,7 @@ import 'vue3-carousel/dist/carousel.css';
 </script>
 
 <style>
+/* カルーセル */
 .carousel__item {
   height: 420px;
   width: 1000px;
@@ -101,4 +120,14 @@ import 'vue3-carousel/dist/carousel.css';
   box-sizing: content-box;
   border: 5px solid white;
 }
+
+/* 文字フォント */
+.introduction_texts{
+  font-family: "ヒラギノ明朝 Pro W3",
+    "Hiragino Mincho Pro",
+    "MS P明朝",
+    "MS PMincho",
+    serif;
+}
+
 </style>

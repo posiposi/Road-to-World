@@ -31,7 +31,7 @@ class LoginController extends Controller
     /**
      * バリデーションエラーメッセージ
      */
-     
+
     protected $messages = [
         'email.required' => 'メールアドレスを入力してください。',
         'email.email' => '正しいメールアドレスを入力してください。',
@@ -44,7 +44,7 @@ class LoginController extends Controller
     /**
      * バリデーションルール
      */
-     
+
     protected $rules = [
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],

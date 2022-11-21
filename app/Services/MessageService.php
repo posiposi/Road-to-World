@@ -16,6 +16,8 @@ class MessageService{
     public static function getMainPageText(){
         return
         [
+            // メインタイトル
+            'main_title' => Message::MAINPAGE_TEXT['main_title'],
             // サブタイトル
             'sub_title' => Message::MAINPAGE_TEXT['sub_title'],
             // メインテキスト
