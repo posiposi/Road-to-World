@@ -21,9 +21,9 @@
                     </div>
                     <div class="card-body">
                         <!-- コメント入力フォーム -->
-                            <input type="text" class="form-control" v-model="comment_input" ref="comment_form">
+                        <input type="text" class="form-control" v-model="comment_input" ref="comment_form">
                         <!-- 送信ボタン -->
-                            <button @click="clickCommentButton" :disabled="disabled.value" ref="comment-button" class="btn btn-primary mt-2">送信</button>
+                        <button @click="clickCommentButton" :disabled="disabled.value" ref="comment-button" class="btn btn-primary mt-2">送信</button>
                     </div>
                 </div>
             </div>
