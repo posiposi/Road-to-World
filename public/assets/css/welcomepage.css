@@ -50,3 +50,15 @@ ul, ol {
     text-decoration:underline;
     text-decoration-color:black;
 }
+
+#wrapper{
+    padding-bottom: 100px;
+}
+
+#footer {
+    background-color: olivedrab;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+}
