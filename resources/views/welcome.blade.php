@@ -9,4 +9,5 @@
     <main id="app">
         <main-page-visual welcome_logo_path="{{ $welcome_logo_path }}"></main-page-visual>
     </main>
+    @include('layouts.footer')
 @endsection

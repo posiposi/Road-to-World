@@ -10,7 +10,7 @@
         <div class="col-sm-12">
           <Carousel :wrap-around="true" v-if="Images.length !== 0">
             <Slide v-for="slide in Images" :key="slide">
-              <div class="carousel__item" v-cloak>
+              <div class="carousel__item">
                 <img :src="slide" alt="画像">
               </div>
             </Slide>

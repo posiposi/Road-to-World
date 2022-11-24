@@ -14,25 +14,24 @@
     </head>
 
     <body>
-        {{-- ナビゲーションバー --}}
-        @include('commons.navbar')
+        <div class="wrapper">
+            {{-- ナビゲーションバー --}}
+            @include('commons.navbar')
 
-        {{-- フラッシュメッセージ --}}
-        @if (session('flash_message'))
-            <div class="flash_message bg-danger text-center py-3 my-0">
-                {{ session('flash_message') }}
+            {{-- フラッシュメッセージ --}}
+            @if (session('flash_message'))
+                <div class="flash_message bg-danger text-center py-3 my-0">
+                    {{ session('flash_message') }}
+                </div>
+            @endif
+
+            <div id=" wrapper">
+                {{-- エラーメッセージ --}}
+                @include('commons.error_messages')
+
+                @yield('content')
             </div>
-        @endif
-
-        <div id="wrapper">
-            {{-- エラーメッセージ --}}
-            @include('commons.error_messages')
-
-            @yield('content')
         </div>
-
-        {{-- フッター --}}
-        @include('layouts.footer')
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
