@@ -50,3 +50,17 @@ ul, ol {
     text-decoration:underline;
     text-decoration-color:black;
 }
+
+#footer {
+    background-color: olivedrab;
+    position: relative;
+    height: 200px;
+    margin-top: auto;
+}
+
+#footer .copyright{
+    position: absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+}
