@@ -21,7 +21,7 @@
             {{-- ナビゲーション --}}
             <div class="collapse navbar-collapse" id="nav-bar">
                 {{-- 左側メニュー --}}
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav me-auto">
                     <div class="btn-bikeregister">
                         {{ link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn text-white']) }}
                         {{ link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn text-white']) }}
@@ -29,16 +29,16 @@
                     </div>
                 </ul>
                 {{-- 右側メニュー --}}
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     @auth
                     <li class="nav-item dropdown">
                         {{-- ログインユーザーの場合はドロップダウンリストを表示する --}}
-                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             {{ Auth::user()->name }}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-right">
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDarkDropdownMenuLink">
                             {{-- ユーザ詳細ページへのリンク --}}
-                            <li class="dropdown-item">{{ link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-primary']) }}</li>
+                            <li>{{ link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-primary dropdown-item']) }}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{{ link_to_route('logout.get', 'ログアウト') }}</li>

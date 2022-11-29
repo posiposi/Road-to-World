@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-    <div class="row text-dark my-4">
+    <div class="row text-dark ms-4">
         <h1 class="font-weight-bold">貸し出し中の自転車</h1>
     </div>
     <div class="container">

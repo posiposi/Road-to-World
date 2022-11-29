@@ -10,7 +10,7 @@
             <h1 class="mt-3">{{ $bike->name }} の予約コメントページ</h1>
         </div>
         <div class="mt-3 mb-3" style="max-width: 1080px">
-            <div class="row no-gutters ml-3">
+            <div class="row no-gutters ms-3">
                 <div class="col-md-6 mt-3 mb-3">
                     <img class="card-img img-fluid" src="{{ $bike->image_path }}" alt="自転車画像">
                 </div>
