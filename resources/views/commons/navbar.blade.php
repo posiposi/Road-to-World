@@ -33,15 +33,15 @@
                     @auth
                     <li class="nav-item dropdown">
                         {{-- ログインユーザーの場合はドロップダウンリストを表示する --}}
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDarkDropdownMenuLink">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
                             {{-- ユーザ詳細ページへのリンク --}}
                             <li>{{ link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-primary dropdown-item']) }}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
-                            <li class="dropdown-item">{{ link_to_route('logout.get', 'ログアウト') }}</li>
+                            <li><a href="{{ route('logout.get') }}">ログアウト</a></li>
                         </ul>
                     </li>
                     @endauth

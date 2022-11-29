@@ -18,7 +18,7 @@
                     @else
                     <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/avatars/nc96424.jpg" alt="デフォルトアバター画像">
                     @endif
-                    <div class="form-group">
+                    <div class="mb-3">
                         {{ Form::open(['route' => 'users.store', 'files' => true]) }}
                             {{ Form::file('image', ['class' => 'form-contorol-file my-2']) }}
                             {{ Form::submit('アバター登録', ['class' => 'btn btn-success btn-block']) }}
