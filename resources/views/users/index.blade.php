@@ -9,7 +9,7 @@
         <h1 class="text-dark font-weight-bold">My Page</h1>
     </div>
     <div class='container'>
-        <div class="row no-gutters ms-3">
+        <div class="row g-0 ms-3">
             {{-- ユーザアバター --}}
             <div class="col-md-6">
                 <div class="card-body shadow-sm contents-avatar">
@@ -50,7 +50,7 @@
         <div class="row my-4">
             <h2 class="text-dark">あなたが貸し出し中の自転車</h2>
         </div>
-        <div class="row no-gutters ms-3">
+        <div class="row g-0 ms-3">
             @foreach ($bikes as $bike)
                 @if($bike->user_id == $login_user->id)
                     <div class="col-md-6 mt-3 mb-3">
