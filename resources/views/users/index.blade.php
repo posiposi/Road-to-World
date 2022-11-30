@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-    <div class="row my-4">
+    <div class="row my-4 ms-4">
         <h1 class="text-dark font-weight-bold">My Page</h1>
     </div>
     <div class='container'>
@@ -18,7 +18,7 @@
                     @else
                     <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/avatars/nc96424.jpg" alt="デフォルトアバター画像">
                     @endif
-                    <div class="mb-3">
+                    <div class="my-3">
                         {{ Form::open(['route' => 'users.store', 'files' => true]) }}
                             {{ Form::file('image', ['class' => 'form-contorol-file my-2']) }}
                             {{ Form::submit('アバター登録', ['class' => 'btn btn-success btn-block']) }}
@@ -37,7 +37,7 @@
                         <li class="list-group-item"> 電話番号：{{ $login_user->tel }} </li>
                     </ul>
                 </div>
-                <div class='card-body'>
+                <div class='card-body mt-3'>
                     {{ link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) }}
                     {{ link_to_route('users.edit', 'ユーザ登録内容変更', [], ['class' => 'btn btn-success'],) }}
                 </div>

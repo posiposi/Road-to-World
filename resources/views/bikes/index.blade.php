@@ -55,7 +55,7 @@
                                                     @endforeach
                                                 </select>
                                                 </li>
-                                                {{ Form::submit('予約', ['class' => 'btn btn-success btn-block']) }}
+                                                {{ Form::submit('予約', ['class' => 'btn btn-primary rounded-pill d-block mt-2 mx-auto']) }}
                                             {{ Form::close() }}
                                         </ul>
                                         <ul class="list-group list-unstyled mt-3">
