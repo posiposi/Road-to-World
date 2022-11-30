@@ -13,16 +13,16 @@
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
             {{ Form::open(['route' => 'login.post']) }}
-                <div class="form-group">
+                <div>
                     {{ Form::label('email', 'メールアドレス') }}
                     {{ Form::email('email', null, ['class' => 'form-control']) }}
                 </div>
-                <div class="form-group">
+                <div>
                     {{ Form::label('password', 'パスワード') }}
                     {{ Form::password('password', ['class' => 'form-control']) }}
                 </div>
                 
-                {{ Form::submit('ログイン', ['class' => 'login-btn btn d-block mx-auto rounded-pill']) }}
+                {{ Form::submit('ログイン', ['class' => 'd-block login-btn btn mx-auto mt-5 rounded-pill']) }}
 
                 <p class="text-center">
                     <a href="{{ route('signup.get') }}" id="register_account">アカウントを作成する</a>

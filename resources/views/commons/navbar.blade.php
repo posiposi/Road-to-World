@@ -21,7 +21,7 @@
             {{-- ナビゲーション --}}
             <div class="collapse navbar-collapse" id="nav-bar">
                 {{-- 左側メニュー --}}
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav me-auto">
                     <div class="btn-bikeregister">
                         {{ link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn text-white']) }}
                         {{ link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn text-white']) }}
@@ -29,21 +29,21 @@
                     </div>
                 </ul>
                 {{-- 右側メニュー --}}
-                <ul class="navbar-nav">
+                <div class="navbar-nav ms-auto">
                     @auth
-                    <li class="nav-item dropdown">
+                    <div class="dropdown">
                         {{-- ログインユーザーの場合はドロップダウンリストを表示する --}}
-                        <a href="#" class="nav-link dropdown-toggle text-dark" data-toggle="dropdown">
+                        <a class="dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-right">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
                             {{-- ユーザ詳細ページへのリンク --}}
-                            <li class="dropdown-item">{{ link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-primary']) }}</li>
+                            <li>{{ link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-dark dropdown-item']) }}</li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
-                            <li class="dropdown-item">{{ link_to_route('logout.get', 'ログアウト') }}</li>
+                            <li><a href="{{ route('logout.get') }}" class="nav-link text-dark dropdown-item">ログアウト</a></li>
                         </ul>
-                    </li>
+                    </div>
                     @endauth
                     {{-- ゲストユーザー用ログインページリンク --}}
                     @guest
@@ -51,7 +51,7 @@
                             <i class="fas fa-user-circle fa-2x user-circle-icon"></i>
                         </a>
                     @endguest
-                </ul>
+                </div>
             </div>
         </div>
     </nav>

@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-    <div class="row text-dark my-4">
+    <div class="row text-dark ms-4">
         <h1 class="font-weight-bold">貸し出し中の自転車</h1>
     </div>
     <div class="container">
@@ -55,7 +55,7 @@
                                                     @endforeach
                                                 </select>
                                                 </li>
-                                                {{ Form::submit('予約', ['class' => 'btn btn-success btn-block']) }}
+                                                {{ Form::submit('予約', ['class' => 'btn btn-primary rounded-pill d-block mt-2 mx-auto']) }}
                                             {{ Form::close() }}
                                         </ul>
                                         <ul class="list-group list-unstyled mt-3">

@@ -1,13 +1,8 @@
 <template>
     <div class="container text-center">
-      <!-- メインロゴ -->
-      <div class="row">
-        <img :src=welcome_logo_path>
-      </div>
-
       <!-- カルーセル -->
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12 mt-5">
           <Carousel :wrap-around="true" v-if="Images.length !== 0">
             <Slide v-for="slide in Images" :key="slide">
               <div class="carousel__item">
