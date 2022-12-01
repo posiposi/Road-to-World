@@ -28,7 +28,6 @@ class SearchController extends Controller
      * 検索結果表示
      *
      * @param Request $request 検索条件
-     * @param Bike $bike メソッドインジェクション
      * @return void
      */
     public function index(Request $request)
