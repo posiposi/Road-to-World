@@ -24,8 +24,8 @@ class DateTimeRequest extends FormRequest
     public function rules()
     {
         return [
-            'start_date_time' => ['after:now', 'before:end_date_time'],
-            'end_date_time' => ['after:now', 'after:start_date_time'],
+            'start_date_time' => ['after:now', 'before:end_date_time', 'required'],
+            'end_date_time' => ['after:now', 'after:start_date_time', 'required'],
         ];
     }
     
@@ -35,6 +35,8 @@ class DateTimeRequest extends FormRequest
             'start_date_time.after' => '開始日時は現在時刻よりも後を指定してください。',
             'start_date_time.before' => '開始日時は終了日時以前を指定してください。',
             'end_date_time.after' => '終了日時は正しい時間を指定してください。',
+            'start_date_time.required' => '開始日を指定してください',
+            'end_date_time.required' => '終了日を指定してください',
         ];
     }
     
@@ -43,8 +45,8 @@ class DateTimeRequest extends FormRequest
         $start_date_time = ($this->filled(['start_date', 'start_time'])) ? $this->start_date .' '. $this->start_time : '';
         $end_date_time = ($this->filled(['end_date', 'end_time'])) ? $this->end_date .' '. $this->end_time : '';
         $this->merge([
-           'start_date_time' => $start_date_time,
-           'end_date_time' => $end_date_time,
+            'start_date_time' => $start_date_time,
+            'end_date_time' => $end_date_time,
         ]);
     }
 }
