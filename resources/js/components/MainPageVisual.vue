@@ -23,7 +23,7 @@
         <div class="col-sm-12">
           <h3>{{ texts.main_title }}</h3>
         </div>
-        <div class="col-sm-12 mb-3 bg-white">
+        <div class="col-sm-12 mb-3">
           <h4 class="mt-3">{{ texts.sub_title }}</h4>
         </div>
       </div>
