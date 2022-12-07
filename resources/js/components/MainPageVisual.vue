@@ -3,7 +3,7 @@
       <!-- カルーセル -->
       <div class="row">
         <div class="col-sm-12 mt-5">
-          <Carousel :wrap-around="true" v-if="Images.length !== 0">
+          <Carousel :autoplay="5000" :wrap-around="true" v-if="Images.length !== 0">
             <Slide v-for="slide in Images" :key="slide">
               <div class="carousel__item">
                 <img :src="slide" alt="画像">
