@@ -11,10 +11,9 @@ class Url
 
     const PICTURE_ACCESS_LIST = [
         'welcome_logo' => 'welcome/logomark.png',
-        'how_to_picuture1' => 'welcome/main_visual.webp',
-        'how_to_picuture2' => 'welcome/how_to_2.jpg',
-        'how_to_picuture3' => 'welcome/how_to_3.jpg',
-        'how_to_picuture4' => 'welcome/how_to_4.jpg',
-        'how_to_picuture5' => 'welcome/how_to_5.jpg',
+        'mainpage_carousel_1' => 'welcome/main_visual.webp',
+        'mainpage_carousel_2' => 'welcome/main_visual_2.jpg',
+        'mainpage_carousel_3' => 'welcome/main_visual_3.jpg',
+        'mainpage_carousel_4' => 'welcome/main_visual_4.jpg',
     ];
 }
