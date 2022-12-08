@@ -2,9 +2,6 @@
 
 use App\Http\Controllers\TopPageController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\BikesController;
 
 // メインページ
 Route::get('/', [TopPageController::class, 'index']);
@@ -37,12 +34,12 @@ Route::controller(SearchController::class)->prefix('search')->group(function() {
 });
 
 // 貸出中自転車一覧表示
-Route::controller(\BikesController::class)->prefix('bikes')->group(function() {
+Route::controller(BikesController::class)->prefix('bikes')->group(function() {
     Route::get('/', 'index')->name('bikes.index');
 });
 
 // サービスクラス呼び出し
-Route::controller(\ServiceController::class)->prefix('service')->group(function() {
+Route::controller(ServiceController::class)->prefix('service')->group(function() {
     // S3から画像取得
     Route::get('/show', 'show')->name('service.show');
     // メインページ内のテキスト取得
@@ -53,7 +50,7 @@ Route::controller(\ServiceController::class)->prefix('service')->group(function(
 Route::group(['middleware' => ['auth']], function ()
     {
         // 自転車関連
-        Route::controller(\BikesController::class)->group(function() {
+        Route::controller(BikesController::class)->group(function() {
             // 自転車登録画面表示
             Route::get('bikeregister', 'show')->name('bikes.get');
             // 新規自転車登録
@@ -67,7 +64,7 @@ Route::group(['middleware' => ['auth']], function ()
         });
         
         // 予約関連
-        Route::controller(\ReservationController::class)->prefix('bikes')->group(function() {
+        Route::controller(ReservationController::class)->prefix('bikes')->group(function() {
             // 予約アクション
             Route::post('/{bikeId}', 'store')->name('bikes.reservation');
             // カレンダー表示
@@ -75,7 +72,7 @@ Route::group(['middleware' => ['auth']], function ()
         });
 
         // ユーザー関連
-        Route::controller(\UsersController::class)->prefix('users')->group(function() {
+        Route::controller(UsersController::class)->prefix('users')->group(function() {
             // ユーザ情報表示
             Route::get('/', 'index')->name('users.index');
             // ユーザアバター登録
@@ -87,7 +84,7 @@ Route::group(['middleware' => ['auth']], function ()
         });
         
         // チャット機能
-        Route::controller(\CommentsController::class)->prefix('comments')->group(function() {
+        Route::controller(CommentsController::class)->prefix('comments')->group(function() {
             // コメントルーム一覧表示
             Route::get('/{bikeId}/{lenderId}/index', 'index')->name('comments.index');
             // コメントルーム表示
@@ -99,7 +96,7 @@ Route::group(['middleware' => ['auth']], function ()
         });
 
         // 決済機能
-        Route::controller(\PaymentsController::class)->group(function() {
+        Route::controller(PaymentsController::class)->group(function() {
             // 決済ボタン画面表示
             Route::get('payment/{time}/{price}/{bikeId}/{startTime}/{endTime}/index', 'index')->name('payment.index');
             // 決済処理
