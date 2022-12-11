@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row pageheader mt-3 mb-5 bg-light bg-gradient">
         <h2 class="text-left">マイページ</h2>
-        <img class="avatar-img" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/no-image.png" alt="デフォルトアバター画像">
+        <img class="avatar-img" src="{{ $avatar_noimage }}" alt="デフォルトアバター画像">
     </div>
 
     <div class="row user-info">
