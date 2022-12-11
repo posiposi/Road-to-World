@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Http\Requests\UserRegisterRequest;
+use App\Services\Image\S3Service;
 
 class UsersController extends Controller
 {
     // コンストラクタインジェクション
-    public function __construct(User $user)
+    public function __construct(User $user, S3Service $s3Service)
     {
         $this->user = $user;
+        $this->s3Service = $s3Service;
     }
 
     /**
@@ -29,15 +31,18 @@ class UsersController extends Controller
     }
     
     /**
-     * ユーザページの表示
+     * マイページの表示
      *
      * @return void
      */
     public function index()
     {
+        // マイページ内に表示するログインユーザーの各種情報
         [$login_user, $bikes, $reservations] = $this->user->getUserPageInfo();
+        // アバターNoImage画像
+        $avatar_noimage = $this->s3Service->getAvatarNoImage();
 
-        return view('users.index', compact('login_user', 'bikes', 'reservations'));
+        return view('users.index', compact('login_user', 'bikes', 'reservations', 'avatar_noimage'));
     }
     
     /**

@@ -31,4 +31,14 @@ class S3Service{
     {
         return Url::URL_LIST['s3'] . Url::PICTURE_ACCESS_LIST['welcome_logo'];
     }
+
+    /**
+     * S3に保存されているアバターNoImage画像のパスを取得する
+     *
+     * @return string アバターNoImage画像のパス
+     */
+    public static function getAvatarNoImage()
+    {
+        return URL::URL_LIST['s3'] . URL::PICTURE_ACCESS_LIST['avatar_noimage'];
+    }
 }
