@@ -8,7 +8,11 @@
 <div class="container">
     <div class="row pageheader mt-3 mb-5 bg-light bg-gradient">
         <h2 class="text-left">マイページ</h2>
+        @if($login_user->image != null)
+        <img class="avatar-img" src="{{ $login_user->image }}" alt="登録アバター画像">
+        @else
         <img class="avatar-img" src="{{ $avatar_noimage }}" alt="デフォルトアバター画像">
+        @endif
     </div>
 
     <div class="row user-info">
