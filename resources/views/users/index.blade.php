@@ -1,17 +1,76 @@
 @extends('layouts.app')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('/assets/css/mypage.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/mypage.css') }}">
 @endpush
 
 @section('content')
-    <div class="row my-4 ms-4">
+<div class="container">
+    <div class="row pageheader mt-3 mb-5 bg-light bg-gradient">
+        <h2 class="text-left">マイページ</h2>
+        <img class="avatar-img" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/welcome/no-image.png" alt="デフォルトアバター画像">
+    </div>
+
+    <div class="row user-info">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>氏名</th>
+                    <td>{{ $login_user->name }}</td>
+                </tr>
+                <tr>
+                    <th>ニックネーム</th>
+                    <td>{{ $login_user->nickname }}</td>
+                </tr>
+                <tr>
+                    <th>メールアドレス</th>
+                    <td>{{ $login_user->email }}</td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>{{ $login_user->tel }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <ul class="row list-group list-group-horizontal user-contents-list">
+            <li class="list-group-item col-md-6 my-auto">
+                <a href="{{ route('users.edit') }}" class="user-info-link">
+                    <i class="fas fa-user-edit fa-2x"></i>
+                    <p class="user-edit fw-bold">会員情報</p>
+                </a>
+            </li>
+            <li class="list-group-item col-md-6">
+                <a href="#" class="reservation-calendar-link">
+                    <i class="far fa-calendar-alt fa-2x"></i>
+                    <p class="reservation-calendar fw-bold">予約表</p>
+                </a>
+            </li>
+            <li class="list-group-item col-md-6">
+                <a href="#" class="user-bike-index-link">
+                    <i class="fas fa-bicycle fa-2x"></i>
+                    <p class="fw-bold">マイバイク</p>
+                </a>
+            </li>
+            <li class="list-group-item col-md-6">
+                <a href="#" class="user-bike-index-link">
+                    <i class="fas fa-door-open fa-2x"></i>
+                    <p class="fw-bold">退会</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+    {{-- 下記従来コード --}}
+    {{-- <div class="row my-4 ms-4">
         <h1 class="text-dark font-weight-bold">My Page</h1>
     </div>
     <div class='container'>
-        <div class="row g-0 ms-3">
+        <div class="row g-0 ms-3"> --}}
             {{-- ユーザアバター --}}
-            <div class="col-md-6">
+            {{-- <div class="col-md-6">
                 <div class="card-body shadow-sm contents-avatar">
                     @if($login_user->image != null)
                     <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="{{ $login_user->image }}" alt="ユーザアバター画像">
@@ -25,10 +84,10 @@
                         {{ Form::close() }}
                     </div>
                 </div>
-            </div>
+            </div> --}}
     
             {{-- ユーザ情報表示カード --}}
-            <div class="col-md-6">
+            {{-- <div class="col-md-6">
                 <div class="card-body">
                     <ul class="list-group list-unstyled">
                         <li class="list-group-item"> 氏名：{{ $login_user->name }} <li>
@@ -43,10 +102,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- ユーザの貸出中自転車の一覧表示 --}}
-    <div class="container">
+    {{-- <div class="container">
         <div class="row my-4">
             <h2 class="text-dark">あなたが貸し出し中の自転車</h2>
         </div>
@@ -88,10 +147,10 @@
                 @endif
             @endforeach
         </div>
-    </div>
+    </div> --}}
 
     {{-- ユーザの予約一覧表 --}}
-    <div class="container">
+    {{-- <div class="container">
         <div class="row my-2">
             <h2 class="text-dark">予約表</h2>
         </div>
@@ -117,5 +176,5 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
