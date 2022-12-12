@@ -1,0 +1,10 @@
+/* ユーザー登録ボタン */
+.user-register-btn {
+    width: 200px;
+    height: 50px;
+    background-color: #001489;
+    color: white;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}

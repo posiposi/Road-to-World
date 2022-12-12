@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/user_register.css') }}">
+@endpush
+
 @section('content')
     <div class="text-center my-4">
         <h1>ユーザ登録</h1>
@@ -39,7 +43,7 @@
                     {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
                 </div>
 
-                {{ Form::submit('登録', ['class' => 'btn btn-success btn-block']) }}
+                {{ Form::submit('登録', ['class' => 'btn user-register-btn rounded-pill']) }}
             {{ Form::close() }}
         </div>
     </div>
