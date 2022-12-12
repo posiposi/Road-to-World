@@ -39,7 +39,7 @@
                     {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
                 </div>
 
-                {{ Form::submit('登録', ['class' => 'btn btn-success btn-block']) }}
+                {{ Form::submit('登録', ['class' => 'btn btn-success d-block mx-auto']) }}
             {{ Form::close() }}
         </div>
     </div>
