@@ -1,5 +1,6 @@
 <footer class="bg-secondary text-white text-center text-md-start">
     <div class="container p-4 pb-2">
+        @guest
         <div class="row mb-3">
             <p class="d-flex justify-content-center align-items-center">
                 <span class="me-3">会員登録はこちらから</span>
@@ -8,6 +9,7 @@
                 </button>
             </p>
         </div>
+        @endguest
         <div class="row mb-2">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                 <h5 class="text-uppercase">Footer Content</h5>
