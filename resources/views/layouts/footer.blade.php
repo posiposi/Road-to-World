@@ -1,3 +1,8 @@
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
+@endpush
+
+
 <footer class="bg-secondary text-white text-center text-md-start">
     <div class="container p-4 pb-2">
         @guest
@@ -54,13 +59,13 @@
                 </ul>
             </div>
         </div>
-        <div style="text-align: center;">
-            <a class="btn text-white btn-floating m-1" style="background-color: #333333;" href="https://github.com/posiposi/Road-to-World">
+        <div class="sns-link">
+            <a class="btn text-white btn-floating m-1 github-link-icon" href="https://github.com/posiposi/Road-to-World">
                 <i class="fab fa-github"></i>
             </a>
         </div>
     </div>
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="text-center p-3 copyright-text">
         © 2022 Copyright: Daichi Sugiyama
     </div>
 </footer>
