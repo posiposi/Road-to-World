@@ -4,8 +4,8 @@
         <div class="row mb-3">
             <p class="d-flex justify-content-center align-items-center">
                 <span class="me-3">会員登録はこちらから</span>
-                <button type="button" class="btn btn-outline-light btn-rounded">
-                    Sign up!
+                <button type="button" class="btn btn-rounded">
+                    <a href="{{ route('signup.get') }}" class="text-white">Sign up!</a>
                 </button>
             </p>
         </div>
