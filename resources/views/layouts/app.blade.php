@@ -1,5 +1,4 @@
 {{-- 共通レイアウト --}}
-
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -9,6 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('asssets/css/common.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
         {{-- 個別CSS読み込み --}}
         @stack('css')
     </head>
@@ -24,17 +25,20 @@
                     {{ session('flash_message') }}
                 </div>
             @endif
-
-            <div id=" wrapper">
+            
+            {{-- 個別ページメインセクション --}}
+            <div id="wrapper">
                 {{-- エラーメッセージ --}}
                 @include('commons.error_messages')
 
                 @yield('content')
             </div>
+            {{-- フッター --}}
+            @include('layouts.footer')
         </div>
 
         <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
         <script src="{{ url(mix('js/app.js')) }}"></script>
         @yield('js')
-        </body>
+    </body>
 </html>

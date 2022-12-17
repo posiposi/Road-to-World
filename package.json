@@ -30,6 +30,7 @@
         "@fullcalendar/interaction": "^5.11.3",
         "@fullcalendar/vue3": "^5.11.2",
         "fullcalendar": "^5.11.3",
+        "mdb-ui-kit": "^6.0.1",
         "vue3-carousel": "^0.1.47"
     }
 }
