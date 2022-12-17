@@ -1,8 +1,3 @@
-@push('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
-@endpush
-
-
 <footer class="bg-secondary text-white text-center text-md-start">
     <div class="container p-4 pb-2">
         @guest
