@@ -26,17 +26,11 @@ class MessageService{
     }
 
     /**
-     * フッターに表示する文章を取得する
+     * フッターに表示するコンテンツタイトルを取得する
      *
-     * @return array フッターに表示するタイトルとテキスト
+     * @return string フッターコンテンツのタイトル
      */
-    public static function getFooterContentsText(){
-        return
-        [
-            // フッタータイトル
-            'footer_titel' => Message::FOOTER_CONTENTS_TEXT,
-            // フッターテキスト
-            'footer_texts' => Message::FOOTER_CONTENTS_TITLE,
-        ];
+    public static function getFooterContentsTitle(){
+        return Message::FOOTER_CONTENTS_TEXT;
     }
 }
