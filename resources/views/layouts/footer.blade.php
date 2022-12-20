@@ -1,3 +1,6 @@
+{{-- 定数を使用するためにサービスクラスを注入 --}}
+@inject('messages', 'App\Services\MessageService')
+
 <footer class="bg-secondary text-white text-center text-md-start">
     <div class="container p-4 pb-2">
         @guest
@@ -12,7 +15,7 @@
         @endguest
         <div class="row mb-2">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Footer Content</h5>
+                <h5 class="text-uppercase">{{ $messages->getFooterContentsTitle() }}</h5>
                 <p>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
                     molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
