@@ -24,4 +24,19 @@ class MessageService{
             'main_text' => Message::MAINPAGE_TEXT['main_text']
         ];
     }
+
+    /**
+     * フッターに表示する文章を取得する
+     *
+     * @return array フッターに表示するタイトルとテキスト
+     */
+    public static function getFooterContentsText(){
+        return
+        [
+            // フッタータイトル
+            'footer_titel' => Message::FOOTER_CONTENTS_TEXT,
+            // フッターテキスト
+            'footer_texts' => Message::FOOTER_CONTENTS_TITLE,
+        ];
+    }
 }
