@@ -34,6 +34,11 @@ class MessageService{
         return Message::FOOTER_CONTENTS_TITLE;
     }
 
+    /**
+     * フッターに表示するアプリ紹介文を取得する
+     *
+     * @return string フッターの紹介文
+     */
     public static function getFooterContentsText(){
         return Message::FOOTER_CONTENTS_TEXT;
     }
