@@ -15,8 +15,8 @@
         @endguest
         <div class="row mb-2">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                <h5 class="text-uppercase">{{ $messages->getFooterContentsTitle() }}</h5>
-                <p>
+                <h5 class="footer-title">{{ $messages->getFooterContentsTitle() }}</h5>
+                <p class="footer-text">
                     {{ $messages->getFooterContentsText() }}
                 </p>
             </div>
