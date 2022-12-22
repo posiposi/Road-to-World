@@ -24,8 +24,32 @@ td {
     list-style: none;
 }
 
-/* コンテンツリスト内リンク */
-ul>li>a {
+/* 会員情報リンク */
+.user-info-link {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
+/* 予約表リンク */
+.reservation-calendar-link {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
+/* マイバイクリンク */
+.user-bike-index-link {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
+/* 退会リンク */
+.user-bike-index-link {
     display: block;
     text-decoration: none;
     text-align: center;

@@ -21,36 +21,33 @@
                 </p>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Links</h5>
+                <h5 class="text-uppercase">サポート</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#!" class="text-white">Link 1</a>
+                        <a href="{{ route('home') }}" class="text-white">Home</a>
                     </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 2</a>
+                    <li class="mt-2">
+                        <a href="#!" class="text-white">利用方法</a>
                     </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 3</a>
+                    <li class="mt-2">
+                        <a href="#!" class="text-white">お問合せ</a>
                     </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 4</a>
+                    <li class="mt-2">
+                        <a href="#!" class="text-white">利用規約</a>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Links</h5>
+                <h5 class="text-uppercase">会員ページ</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#!" class="text-white">Link 1</a>
+                        <a href="{{ route('users.index') }}" class="text-white">マイページ</a>
                     </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 2</a>
+                    <li class="mt-2">
+                        <a href="#!" class="text-white">予約表</a>
                     </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#!" class="text-white">Link 4</a>
+                    <li class="mt-2">
+                        <a href="#!" class="text-white">マイバイク</a>
                     </li>
                 </ul>
             </div>
