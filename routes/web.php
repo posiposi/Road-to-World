@@ -13,7 +13,7 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 // メインページ
-Route::get('/', [TopPageController::class, 'index']);
+Route::get('/', [TopPageController::class, 'index'])->name('home');
 
 // Full-Calendarテスト
 // 前月、次月への変遷技術調査が完了するまでコメントアウト
