@@ -24,4 +24,22 @@ class MessageService{
             'main_text' => Message::MAINPAGE_TEXT['main_text']
         ];
     }
+
+    /**
+     * フッターに表示するコンテンツタイトルを取得する
+     *
+     * @return string フッターコンテンツのタイトル
+     */
+    public static function getFooterContentsTitle(){
+        return Message::FOOTER_CONTENTS_TITLE;
+    }
+
+    /**
+     * フッターに表示するアプリ紹介文を取得する
+     *
+     * @return string フッターの紹介文
+     */
+    public static function getFooterContentsText(){
+        return Message::FOOTER_CONTENTS_TEXT;
+    }
 }
