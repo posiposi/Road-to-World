@@ -30,3 +30,8 @@
     "MS PMincho",
     serif;
 }
+
+/* リンクマウスオーバー */
+a:hover {
+    font-weight: bold;
+}
