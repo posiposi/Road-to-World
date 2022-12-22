@@ -9,8 +9,7 @@ class Message{
     /**
      * 予約ページメッセージリスト
      */
-    // TODO 定数名が不適切なため要修正
-    const MESSAGE_LIST = [
+    const RENTAL_MESSAGE_LIST = [
         'rental_self_bike' => 'あなた自身の自転車は借りることが出来ません。',
         'reserved' => 'ご希望の時間は予約済みになっています。',
         'not_existing_bikes' => '該当する自転車がありませんでした。'
