@@ -43,7 +43,7 @@ class SearchController extends Controller
             return view('searches.index', compact('bikes', 'search_name', 'search_brand', 'search_address', 'search_price'));
         }
         else {
-            return redirect('search')->with('flash_message', Message::MESSAGE_LIST['not_existing_bikes']);
+            return redirect('search')->with('flash_message', Message::RENTAL_MESSAGE_LIST['not_existing_bikes']);
         }
     }
 }

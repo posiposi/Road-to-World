@@ -45,12 +45,12 @@ class ReservationController extends Controller
             }
             //予約対象が予約者自身の所有自転車の場合
             else {
-                return back()->with(Message::SHOW_MESSAGE_TYPE['flash'], Message::MESSAGE_LIST['rental_self_bike']);
+                return back()->with(Message::SHOW_MESSAGE_TYPE['flash'], Message::RENTAL_MESSAGE_LIST['rental_self_bike']);
             }
         }
         // 重複する予約がある場合
         else {
-            return back()->with(Message::SHOW_MESSAGE_TYPE['flash'], Message::MESSAGE_LIST['reserved']);
+            return back()->with(Message::SHOW_MESSAGE_TYPE['flash'], Message::RENTAL_MESSAGE_LIST['reserved']);
         }
     }
     
