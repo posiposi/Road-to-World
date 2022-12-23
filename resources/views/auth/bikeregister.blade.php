@@ -19,9 +19,25 @@
                     {{ Form::text('name', null, ['class' => 'form-control']) }}
                 </div>
                 
-                <div>
-                    {{ Form::label('status', '保管状態') }}
-                    {{ Form::select('status', ['良い' => '良い', '普通' => '普通', '悪い' => '悪い'], '普通', ['class' => 'form-control']) }}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="良好" name="status">
+                    <label class="form-check-label">
+                        良好
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="普通" name="status">
+                    <label class="form-check-label">
+                        普通
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="悪い" name="status">
+                    <label class="form-check-label">
+                        悪い
+                    </label>
                 </div>
 
                 <div>
