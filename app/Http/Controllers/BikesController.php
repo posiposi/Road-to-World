@@ -22,7 +22,7 @@ class BikesController extends Controller
     public function show()
     {
         // 自転車保管状態ラジオボタンの選択肢を取得
-        $bike_status = BikeStatus::cases();
+        $bike_status_cases = BikeStatus::cases();
 
         // 自転車登録画面へ変遷する
         return view('auth.bikeregister', compact('bike_status_cases'));

@@ -22,26 +22,15 @@
             <div class="mt-3">
                 <label for="status">保管状態</label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" value="良好" name="status">
-                <label class="form-check-label">
-                    良好
-                </label>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="radio" value="普通" name="status">
-                <label class="form-check-label">
-                    普通
-                </label>
-            </div>
-
-            <div class="form-check">
-                <input class="form-check-input" type="radio" value="悪い" name="status">
-                <label class="form-check-label">
-                    悪い
-                </label>
-            </div>
+            
+            @foreach ($bike_status_cases as $bike_status)
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" value="{{ $bike_status->value }}" name="status">
+                    <label class="form-check-label">
+                        {{ $bike_status->label_BikeStatus() }}
+                    </label>
+                </div>
+            @endforeach
 
             <div class="mt-3">
                 <label for="bike_address">受け渡し場所</label>
