@@ -26,7 +26,7 @@
 
             @foreach ($bike_status_cases as $bike_status)
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" value="{{ old('status', $bike->status) }}" name="status">
+                    <input type="radio" class="form-check-input" value="{{ $bike_status->value }}" name="status" @if ($bike->status == $bike_status->value) checked @endif>
                     <label class="form-check-label">
                         {{ $bike_status->label_BikeStatus() }}
                     </label>
