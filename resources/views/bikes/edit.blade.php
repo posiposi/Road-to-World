@@ -4,48 +4,55 @@
 <div class="text-center my-4">
     <h1>バイク登録情報変更</h1>
 </div>
-<div class="container">
-    <div class="row my-4">
-        <div class="col-sm-6 offset-sm-3">
-            {{ Form::open(['route' => ['bikes.update', 'id'=>$bike->id], 'files' => true, 'method' => 'put',]) }}
-            <div class="mb-3">
-                {{ Form::label('brand', 'ブランド') }}
-                {{ Form::text('brand', old('brand', $bike->brand), ['class' => 'form-control']) }}
+
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+        <form action="{{ route('bikes.update', ['id' => $bike->id]) }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="mt-3">
+                <label for="brand">ブランド</label>
+                <input type="text" class="form-control" name="brand" value="{{ old('brand', $bike->brand) }}">
             </div>
 
-            <div class="mb-3">
-                {{ Form::label('name', 'モデル名') }}
-                {{ Form::text('name', old('name', $bike->name), ['class' => 'form-control']) }}
+            <div class="mt-3">
+                <label for="name">モデル名</label>
+                <input type="text" class="form-control" name="name" value="{{ old('name', $bike->name) }}">
             </div>
 
-            <div class="mb-3">
-                {{ Form::label('status', '保管状態') }}
-                {{ Form::select('status', ['良い' => '良い', '普通' => '普通', '悪い' => '悪い'], old('status', $bike->status),
-                ['class' => 'form-control'])}}
+            <div class="mt-3">
+                <label for="status">保管状態</label>
             </div>
 
-            <div class="mb-3">
-                {{ Form::label('bike_address', '受け渡し場所') }}
-                {{ Form::text('bike_address', old('bike_address', $bike->bike_address), ['class' => 'form-control']) }}
+            @foreach ($bike_status_cases as $bike_status)
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" value="{{ old('status', $bike->status) }}" name="status">
+                    <label class="form-check-label">
+                        {{ $bike_status->label_BikeStatus() }}
+                    </label>
+                </div>
+            @endforeach
+
+            <div class="mt-3">
+                <label for="bike_address">受け渡し場所</label>
+                <input type="text" class="form-control" value="{{ old('bike_address', $bike->bike_address) }}" name="bike_address">
             </div>
 
-            <div class="mb-3">
-                {{ Form::label('price', '料金(30分あたり)') }}
-                {{ Form::text('price', old('price', $bike->price), ['class' => 'form-control', 'placeholder' =>
-                '価格はコンマなしで記入してください。']) }}
+            <div class="mt-3">
+                <label for="price">料金(¥/30分)</label>
+                <input type="text" class="form-control" value="{{ old('price', $bike->price) }}" name="price" placeholder="価格はコンマなしで記入してください。">
             </div>
 
-            <div class="mb-3">
-                {{ Form::label('remark', '説明・備考') }}
-                {{ Form::textarea('remark', old('textarea', $bike->remark), ['class' => 'form-control']) }}
+            <div class="mt-3">
+                <label for="remark">説明・備考</label>
+                <textarea class="form-control" name="remark" cols="50" rows="2" placeholder="150文字以内で入力してください。"maxlength="150">{{ $bike->remark }}</textarea>
             </div>
 
-            <div class="mb-3">
-                {{ Form::file('image_path', ['class' => 'form-contorol-file']) }}
+            <div class="mt-3">
+                <input type="file" name="image_path">
             </div>
-            {{ Form::submit('変更', ['class' => 'btn btn-success btn-block']) }}
-            {{ Form::close() }}
-        </div>
+            <input class="d-grid mx-auto mt-2 btn btn-success rounded-pill" type="submit" value="変更">
+        </form>
     </div>
 </div>
 @endsection
