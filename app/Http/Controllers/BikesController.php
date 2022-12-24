@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bike;
+use App\Enums\BikeStatus;
 use App\Http\Requests\BikeRegisterRequest;
 
 class BikesController extends Controller
@@ -20,8 +21,11 @@ class BikesController extends Controller
      */
     public function show()
     {
+        // 自転車保管状態ラジオボタンの選択肢を取得
+        $bike_status = BikeStatus::cases();
+
         // 自転車登録画面へ変遷する
-        return view('auth.bikeregister');
+        return view('auth.bikeregister', compact('bike_status_cases'));
     }
     
     /**
