@@ -25,13 +25,13 @@
                             <img class="card-img img-fluid mt-4" src="{{ $bike->image_path }}" alt="自転車画像">
                             <div class="card-body">
                                 <ul class="list-group list-unstyled">
-                                    <li class='list-group-item'> 所有者：{{ $bike->user->nickname }}</li>
-                                    <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
-                                    <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
-                                    <li class="list-group-item"> 保管状態：{{ $bike->getBikeStatusLogicalName($bike->status) }} </li>
-                                    <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
-                                    <li class="list-group-item"> 料金：¥{{ number_format($bike->price) }}/30分 </li>
-                                    <li class="list-group-item card-remark"> 説明・備考</br>
+                                    <li class='list-group-item'> {{ Word::BIKE_INDEX_LABEL['owner'] }}{{ $bike->user->nickname }}</li>
+                                    <li class="list-group-item"> {{ Word::BIKE_INDEX_LABEL['brand'] }}{{ $bike->brand }} <li>
+                                    <li class="list-group-item"> {{ Word::BIKE_INDEX_LABEL['bike_name'] }}{{ $bike->name }} </li>
+                                    <li class="list-group-item"> {{ Word::BIKE_INDEX_LABEL['bike_status'] }}{{ $bike->getBikeStatusLogicalName($bike->status) }} </li>
+                                    <li class="list-group-item"> {{ Word::BIKE_INDEX_LABEL['bike_address'] }}{{ $bike->bike_address }} </li>
+                                    <li class="list-group-item"> {{ Word::BIKE_INDEX_LABEL['price_yen'] }}{{ number_format($bike->price) }}{{ Word::BIKE_INDEX_LABEL['per_thirty_minutes'] }} </li>
+                                    <li class="list-group-item card-remark">{{ Word::BIKE_INDEX_LABEL['remark'] }}</br>
                                         <p class="mt-2">{{ $bike->remark }}</p>
                                     </li>
                                 </ul>
@@ -39,36 +39,36 @@
                                     {{-- 予約リクエストフォーム --}}
                                     <ul class="list-group list-unstyled mt-3">
                                         {{ Form::open(['route' => ['bikes.reservation', $bike->id]]) }}
-                                            <li class="list-group-item">開始日<input type="date" name="start_date"><br>
-                                            開始時間
+                                            <li class="list-group-item">{{ Word::BIKE_INDEX_LABEL['start_date'] }}<input type="date" name="start_date"><br>
+                                                {{ Word::BIKE_INDEX_LABEL['start_time'] }}
                                             <select name="start_time">
                                                 @foreach($times as $time)
                                                     <option value ="{{ $time }}">{{ $time }}</option>
                                                 @endforeach
                                             </select>
                                             </li>
-                                            <li class="list-group-item">終了日<input type="date" name="end_date"><br>
-                                            終了時間
+                                            <li class="list-group-item">{{ Word::BIKE_INDEX_LABEL['end_date'] }}<input type="date" name="end_date"><br>
+                                                {{ Word::BIKE_INDEX_LABEL['end_time'] }}
                                             <select name="end_time">
                                                 @foreach($times as $time)
                                                     <option value ="{{ $time }}">{{ $time }}</option>
                                                 @endforeach
                                             </select>
                                             </li>
-                                            {{ Form::submit('予約', ['class' => 'btn btn-primary rounded-pill d-block mt-2 mx-auto']) }}
+                                            {{ Form::submit(Word::BIKE_INDEX_LABEL['btn_bike_reservation'], ['class' => 'btn btn-primary rounded-pill d-block mt-2 mx-auto']) }}
                                         {{ Form::close() }}
                                     </ul>
                                     <ul class="list-group list-unstyled mt-3">
                                         {{-- ログインユーザがバイク所有者の場合 --}}
                                         @if($user->id == $bike->user_id)
-                                            {{ link_to_route('comments.index', 'コメントルーム一覧へ', ['bikeId' => $bike->id, 'lenderId' => $user->id,], ['class' => 'btn btn-success']) }}
+                                            {{ link_to_route('comments.index', Word::BIKE_INDEX_LABEL['to_comment_room_index'], ['bikeId' => $bike->id, 'lenderId' => $user->id,], ['class' => 'btn btn-success']) }}
                                         {{-- ログインユーザが借り手側の場合 --}}
                                         @else
-                                            {{ link_to_route('comments.show', 'コメントルームへ', ['bikeId' => $bike->id, 'senderId' => $user->id, 'receiverId' => $bike->user_id], ['class' => 'btn btn-success']) }}
+                                            {{ link_to_route('comments.show', Word::BIKE_INDEX_LABEL['to_comment_room'], ['bikeId' => $bike->id, 'senderId' => $user->id, 'receiverId' => $bike->user_id], ['class' => 'btn btn-success']) }}
                                         @endif
                                     </ul>
                                     <ul class="list-group list-unstyled mt-3">
-                                        {{ link_to_route('bikes.calendar', '予約状況カレンダー', ['bikeId' => $bike->id, 'week' => 'this_week', 'now' => 'today'], ['class' => 'btn btn-success']) }}
+                                        {{ link_to_route('bikes.calendar', Word::BIKE_INDEX_LABEL['reservation_calendar'], ['bikeId' => $bike->id, 'week' => 'this_week', 'now' => 'today'], ['class' => 'btn btn-success']) }}
                                     </ul>
                                 @endauth
                             </div>
@@ -80,7 +80,7 @@
     </div>
     {{ $bikes->links() }}
     @else
-        <h4 class="font-weight-bold">現在貸し出し可能な自転車はありません。</h4>
+        <h4 class="font-weight-bold">{{ Message::NOT_AVAILABLE_RENTAL_BIKE_MESSAGE }}</h4>
     @endif
 </div>
 @endsection
