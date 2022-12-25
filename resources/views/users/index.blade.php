@@ -58,7 +58,7 @@
                 </a>
             </li>
             <li class="list-group-item col-md-6">
-                <a href="#" class="user-bike-index-link">
+                <a href="{{ route('logout.get') }}" class="user-bike-index-link">
                     <i class="fas fa-door-open fa-2x"></i>
                     <p class="fw-bold">{{ Word::MYPAGE_LABEL['logout'] }}</p>
                 </a>
