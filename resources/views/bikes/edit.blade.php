@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="text-center my-4">
-    <h1>バイク登録情報変更</h1>
+    <h1>{{ Word::PAGE_TITLE['bike_info_change'] }}</h1>
 </div>
 
 <div class="row">
@@ -11,17 +11,17 @@
             @csrf
             @method('PUT')
             <div class="mt-3">
-                <label for="brand">ブランド</label>
+                <label for="brand">{{ $bike_form_label['brand'] }}</label>
                 <input type="text" class="form-control" name="brand" value="{{ old('brand', $bike->brand) }}">
             </div>
 
             <div class="mt-3">
-                <label for="name">モデル名</label>
+                <label for="name">{{ $bike_form_label['bike_name'] }}</label>
                 <input type="text" class="form-control" name="name" value="{{ old('name', $bike->name) }}">
             </div>
 
             <div class="mt-3">
-                <label for="status">保管状態</label>
+                <label for="status">{{ $bike_form_label['bike_status'] }}</label>
             </div>
 
             @foreach ($bike_status_cases as $bike_status)
@@ -34,24 +34,24 @@
             @endforeach
 
             <div class="mt-3">
-                <label for="bike_address">受け渡し場所</label>
+                <label for="bike_address">{{ $bike_form_label['bike_address'] }}</label>
                 <input type="text" class="form-control" value="{{ old('bike_address', $bike->bike_address) }}" name="bike_address">
             </div>
 
             <div class="mt-3">
-                <label for="price">料金(¥/30分)</label>
-                <input type="text" class="form-control" value="{{ old('price', $bike->price) }}" name="price" placeholder="価格はコンマなしで記入してください。">
+                <label for="price">{{ $bike_form_label['price'] }}</label>
+                <input type="text" class="form-control" value="{{ old('price', $bike->price) }}" name="price" placeholder="{{ Word::WORD_LIST['not_comma'] }}">
             </div>
 
             <div class="mt-3">
-                <label for="remark">説明・備考</label>
-                <textarea class="form-control" name="remark" cols="50" rows="2" placeholder="150文字以内で入力してください。"maxlength="150">{{ $bike->remark }}</textarea>
+                <label for="remark">{{ $bike_form_label['remark'] }}</label>
+                <textarea class="form-control" name="remark" cols="50" rows="2" placeholder="{{ Word::WORD_LIST['within_150words'] }}" maxlength="150">{{ $bike->remark }}</textarea>
             </div>
 
             <div class="mt-3">
                 <input type="file" name="image_path">
             </div>
-            <input class="d-grid mx-auto mt-2 btn btn-success rounded-pill" type="submit" value="変更">
+            <input class="d-grid mx-auto mt-2 btn btn-success rounded-pill" type="submit" value="{{ $bike_form_label['btn_bike_info_change'] }}">
         </form>
     </div>
 </div>

@@ -70,8 +70,10 @@ class BikesController extends Controller
         $bike = Bike::findOrFail($bike_id);
         // 自転車保管状態ラジオボタンの選択肢を取得
         $bike_status_cases = BikeStatus::cases();
+        // 入力フォーム用ラベルテキストを取得
+        $bike_form_label = Message::BIKE_FORM_LABEL;
 
-        return view('bikes.edit', compact('bike', 'bike_status_cases'));
+        return view('bikes.edit', compact('bike', 'bike_status_cases', 'bike_form_label'));
     }
     
     /**
