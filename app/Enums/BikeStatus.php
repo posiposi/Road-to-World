@@ -17,7 +17,7 @@ enum BikeStatus: string
     /**
      * 自転車保管状況の論理名を表示する
      *
-     * @return array 
+     * @return array 自転車保管状況の論理名配列
      */
     public function label_BikeStatus(): string
     {
