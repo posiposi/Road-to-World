@@ -45,4 +45,18 @@ class Message{
     const FOOTER_CONTENTS_TEXT = "購入の敷居が高いロードバイクが日本の人々に身近な存在になってほしい。"
     .PHP_EOL."そんな想いを込めて本アプリの開発を進めています。"
     .PHP_EOL."アプリ名称の'to World'は'ロードバイクの世界へ'という意味と'世界に通じる選手の第一歩'という意味を込めています。";
+
+    /**
+     * 自転車登録、変更フォームのラベルテキスト
+     */
+    const BIKE_FORM_LABEL = [
+        'brand' => 'ブランド',
+        'bike_name' => 'モデル名',
+        'bike_status' => '保管状態',
+        'bike_address' => '受け渡し場所',
+        'price' => '料金(¥/30分)',
+        'remark' => '説明・備考',
+        'btn_bike_info_register' => '登録',
+        'btn_bike_info_change' => '変更',
+    ];
 }
