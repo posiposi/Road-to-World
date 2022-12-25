@@ -7,11 +7,11 @@
 @section('content')
 <div class="container">
     <div class="row pageheader mt-3 mb-5 bg-light bg-gradient">
-        <h2 class="text-left">マイページ</h2>
+        <h2 class="text-left">{{ Word::PAGE_TITLE['mypage'] }}</h2>
         @if($login_user->image != null)
-        <img class="avatar-img" src="{{ $login_user->image }}" alt="登録アバター画像">
+        <img class="avatar-img" src="{{ $login_user->image }}" alt="{{ Word::MYPAGE_LABEL['alt_register_avatar'] }}">
         @else
-        <img class="avatar-img" src="{{ $avatar_noimage }}" alt="デフォルトアバター画像">
+        <img class="avatar-img" src="{{ $avatar_noimage }}" alt="{{ Word::MYPAGE_LABEL['alt_default_avatar'] }}">
         @endif
     </div>
 
@@ -19,19 +19,19 @@
         <table class="table">
             <tbody>
                 <tr>
-                    <th>氏名</th>
+                    <th>{{ Word::MYPAGE_LABEL['user_name'] }}</th>
                     <td>{{ $login_user->name }}</td>
                 </tr>
                 <tr>
-                    <th>ニックネーム</th>
+                    <th>{{ Word::MYPAGE_LABEL['user_nickname'] }}</th>
                     <td>{{ $login_user->nickname }}</td>
                 </tr>
                 <tr>
-                    <th>メールアドレス</th>
+                    <th>{{ Word::MYPAGE_LABEL['user_mail'] }}</th>
                     <td>{{ $login_user->email }}</td>
                 </tr>
                 <tr>
-                    <th>電話番号</th>
+                    <th>{{ Word::MYPAGE_LABEL['user_tel'] }}</th>
                     <td>{{ $login_user->tel }}</td>
                 </tr>
             </tbody>
@@ -42,143 +42,28 @@
             <li class="list-group-item col-md-6 my-auto">
                 <a href="{{ route('users.edit') }}" class="user-info-link">
                     <i class="fas fa-user-edit fa-2x"></i>
-                    <p class="user-edit fw-bold">会員情報</p>
+                    <p class="user-edit fw-bold">{{ Word::MYPAGE_LABEL['user_info'] }}</p>
                 </a>
             </li>
             <li class="list-group-item col-md-6">
                 <a href="#" class="reservation-calendar-link">
                     <i class="far fa-calendar-alt fa-2x"></i>
-                    <p class="reservation-calendar fw-bold">予約表</p>
+                    <p class="reservation-calendar fw-bold">{{ Word::MYPAGE_LABEL['reservation_calendar'] }}</p>
                 </a>
             </li>
             <li class="list-group-item col-md-6">
                 <a href="#" class="user-bike-index-link">
                     <i class="fas fa-bicycle fa-2x"></i>
-                    <p class="fw-bold">マイバイク</p>
+                    <p class="fw-bold">{{ Word::MYPAGE_LABEL['mybike'] }}</p>
                 </a>
             </li>
             <li class="list-group-item col-md-6">
-                <a href="#" class="user-bike-index-link">
+                <a href="{{ route('logout.get') }}" class="user-bike-index-link">
                     <i class="fas fa-door-open fa-2x"></i>
-                    <p class="fw-bold">退会</p>
+                    <p class="fw-bold">{{ Word::MYPAGE_LABEL['logout'] }}</p>
                 </a>
             </li>
         </ul>
     </div>
 </div>
-
-    {{-- 下記従来コード --}}
-    {{-- <div class="row my-4 ms-4">
-        <h1 class="text-dark font-weight-bold">My Page</h1>
-    </div>
-    <div class='container'>
-        <div class="row g-0 ms-3"> --}}
-            {{-- ユーザアバター --}}
-            {{-- <div class="col-md-6">
-                <div class="card-body shadow-sm contents-avatar">
-                    @if($login_user->image != null)
-                    <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="{{ $login_user->image }}" alt="ユーザアバター画像">
-                    @else
-                    <img class="card-img img-fluid avatar-img" style="max-height:1080px" src="https://bikeshare-bucket001.s3.ap-northeast-1.amazonaws.com/avatars/nc96424.jpg" alt="デフォルトアバター画像">
-                    @endif
-                    <div class="my-3">
-                        {{ Form::open(['route' => 'users.store', 'files' => true]) }}
-                            {{ Form::file('image', ['class' => 'form-contorol-file my-2']) }}
-                            {{ Form::submit('アバター登録', ['class' => 'btn btn-success btn-block']) }}
-                        {{ Form::close() }}
-                    </div>
-                </div>
-            </div> --}}
-    
-            {{-- ユーザ情報表示カード --}}
-            {{-- <div class="col-md-6">
-                <div class="card-body">
-                    <ul class="list-group list-unstyled">
-                        <li class="list-group-item"> 氏名：{{ $login_user->name }} <li>
-                        <li class="list-group-item"> ニックネーム：{{ $login_user->nickname }}</li>
-                        <li class="list-group-item"> メールアドレス：{{ $login_user->email }} </li>
-                        <li class="list-group-item"> 電話番号：{{ $login_user->tel }} </li>
-                    </ul>
-                </div>
-                <div class='card-body mt-3'>
-                    {{ link_to_route('bikes.get', 'バイク登録', [], ['class' => 'btn btn-success']) }}
-                    {{ link_to_route('users.edit', 'ユーザ登録内容変更', [], ['class' => 'btn btn-success'],) }}
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- ユーザの貸出中自転車の一覧表示 --}}
-    {{-- <div class="container">
-        <div class="row my-4">
-            <h2 class="text-dark">あなたが貸し出し中の自転車</h2>
-        </div>
-        <div class="row g-0 ms-3">
-            @foreach ($bikes as $bike)
-                @if($bike->user_id == $login_user->id)
-                    <div class="col-md-6 mt-3 mb-3">
-                        <img class="card-img img-fluid user-bike-img" src="{{ $bike->image_path }}" alt="自転車画像">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <ul class="list-group list-unstyled">
-                                <li class="list-group-item"> ブランド：{{ $bike->brand }} <li>
-                                <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
-                                <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
-                                <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
-                                <li class="list-group-item user-bike-card-remark"> 説明・備考</br>
-                                    <p class="mt-2">{{ $bike->remark }}</p>
-                                </li>
-                            </ul>    
-                            <ul class="list-group list-unstyled">
-                                <li class="list-group-item">
-                                    {{ link_to_route('bikes.edit', '登録内容変更', ['bike_id' => $bike->id], ['class' => 'btn btn-success'],) }}
-                                    <script>
-                                        function confirm_delete() {
-                                            var select = confirm("削除してもよろしいですか？");
-                                            return select;
-                                        }
-                                    </script>
-                                    <form action="{{ route('bikes.delete', $bike->id)}}" method="post" onsubmit="return confirm_delete()">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger mt-2">削除</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div> 
-                    </div>
-                @endif
-            @endforeach
-        </div>
-    </div> --}}
-
-    {{-- ユーザの予約一覧表 --}}
-    {{-- <div class="container">
-        <div class="row my-2">
-            <h2 class="text-dark">予約表</h2>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 mt-2 mb-4">
-                <table>
-                    <tr>
-                        <th>モデル名</th>
-                        <th>貸出者</th>
-                        <th>受け渡し場所</th>
-                        <th>開始日時</th>
-                        <th>終了日時</th>
-                    </tr>
-                    @foreach ($reservations as $reservation)
-                    <tr>
-                        <td> {{ $reservation->bike->name }} </td>
-                        <td> {{ $reservation->bike->user->nickname }} </td>
-                        <td> {{ $reservation->bike->bike_address }} </td>
-                        <td> {{ $reservation->start_at }} </td>
-                        <td> {{ $reservation->end_at }} </td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
-        </div>
-    </div> --}}
 @endsection
