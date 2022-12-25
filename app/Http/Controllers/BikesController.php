@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bike;
 use App\Enums\BikeStatus;
+use App\Consts\Message;
 use App\Http\Requests\BikeRegisterRequest;
 
 class BikesController extends Controller
@@ -23,9 +24,11 @@ class BikesController extends Controller
     {
         // 自転車保管状態ラジオボタンの選択肢を取得
         $bike_status_cases = BikeStatus::cases();
+        // 入力フォーム用ラベルテキストを取得
+        $bike_form_label = Message::BIKE_FORM_LABEL;
 
         // 自転車登録画面へ変遷する
-        return view('auth.bikeregister', compact('bike_status_cases'));
+        return view('auth.bikeregister', compact('bike_status_cases', 'bike_form_label'));
     }
     
     /**
