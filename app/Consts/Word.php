@@ -19,6 +19,7 @@ class Word
     // 各ページのタイトル
     const PAGE_TITLE = [
         'bike_register' => 'マイバイク登録',
-        'bike_info_change' => 'マイバイク登録情報変更'
+        'bike_info_change' => 'マイバイク登録情報変更',
+        'bike_index' => '貸し出し中の自転車',
     ];
 }
