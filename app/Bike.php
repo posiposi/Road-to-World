@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Consts\Url;
+use App\Enums\BikeStatus;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -195,6 +196,18 @@ class Bike extends Model
         $bikes = $query->get();
         // 検索結果を配列にして返却する
         return [$bikes, $search_name, $search_brand, $search_address, $search_price];
+    }
+
+    /**
+     * 自転車の保管状態を論理名で設定する
+     *
+     * @param string $bike_status 自転車の保管状態
+     * @return string 自転車の保管状態論理名
+     */
+    public function getBikeStatusLogicalName(string $bike_status)
+    {
+        // 自転車の保管状態の論理名を返却する
+        return BikeStatus::from($bike_status)->label_BikeStatus();
     }
 
     /**
