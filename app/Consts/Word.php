@@ -21,6 +21,7 @@ class Word
         'bike_register' => 'マイバイク登録',
         'bike_info_change' => 'マイバイク登録情報変更',
         'bike_index' => '貸し出し中の自転車',
+        'mypage' => 'マイページ',
     ];
 
     /**
@@ -57,5 +58,21 @@ class Word
         'to_comment_room_index' => 'コメントルーム一覧へ',
         'to_comment_room' => 'コメントルームへ',
         'reservation_calendar' => '予約状況カレンダー',
+    ];
+
+    /**
+     * マイページのラベルテキスト
+     */
+    const MYPAGE_LABEL = [
+        'user_name' => '氏名',
+        'user_nickname' => 'ニックネーム',
+        'user_mail' => 'メールアドレス',
+        'user_tel' => '電話番号',
+        'user_info' => '会員情報',
+        'reservation_calendar' => '予約表',
+        'mybike' => 'マイバイク',
+        'logout' => 'ログアウト',
+        'alt_register_avatar' => '登録アバター画像',
+        'alt_default_avatar' => 'デフォルトアバター画像',
     ];
 }

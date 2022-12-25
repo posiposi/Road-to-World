@@ -7,11 +7,11 @@
 @section('content')
 <div class="container">
     <div class="row pageheader mt-3 mb-5 bg-light bg-gradient">
-        <h2 class="text-left">マイページ</h2>
+        <h2 class="text-left">{{ Word::PAGE_TITLE['mypage'] }}</h2>
         @if($login_user->image != null)
-        <img class="avatar-img" src="{{ $login_user->image }}" alt="登録アバター画像">
+        <img class="avatar-img" src="{{ $login_user->image }}" alt="{{ Word::MYPAGE_LABEL['alt_register_avatar'] }}">
         @else
-        <img class="avatar-img" src="{{ $avatar_noimage }}" alt="デフォルトアバター画像">
+        <img class="avatar-img" src="{{ $avatar_noimage }}" alt="{{ Word::MYPAGE_LABEL['alt_default_avatar'] }}">
         @endif
     </div>
 
@@ -19,19 +19,19 @@
         <table class="table">
             <tbody>
                 <tr>
-                    <th>氏名</th>
+                    <th>{{ Word::MYPAGE_LABEL['user_name'] }}</th>
                     <td>{{ $login_user->name }}</td>
                 </tr>
                 <tr>
-                    <th>ニックネーム</th>
+                    <th>{{ Word::MYPAGE_LABEL['user_nickname'] }}</th>
                     <td>{{ $login_user->nickname }}</td>
                 </tr>
                 <tr>
-                    <th>メールアドレス</th>
+                    <th>{{ Word::MYPAGE_LABEL['user_mail'] }}</th>
                     <td>{{ $login_user->email }}</td>
                 </tr>
                 <tr>
-                    <th>電話番号</th>
+                    <th>{{ Word::MYPAGE_LABEL['user_tel'] }}</th>
                     <td>{{ $login_user->tel }}</td>
                 </tr>
             </tbody>
@@ -42,25 +42,25 @@
             <li class="list-group-item col-md-6 my-auto">
                 <a href="{{ route('users.edit') }}" class="user-info-link">
                     <i class="fas fa-user-edit fa-2x"></i>
-                    <p class="user-edit fw-bold">会員情報</p>
+                    <p class="user-edit fw-bold">{{ Word::MYPAGE_LABEL['user_info'] }}</p>
                 </a>
             </li>
             <li class="list-group-item col-md-6">
                 <a href="#" class="reservation-calendar-link">
                     <i class="far fa-calendar-alt fa-2x"></i>
-                    <p class="reservation-calendar fw-bold">予約表</p>
+                    <p class="reservation-calendar fw-bold">{{ Word::MYPAGE_LABEL['reservation_calendar'] }}</p>
                 </a>
             </li>
             <li class="list-group-item col-md-6">
                 <a href="#" class="user-bike-index-link">
                     <i class="fas fa-bicycle fa-2x"></i>
-                    <p class="fw-bold">マイバイク</p>
+                    <p class="fw-bold">{{ Word::MYPAGE_LABEL['mybike'] }}</p>
                 </a>
             </li>
             <li class="list-group-item col-md-6">
                 <a href="#" class="user-bike-index-link">
                     <i class="fas fa-door-open fa-2x"></i>
-                    <p class="fw-bold">退会</p>
+                    <p class="fw-bold">{{ Word::MYPAGE_LABEL['logout'] }}</p>
                 </a>
             </li>
         </ul>
