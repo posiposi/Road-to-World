@@ -8,7 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" href="{{ asset('asssets/css/common.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
         {{-- 個別CSS読み込み --}}
         @stack('css')
