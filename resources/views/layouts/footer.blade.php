@@ -49,11 +49,17 @@
                     <li class="mt-2">
                         <a href="#!" class="text-white">マイバイク</a>
                     </li>
+                    @auth
+                    <li class="mt-2">
+                        <a href="{{ route('logout.get') }}" class="text-white">ログアウト</a>
+                    </li>
+                    @endauth
                 </ul>
             </div>
         </div>
         <div class="sns-link">
-            <a class="btn text-white btn-floating m-1 github-link-icon" href="https://github.com/posiposi/Road-to-World">
+            <a class="btn text-white btn-floating m-1 github-link-icon"
+                href="https://github.com/posiposi/Road-to-World">
                 <i class="fab fa-github"></i>
             </a>
         </div>
