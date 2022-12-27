@@ -4,7 +4,7 @@
  * @returns {boolean} true:OKボタン押下、false:イベントキャンセル
  */
 const showConfirmDialog = (e) => {
-    if(window.confirm('この内容で予約してもよろしいですか？')) {
+    if(window.confirm('予約してもよろしいですか？')) {
         return true;
     } else {
         e.stopPropagation();
