@@ -1,8 +1,9 @@
 <head>
     <style>
-        body { 
-            padding-top: 60px; 
+        body {
+            padding-top: 60px;
         }
+
         .user-circle-icon {
             color: black;
         }
@@ -15,7 +16,9 @@
             {{-- ブランド --}}
             <a class="navbar-brand" href="/">Home</a>
             {{-- 切り替えボタン --}}
-            <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             {{-- ナビゲーション --}}
@@ -34,26 +37,17 @@
                 </ul>
                 {{-- 右側メニュー --}}
                 <ul class="navbar-nav ms-auto">
+                    {{-- ユーザーログイン時 --}}
                     @auth
-                    <li class="nav-item dropdown">
-                        {{-- ログインユーザーの場合はドロップダウンリストを表示する --}}
-                        <a class="dropdown-toggle link-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDarkDropdownMenuLink">
-                            {{-- ユーザ詳細ページへのリンク --}}
-                            <li>{{ link_to_route('users.index', 'My Page', [], ['class' => 'nav-link text-dark dropdown-item']) }}</li>
-                            <li class="dropdown-divider"></li>
-                            {{-- ログアウトへのリンク --}}
-                            <li><a href="{{ route('logout.get') }}" class="nav-link text-dark dropdown-item">ログアウト</a></li>
-                        </ul>
-                    </li>
+                    <a href="{{ route('users.index') }}">
+                        <i class="fas fa-user-circle fa-2x user-circle-icon"></i>
+                    </a>
                     @endauth
-                    {{-- ゲストユーザー用ログインページリンク --}}
+                    {{-- ゲストユーザーログイン時 --}}
                     @guest
-                        <a href="{{ route('login') }}">
-                            <i class="fas fa-user-circle fa-2x user-circle-icon"></i>
-                        </a>
+                    <a href="{{ route('login') }}">
+                        <i class="fas fa-user-circle fa-2x user-circle-icon"></i>
+                    </a>
                     @endguest
                 </ul>
             </div>
