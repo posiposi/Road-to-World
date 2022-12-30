@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/user_edit.css') }}">
+@endpush
+
+
 @section('content')
 <div class="text-center my-4">
     <h1>会員情報変更</h1>
@@ -8,7 +13,11 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
-            {{ Form::open(['route' => ['users.update', 'userId'=>$login_user->id], 'method' => 'put', ]) }}
+            {{ Form::open(['route' => ['users.update', 'userId'=>$login_user->id], 'method' => 'put']) }}
+            <div class="mb-3">
+                <img class="avatar-img" src="{{ $login_user->image }}" alt="アバター画像">
+            </div>
+
             <div class="mb-3">
                 {{ Form::label('name', '氏名') }}
                 {{ Form::text('name', old('name', $login_user->name), ['class' => 'form-control']) }}
