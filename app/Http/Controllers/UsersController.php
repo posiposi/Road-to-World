@@ -46,7 +46,7 @@ class UsersController extends Controller
     }
     
     /**
-     * ユーザ情報変更画面の表示
+     * 会員情報変更画面の表示
      * 
      * @var object $login_user ログインユーザー
      * @return void
