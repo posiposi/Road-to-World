@@ -13,9 +13,10 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
-            {{ Form::open(['route' => ['users.update', 'userId'=>$login_user->id], 'method' => 'put']) }}
+            {{ Form::open(['route' => ['users.update', 'userId'=>$login_user->id, 'files' => true], 'method' => 'put']) }}
             <div class="mb-3">
-                <img class="avatar-img" src="{{ $login_user->image }}" alt="アバター画像">
+                <img class="avatar-img img-fluid rounded-circle" src="{{ $login_user->image }}" alt="アバター画像">
+                <input type="file" class="avatar-btn">
             </div>
 
             <div class="mb-3">
@@ -44,9 +45,11 @@
                 '新しく設定したいパスワードを8文字以上で入力して下さい。']) }}
             </div>
 
-            {{ Form::submit('変更', ['class' => 'btn btn-success btn-block']) }}
+            {{ Form::submit('変更', ['class' => 'btn btn-success btn-change']) }}
             {{ Form::close() }}
         </div>
     </div>
 </div>
+{{-- アバター画像プレビュー --}}
+<script src="{{ url(mix('js/file-preview.js')) }}"></script>
 @endsection
