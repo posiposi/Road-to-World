@@ -86,45 +86,46 @@ class User extends Authenticatable
     /**
      * ユーザーのアバターをDBとS3バケットへ保存する
      *
-     * @param object $request 登録するアバター画像
+     * @param object $requestImage 登録するアバター画像リクエスト
+     * @param object $login_user ログインユーザー
      * @return void
      */
-    public function registerUserAvatar($request){
-        // ログインユーザーを取得する
-        $user = Auth::user();
+    public function registerUserAvatar($requestImage, $login_user){
         // 削除するs3の画像特定のためにDBに保存されているs3の画像パスを取得する
-        $image_keypath = str_replace(Url::URL_LIST['s3'], '', $user->image);
+        $image_keypath = str_replace(Url::URL_LIST['s3'], '', $login_user->image);
         // S3上の既存アバター画像を削除する
         Storage::disk('s3')->delete($image_keypath);
-        // S3アップロード開始
-        $image = $request->file('image');
         // バケットの`avatars`フォルダへアップロード
-        $path = Storage::disk('s3')->putFile('avatars', $image, 'public');
+        $path = Storage::disk('s3')->putFile('avatars', $requestImage, 'public');
         // アップロードした画像のフルパスを取得
-        $user->image = Storage::disk('s3')->url($path);
+        $login_user->image = Storage::disk('s3')->url($path);
         // DBにアバターを保存する
-        $user->save();
+        $login_user->save();
     }
 
     /**
      * ログインユーザーの情報を変更する
      *
      * @param object $request ログインユーザーの情報変更リクエスト
-     * @param int $user_id ログインユーザーのid
      * @return void
      */
-    public function updateUserInfo($request, $user_id){
-        // ログインユーザーを取得する
-        $login_user = User::findOrFail($user_id);
+    public function updateUserInfo($request){
+        $login_user = Auth::user();
+        $request_image = $request->image;
+
         // 情報変更リクエストを変数に代入
         $form = $request->all();
-        
         // フォームトークン削除
         unset($form['_token']);
         // ログインユーザーの情報を更新する
         $login_user->fill($form)->save();
         //パスワードをハッシュ化して更新する
         $login_user->fill(['password' => Hash::make($request->password)])->save();
+        
+        // 画像の変更をしなかった場合のエラー回避のために条件確認を行う
+        if (!is_null($request_image)) {
+            self::registerUserAvatar($request_image, $login_user);
+        }
     }
 
     /**

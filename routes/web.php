@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
         // ユーザ情報変更画面表示
         Route::get('/edit', [UsersController::class, 'edit'])->name('users.edit');
         // ユーザ情報変更
-        Route::put('/{userId}/update', [UsersController::class, 'update'])->name('users.update');
+        Route::put('/update', [UsersController::class, 'update'])->name('users.update');
     });
     
     // チャット機能

@@ -13,7 +13,7 @@ const previewImage = (file) => {
 }
 
 // ファイルインプットを取得
-const fileInput = document.querySelector('.avatar-btn');
+const fileInput = document.querySelector('.avatarHiddenBtn');
 
 const handleFileSelect = () => {
     const files = fileInput.files;
