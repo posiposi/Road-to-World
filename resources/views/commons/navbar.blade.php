@@ -1,13 +1,5 @@
 <head>
-    <style>
-        body {
-            padding-top: 60px;
-        }
-
-        .user-circle-icon {
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}">
 </head>
 
 <header>
