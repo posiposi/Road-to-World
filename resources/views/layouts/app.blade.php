@@ -14,8 +14,8 @@
     @stack('css')
 </head>
 
-<body>
-    <div class="wrapper">
+<body style="height: 100%; margin: 0">
+    <div class="wrapper" style="height: 100%; display: flex; flex-direction: column">
         {{-- ナビゲーションバー --}}
         @include('commons.navbar')
 
@@ -27,12 +27,12 @@
         @endif
 
         {{-- 個別ページメインセクション --}}
-        <div id="wrapper">
+        <main style="flex: auto">
             {{-- エラーメッセージ --}}
             @include('commons.error_messages')
 
             @yield('content')
-        </div>
+        </main>
         {{-- フッター --}}
         @include('layouts.footer')
     </div>
