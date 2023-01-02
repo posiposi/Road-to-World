@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/mypage.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/mypage.css') }}">
 @endpush
 
 @section('content')
@@ -9,9 +9,9 @@
     <div class="row pageheader mt-3 mb-5 bg-light bg-gradient">
         <h2 class="text-left">{{ Word::PAGE_TITLE['mypage'] }}</h2>
         @if($login_user->image != null)
-        <img class="avatar-img" src="{{ $login_user->image }}" alt="{{ Word::MYPAGE_LABEL['alt_register_avatar'] }}">
+        <img class="avatar-img img-fluid rounded-circle" src="{{ $login_user->image }}" alt="{{ Word::MYPAGE_LABEL['alt_register_avatar'] }}">
         @else
-        <img class="avatar-img" src="{{ $avatar_noimage }}" alt="{{ Word::MYPAGE_LABEL['alt_default_avatar'] }}">
+        <img class="avatar-img img-fluid rounded-circle" src="{{ $avatar_noimage }}" alt="{{ Word::MYPAGE_LABEL['alt_default_avatar'] }}">
         @endif
     </div>
 
@@ -37,6 +37,7 @@
             </tbody>
         </table>
     </div>
+    
     <div class="row">
         <ul class="row list-group list-group-horizontal user-contents-list">
             <li class="list-group-item col-md-6 my-auto">
