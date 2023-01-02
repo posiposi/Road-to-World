@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/confirm-dialog.js', 'public/js')
+    .js('resources/js/file-preview.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();

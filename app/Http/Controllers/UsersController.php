@@ -46,7 +46,7 @@ class UsersController extends Controller
     }
     
     /**
-     * ユーザ情報変更画面の表示
+     * 会員情報変更画面の表示
      * 
      * @var object $login_user ログインユーザー
      * @return void
@@ -65,10 +65,10 @@ class UsersController extends Controller
      * @param integer $user_id ログインユーザーid
      * @return void
      */
-    public function update(UserRegisterRequest $request, int $user_id)
+    public function update(UserRegisterRequest $request)
     {
         // ログインユーザーの情報を更新する
-        $this->user->updateUserInfo($request, $user_id);
+        $this->user->updateUserInfo($request);
         // ユーザーマイページへ画面変遷する
         return redirect('/users');
     }
