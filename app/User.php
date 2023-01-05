@@ -134,8 +134,11 @@ class User extends Authenticatable
      * @return array マイページ表示用情報
      */
     public function getUserPageInfo(){
+        /** @var object $login_user ログインユーザー */
         $login_user = Auth::user();
+        /** @var object $bikes 全自転車の情報 */
         $bikes = Bike::all();
+        /** @var array $reservations ログインユーザーが借り手の予約 */
         $reservations = Reservation::where('user_id', $login_user->id)->get();
         
         return [$login_user, $bikes, $reservations];
