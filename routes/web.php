@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
         // ユーザ情報変更
         Route::put('/update', [UsersController::class, 'update'])->name('users.update');
         // マイバイク画面表示
-        Route::get('/{userId}/{bikes}/index', [UsersController::class, 'redirectMybikePage'])->name('mybike.index');
+        Route::get('/{userId}/{userBikes}/index', [UsersController::class, 'redirectMybikePage'])->name('mybike.index');
     });
     
     // チャット機能

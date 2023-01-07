@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="list-group-item col-md-6">
-                <a href="#" class="user-bike-index-link">
+                <a href="{{ route('mybike.index') }}" class="user-bike-index-link">
                     <i class="fas fa-bicycle fa-2x"></i>
                     <p class="fw-bold">{{ Word::MYPAGE_LABEL['mybike'] }}</p>
                 </a>

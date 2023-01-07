@@ -59,6 +59,18 @@ class UsersController extends Controller
     }
     
     /**
+     * マイバイクページに画面遷移する
+     *
+     * @param integer $userId ログインユーザーID
+     * @param object $userBikes ログインユーザーが所有する自転車
+     * @return void
+     */
+    public function redirectMybikePage(int $userId, object $userBikes)
+    {
+        return view('mybike.index', compact('userId', 'userBikes'));
+    }
+
+    /**
      * ユーザーの情報を変更する
      *
      * @param UserRegisterRequest $request 情報変更リクエスト
