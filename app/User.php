@@ -90,7 +90,8 @@ class User extends Authenticatable
      * @param object $login_user ログインユーザー
      * @return void
      */
-    public function registerUserAvatar($requestImage, $login_user){
+    public function registerUserAvatar($requestImage, $login_user)
+    {
         // 削除するs3の画像特定のためにDBに保存されているs3の画像パスを取得する
         $image_keypath = str_replace(Url::URL_LIST['s3'], '', $login_user->image);
         // S3上の既存アバター画像を削除する
@@ -109,7 +110,8 @@ class User extends Authenticatable
      * @param object $request ログインユーザーの情報変更リクエスト
      * @return void
      */
-    public function updateUserInfo($request){
+    public function updateUserInfo($request)
+    {
         $login_user = Auth::user();
         $request_image = $request->image;
 
@@ -133,7 +135,8 @@ class User extends Authenticatable
      *
      * @return array マイページ表示用情報
      */
-    public function getUserPageInfo(){
+    public function getUserPageInfo()
+    {
         /** @var object $login_user ログインユーザー */
         $login_user = Auth::user();
         /** @var object $bikes 全自転車の情報 */
@@ -142,5 +145,15 @@ class User extends Authenticatable
         $reservations = Reservation::where('user_id', $login_user->id)->get();
         
         return [$login_user, $bikes, $reservations];
+    }
+
+    /**
+     * ログインユーザーのIDを取得する
+     *
+     * @return int ログインユーザーID
+     */
+    public static function getLoginUserId(): int
+    {
+        return Auth::id();
     }
 }

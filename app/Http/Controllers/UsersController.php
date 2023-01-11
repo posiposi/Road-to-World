@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Http\Requests\UserRegisterRequest;
 use App\Services\Image\S3Service;
+use App\Services\UserService;
 
 class UsersController extends Controller
 {
@@ -65,9 +66,11 @@ class UsersController extends Controller
      * @param object $userBikes ログインユーザーが所有する自転車
      * @return void
      */
-    public function redirectMybikePage(int $userId, object $userBikes)
+    public function redirectMybikePage()
     {
-        return view('mybike.index', compact('userId', 'userBikes'));
+        $user_id = UserService::getLoginUserId();
+        $user_bikes = UserService::getUserBikes($user_id);
+        return view('bikes.mybike_index', compact('user_id', 'user_bikes'));
     }
 
     /**
