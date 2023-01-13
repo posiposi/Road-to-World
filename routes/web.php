@@ -91,6 +91,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/edit', [UsersController::class, 'edit'])->name('users.edit');
         // ユーザ情報変更
         Route::put('/update', [UsersController::class, 'update'])->name('users.update');
+        // マイバイク画面表示
+        Route::get('mybikes/index', [UsersController::class, 'redirectMybikePage'])->name('mybike.index');
     });
     
     // チャット機能

@@ -22,6 +22,7 @@ class Word
         'bike_info_change' => 'マイバイク登録情報変更',
         'bike_index' => '貸し出し中の自転車',
         'mypage' => 'マイページ',
+        'mybike' => 'マイバイク',
     ];
 
     /**
