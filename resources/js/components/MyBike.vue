@@ -11,7 +11,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ userBike.brand }}</h5>
           <p class="card-text">{{ userBike.remark }}</p>
-          <!-- <a href="#!" class="btn btn-primary">内容変更</a> -->
+          <button @click="redirectBikesEdit(userBike.id)" class="btn btn-primary">情報変更</button>
           <!-- <a href="#" class="btn btn-danger ms-2">削除</a> -->
         </div>
       </div>
@@ -28,9 +28,15 @@ export default {
     // ユーザーの全所有自転車
     const userBikes = ref(props.user_bikes);
 
+    // 自転車情報変更画面へのリダイレクトAPI呼び出し
+    const redirectBikesEdit = (e) => {
+      location.href = '/' + 'bikes' + '/' + e + '/' + 'edit';
+    }
+
     return {
       userBikes,
-    }
+      redirectBikesEdit,
+    };
   }
 }
 </script>
