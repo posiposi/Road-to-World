@@ -101,7 +101,5 @@ class BikesController extends Controller
     {
         // 該当するidの自転車を削除する
         $this->bike->deleteRegisteredBike($bike_id);
-        // 遷移元へ画面変遷する
-        return back();
     }
 }
