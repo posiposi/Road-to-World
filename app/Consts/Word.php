@@ -4,7 +4,9 @@ namespace App\Consts;
 
 class Word
 {
-    // ワードリスト
+    /**
+     * ワードリスト
+     */
     const WORD_LIST = [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
@@ -16,7 +18,9 @@ class Word
         'within_150words' => '150文字以内で入力してください。',
     ];
 
-    // 各ページのタイトル
+    /**
+     * 各ページのタイトル
+     */
     const PAGE_TITLE = [
         'bike_register' => 'マイバイク登録',
         'bike_info_change' => 'マイバイク登録情報変更',
@@ -75,5 +79,13 @@ class Word
         'logout' => 'ログアウト',
         'alt_register_avatar' => '登録アバター画像',
         'alt_default_avatar' => 'デフォルトアバター画像',
+    ];
+
+    /**
+     * 決済ボタンページのラベルテキスト
+     */
+    const PAYMENT_LABEL = [
+        'payment_completed' => '決済が完了しました！',
+        'back_to_bikes_index' => '自転車一覧画面に戻る',
     ];
 }

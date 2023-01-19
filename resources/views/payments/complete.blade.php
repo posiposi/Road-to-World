@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <p class="text-center mt-5">決済が完了しました！</p>
+    <p class="text-center mt-5">{{ Word::PAYMENT_LABEL['payment_completed'] }}</p>
     <div class="container">
         <div class="row">
-            <div class="mx-auto">
-                {{ link_to_route('bikes.index', '貸出中バイク一覧へ戻る', [], ['class' => 'btn btn-primary']) }}
+            <div class="col-sm-3 mx-auto">
+                <a href="{{ route('bikes.index') }}" class="btn btn-primary d-block">{{ Word::PAYMENT_LABEL['back_to_bikes_index'] }}</a>
             </div>
         </div>
     </div>
