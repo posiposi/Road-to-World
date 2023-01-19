@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div class="wrapper text-font">
         {{-- ナビゲーションバー --}}
         @include('commons.navbar')
 

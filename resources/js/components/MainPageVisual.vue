@@ -117,11 +117,7 @@ import 'vue3-carousel/dist/carousel.css';
 
 /* 文字フォント */
 .introduction_texts{
-  font-family: "ヒラギノ明朝 Pro W3",
-    "Hiragino Mincho Pro",
-    "MS P明朝",
-    "MS PMincho",
-    serif;
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
 }
 
 </style>
