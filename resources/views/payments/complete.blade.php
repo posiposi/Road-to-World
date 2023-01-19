@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto">
-                {{ link_to_route('bikes.index', '貸出中バイク一覧へ戻る', [], ['class' => 'btn btn-primary']) }}
+                <a href="{{ route('bikes.index') }}" class="btn btn-primary d-block"></a>
             </div>
         </div>
     </div>
