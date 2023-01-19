@@ -35,3 +35,8 @@
 a:hover {
     font-weight: bold;
 }
+
+/* 文字フォント */
+.text_font{
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}

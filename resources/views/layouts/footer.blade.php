@@ -1,7 +1,7 @@
 {{-- 定数を使用するためにサービスクラスを注入 --}}
 @inject('messages', 'App\Services\MessageService')
 
-<footer class="bg-secondary text-white text-center text-md-start mt-5">
+<footer class="bg-secondary text-white text-center text-md-start mt-5 text-font">
     <div class="container p-4 pb-2">
         @guest
         <div class="row mb-3">
