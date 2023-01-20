@@ -16,6 +16,7 @@ class Word
         'search' => '貸出中の自転車を検索する',
         'not_comma' => '価格はコンマなしで入力してください。',
         'within_150words' => '150文字以内で入力してください。',
+        'required_content' => 'は必須項目です。',
     ];
 
     /**
@@ -41,6 +42,7 @@ class Word
         'remark' => '説明・備考',
         'btn_bike_info_register' => '登録',
         'btn_bike_info_change' => '変更',
+        'select_bike_image' => 'アップロードする画像を選択してください。',
     ];
 
     /**
