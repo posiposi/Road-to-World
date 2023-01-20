@@ -44,7 +44,7 @@ class RegisterController extends Controller
     /**
      * バリデーションエラーメッセージ
      */
-     
+
     protected $messages = [
         'name.required' => '名前を入力してください。',
         'name.max' => '名前は255文字以内で入力してください。',
@@ -61,11 +61,11 @@ class RegisterController extends Controller
         'tel.numeric' => '電話番号は半角数字、ハイフン無しで入力してください。',
         'tel.digits_between' => '電話番号は10文字、または11文字で入力してください。',
     ];
-    
+
     /**
      * バリデーションルール
      */
-     
+
     protected $rules = [
         'name' => ['required', 'string', 'max:255'],
         'nickname' => ['required', 'string', 'max:255'],
@@ -73,14 +73,14 @@ class RegisterController extends Controller
         'password' => ['required', 'string', 'min:8', 'confirmed'],
         'tel' => ['required', 'numeric', 'digits_between:10,11'],
     ];
-    
+
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-     //バリデーション
+    //バリデーション
     protected function validator(array $data)
     {
         return Validator::make($data, $this->rules, $this->messages);
