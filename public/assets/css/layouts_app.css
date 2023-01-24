@@ -11,6 +11,11 @@ body {
     grid-row-end: 3;
 }
 
+/* 必須アイコン */
+.fa-exclamation-circle {
+    color: cornflowerblue;
+}
+
 /* 文字フォント */
 .text_font{
     font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
