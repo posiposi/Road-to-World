@@ -47,7 +47,7 @@
                         <a href="#!" class="text-white">予約表</a>
                     </li>
                     <li class="mt-2">
-                        <a href="#!" class="text-white">マイバイク</a>
+                        <a href="{{ route('mybike.index') }}" class="text-white">マイバイク</a>
                     </li>
                     @auth
                     <li class="mt-2">
