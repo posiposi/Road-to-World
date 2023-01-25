@@ -59,7 +59,7 @@
         </div>
         <div class="sns-link">
             <a class="btn text-white btn-floating m-1 github-link-icon"
-                href="https://github.com/posiposi/Road-to-World">
+                href={{ Url::LINK_URL['github'] }}>
                 <i class="fab fa-github"></i>
             </a>
         </div>
