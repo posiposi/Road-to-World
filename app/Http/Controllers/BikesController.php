@@ -87,8 +87,8 @@ class BikesController extends Controller
     {
         // idで該当自転車を検索し、登録情報を変更する
         $this->bike->updateRegisteredBike($request, $id);
-        // ユーザー情報画面へ画面変遷する
-        return redirect('/users');
+        // マイバイク画面へ戻る
+        return redirect()->route('mybike.index');
     }
     
     /**
