@@ -32,7 +32,7 @@ class BikesController extends Controller
     }
     
     /**
-     * 貸し出しする自転車の登録
+     * 自転車を登録する
      *
      * @param BikeRegisterRequest $request 登録する自転車の情報リクエスト
      * @return void
@@ -42,7 +42,7 @@ class BikesController extends Controller
         // 自転車を登録する
         $this->bike->registerBike($request);
         // ログインユーザーのマイページへ画面変遷
-        return redirect('/users');
+        return redirect()->route('mybike.index');
     }
     
     /**
@@ -87,8 +87,8 @@ class BikesController extends Controller
     {
         // idで該当自転車を検索し、登録情報を変更する
         $this->bike->updateRegisteredBike($request, $id);
-        // ユーザー情報画面へ画面変遷する
-        return redirect('/users');
+        // マイバイク画面へ戻る
+        return redirect()->route('mybike.index');
     }
     
     /**
