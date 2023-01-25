@@ -21,13 +21,13 @@
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
                     <label for="brand">{{ $bike_form_label['brand'] }}</label>
-                    <input class="form-control" type="text" name="brand" value="{{ old('brand') }}">
+                    <input class="form-control" type="text" name="brand" value="{{ old('brand') }}" enterkeyhint=”next”>
                 </div>
 
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
                     <label for="name">{{ $bike_form_label['bike_name'] }}</label>
-                    <input class="form-control" type="text" name="name" value="{{ old('name') }}">
+                    <input class="form-control" type="text" name="name" value="{{ old('name') }}" enterkeyhint=”next”>
                 </div>
 
                 <div class="mt-3">
@@ -47,20 +47,20 @@
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
                     <label for="bike_address">{{ $bike_form_label['bike_address'] }}</label>
-                    <input class="form-control" type="text" name="bike_address" value="{{ old('bike_address') }}">
+                    <input class="form-control" type="text" name="bike_address" value="{{ old('bike_address') }}" enterkeyhint=”next”>
                 </div>
 
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
                     <label for="price">{{ $bike_form_label['price'] }}</label>
                     <input class="form-control" type="text" name="price" value="{{ old('price') }}"
-                        placeholder="{{ Word::WORD_LIST['not_comma'] }}">
+                        placeholder="{{ Word::WORD_LIST['not_comma'] }}" inputmode="numeric" enterkeyhint=”next”>
                 </div>
 
                 <div class="mt-3">
                     <label for="remark">{{ $bike_form_label['remark'] }}</label>
                     <textarea class="form-control" name="remark" cols="50" rows="2"
-                        placeholder="{{ Word::WORD_LIST['within_150words'] }}" maxlength="150">{{ old('remark') }}</textarea>
+                        placeholder="{{ Word::WORD_LIST['within_150words'] }}" maxlength="150" enterkeyhint=”next”>{{ old('remark') }}</textarea>
                 </div>
 
                 <div class="mt-3">
