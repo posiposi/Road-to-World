@@ -17,6 +17,8 @@ class Word
         'not_comma' => '価格はコンマなしで入力してください。',
         'within_150words' => '150文字以内で入力してください。',
         'required_content' => 'は必須項目です。',
+        'copyright_icon' => '©',
+        'copyright' => 'Copyright: Daichi Sugiyama',
     ];
 
     /**

@@ -19,4 +19,9 @@ class Url
         // NoImageアバター画像
         'avatar_noimage' => 'welcome/no-image.png',
     ];
+
+    // リンクURL
+    const LINK_URL = [
+        'github' => 'https://github.com/posiposi/Road-to-World',
+    ];
 }
