@@ -58,13 +58,12 @@
             </div>
         </div>
         <div class="sns-link">
-            <a class="btn text-white btn-floating m-1 github-link-icon"
-                href={{ Url::LINK_URL['github'] }}>
+            <a class="btn text-white btn-floating m-1 github-link-icon" href={{ Url::LINK_URL['github'] }}>
                 <i class="fab fa-github"></i>
             </a>
         </div>
     </div>
     <div class="text-center p-3 copyright-text">
-        © 2022 Copyright: Daichi Sugiyama
+        {{ Word::WORD_LIST['copyright_icon'] }} {{ date('Y') }} {{ Word::WORD_LIST['copyright'] }}
     </div>
 </footer>
