@@ -80,8 +80,8 @@
                 </div>
             @endforeach
         </div>
+        <div class="d-flex justify-content-center">{{ $bikes->links() }}</div>
     </div>
-    {{ $bikes->links() }}
     @else
         <h4 class="font-weight-bold">{{ Message::NOT_AVAILABLE_RENTAL_BIKE_MESSAGE }}</h4>
     @endif

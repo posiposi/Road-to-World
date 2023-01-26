@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Consts\PaginationConst;
 
 class Bike extends Model
 {
@@ -152,8 +153,8 @@ class Bike extends Model
      */
     public function showBikesIndex()
     {
-        // 表示する自転車を取得(1ページ6台表示)
-        $bikes = Self::paginate(6);
+        // 表示する自転車を取得(1ページ3台表示)
+        $bikes = Self::paginate(PaginationConst::BIKES_INDEX_PAGINATION);
         // ログインユーザーを取得
         $user = Auth::user();
         // カレンダーに表示する時間の空配列を設定
