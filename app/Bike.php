@@ -8,37 +8,38 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Consts\PaginationConst;
 
 class Bike extends Model
 {
     protected $fillable = [
         'name', 'brand', 'status', 'bike_address', 'image_path', 'price', 'remark',
     ];
-    
+
     /** 一対多の記述(バイクは複数のユーザに従属) */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     /** 多対多の記述(多数のバイクが中間テーブルを通して多数のユーザに予約される。) */
     public function reserved()
     {
         return $this->belongsToMany(User::class, 'reservations', 'bike_id', 'user_id');
     }
-    
+
     /** 一対多の記述(バイクは複数のコメントを所有) */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
-    
+
     /** 一対多の記述(バイクは複数の予約を所持) */
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
     }
-    
+
     /**
      * S3へ自転車の画像を保存する
      *
@@ -89,7 +90,7 @@ class Bike extends Model
             'price' => $request->price,
             'remark' => $request->remark,
         ]);
-        
+
         // S3へ画像をアップロードする
         $bike->image_path = self::uploadBikeImage($request->image_path);
         // 自転車情報をDBへ保存する
@@ -106,10 +107,9 @@ class Bike extends Model
     {
         //変更対象自転車の既存情報を取得する
         $registered_bike = Bike::findOrFail($bike_id);
-        
+
         //ログインユーザーと削除対象自転車の所有者が同一の場合
-        if (Auth::id() === $registered_bike->user_id)
-        {
+        if (Auth::id() === $registered_bike->user_id) {
             //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
             $image_keypath = str_replace(Url::URL_LIST['s3'], '', $registered_bike->image_path);
             //該当するs3上の既存画像を削除する
@@ -152,16 +152,16 @@ class Bike extends Model
      */
     public function showBikesIndex()
     {
-        // 表示する自転車を取得(1ページ6台表示)
-        $bikes = Self::paginate(6);
+        // 表示する自転車を取得(1ページ3台表示)
+        $bikes = Self::paginate(PaginationConst::BIKES_INDEX_PAGINATION);
         // ログインユーザーを取得
         $user = Auth::user();
         // カレンダーに表示する時間の空配列を設定
         $times = [];
 
         //カレンダーに表示する日付・時刻を配列に代入
-        for ($i = 0; $i < 48; $i++){
-            $times[] = date("H:i", strtotime("+". $i * 30 . "minute", (-3600*9)));
+        for ($i = 0; $i < 48; $i++) {
+            $times[] = date("H:i", strtotime("+" . $i * 30 . "minute", (-3600 * 9)));
         };
         // 上記で設定した変数を配列で返却
         return [$bikes, $user, $times];
@@ -173,7 +173,8 @@ class Bike extends Model
      * @param object $request 検索条件
      * @return array 検索結果
      */
-    public function doSearchBikes($request){
+    public function doSearchBikes($request)
+    {
         // Bikeモデルのクエリ発行用インスタンス生成
         $query = Bike::query();
         // 検索条件:自転車モデル名
@@ -185,13 +186,13 @@ class Bike extends Model
         // 検索条件:価格
         $search_price = $request->input('search_price');
         if (!empty('search_name')) {
-            $query->where('name', 'like', '%'.$this->escapeWord($search_name).'%');
+            $query->where('name', 'like', '%' . $this->escapeWord($search_name) . '%');
         }
         if (!empty('search_brand')) {
-            $query->where('brand', 'like', '%'.$this->escapeWord($search_brand).'%');
+            $query->where('brand', 'like', '%' . $this->escapeWord($search_brand) . '%');
         }
         if (!empty('search_address')) {
-            $query->where('bike_address', 'like', '%'.$this->escapeWord($search_address).'%');
+            $query->where('bike_address', 'like', '%' . $this->escapeWord($search_address) . '%');
         }
         $bikes = $query->get();
         // 検索結果を配列にして返却する
@@ -216,10 +217,11 @@ class Bike extends Model
      * @param string $search_word エスケープをする検索語句 
      * @return array エスケープ処理を行った検索語句
      */
-    private function escapeWord($search_word, string $char = '\\'){
+    private function escapeWord($search_word, string $char = '\\')
+    {
         return str_replace(
             [$char, '%', '_'],
-            [$char.$char, $char.'%', $char.'_'],
+            [$char . $char, $char . '%', $char . '_'],
             $search_word
         );
     }
