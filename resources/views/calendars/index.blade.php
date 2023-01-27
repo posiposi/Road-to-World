@@ -44,8 +44,8 @@
     <h1 class='ms-3'>予約状況カレンダー</h1>
 
     <div class="cotainer">
-        {{ link_to_route('bikes.calendar', '先週へ', ['bikeId' => $bike->id, 'week' => 'last_week', 'now' => $dt]) }}
-        {{ link_to_route('bikes.calendar', '翌週へ', ['bikeId' => $bike->id, 'week' => 'next_week', 'now' => $dt]) }}
+        <a class="ms-4" href="{{ route('bikes.calendar', ['bikeId' => $bike->id, 'week' => 'last_week', 'now' => $dt]) }}">先週へ</a>
+        <a class="ms-2" href="{{ route('bikes.calendar', ['bikeId' => $bike->id, 'week' => 'next_week', 'now' => $dt]) }}">翌週へ</a>
         <div class="row mx-4">
             <table>
                 <tr>
