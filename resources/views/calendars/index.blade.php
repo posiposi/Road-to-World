@@ -1,51 +1,19 @@
 @extends('layouts.app')
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('assets/css/reservation_calendar.css') }}">
+@endpush
+
 @section('content')
-
-<head>
-    <style>
-        html {
-            font-family: sans-serif;
-        }
-
-        table {
-            border-collapse: collapse;
-            border: 2px solid rgb(200, 200, 200);
-            letter-spacing: 1px;
-            font-size: 0.8rem;
-        }
-
-        td,
-        th {
-            border: 1px solid rgb(190, 190, 190);
-            padding: 10px 20px;
-            text-align: center;
-        }
-
-        td {
-            text-align: center;
-        }
-
-        th.saturday {
-            color: blue;
-        }
-
-        th.sunday {
-            color: red;
-        }
-
-        caption {
-            padding: 10px;
-        }
-    </style>
-</head>
 
 <body>
     <h1 class='ms-3'>予約状況カレンダー</h1>
 
     <div class="cotainer">
-        <a class="ms-4" href="{{ route('bikes.calendar', ['bikeId' => $bike->id, 'week' => 'last_week', 'now' => $dt]) }}">先週へ</a>
-        <a class="ms-2" href="{{ route('bikes.calendar', ['bikeId' => $bike->id, 'week' => 'next_week', 'now' => $dt]) }}">翌週へ</a>
+        <a class="ms-4"
+            href="{{ route('bikes.calendar', ['bikeId' => $bike->id, 'week' => 'last_week', 'now' => $dt]) }}">先週へ</a>
+        <a class="ms-2"
+            href="{{ route('bikes.calendar', ['bikeId' => $bike->id, 'week' => 'next_week', 'now' => $dt]) }}">翌週へ</a>
         <div class="row mx-4">
             <table>
                 <tr>
@@ -75,7 +43,7 @@
                         @else
                         <th></th>
                         @endif
-                    @endfor
+                        @endfor
                 </tr>
 
                 <tr>
@@ -85,7 +53,7 @@
                         @else
                         <th></th>
                         @endif
-                    @endfor
+                        @endfor
                 </tr>
                 @endforeach
             </table>
