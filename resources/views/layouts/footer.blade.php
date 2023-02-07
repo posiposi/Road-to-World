@@ -44,12 +44,12 @@
                         <a href="{{ route('users.index') }}" class="text-white">マイページ</a>
                     </li>
                     <li class="mt-2">
-                        <a href="#!" class="text-white">予約表</a>
-                    </li>
-                    <li class="mt-2">
                         <a href="{{ route('mybike.index') }}" class="text-white">マイバイク</a>
                     </li>
                     @auth
+                    <li class="mt-2">
+                        <a href="#!" class="text-white">予約表</a>
+                    </li>
                     <li class="mt-2">
                         <a href="{{ route('logout.get') }}" class="text-white">ログアウト</a>
                     </li>
