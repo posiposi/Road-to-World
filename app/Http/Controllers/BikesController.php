@@ -6,15 +6,20 @@ use App\Bike;
 use App\Enums\BikeStatus;
 use App\Consts\Word;
 use App\Http\Requests\BikeRegisterRequest;
+use App\Services\BikeService;
+use Illuminate\Support\Facades\Auth;
 
 class BikesController extends Controller
 {
-    //コンストラクタインジェクション
-    public function __construct(Bike $bike)
+    private $bike;
+    private $bike_service;
+
+    public function __construct(Bike $bike, BikeService $bikeService)
     {
         $this->bike = $bike;
+        $this->bike_service = $bikeService;
     }
-    
+
     /**
      * 自転車登録画面表示
      *
@@ -30,7 +35,7 @@ class BikesController extends Controller
         // 自転車登録画面へ変遷する
         return view('auth.bikeregister', compact('bike_status_cases', 'bike_form_label'));
     }
-    
+
     /**
      * 自転車を登録する
      *
@@ -44,7 +49,7 @@ class BikesController extends Controller
         // ログインユーザーのマイページへ画面変遷
         return redirect()->route('mybike.index');
     }
-    
+
     /**
      * 貸出中自転車一覧画面の表示
      * 
@@ -52,12 +57,17 @@ class BikesController extends Controller
      */
     public function index()
     {
-        // メソッドで返却された配列を分割代入する
-        [$bikes, $user, $times] = $this->bike->showBikesIndex();
+        $all_bikes = $this->bike_service->getBikesList();
+        $user = Auth::user();
+        $times = [];
+        for ($i = 0; $i < 48; $i++) {
+            $times[] = date("H:i", strtotime("+" . $i * 30 . "minute", (-3600 * 9)));
+        };
+
         // 自転車一覧画面へ変遷する
-        return view('bikes.index', compact('bikes', 'user', 'times'));
+        return view('bikes.index', compact('all_bikes', 'user', 'times'));
     }
-    
+
     /**
      * 自転車情報変更画面を表示する
      *
@@ -75,7 +85,7 @@ class BikesController extends Controller
 
         return view('bikes.edit', compact('bike', 'bike_status_cases', 'bike_form_label'));
     }
-    
+
     /**
      * 自転車の変更保存
      *
@@ -90,7 +100,7 @@ class BikesController extends Controller
         // マイバイク画面へ戻る
         return redirect()->route('mybike.index');
     }
-    
+
     /**
      * 登録自転車の削除
      *

@@ -146,28 +146,6 @@ class Bike extends Model
     }
 
     /**
-     * 貸出中自転車の一覧を表示する
-     *
-     * @return array {$bikes: object, $users: object, $times: array}
-     */
-    public function showBikesIndex()
-    {
-        // 表示する自転車を取得(1ページ3台表示)
-        $bikes = Self::paginate(PaginationConst::BIKES_INDEX_PAGINATION);
-        // ログインユーザーを取得
-        $user = Auth::user();
-        // カレンダーに表示する時間の空配列を設定
-        $times = [];
-
-        //カレンダーに表示する日付・時刻を配列に代入
-        for ($i = 0; $i < 48; $i++) {
-            $times[] = date("H:i", strtotime("+" . $i * 30 . "minute", (-3600 * 9)));
-        };
-        // 上記で設定した変数を配列で返却
-        return [$bikes, $user, $times];
-    }
-
-    /**
      * 自転車を検索する
      *
      * @param object $request 検索条件

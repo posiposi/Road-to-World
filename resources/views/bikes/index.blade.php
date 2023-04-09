@@ -9,10 +9,10 @@
     <h1 class="font-weight-bold">{{ Word::PAGE_TITLE['bike_index'] }}</h1>
 </div>
 <div class="container">
-    @if (count($bikes) > 0)
+    @if (count($all_bikes) > 0)
     <div class="row">
         <div class="card-group">
-            @foreach ($bikes as $bike)
+            @foreach ($all_bikes as $bike)
             <div class="col-md-4">
                 <div class="card mb-3 border border-0">
                     <div class="bd-placeholder-img card-img-top">
@@ -90,7 +90,7 @@
             </div>
             @endforeach
         </div>
-        <div class="d-flex justify-content-center">{{ $bikes->links() }}</div>
+        <div class="d-flex justify-content-center">{{ $all_bikes->links() }}</div>
     </div>
     @else
     <h4 class="font-weight-bold">{{ Message::NOT_AVAILABLE_RENTAL_BIKE_MESSAGE }}</h4>
