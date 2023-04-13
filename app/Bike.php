@@ -98,28 +98,6 @@ class Bike extends Model
     }
 
     /**
-     * 登録自転車を削除する
-     *
-     * @param integer $bike_id 削除対象自転車のid
-     * @return void
-     */
-    public function deleteRegisteredBike(int $bike_id)
-    {
-        //変更対象自転車の既存情報を取得する
-        $registered_bike = Bike::findOrFail($bike_id);
-
-        //ログインユーザーと削除対象自転車の所有者が同一の場合
-        if (Auth::id() === $registered_bike->user_id) {
-            //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
-            $image_keypath = str_replace(Url::URL_LIST['s3'], '', $registered_bike->image_path);
-            //該当するs3上の既存画像を削除する
-            Storage::disk('s3')->delete($image_keypath);
-            //DB上の既存自転車の情報を削除する
-            $registered_bike->delete();
-        }
-    }
-
-    /**
      * 既存登録自転車の情報を変更する
      *
      * @param object $request 変更する情報リクエスト

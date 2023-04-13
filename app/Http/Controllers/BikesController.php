@@ -109,7 +109,7 @@ class BikesController extends Controller
      */
     public function destroy(int $bike_id)
     {
-        // 該当するidの自転車を削除する
-        $this->bike->deleteRegisteredBike($bike_id);
+        $this->bike_service->deleteBike($bike_id);
+        return back();
     }
 }
