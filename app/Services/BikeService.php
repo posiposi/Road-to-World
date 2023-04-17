@@ -15,16 +15,6 @@ class BikeService
     }
 
     /**
-     * 自転車一覧を取得する
-     *
-     * @return collection 自転車一覧
-     */
-    public function getBikesList()
-    {
-        return $this->bike_repository->getAllBikes();
-    }
-
-    /**
      * 自転車登録を削除する
      *
      * @param integer $bike_id 削除対象自転車のID

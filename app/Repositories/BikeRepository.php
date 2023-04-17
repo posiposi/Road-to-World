@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Bike;
-use App\Consts\PaginationConst;
 use App\ValueObjects\Bike\BikeId;
 use Illuminate\Support\Facades\Auth;
 use App\Consts\Url;
@@ -11,23 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class BikeRepository implements BikeRepositoryInterface
 {
-    private $bike;
-
-    public function __construct(Bike $bike)
-    {
-        $this->bike = $bike;
-    }
-
-    /**
-     * 全自転車レコードを取得する
-     *
-     * @return collection $all_bikes 全自転車のレコード
-     */
-    public function getAllBikes()
-    {
-        return $this->bike->paginate(PaginationConst::BIKES_INDEX_PAGINATION);
-    }
-
     /**
      * 登録されている自転車を削除する
      *

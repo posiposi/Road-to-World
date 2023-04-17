@@ -7,8 +7,6 @@ use App\Enums\BikeStatus;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use App\Consts\PaginationConst;
 
 class Bike extends Model
 {
