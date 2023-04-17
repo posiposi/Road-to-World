@@ -7,8 +7,6 @@ use App\Enums\BikeStatus;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-use App\Consts\PaginationConst;
 
 class Bike extends Model
 {
@@ -98,28 +96,6 @@ class Bike extends Model
     }
 
     /**
-     * 登録自転車を削除する
-     *
-     * @param integer $bike_id 削除対象自転車のid
-     * @return void
-     */
-    public function deleteRegisteredBike(int $bike_id)
-    {
-        //変更対象自転車の既存情報を取得する
-        $registered_bike = Bike::findOrFail($bike_id);
-
-        //ログインユーザーと削除対象自転車の所有者が同一の場合
-        if (Auth::id() === $registered_bike->user_id) {
-            //DBに保存されている画像のフルパスからs3のURLパラメータを削除する
-            $image_keypath = str_replace(Url::URL_LIST['s3'], '', $registered_bike->image_path);
-            //該当するs3上の既存画像を削除する
-            Storage::disk('s3')->delete($image_keypath);
-            //DB上の既存自転車の情報を削除する
-            $registered_bike->delete();
-        }
-    }
-
-    /**
      * 既存登録自転車の情報を変更する
      *
      * @param object $request 変更する情報リクエスト
@@ -143,28 +119,6 @@ class Bike extends Model
         $bike->image_path = self::uploadBikeImage($request->image_path);
         // 自転車情報をDBへ保存する
         $bike->save();
-    }
-
-    /**
-     * 貸出中自転車の一覧を表示する
-     *
-     * @return array {$bikes: object, $users: object, $times: array}
-     */
-    public function showBikesIndex()
-    {
-        // 表示する自転車を取得(1ページ3台表示)
-        $bikes = Self::paginate(PaginationConst::BIKES_INDEX_PAGINATION);
-        // ログインユーザーを取得
-        $user = Auth::user();
-        // カレンダーに表示する時間の空配列を設定
-        $times = [];
-
-        //カレンダーに表示する日付・時刻を配列に代入
-        for ($i = 0; $i < 48; $i++) {
-            $times[] = date("H:i", strtotime("+" . $i * 30 . "minute", (-3600 * 9)));
-        };
-        // 上記で設定した変数を配列で返却
-        return [$bikes, $user, $times];
     }
 
     /**

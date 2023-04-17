@@ -22,13 +22,13 @@ Route::get('/', [TopPageController::class, 'index'])->name('home');
 // });
 
 // ユーザー登録
-Route::prefix('signup')->group(function() {
+Route::prefix('signup')->group(function () {
     Route::get('/', [RegisterController::class, 'showRegistrationForm'])->name('signup.get');
     Route::post('/', [RegisterController::class, 'register'])->name('signup.post');
 });
 
 // ログイン
-Route::prefix('login')->group(function() {
+Route::prefix('login')->group(function () {
     Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/', [LoginController::class, 'login'])->name('login.post');
 });
@@ -37,20 +37,20 @@ Route::prefix('login')->group(function() {
 Route::get('logout', [LoginController::class, 'logout'])->name('logout.get');
 
 // 検索機能
-Route::prefix('search')->group(function() {
-     // 検索画面表示
+Route::prefix('search')->group(function () {
+    // 検索画面表示
     Route::get('/', [SearchController::class, 'show'])->name('search');
     // 検索結果表示
     Route::get('/index', [SearchController::class, 'index'])->name('search.index');
 });
 
 // 貸出中自転車一覧表示
-Route::prefix('bikes')->group(function() {
+Route::prefix('bikes')->group(function () {
     Route::get('/', [BikesController::class, 'index'])->name('bikes.index');
 });
 
 // サービスクラス呼び出し
-Route::prefix('service')->group(function() {
+Route::prefix('service')->group(function () {
     // S3から画像取得
     Route::get('/show', [ServiceController::class, 'show'])->name('service.show');
     // メインページ内のテキスト取得
@@ -60,13 +60,14 @@ Route::prefix('service')->group(function() {
 // ログイン認証
 Route::group(['middleware' => ['auth']], function () {
     // 自転車情報関連
-    Route::prefix('bikes')->group(function() {
+    Route::prefix('bikes')->group(function () {
         // 自転車情報変更画面表示
         Route::get('/{bike_id}/edit', [BikesController::class, 'edit'])->name('bikes.edit');
         // 自転車情報変更
         Route::put('/{id}/update', [BikesController::class, 'update'])->name('bikes.update');
         // 自転車削除
-        Route::delete('/{id}/delete', [BikesController::class,'destroy'])->name('bikes.delete');
+        Route::get('/{bikeId}/delete', [BikesController::class, 'destroy'])->name('bikes.delete');
+        Route::delete('/{bikeId}/delete', [BikesController::class, 'destroy'])->name('bikes.delete');
         // 予約アクション
         Route::post('/{bikeId}', [ReservationController::class, 'store'])->name('bikes.reservation');
         // カレンダー表示
@@ -74,7 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // 自転車登録関連
-    Route::prefix('bikeregister')->group(function() {
+    Route::prefix('bikeregister')->group(function () {
         // 自転車登録画面表示
         Route::get('/', [BikesController::class, 'show'])->name('bikes.get');
         // 新規自転車登録
@@ -82,7 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // ユーザー関連
-    Route::prefix('users')->group(function() {
+    Route::prefix('users')->group(function () {
         // ユーザ情報表示
         Route::get('/', [UsersController::class, 'index'])->name('users.index');
         // ユーザアバター登録
@@ -94,9 +95,9 @@ Route::group(['middleware' => ['auth']], function () {
         // マイバイク画面表示
         Route::get('mybikes/index', [UsersController::class, 'redirectMybikePage'])->name('mybike.index');
     });
-    
+
     // チャット機能
-    Route::prefix('comments/{bikeId}')->group(function() {
+    Route::prefix('comments/{bikeId}')->group(function () {
         // コメントルーム一覧表示
         Route::get('/{lenderId}/index', [CommentsController::class, 'index'])->name('comments.index');
         // コメントルーム表示
