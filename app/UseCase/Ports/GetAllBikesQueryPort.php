@@ -2,7 +2,7 @@
 
 namespace App\UseCase\Ports;
 
-interface getAllBikesQueryPort
+interface GetAllBikesQueryPort
 {
     public function getAllBikes();
 }
