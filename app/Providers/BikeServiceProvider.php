@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Adapters\Bike\DeleteBikeAdapter;
 use App\Adapters\Bike\GetAllBikesAdapter;
+use App\UseCase\Ports\DeleteBikeCommandPort;
 use Illuminate\Support\ServiceProvider;
 use App\UseCase\Ports\GetAllBikesQueryPort;
 
@@ -16,6 +18,7 @@ class BikeServiceProvider extends ServiceProvider
     public function register()
     {
         app()->bind(GetAllBikesQueryPort::class, GetAllBikesAdapter::class);
+        app()->bind(DeleteBikeCommandPort::class, DeleteBikeAdapter::class);
     }
 
     /**
