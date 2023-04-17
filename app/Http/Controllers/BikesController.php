@@ -7,17 +7,20 @@ use App\Enums\BikeStatus;
 use App\Consts\Word;
 use App\Http\Requests\BikeRegisterRequest;
 use App\Services\BikeService;
+use App\UseCase\GetAllBikes\GetAllBikes;
 use Illuminate\Support\Facades\Auth;
 
 class BikesController extends Controller
 {
     private $bike;
     private $bike_service;
+    private $getAllBikes;
 
-    public function __construct(Bike $bike, BikeService $bikeService)
+    public function __construct(Bike $bike, BikeService $bikeService, GetAllBikes $getAllBikes)
     {
         $this->bike = $bike;
         $this->bike_service = $bikeService;
+        $this->getAllBikes = $getAllBikes;
     }
 
     /**
@@ -57,7 +60,7 @@ class BikesController extends Controller
      */
     public function index()
     {
-        $all_bikes = $this->bike_service->getBikesList();
+        $all_bikes = $this->getAllBikes();
         $user = Auth::user();
         $times = [];
         for ($i = 0; $i < 48; $i++) {
