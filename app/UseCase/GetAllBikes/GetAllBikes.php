@@ -30,7 +30,7 @@ class GetAllBikes
      *
      * @return Bike 全自転車レコード
      */
-    public function __invoke()
+    public function execute()
     {
         return $this->port->getAllBikes();
     }
