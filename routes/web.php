@@ -66,8 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
         // 自転車情報変更
         Route::put('/{id}/update', [BikesController::class, 'update'])->name('bikes.update');
         // 自転車削除
-        Route::get('/{id}/delete', [BikesController::class, 'destroy'])->name('bikes.delete');
-        Route::delete('/{id}/delete', [BikesController::class, 'destroy'])->name('bikes.delete');
+        Route::get('/{bikeId}/delete', [BikesController::class, 'destroy'])->name('bikes.delete');
+        Route::delete('/{bikeId}/delete', [BikesController::class, 'destroy'])->name('bikes.delete');
         // 予約アクション
         Route::post('/{bikeId}', [ReservationController::class, 'store'])->name('bikes.reservation');
         // カレンダー表示

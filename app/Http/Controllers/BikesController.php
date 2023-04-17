@@ -6,21 +6,21 @@ use App\Bike;
 use App\Enums\BikeStatus;
 use App\Consts\Word;
 use App\Http\Requests\BikeRegisterRequest;
-use App\Services\BikeService;
+use App\UseCase\DeleteBike\DeleteBike;
 use App\UseCase\GetAllBikes\GetAllBikes;
 use Illuminate\Support\Facades\Auth;
 
 class BikesController extends Controller
 {
     private $bike;
-    private $bike_service;
     private $getAllBikes;
+    private $deleteBike;
 
-    public function __construct(Bike $bike, BikeService $bikeService, GetAllBikes $getAllBikes)
+    public function __construct(Bike $bike, GetAllBikes $getAllBikes, DeleteBike $deleteBike)
     {
         $this->bike = $bike;
-        $this->bike_service = $bikeService;
         $this->getAllBikes = $getAllBikes;
+        $this->deleteBike = $deleteBike;
     }
 
     /**
@@ -60,7 +60,7 @@ class BikesController extends Controller
      */
     public function index()
     {
-        $all_bikes = $this->getAllBikes();
+        $all_bikes = $this->getAllBikes->execute();
         $user = Auth::user();
         $times = [];
         for ($i = 0; $i < 48; $i++) {
@@ -110,9 +110,9 @@ class BikesController extends Controller
      * @param int $bike_id 削除する自転車のid
      * @return void
      */
-    public function destroy(int $bike_id)
+    public function destroy(int $bikeId)
     {
-        $this->bike_service->deleteBike($bike_id);
+        $this->deleteBike->execute($bikeId);
         return back();
     }
 }
