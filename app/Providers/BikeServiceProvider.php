@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Adapters\Bike\DeleteBikeAdapter;
 use App\Adapters\Bike\GetAllBikesAdapter;
+use App\Adapters\Bike\UploadBikeImageAdapter;
 use App\UseCase\Ports\DeleteBikeCommandPort;
 use Illuminate\Support\ServiceProvider;
 use App\UseCase\Ports\GetAllBikesQueryPort;
+use App\UseCase\Ports\UploadBikeImageCommandPort;
 
 class BikeServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class BikeServiceProvider extends ServiceProvider
     {
         app()->bind(GetAllBikesQueryPort::class, GetAllBikesAdapter::class);
         app()->bind(DeleteBikeCommandPort::class, DeleteBikeAdapter::class);
+        app()->bind(UploadBikeImageCommandPort::class, UploadBikeImageAdapter::class);
     }
 
     /**
