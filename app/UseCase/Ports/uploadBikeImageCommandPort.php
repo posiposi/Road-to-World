@@ -2,7 +2,7 @@
 
 namespace App\UseCase\Ports;
 
-interface uploadBikeImageCommandPort
+interface UploadBikeImageCommandPort
 {
     public function uploadBikeImage(string $imagePath);
 }
