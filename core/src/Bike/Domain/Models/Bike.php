@@ -85,7 +85,18 @@ final class Bike
         return $this->remark;
     }
 
-    public static function ofByArray(array $values)
+    public function imagePath(): ImagePath
+    {
+        return $this->imagePath;
+    }
+
+    /**
+     * 配列からオブジェクトを生成する
+     *
+     * @param array $values
+     * @return Bike
+     */
+    public static function ofByArray(array $values): Bike
     {
         return new self(
             BikeId::of($values['bikeId']),
