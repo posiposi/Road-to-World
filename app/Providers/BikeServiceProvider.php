@@ -8,7 +8,7 @@ use App\Adapters\Bike\UploadBikeImageAdapter;
 use App\UseCase\Ports\DeleteBikeCommandPort;
 use Illuminate\Support\ServiceProvider;
 use App\UseCase\Ports\GetAllBikesQueryPort;
-use App\UseCase\Ports\UploadBikeImageCommandPort;
+use Core\src\Bike\UseCase\Ports\UploadBikeImageCommandPort;
 
 class BikeServiceProvider extends ServiceProvider
 {
