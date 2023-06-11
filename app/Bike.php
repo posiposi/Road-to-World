@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use core\src\Bike\Domain\Models\BikeId;
 use Illuminate\Support\Facades\Storage;
-use Core\src\Bike\UseCase\UploadBikeImage\UploadBikeImage;
+use Core\src\Bike\UseCase\UpdateBikeImage\UpdateBikeImage;
 use Illuminate\Database\Eloquent\Builder;
 
 class Bike extends Model
