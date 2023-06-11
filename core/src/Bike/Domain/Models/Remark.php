@@ -10,8 +10,12 @@ final class Remark
 
     private $value;
 
-    private function __construct(string $value)
+    private function __construct(?string $value)
     {
+        if (is_null($value)) {
+            $value = '';
+        }
+
         $this->value = $value;
     }
 }

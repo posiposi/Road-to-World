@@ -2,14 +2,14 @@
 
 namespace Core\src\Bike\Domain\Models;
 
-use core\src\Bike\Domain\Models\BikeAddress;
-use core\src\Bike\Domain\Models\BikeId;
-use core\src\Bike\Domain\Models\BikeName;
-use core\src\Bike\Domain\Models\Brand;
-use core\src\Bike\Domain\Models\ImagePath;
-use core\src\Bike\Domain\Models\Price;
-use core\src\Bike\Domain\Models\Remark;
-use core\src\Bike\Domain\Models\Status;
+use Core\src\Bike\Domain\Models\BikeAddress;
+use Core\src\Bike\Domain\Models\BikeId;
+use Core\src\Bike\Domain\Models\BikeName;
+use Core\src\Bike\Domain\Models\Brand;
+use Core\src\Bike\Domain\Models\ImagePath;
+use Core\src\Bike\Domain\Models\Price;
+use Core\src\Bike\Domain\Models\Remark;
+use Core\src\Bike\Domain\Models\Status;
 
 final class Bike
 {
@@ -99,10 +99,10 @@ final class Bike
     public static function ofByArray(array $values): Bike
     {
         return new self(
-            BikeId::of($values['bikeId']),
+            BikeId::of($values['id']),
             Brand::of($values['brand']),
-            BikeName::of($values['bikeName']),
-            BikeAddress::of($values['bikeAddress']),
+            BikeName::of($values['name']),
+            BikeAddress::of($values['bike_address']),
             Price::of($values['price']),
             Status::of($values['status']),
             Remark::of($values['remark']),
