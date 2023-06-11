@@ -15,7 +15,7 @@ final class GetBikeAdapter implements GetBikeQueryPort
         $this->bike = $bike;
     }
 
-    public function findByBikeId(BikeId $bikeId): array
+    public function findByBikeId(BikeId $bikeId): Bike
     {
         return $this->bike->getByBikeId($bikeId);
     }

@@ -2,14 +2,23 @@
 
 namespace App;
 
+use App\Bike as EloquentBike;
+use Core\src\Bike\Domain\Models\Bike as DomainBike;
 use App\Consts\Url;
 use App\Enums\BikeStatus;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use core\src\Bike\Domain\Models\BikeId;
 use Illuminate\Support\Facades\Storage;
+use Core\src\Bike\UseCase\UploadBikeImage\UploadBikeImage;
+use Illuminate\Database\Eloquent\Builder;
 
 class Bike extends Model
 {
+    protected $table = 'bikes';
+
+    private $uploadBikeImage;
+
     protected $fillable = [
         'name', 'brand', 'status', 'bike_address', 'image_path', 'price', 'remark',
     ];
@@ -38,17 +47,36 @@ class Bike extends Model
         return $this->hasMany(Reservation::class);
     }
 
-    /**
-     * S3へ自転車の画像を保存する
-     *
-     * @param string $image_path 保存する画像のパス
-     * @return string $url 保存した画像のS3パス
-     */
-    private function uploadBikeImage(string $image_path)
+    public function getByBikeId(BikeId $bikeId): EloquentBike
     {
-        $path = Storage::disk('s3')->putFile('bikes', $image_path, 'public');
-        $url = Storage::disk('s3')->url($path);
-        return $url;
+        return $this->newQuery()
+            ->where('id', $bikeId->toInt())
+            ->first();
+    }
+
+    public function updateBike(DomainBike $bike, string $imagePath, int $userId): void
+    {
+        $this->newQuery()
+            ->where('id', $bike->bikeId()->toInt())
+            ->update([
+                'id' => $bike->bikeId()->toInt(),
+                'user_id' => $userId,
+                'name' => $bike->bikeName()->toString(),
+                'brand' => $bike->brand()->toString(),
+                'status' => $bike->status()->toString(),
+                'bike_address' => $bike->bikeAddress()->toString(),
+                'image_path' => $imagePath,
+                'price' => $bike->price()->toInt(),
+                'remark' => $bike->remark()->toString()
+            ]);
+    }
+
+    /**
+     * @return DomainBike
+     */
+    public function toModel(): DomainBike
+    {
+        return DomainBike::ofByArray($this->attributesToArray());
     }
 
     /**
@@ -90,33 +118,7 @@ class Bike extends Model
         ]);
 
         // S3へ画像をアップロードする
-        $bike->image_path = self::uploadBikeImage($request->image_path);
-        // 自転車情報をDBへ保存する
-        $bike->save();
-    }
-
-    /**
-     * 既存登録自転車の情報を変更する
-     *
-     * @param object $request 変更する情報リクエスト
-     * @param integer $bike_id 対象となる自転車のid
-     * @return void
-     */
-    public function updateRegisteredBike($request, int $bike_id)
-    {
-        // 変更対象自転車の既存情報を取得する
-        $bike = Bike::findOrFail($bike_id);
-        // ユーザー側の変更リクエストを取得する
-        $form = $request->all();
-        // DBに保存されている画像のフルパスからs3のURLパラメータを削除する
-        $image_keypath = str_replace(Url::URL_LIST['s3'], '', $bike->image_path);
-        // 該当するs3上の既存画像を削除する
-        Storage::disk('s3')->delete($image_keypath);
-        // 画像以外の自転車変更リクエストをDBに保存する
-        $bike->fill($form)->save();
-
-        // S3へ画像をアップロードする
-        $bike->image_path = self::uploadBikeImage($request->image_path);
+        $bike->image_path = $this->uploadBikeImage->execute($request->image_path);
         // 自転車情報をDBへ保存する
         $bike->save();
     }

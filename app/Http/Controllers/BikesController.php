@@ -3,24 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Bike;
-use App\Enums\BikeStatus;
 use App\Consts\Word;
+use App\Enums\BikeStatus;
 use App\Http\Requests\BikeRegisterRequest;
 use App\UseCase\DeleteBike\DeleteBike;
 use App\UseCase\GetAllBikes\GetAllBikes;
+use Core\src\Bike\Domain\Models\Bike as DomainBike;
 use Illuminate\Support\Facades\Auth;
+use Core\src\Bike\UseCase\UpdateRegisteredBike\UpdateRegisteredBike;
 
 class BikesController extends Controller
 {
     private $bike;
     private $getAllBikes;
     private $deleteBike;
+    private $updateBike;
 
-    public function __construct(Bike $bike, GetAllBikes $getAllBikes, DeleteBike $deleteBike)
-    {
+    public function __construct(
+        Bike $bike,
+        GetAllBikes $getAllBikes,
+        DeleteBike $deleteBike,
+        updateRegisteredBike $updateBike,
+    ) {
         $this->bike = $bike;
         $this->getAllBikes = $getAllBikes;
         $this->deleteBike = $deleteBike;
+        $this->updateBike = $updateBike;
     }
 
     /**
@@ -90,17 +98,19 @@ class BikesController extends Controller
     }
 
     /**
-     * 自転車の変更保存
+     * 自転車の更新
      *
-     * @param BikeRegisterRequest $request 変更する自転車の情報リクエスト
-     * @param int $id 対象自転車のid
+     * @param BikeRegisterRequest $request
+     * @param int $id
      * @return void
      */
     public function update(BikeRegisterRequest $request, int $id)
     {
-        // idで該当自転車を検索し、登録情報を変更する
-        $this->bike->updateRegisteredBike($request, $id);
-        // マイバイク画面へ戻る
+        $values = $request->toArray();
+        $values['id'] = $id;
+        $domainBike = DomainBike::ofByArray($values);
+        $this->updateBike->execute($domainBike);
+
         return redirect()->route('mybike.index');
     }
 
