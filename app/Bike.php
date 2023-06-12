@@ -20,7 +20,7 @@ class Bike extends Model
     private $uploadBikeImage;
 
     protected $fillable = [
-        'name', 'brand', 'status', 'bike_address', 'image_path', 'price', 'remark',
+        'user_id', 'name', 'brand', 'status', 'bike_address', 'image_path', 'price', 'remark',
     ];
 
     /** 一対多の記述(バイクは複数のユーザに従属) */
@@ -52,6 +52,22 @@ class Bike extends Model
         return $this->newQuery()
             ->where('id', $bikeId->toInt())
             ->first();
+    }
+
+    public function createBike(DomainBike $bike): void
+    {
+        $this->newQuery()
+            ->create([
+                'id' => $bike->bikeId()->toInt(),
+                'user_id' => $bike->userId()->toInt(),
+                'name' => $bike->bikeName()->toString(),
+                'brand' => $bike->brand()->toString(),
+                'status' => $bike->status()->toString(),
+                'bike_address' => $bike->bikeAddress()->toString(),
+                'image_path' => $bike->imagePath()->toString(),
+                'price' => $bike->price()->toInt(),
+                'remark' => $bike->remark()->toString(),
+            ]);
     }
 
     public function updateBike(DomainBike $bike, string $imagePath, int $userId): void

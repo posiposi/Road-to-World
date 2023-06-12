@@ -15,6 +15,8 @@ use Core\src\Bike\UseCase\Ports\UpdateBikeImageCommandPort;
 use Illuminate\Support\ServiceProvider;
 use App\Adapters\Bike\RegisterBikeAdapter;
 use Core\src\Bike\UseCase\Ports\RegisterBikeCommandPort;
+use Core\src\Bike\UseCase\Ports\UploadBikeImageCommandPort;
+use App\Adapters\Bike\UploadBikeImageAdapter;
 
 class BikeServiceProvider extends ServiceProvider
 {
@@ -31,6 +33,7 @@ class BikeServiceProvider extends ServiceProvider
         app()->bind(GetBikeQueryPort::class, GetBikeAdapter::class);
         app()->bind(UpdateBikeCommandPort::class, UpdateBikeAdapter::class);
         app()->bind(RegisterBikeCommandPort::class, RegisterBikeAdapter::class);
+        app()->bind(UploadBikeImageCommandPort::class, UploadBikeImageAdapter::class);
     }
 
     /**
