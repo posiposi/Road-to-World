@@ -2,9 +2,9 @@
 
 namespace Core\src\Bike\UseCase\Ports;
 
-use Core\src\Bike\Domain\Models\Bike;
+use core\src\Bike\Domain\Models\ImagePath;
 
 interface UploadBikeImageCommandPort
 {
-    public function uploadBikeImage(Bike $request, array $bike);
+    public function uploadBikeImage(ImagePath $imagePath): string;
 }

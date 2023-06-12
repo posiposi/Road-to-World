@@ -10,11 +10,14 @@ use Core\src\Bike\Domain\Models\ImagePath;
 use Core\src\Bike\Domain\Models\Price;
 use Core\src\Bike\Domain\Models\Remark;
 use Core\src\Bike\Domain\Models\Status;
+use Core\src\User\Domain\Models\UserId;
 
 final class Bike
 {
     /** @param BikeId */
     private $bikeId;
+    /** @param UserId */
+    private $userId;
     /** @param Brand */
     private $brand;
     /** @param BikeName */
@@ -32,6 +35,7 @@ final class Bike
 
     public function __construct(
         BikeId $bikeId,
+        UserId $userId,
         Brand $brand,
         BikeName $bikeName,
         BikeAddress $bikeAddress,
@@ -41,6 +45,7 @@ final class Bike
         ImagePath $imagePath,
     ) {
         $this->bikeId = $bikeId;
+        $this->userId = $userId;
         $this->brand = $brand;
         $this->bikeName = $bikeName;
         $this->bikeAddress = $bikeAddress;
@@ -53,6 +58,11 @@ final class Bike
     public function bikeId(): BikeId
     {
         return $this->bikeId;
+    }
+
+    public function userId(): UserId
+    {
+        return $this->userId;
     }
 
     public function brand(): Brand
@@ -100,6 +110,7 @@ final class Bike
     {
         return new self(
             BikeId::of($values['id']),
+            UserId::of($values['user_id']),
             Brand::of($values['brand']),
             BikeName::of($values['name']),
             BikeAddress::of($values['bike_address']),

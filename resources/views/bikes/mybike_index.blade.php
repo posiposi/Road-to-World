@@ -20,9 +20,6 @@
         </div>
         @endforeach
     </div>
-    {{-- <div id="app">
-        <my-bike v-bind:user_bikes="{{ $user_bikes }}"></my-bike>
-    </div> --}}
 </div>
 
 @endsection

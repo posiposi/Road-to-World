@@ -5,21 +5,21 @@ namespace Core\src\Bike\UseCase\UpdateRegisteredBike;
 use Core\src\Bike\Domain\Models\Bike;
 use Core\src\Bike\UseCase\Ports\GetBikeQueryPort;
 use Core\src\Bike\UseCase\Ports\UpdateBikeCommandPort;
-use Core\src\Bike\UseCase\Ports\UploadBikeImageCommandPort;
+use Core\src\Bike\UseCase\Ports\UpdateBikeImageCommandPort;
 
 class UpdateRegisteredBike
 {
     private $getBikePort;
-    private $uploadBikeImagePort;
+    private $updateBikeImagePort;
     private $updateBikePort;
 
     public function __construct(
         GetBikeQueryPort $getBikePort,
-        UploadBikeImageCommandPort $uploadBikeImagePort,
+        UpdateBikeImageCommandPort $updateBikeImagePort,
         UpdateBikeCommandPort $updateBikePort,
     ) {
         $this->getBikePort = $getBikePort;
-        $this->uploadBikeImagePort = $uploadBikeImagePort;
+        $this->updateBikeImagePort = $updateBikeImagePort;
         $this->updateBikePort = $updateBikePort;
     }
 
@@ -33,7 +33,7 @@ class UpdateRegisteredBike
         // 既存自転車を配列で取得
         $bike = $this->getBikePort->findByBikeId($domainBike->bikeId())->attributesToArray();
         // S3へ画像をアップロード、保存した画像のパスを取得
-        $imagePath = $this->uploadBikeImagePort->uploadBikeImage($domainBike, $bike);
+        $imagePath = $this->updateBikeImagePort->updateBikeImage($domainBike, $bike);
         // 自転車情報を永続化
         $this->updateBikePort->updateBike($domainBike, $imagePath);
     }

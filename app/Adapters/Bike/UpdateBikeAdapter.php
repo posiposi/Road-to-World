@@ -19,7 +19,6 @@ class UpdateBikeAdapter implements UpdateBikeCommandPort
 
     public function updateBike(Bike $bike, string $imagePath): void
     {
-        $userId = Auth::id();
-        $this->bike->updateBike($bike, $imagePath, $userId);
+        $this->bike->updateBike($bike, $imagePath, Auth::id());
     }
 }
