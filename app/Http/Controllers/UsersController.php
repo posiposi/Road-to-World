@@ -8,6 +8,7 @@ use App\User;
 use App\Http\Requests\UserRegisterRequest;
 use App\Services\Image\S3Service;
 use App\Services\UserService;
+use Core\src\Bike\UseCase\GetUserBike\GetUserBike;
 use Core\src\User\UseCase\GetUserId\GetUserId;
 use Illuminate\View\View;
 
@@ -15,14 +16,18 @@ class UsersController extends Controller
 {
     private $getUserIdUseCase;
 
+    private $getUserBikeUseCase;
+
     public function __construct(
         User $user,
         S3Service $s3Service,
-        GetUserId $getUserIdUseCase
+        GetUserId $getUserIdUseCase,
+        GetUserBike $getUserBikeUseCase
     ) {
         $this->user = $user;
         $this->s3Service = $s3Service;
         $this->getUserIdUseCase = $getUserIdUseCase;
+        $this->getUserBikeUseCase = $getUserBikeUseCase;
     }
 
     /**
@@ -68,14 +73,12 @@ class UsersController extends Controller
 
     /**
      * マイバイクページに画面遷移する
-     *
-     * @param int $userId
      */
     public function redirectMybikePage(): View
     {
         $userId = $this->getUserIdUseCase->execute();
-        $user_bikes = UserService::getUserBikes($userId->toInt());
-        return view('bikes.mybike_index', compact('userId', 'user_bikes'));
+        $bikeList = $this->getUserBikeUseCase->execute($userId);
+        return view('bikes.mybike_index', compact('userId', 'bikeList'));
     }
 
     /**
