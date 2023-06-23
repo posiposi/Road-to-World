@@ -2,16 +2,13 @@
 
 namespace App;
 
-use App\Bike as EloquentBike;
-use Core\src\Bike\Domain\Models\Bike as DomainBike;
-use App\Consts\Url;
 use App\Enums\BikeStatus;
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use core\src\Bike\Domain\Models\BikeId;
-use Illuminate\Support\Facades\Storage;
-use Core\src\Bike\UseCase\UpdateBikeImage\UpdateBikeImage;
+use Core\src\Bike\Domain\Models\Bike as DomainBike;
+use Core\src\Bike\Domain\Models\BikeId;
+use Core\src\User\Domain\Models\UserId;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Bike extends Model
 {
@@ -47,11 +44,17 @@ class Bike extends Model
         return $this->hasMany(Reservation::class);
     }
 
-    public function getByBikeId(BikeId $bikeId): EloquentBike
+    public function getByBikeId(BikeId $bikeId): self
     {
         return $this->newQuery()
             ->where('id', $bikeId->toInt())
             ->first();
+    }
+
+    public function getByUserId(UserId $userId): Builder
+    {
+        return $this->newQuery()
+            ->where('user_id', '=', $userId->toInt());
     }
 
     public function createBike(DomainBike $bike): void
