@@ -8,14 +8,26 @@ use App\User;
 use App\Http\Requests\UserRegisterRequest;
 use App\Services\Image\S3Service;
 use App\Services\UserService;
+use Core\src\Bike\UseCase\GetUserBike\GetUserBike;
+use Core\src\User\UseCase\GetUserId\GetUserId;
+use Illuminate\View\View;
 
 class UsersController extends Controller
 {
-    // コンストラクタインジェクション
-    public function __construct(User $user, S3Service $s3Service)
-    {
+    private $getUserIdUseCase;
+
+    private $getUserBikeUseCase;
+
+    public function __construct(
+        User $user,
+        S3Service $s3Service,
+        GetUserId $getUserIdUseCase,
+        GetUserBike $getUserBikeUseCase
+    ) {
         $this->user = $user;
         $this->s3Service = $s3Service;
+        $this->getUserIdUseCase = $getUserIdUseCase;
+        $this->getUserBikeUseCase = $getUserBikeUseCase;
     }
 
     /**
@@ -30,7 +42,7 @@ class UsersController extends Controller
         $this->user->registerUserAvatar($request);
         return back();
     }
-    
+
     /**
      * マイページの表示
      *
@@ -45,7 +57,7 @@ class UsersController extends Controller
 
         return view('users.index', compact('login_user', 'bikes', 'reservations', 'avatar_noimage'));
     }
-    
+
     /**
      * 会員情報変更画面の表示
      * 
@@ -58,19 +70,15 @@ class UsersController extends Controller
         $login_user = Auth::user();
         return view('users.edit', compact('login_user'));
     }
-    
+
     /**
      * マイバイクページに画面遷移する
-     *
-     * @param integer $userId ログインユーザーID
-     * @param object $userBikes ログインユーザーが所有する自転車
-     * @return void
      */
-    public function redirectMybikePage()
+    public function redirectMybikePage(): View
     {
-        $user_id = UserService::getLoginUserId();
-        $user_bikes = UserService::getUserBikes($user_id);
-        return view('bikes.mybike_index', compact('user_id', 'user_bikes'));
+        $userId = $this->getUserIdUseCase->execute();
+        $bikeList = $this->getUserBikeUseCase->execute($userId);
+        return view('bikes.mybike_index', compact('userId', 'bikeList'));
     }
 
     /**

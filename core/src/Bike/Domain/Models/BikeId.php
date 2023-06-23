@@ -1,6 +1,6 @@
 <?php
 
-namespace core\src\Bike\Domain\Models;
+namespace Core\src\Bike\Domain\Models;
 
 use App\ValueObjects\ValueObjectInt;
 
