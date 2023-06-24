@@ -104,7 +104,6 @@ final class Bike
      * 配列からオブジェクトを生成する
      *
      * @param array $values
-     * @return Bike
      */
     public static function ofByArray(array $values): Bike
     {
@@ -119,5 +118,25 @@ final class Bike
             Remark::of($values['remark']),
             ImagePath::of($values['image_path']),
         );
+    }
+
+    /**
+     * オブジェクトから配列を生成
+     *
+     * @param Bike $bike
+     */
+    public static function modelToArray(Bike $bike): array
+    {
+        return [
+            'id' => $bike->bikeId()->toInt(),
+            'user_id' => $bike->userId()->toInt(),
+            'brand' => $bike->brand()->toString(),
+            'name' => $bike->bikeName()->toString(),
+            'bike_address' => $bike->bikeAddress()->toString(),
+            'price' => $bike->price()->toInt(),
+            'status' => $bike->status()->toString(),
+            'remark' => $bike->remark()->toString(),
+            'image_path' => $bike->imagePath()->toString(),
+        ];
     }
 }

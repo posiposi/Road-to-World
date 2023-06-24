@@ -7,27 +7,22 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Http\Requests\UserRegisterRequest;
 use App\Services\Image\S3Service;
-use App\Services\UserService;
-use Core\src\Bike\UseCase\GetUserBike\GetUserBike;
+use Core\src\Bike\UseCase\GetUserBikeList\GetUserBikeList;
 use Core\src\User\UseCase\GetUserId\GetUserId;
 use Illuminate\View\View;
 
 class UsersController extends Controller
 {
-    private $getUserIdUseCase;
-
-    private $getUserBikeUseCase;
+    private $getUserBikeListUseCase;
 
     public function __construct(
         User $user,
         S3Service $s3Service,
-        GetUserId $getUserIdUseCase,
-        GetUserBike $getUserBikeUseCase
+        GetUserBikeList $getUserBikeListUseCase
     ) {
         $this->user = $user;
         $this->s3Service = $s3Service;
-        $this->getUserIdUseCase = $getUserIdUseCase;
-        $this->getUserBikeUseCase = $getUserBikeUseCase;
+        $this->getUserBikeListUseCase = $getUserBikeListUseCase;
     }
 
     /**
@@ -76,9 +71,8 @@ class UsersController extends Controller
      */
     public function redirectMybikePage(): View
     {
-        $userId = $this->getUserIdUseCase->execute();
-        $bikeList = $this->getUserBikeUseCase->execute($userId);
-        return view('bikes.mybike_index', compact('userId', 'bikeList'));
+        $bikeList = $this->getUserBikeListUseCase->execute();
+        return view('bikes.mybike_index', compact('bikeList'));
     }
 
     /**
