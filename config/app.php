@@ -231,7 +231,7 @@ return [
         'Message' => App\Consts\Message::class,
         'Url' => App\Consts\Url::class,
         'Word' => App\Consts\Word::class,
-
+        'BikeStatus' => App\Enums\BikeStatus::class,
     ],
 
 ];

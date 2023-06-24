@@ -3,9 +3,10 @@
 namespace App\Adapters\Bike;
 
 use App\Bike as EloquentBike;
-use Core\src\Bike\UseCase\Ports\GetBikeQueryPort;
+use Core\src\Bike\Domain\Models\Bike;
 use Core\src\Bike\Domain\Models\BikeId;
 use Core\src\Bike\Domain\Models\BikeList;
+use Core\src\Bike\UseCase\Ports\GetBikeQueryPort;
 use Core\src\User\Domain\Models\UserId;
 
 final class GetBikeAdapter implements GetBikeQueryPort
@@ -17,9 +18,9 @@ final class GetBikeAdapter implements GetBikeQueryPort
         $this->bike = $bike;
     }
 
-    public function findByBikeId(BikeId $bikeId): EloquentBike
+    public function findByBikeId(BikeId $bikeId): Bike
     {
-        return $this->bike->getByBikeId($bikeId);
+        return $this->bike->getByBikeId($bikeId)->toModel();
     }
 
     /**

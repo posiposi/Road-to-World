@@ -31,9 +31,9 @@ class UpdateRegisteredBike
     public function execute(Bike $domainBike): void
     {
         // 既存自転車を配列で取得
-        $bike = $this->getBikePort->findByBikeId($domainBike->bikeId())->attributesToArray();
+        $bike = $this->getBikePort->findByBikeId($domainBike->bikeId());
         // S3へ画像をアップロード、保存した画像のパスを取得
-        $imagePath = $this->updateBikeImagePort->updateBikeImage($domainBike, $bike);
+        $imagePath = $this->updateBikeImagePort->updateBikeImage($domainBike, Bike::modelToArray($bike));
         // 自転車情報を永続化
         $this->updateBikePort->updateBike($domainBike, $imagePath);
     }

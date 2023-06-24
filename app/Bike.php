@@ -90,9 +90,6 @@ class Bike extends Model
             ]);
     }
 
-    /**
-     * @return DomainBike
-     */
     public function toModel(): DomainBike
     {
         return DomainBike::ofByArray($this->attributesToArray());
