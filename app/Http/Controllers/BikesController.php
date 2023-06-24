@@ -3,24 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Bike;
-use App\Enums\BikeStatus;
 use App\Consts\Word;
+use App\Enums\BikeStatus;
 use App\Http\Requests\BikeRegisterRequest;
 use App\UseCase\DeleteBike\DeleteBike;
 use App\UseCase\GetAllBikes\GetAllBikes;
+use Core\src\Bike\Domain\Models\Bike as DomainBike;
+use Core\src\Bike\UseCase\RegisterBike\RegisterBike;
 use Illuminate\Support\Facades\Auth;
+use Core\src\Bike\UseCase\UpdateRegisteredBike\UpdateRegisteredBike;
 
 class BikesController extends Controller
 {
     private $bike;
     private $getAllBikes;
     private $deleteBike;
+    private $updateBike;
+    private $registerBike;
 
-    public function __construct(Bike $bike, GetAllBikes $getAllBikes, DeleteBike $deleteBike)
-    {
+    public function __construct(
+        Bike $bike,
+        GetAllBikes $getAllBikes,
+        DeleteBike $deleteBike,
+        UpdateRegisteredBike $updateBike,
+        RegisterBike $registerBike,
+    ) {
         $this->bike = $bike;
         $this->getAllBikes = $getAllBikes;
         $this->deleteBike = $deleteBike;
+        $this->updateBike = $updateBike;
+        $this->registerBike = $registerBike;
     }
 
     /**
@@ -42,14 +54,12 @@ class BikesController extends Controller
     /**
      * 自転車を登録する
      *
-     * @param BikeRegisterRequest $request 登録する自転車の情報リクエスト
+     * @param BikeRegisterRequest $request
      * @return void
      */
     public function store(BikeRegisterRequest $request)
     {
-        // 自転車を登録する
-        $this->bike->registerBike($request);
-        // ログインユーザーのマイページへ画面変遷
+        $this->registerBike->execute($request->toArray());
         return redirect()->route('mybike.index');
     }
 
@@ -90,24 +100,28 @@ class BikesController extends Controller
     }
 
     /**
-     * 自転車の変更保存
+     * 自転車の更新
      *
-     * @param BikeRegisterRequest $request 変更する自転車の情報リクエスト
-     * @param int $id 対象自転車のid
+     * @param BikeRegisterRequest $request
+     * @param int $id
      * @return void
      */
     public function update(BikeRegisterRequest $request, int $id)
     {
-        // idで該当自転車を検索し、登録情報を変更する
-        $this->bike->updateRegisteredBike($request, $id);
-        // マイバイク画面へ戻る
+        $values = $request->toArray();
+        $values['id'] = $id;
+        $userId = Auth::id();
+        $values['user_id'] = $userId;
+        $domainBike = DomainBike::ofByArray($values);
+        $this->updateBike->execute($domainBike);
+
         return redirect()->route('mybike.index');
     }
 
     /**
      * 登録自転車の削除
      *
-     * @param int $bike_id 削除する自転車のid
+     * @param int $bikeId
      * @return void
      */
     public function destroy(int $bikeId)
