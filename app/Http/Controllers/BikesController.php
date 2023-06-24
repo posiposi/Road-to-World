@@ -12,6 +12,7 @@ use Core\src\Bike\Domain\Models\Bike as DomainBike;
 use Core\src\Bike\UseCase\RegisterBike\RegisterBike;
 use Illuminate\Support\Facades\Auth;
 use Core\src\Bike\UseCase\UpdateRegisteredBike\UpdateRegisteredBike;
+use Illuminate\View\View;
 
 class BikesController extends Controller
 {
@@ -82,15 +83,11 @@ class BikesController extends Controller
     }
 
     /**
-     * 自転車情報変更画面を表示する
-     *
-     * @param int $bike_id 対象自転車のid
-     * @var object $bike 対象となる自転車
-     * @return void
+     * @param int $bikeId
      */
-    public function edit(int $bike_id)
+    public function edit(int $bikeId): View
     {
-        $bike = Bike::findOrFail($bike_id);
+        $bike = Bike::findOrFail($bikeId);
         // 自転車保管状態ラジオボタンの選択肢を取得
         $bike_status_cases = BikeStatus::cases();
         // 入力フォーム用ラベルテキストを取得

@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth']], function () {
     // 自転車情報関連
     Route::prefix('bikes')->group(function () {
         // 自転車情報変更画面表示
-        Route::get('/{bike_id}/edit', [BikesController::class, 'edit'])->name('bikes.edit');
+        Route::get('/{bikeId}/edit', [BikesController::class, 'edit'])->name('bikes.edit');
         // 自転車情報変更
         Route::put('/{id}/update', [BikesController::class, 'update'])->name('bikes.update');
         // 自転車削除
