@@ -11,21 +11,22 @@
         "php": "~8.1.1",
         "barryvdh/laravel-ide-helper": "^2.1",
         "doctrine/dbal": "2.*",
-        "fideloper/proxy": "^4.4",
         "intervention/image": "^2.6",
-        "laravel/cashier": "13.0",
-        "laravel/framework": "^8.0",
+        "laravel/cashier": "14.0",
+        "laravel/framework": "^9.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.0",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^3.0",
+        "league/flysystem-ftp": "^3.0",
+        "league/flysystem-sftp-v3": "^3.0"
     },
     "require-dev": {
-        "facade/ignition": "^2.3.6",
+        "spatie/laravel-ignition": "^1.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.13",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^5.0",
+        "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.0"
     },
     "config": {
