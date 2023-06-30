@@ -10,14 +10,12 @@ import { createApp } from 'vue';
 import AsyncComment from './components/AsyncComment.vue';
 import HowToSection from './components/HowToSection.vue';
 import MainPageVisual from './components/MainPageVisual.vue';
-import FullCalendarComponent from './components/FullCalendarComponent.vue';
 import MyBike from './components/MyBike.vue'
 
 createApp({
     components:{
         AsyncComment,
         HowToSection,
-        FullCalendarComponent,
         MainPageVisual,
         MyBike,
     }
