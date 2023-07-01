@@ -6,20 +6,17 @@
 
 @section('content')
 
-{{-- メインコンテンツ --}}
 @if(!$isMobile)
 <main id="app">
-    <main-page-visual welcome_logo_path="{{ $welcome_logo_path }}"></main-page-visual>
+    @include('components.main_carousel')
 </main>
 @endif
 
 @if($isMobile)
-{{-- メインビジュアル --}}
 <div class="row">
     <div class="col main-visual"></div>
 </div>
 
-<!-- サイト説明文 -->
 <div class="row introduction_texts">
     <div class="col text-center">
         <h3>{{ Message::MAINPAGE_TEXT['main_title'] }}</h3>
