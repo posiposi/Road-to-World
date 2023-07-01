@@ -4,19 +4,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-
-import { createApp } from 'vue';
-import AsyncComment from './components/AsyncComment.vue';
-import HowToSection from './components/HowToSection.vue';
-import MainPageVisual from './components/MainPageVisual.vue';
-import MyBike from './components/MyBike.vue'
-
-createApp({
-    components:{
-        AsyncComment,
-        HowToSection,
-        MainPageVisual,
-        MyBike,
-    }
-}).mount('#app')
+import './bootstrap';
+import './confirm-dialog';
+import './file-preview';
