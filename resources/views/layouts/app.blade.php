@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
     {{-- 個別CSS読み込み --}}
     @stack('css')
+    @vite('resources/js/app.js')
 </head>
 
 <body>
@@ -39,7 +40,6 @@
     @include('layouts.footer')
 
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
-    <script src="{{ url(mix('js/app.js')) }}"></script>
     @yield('js')
 </body>
 
