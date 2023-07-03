@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
     {{-- 個別CSS読み込み --}}
     @stack('css')
-    @vite('resources/js/app.js')
+    @vite('resources/js/app.ts')
 </head>
 
 <body>
