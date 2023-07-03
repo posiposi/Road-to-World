@@ -17,27 +17,14 @@
 </head>
 
 <body>
-    <div class="wrapper text_font">
-        {{-- ナビゲーションバー --}}
-        @include('commons.navbar')
-
-        {{-- フラッシュメッセージ --}}
-        @if (session('flash_message'))
-        <div class="flash_message bg-danger text-center py-3 my-0">
-            {{ session('flash_message') }}
-        </div>
-        @endif
-
-        {{-- 個別ページメインセクション --}}
-        <main>
-            {{-- エラーメッセージ --}}
-            @include('commons.error_messages')
-
-            @yield('content')
-        </main>
-    </div>
+    {{-- ナビゲーションバー --}}
+    @include('commons.navbar')
+    {{-- メインコンテンツ --}}
+    @yield('content')
     {{-- フッター --}}
     @include('layouts.footer')
+    {{-- エラーメッセージ --}}
+    @include('commons.error_messages')
 
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     @yield('js')
