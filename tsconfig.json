@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ES2018",
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "strict": true,
+        "skipLibCheck": true,
+        "noImplicitAny": false
+    },
+    "include": [
+        "resources/ts/**/*"
+    ]
+}
