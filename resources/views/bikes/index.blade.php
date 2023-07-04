@@ -96,6 +96,4 @@
     <h4 class="font-weight-bold">{{ Message::NOT_AVAILABLE_RENTAL_BIKE_MESSAGE }}</h4>
     @endif
 </div>
-{{-- 確認ダイアログ --}}
-<script src="{{ url(mix('js/confirm-dialog.js')) }}"></script>
 @endsection

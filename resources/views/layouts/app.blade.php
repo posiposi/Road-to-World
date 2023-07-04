@@ -13,33 +13,20 @@
     <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
     {{-- 個別CSS読み込み --}}
     @stack('css')
+    @vite('resources/js/app.ts')
 </head>
 
 <body>
-    <div class="wrapper text_font">
-        {{-- ナビゲーションバー --}}
-        @include('commons.navbar')
-
-        {{-- フラッシュメッセージ --}}
-        @if (session('flash_message'))
-        <div class="flash_message bg-danger text-center py-3 my-0">
-            {{ session('flash_message') }}
-        </div>
-        @endif
-
-        {{-- 個別ページメインセクション --}}
-        <main>
-            {{-- エラーメッセージ --}}
-            @include('commons.error_messages')
-
-            @yield('content')
-        </main>
-    </div>
+    {{-- ナビゲーションバー --}}
+    @include('commons.navbar')
+    {{-- メインコンテンツ --}}
+    @yield('content')
     {{-- フッター --}}
     @include('layouts.footer')
+    {{-- エラーメッセージ --}}
+    @include('commons.error_messages')
 
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
-    <script src="{{ url(mix('js/app.js')) }}"></script>
     @yield('js')
 </body>
 
