@@ -1,14 +1,12 @@
 /**
  * 予約確認ダイアログを表示する
- * @param {Object} e イベントオブジェクト
- * @returns {boolean} true:OKボタン押下、false:イベントキャンセル
  */
-const showConfirmDialog = (e) => {
-    if(window.confirm('予約してもよろしいですか？')) {
+const showConfirmDialog = (event: Event) => {
+    if (window.confirm('予約してもよろしいですか？')) {
         return true;
     } else {
-        e.stopPropagation();
-        e.preventDefault();
+        event.stopPropagation();
+        event.preventDefault();
     }
 };
 
