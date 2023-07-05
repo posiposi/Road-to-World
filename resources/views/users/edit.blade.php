@@ -4,12 +4,10 @@
 <link rel="stylesheet" href="{{ asset('assets/css/user_edit.css') }}">
 @endpush
 
-
 @section('content')
 <div class="text-center my-4">
     <h1>会員情報変更</h1>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
@@ -54,6 +52,4 @@
         </div>
     </div>
 </div>
-{{-- アバター画像プレビュー --}}
-<script src="{{ url(mix('js/file-preview.js')) }}"></script>
 @endsection

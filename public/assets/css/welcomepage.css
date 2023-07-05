@@ -70,3 +70,7 @@ ol {
 .introduction_texts {
     font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
 }
+
+.carousel-item {
+    height: 700px;
+}

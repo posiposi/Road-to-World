@@ -3,7 +3,7 @@ const previewImage = (file) => {
     const image = document.querySelector('.avatar-img');
 
     const reader = new FileReader();
-    
+
     reader.onload = (e) => {
         const imageUrl = e.target.result;
         image.src = imageUrl;
@@ -15,10 +15,12 @@ const previewImage = (file) => {
 // ファイルインプットを取得
 const fileInput = document.querySelector('.avatarHiddenBtn');
 
-const handleFileSelect = () => {
-    const files = fileInput.files;
-    for (let i = 0; i < files.length; i++) {
-        previewImage(files[i]);
+if (fileInput) {
+    const handleFileSelect = () => {
+        const files = fileInput.files;
+        for (let i = 0; i < files.length; i++) {
+            previewImage(files[i]);
+        }
     }
+    fileInput.addEventListener('change', handleFileSelect);
 }
-fileInput.addEventListener('change', handleFileSelect);
