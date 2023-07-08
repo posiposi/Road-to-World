@@ -5,5 +5,5 @@
  */
 
 import './bootstrap';
-import './confirm-dialog';
-import './file-preview';
+import '../ts/confirm-dialog';
+import '../ts/file-preview';
