@@ -16,13 +16,13 @@
             {{-- 左側メニュー --}}
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    {{ link_to_route('bikes.get', '自転車を貸す', [], ['class' => 'btn text-white']) }}
+                    <a href="{{ route('bikes.get') }}" class="btn text-white">自転車を貸す</a>
                 </li>
                 <li class="nav-item">
-                    {{ link_to_route('bikes.index', '自転車を借りる', [], ['class' => 'btn text-white']) }}
+                    <a href="{{ route('bikes.index') }}" class="btn text-white">自転車を借りる</a>
                 </li>
                 <li class="nav-item">
-                    {{ link_to_route('search', '自転車を検索', [], ['class' => 'btn text-white']) }}
+                    <a href="{{ route('search') }}" class="btn text-white">自転車を検索</a>
                 </li>
             </ul>
             {{-- 右側メニュー --}}

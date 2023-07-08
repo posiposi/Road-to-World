@@ -69,19 +69,24 @@
                             <ul class="list-group list-unstyled mt-3">
                                 {{-- ログインユーザがバイク所有者の場合 --}}
                                 @if($user->id == $bike->user_id)
-                                {{ link_to_route('comments.index', Word::BIKE_INDEX_LABEL['to_comment_room_index'],
-                                ['bikeId' => $bike->id, 'lenderId' => $user->id,], ['class' => 'btn btn-success']) }}
-                                {{-- ログインユーザが借り手側の場合 --}}
+                                <a href="{{ route('comments.index', [
+                                        'bikeId' => $bike->id,
+                                        'lenderId' => $user->id
+                                    ]) }}" class="btn btn-success">コメントルーム一覧へ</a>
                                 @else
-                                {{ link_to_route('comments.show', Word::BIKE_INDEX_LABEL['to_comment_room'], ['bikeId'
-                                => $bike->id, 'senderId' => $user->id, 'receiverId' => $bike->user_id], ['class' => 'btn
-                                btn-success']) }}
+                                <a href="{{ route('comments.show', [
+                                        'bikeId' => $bike->id,
+                                        'senderId' => $user->id,
+                                        'receiverId' => $bike->user_id
+                                    ]) }}" class="btn btn-success">コメントルームへ</a>
                                 @endif
                             </ul>
                             <ul class="list-group list-unstyled mt-3">
-                                {{ link_to_route('bikes.calendar', Word::BIKE_INDEX_LABEL['reservation_calendar'],
-                                ['bikeId' => $bike->id, 'week' => 'this_week', 'now' => 'today'], ['class' => 'btn
-                                btn-success']) }}
+                                <a href="{{ route('bikes.calendar', [
+                                        'bikeId' => $bike->id,
+                                        'week' => 'this_week',
+                                        'now' => 'today'
+                                    ]) }}" class="btn btn-success">予約状況カレンダー</a>
                             </ul>
                             @endauth
                         </div>
