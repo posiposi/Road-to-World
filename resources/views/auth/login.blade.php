@@ -13,22 +13,21 @@
     {{-- 入力フォーム --}}
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
-            {{ Form::open(['route' => 'login.post']) }}
-            <div>
-                {{ Form::label('email', 'メールアドレス') }}
-                {{ Form::email('email', null, ['class' => 'form-control']) }}
-            </div>
-            <div>
-                {{ Form::label('password', 'パスワード') }}
-                {{ Form::password('password', ['class' => 'form-control']) }}
-            </div>
-
-            {{ Form::submit('ログイン', ['class' => 'd-block login-btn btn mx-auto mt-5 rounded-pill']) }}
-
-            <p class="text-center">
-                <a href="{{ route('signup.get') }}" id="register_account">アカウントを作成する</a>
-            </p>
-            {{ Form::close() }}
+            <form action="{{ route('login.post') }}" method="post">
+                @csrf
+                <div>
+                    <label for="email">メールアドレス</label>
+                    <input class="form-control" name="email" type="email">
+                </div>
+                <div>
+                    <label for="password">パスワード</label>
+                    <input class="form-control" name="password" type="password">
+                </div>
+                <input class="d-block login-btn btn mx-auto mt-5 rounded-pill" type="submit" value="ログイン">
+                <p class="text-center">
+                    <a href="{{ route('signup.get') }}" id="register_account">アカウントを作成する</a>
+                </p>
+            </form>
         </div>
     </div>
 </div>
