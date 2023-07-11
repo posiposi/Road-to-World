@@ -17,44 +17,37 @@
                 <div>
                     <i class="fas fa-exclamation-circle"></i>{{ Word::WORD_LIST['required_content'] }}
                 </div>
-
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ Form::label('name', '氏名') }}
-                    {{ Form::text('name', null, ['class' => 'form-control']) }}
+                    <label for="name">氏名</label>
+                    <input class="form-control" type="text" name="name">
                 </div>
-
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ Form::label('nickname', 'ニックネーム') }}
-                    {{ Form::text('nickname', null, ['class' => 'form-control']) }}
+                    <label for="nickname">ニックネーム</label>
+                    <input class="form-control" type="text" name="nickname">
                 </div>
-
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ Form::label('email', 'メールアドレス') }}
-                    {{ Form::email('email', null, ['class' => 'form-control']) }}
+                    <label for="email">メールアドレス</label>
+                    <input class="form-control" type="email" name="email">
                 </div>
-
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ Form::label('tel', '電話番号') }}
-                    {{ Form::text('tel', null, ['class' => 'form-control', 'placeholder' => 'ハイフン無しの半角数字で入力して下さい。'])}}
+                    <label for="tel">電話番号</label>
+                    <input class="form-control" type="tel" name="tel" placeholder="ハイフン無し、半角数字で入力してください。">
                 </div>
-
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ Form::label('password', 'パスワード') }}
-                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => '8文字以上で入力して下さい。']) }}
+                    <label for="password">パスワード</label>
+                    <input class="form-control" type="password" name="password" placeholder="8文字以上で入力して下さい。">
                 </div>
-
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ Form::label('password_confirmation', 'パスワード確認') }}
-                    {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
+                    <label for="password_confirmation">パスワード確認</label>
+                    <input class="form-control" type="password" name="password_confirmation">
                 </div>
-
-                {{ Form::submit('登録', ['class' => 'btn user-register-btn rounded-pill mt-3']) }}
+                <input class="btn user-register-btn rounded-pill mt-3" type="submit" value="登録">
             </form>
         </div>
     </div>

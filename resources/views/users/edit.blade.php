@@ -23,31 +23,32 @@
                 </div>
 
                 <div class="mb-3">
-                    {{ Form::label('name', '氏名') }}
-                    {{ Form::text('name', old('name', $login_user->name), ['class' => 'form-control']) }}
+                    <label for="name">氏名</label>
+                    <input class="form-control" name="name" type="text" value="{{ old('name', $login_user->name) }}">
                 </div>
 
                 <div class="mb-3">
-                    {{ Form::label('nickname', 'ニックネーム') }}
-                    {{ Form::text('nickname', old('nickname', $login_user->nickname), ['class' => 'form-control']) }}
+                    <label for="nickname">ニックネーム</label>
+                    <input class="form-control" name="nickname" type="text"
+                        value="{{ old('nickname', $login_user->nickname) }}">
                 </div>
 
                 <div class="mb-3">
-                    {{ Form::label('email', 'メールアドレス') }}
-                    {{ Form::email('email', old('email', $login_user->email), ['class' => 'form-control']) }}
+                    <label for="email">メールアドレス</label>
+                    <input class="form-control" name="email" type="email"
+                        value="{{ old('email', $login_user->email) }}">
                 </div>
 
                 <div class="mb-3">
-                    {{ Form::label('tel', '電話番号') }}
-                    {{ Form::text('tel', old('tel', $login_user->tel), ['class' => 'form-control'])}}
+                    <label for="tel">電話番号</label>
+                    <input class="form-control" name="tel" type="tel" value="{{ old('tel', $login_user->tel) }}">
                 </div>
 
                 <div class="mb-3">
-                    {{ Form::label('password', 'パスワード') }}
-                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' =>
-                    '新しく設定したいパスワードを8文字以上で入力して下さい。']) }}
+                    <label for="password">パスワード</label>
+                    <input class="form-control" name="password" type="password" placeholder="新しいパスワードを8文字以上で設定して下さい。">
                 </div>
-                {{ Form::submit('変更', ['class' => 'btn btn-success btn-change']) }}
+                <input class="btn btn-success btn-change" type="submit" value="変更">
             </form>
         </div>
     </div>
