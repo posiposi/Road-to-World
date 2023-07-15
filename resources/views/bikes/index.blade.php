@@ -37,7 +37,7 @@
                                 </li>
                             </ul>
                             @auth
-                            {{-- 予約リクエストフォーム --}}
+                            @if ($user->id !== $bike->user_id)
                             <ul class="list-group list-unstyled mt-3">
                                 <form class="reservation-form"
                                     action="{{ route('bikes.reservation', ['bikeId' => $bike->id]) }}" method="post">
@@ -66,6 +66,7 @@
                                     </button>
                                 </form>
                             </ul>
+                            @endif
                             <ul class="list-group list-unstyled mt-3">
                                 {{-- ログインユーザがバイク所有者の場合 --}}
                                 @if($user->id == $bike->user_id)
