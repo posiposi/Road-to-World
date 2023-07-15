@@ -36,54 +36,7 @@
                                     <p class="mt-2">{{ $bike->remark }}</p>
                                 </li>
                             </ul>
-                            @auth
-                            {{-- 予約リクエストフォーム --}}
-                            <ul class="list-group list-unstyled mt-3">
-                                <form class="reservation-form"
-                                    action="{{ route('bikes.reservation', ['bikeId' => $bike->id]) }}" method="post">
-                                    @csrf
-                                    <li class="list-group-item">{{ Word::BIKE_INDEX_LABEL['start_date'] }}<input
-                                            type="date" name="start_date"><br>
-                                        {{ Word::BIKE_INDEX_LABEL['start_time'] }}
-                                        <select name="start_time">
-                                            @foreach($times as $time)
-                                            <option value="{{ $time }}">{{ $time }}</option>
-                                            @endforeach
-                                        </select>
-                                    </li>
-                                    <li class="list-group-item">{{ Word::BIKE_INDEX_LABEL['end_date'] }}<input
-                                            type="date" name="end_date"><br>
-                                        {{ Word::BIKE_INDEX_LABEL['end_time'] }}
-                                        <select name="end_time">
-                                            @foreach($times as $time)
-                                            <option value="{{ $time }}">{{ $time }}</option>
-                                            @endforeach
-                                        </select>
-                                    </li>
-                                    <button type="submit" id="reservation-btn"
-                                        class="btn btn-primary rounded-pill d-block mt-2 mx-auto">
-                                        予約
-                                    </button>
-                                </form>
-                            </ul>
-                            <ul class="list-group list-unstyled mt-3">
-                                {{-- ログインユーザがバイク所有者の場合 --}}
-                                @if($user->id == $bike->user_id)
-                                {{ link_to_route('comments.index', Word::BIKE_INDEX_LABEL['to_comment_room_index'],
-                                ['bikeId' => $bike->id, 'lenderId' => $user->id,], ['class' => 'btn btn-success']) }}
-                                {{-- ログインユーザが借り手側の場合 --}}
-                                @else
-                                {{ link_to_route('comments.show', Word::BIKE_INDEX_LABEL['to_comment_room'], ['bikeId'
-                                => $bike->id, 'senderId' => $user->id, 'receiverId' => $bike->user_id], ['class' => 'btn
-                                btn-success']) }}
-                                @endif
-                            </ul>
-                            <ul class="list-group list-unstyled mt-3">
-                                {{ link_to_route('bikes.calendar', Word::BIKE_INDEX_LABEL['reservation_calendar'],
-                                ['bikeId' => $bike->id, 'week' => 'this_week', 'now' => 'today'], ['class' => 'btn
-                                btn-success']) }}
-                            </ul>
-                            @endauth
+                            @include('bikes.index_auth')
                         </div>
                     </div>
                 </div>
