@@ -20,7 +20,9 @@
     {{-- ナビゲーションバー --}}
     @include('commons.navbar')
     {{-- メインコンテンツ --}}
-    @yield('content')
+    <div class="container">
+        @yield('content')
+    </div>
     {{-- フッター --}}
     @include('layouts.footer')
     {{-- エラーメッセージ --}}

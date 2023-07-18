@@ -12,19 +12,19 @@ class Comment extends Model
     protected $fillable = [
         'body', 'sender_id', 'receiver_id', 'bike_id',
     ];
-    
+
     /** 一対多の記述(コメントは一人のユーザに従属) */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     /** 一対多の記述(コメントは一台のバイクに従属) */
     public function bike()
     {
         return $this->belongsTo(Bike::class);
     }
-    
+
     /** 一対多の記述(コメントは複数のリプライを所有) */
     public function riplies()
     {
@@ -46,12 +46,12 @@ class Comment extends Model
      *
      * @param int $bikeId 対象の自転車id
      * @param int $lenderId 借り手側ユーザーid
-     * @return array 
      */
-    public function getInfoForBikesIndex($bikeId, $lenderId){
+    public function getInfoForBikesIndex($bikeId, $lenderId): array
+    {
         $bike = Bike::findOrFail($bikeId);
-        $user = User::where('id', '!=', $lenderId)->get();
-        return [$bike, $user];
+        $users = User::where('id', '!=', $lenderId)->get();
+        return [$bike, $users];
     }
 
     /**
@@ -62,7 +62,8 @@ class Comment extends Model
      * @param int $receiverId 貸し手側ユーザーのid
      * @return array コメントルーム一覧表示用の情報
      */
-    public function getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId){
+    public function getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId)
+    {
         $bike = Bike::findOrFail($bikeId);
         $login_user = Auth::id();
         $sender = User::findOrFail($senderId);
@@ -81,7 +82,8 @@ class Comment extends Model
      * @param int $receiverId コメント受信者id
      * @return void
      */
-    public function saveComment($request, $bikeId, $senderId, $receiverId){
+    public function saveComment($request, $bikeId, $senderId, $receiverId)
+    {
         /* コメント本文 */
         $this->body = $request->body;
         /* コメント送信者ID */
