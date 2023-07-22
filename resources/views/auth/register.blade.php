@@ -47,7 +47,7 @@
                     <label for="password_confirmation">パスワード確認</label>
                     <input class="form-control" type="password" name="password_confirmation">
                 </div>
-                <input class="btn user-register-btn rounded-pill mt-3" type="submit" value="登録">
+                <input class="btn user-register-btn rounded-pill mt-3 mb-3" type="submit" value="登録">
             </form>
         </div>
     </div>
