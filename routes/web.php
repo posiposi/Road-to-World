@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MessageAdded;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SearchController;
@@ -8,18 +9,15 @@ use App\Http\Controllers\BikesController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\Message\SendMessageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\Message\RedirectMessageRoomController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Message\GetMessagesController;
 
 // メインページ
 Route::get('/', [TopPageController::class, 'index'])->name('home');
-
-// Full-Calendarテスト
-// 前月、次月への変遷技術調査が完了するまでコメントアウト
-// Route::get('/calendar', function(){
-//     return view('calendar');
-// });
 
 // ユーザー登録
 Route::prefix('signup')->group(function () {
@@ -115,4 +113,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/{amount}/{bikeId}/{startTime}/{endTime}/payment', [PaymentsController::class, 'payment'])->name('payment');
     // 決済完了ページ表示
     Route::get('/complete', [PaymentsController::class, 'complete'])->name('complete');
+
+    // メッセージテストルームへリダイレクト
+    Route::get('messages/room', RedirectMessageRoomController::class);
+    // 既存メッセージ取得
+    Route::get('messages/get', GetMessagesController::class);
+    // メッセージイベント発行
+    Route::post('message', SendMessageController::class);
 });

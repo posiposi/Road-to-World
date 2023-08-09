@@ -53,10 +53,10 @@
             </div>
         </div>
     </div>
-    <div id="app" class="comment-area row mb-4">
-        <async-comment
-            v-bind:data="{sender: {{ $sender }}, sendercomments: {{ $sender_comments }}, receiver: {{ $receiver }}, receivercomments: {{ $receiver_comments }}}">
-        </async-comment>
+    <div class="card-body">
+        <input type="text" class="form-control" v-model="comment_input" ref="comment_form">
+        <button id="btn-message-send" class="btn btn-primary mt-2">送信</button>
     </div>
 </div>
+@vite('resources/ts/sendMessage.ts')
 @endsection
