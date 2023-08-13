@@ -11,7 +11,6 @@ class GetMessagesController extends Controller
 {
     public function __invoke()
     {
-        // TODO 本実装時に挿入データを正規のものにすること
         $senderId = Auth::id();
         $bikeId = 9;
         $receiverId = 2;
