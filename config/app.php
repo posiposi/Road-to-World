@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\BikeServiceProvider::class,
         App\Providers\UserServiceProvider::class,
+        App\Providers\CommentServiceProvider::class,
     ],
 
     /*
