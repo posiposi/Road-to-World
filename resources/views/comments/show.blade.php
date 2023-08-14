@@ -63,4 +63,5 @@
     </div>
 </div>
 @vite('resources/ts/sendMessage.ts')
+@vite('resources/ts/getMessage.ts')
 @endsection
