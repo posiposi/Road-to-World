@@ -117,7 +117,7 @@ Route::group(['middleware' => ['auth']], function () {
     // メッセージテストルームへリダイレクト
     Route::get('messages/room', RedirectMessageRoomController::class);
     // 既存メッセージ取得
-    Route::get('messages/get', GetMessagesController::class);
+    Route::get('messages/{loginUserId}/{anotherUserId}/{bikeId}/get', GetMessagesController::class);
     // メッセージイベント発行
     Route::post('message', SendMessageController::class);
 });
