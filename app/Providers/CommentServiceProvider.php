@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Adapters\Bike\GetCommentAdapter;
+use App\Adapters\Comment\GetCommentAdapter;
 use Core\src\Comment\UseCase\Ports\GetCommentQueryPort;
 use Illuminate\Support\ServiceProvider;
 

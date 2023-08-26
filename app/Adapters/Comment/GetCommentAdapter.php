@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Adapters\Bike;
+namespace App\Adapters\Comment;
 
 use Core\src\Comment\Domain\Models\SenderId;
 use Core\src\Comment\Domain\Models\ReceiverId;
@@ -23,6 +23,8 @@ class GetCommentAdapter implements GetCommentQueryPort
 
     public function getComment(SenderId $senderId, ReceiverId $receiverId, BikeId $bikeId): Comment
     {
-        return $this->eloquentComment->toModel($senderId, $receiverId, $bikeId);
+        $values = $this->eloquentComment->getComment($senderId, $receiverId, $bikeId)->toArray();
+        // TODO コメントリストクラスを定義後、返却するように実装する
+        return Comment::fromArray($values);
     }
 }
