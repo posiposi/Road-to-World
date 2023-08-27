@@ -8,6 +8,7 @@ use Core\src\Bike\Domain\Models\BikeId;
 use Core\src\Comment\Domain\Models\Comment as ModelsComment;
 use Core\src\Comment\Domain\Models\ReceiverId;
 use Core\src\Comment\Domain\Models\SenderId;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,14 +48,14 @@ class Comment extends Model
         return $date->format('m/d H:i');
     }
 
-    public function getComment(SenderId $senderId, ReceiverId $receiverId, BikeId $bikeId)
+    public function getComment(SenderId $senderId, ReceiverId $receiverId, BikeId $bikeId): Collection
     {
         $query = $this->newQuery();
-        $query->where('sender_id', $senderId->toInt())
+        $comments = $query->where('sender_id', $senderId->toInt())
             ->where('receiver_id', $receiverId->toInt())
             ->where('bike_id', $bikeId->toInt())
             ->get();
-        return $query->toArray();
+        return $comments;
     }
 
     /**
@@ -112,8 +113,8 @@ class Comment extends Model
         $this->save();
     }
 
-    public function toModel(SenderId $senderId, ReceiverId $receiverId, BikeId $bikeId): ModelsComment
+    public function toModel(array $values): ModelsComment
     {
-        return ModelsComment::fromArray($this->getComment($senderId, $receiverId, $bikeId));
+        return ModelsComment::fromArray($values);
     }
 }
