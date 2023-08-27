@@ -54,10 +54,10 @@ final class Comment
     public static function fromArray(array $value): self
     {
         return new self(
-            SenderId::of($value['sender_id']),
-            ReceiverId::of($value['receiver_id']),
-            BikeId::of($value['bike_id']),
-            CommentBody::of($value['body'])
+            SenderId::of($value['sender_id'] ?? 0),
+            ReceiverId::of($value['receiver_id'] ?? 0),
+            BikeId::of($value['bike_id'] ?? 0),
+            CommentBody::of($value['body'] ?? '')
         );
     }
 }
