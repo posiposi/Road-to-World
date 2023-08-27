@@ -1,18 +1,28 @@
 import axios from "axios";
 
+const splitPathName: Array<string> = location.pathname.split('/');
+const bikeId: number = Number(splitPathName[2]);
+const loginUserId: number = Number(splitPathName[3]);
+const anotherUserId: number = Number(splitPathName[4]);
+
 const getMessageList = () => {
-  axios.get('/messages/get')
+  axios.get('/messages/' + loginUserId + '/' + anotherUserId + '/' + bikeId + '/get')
     .then((result) => {
       const resultObj = result.data;
       console.log(resultObj);
-      for (let index = 0; index < resultObj.length; index++) {
-        const message = resultObj[index];
-        initMessageList(message.body);
-      }
+      // TODO getで取得してくるのがコメントリストクラスでないためフロント側で描画されない
+      initMessageList(resultObj[0].body);
+      // ループ不要か検討すること
+      // for (let index = 0; index < resultObj.length; index++) {
+      //   // const message = resultObj[index];
+      //   const message = resultObj;
+      //   console.log(message);
+      //   initMessageList(message.body);
+      // }
     })
     .catch((error) => {
       console.log('error!');
-      console.log(error.data);
+      console.log(error);
     });
 };
 

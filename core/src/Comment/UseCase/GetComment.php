@@ -3,7 +3,7 @@
 namespace Core\src\Comment\UseCase;
 
 use Core\src\Bike\Domain\Models\BikeId;
-use Core\src\Comment\Domain\Models\Comment;
+use Core\src\User\Domain\Models\UserId;
 use Core\src\Comment\Domain\Models\ReceiverId;
 use Core\src\Comment\Domain\Models\SenderId;
 use Core\src\Comment\UseCase\Ports\GetCommentQueryPort;
@@ -21,10 +21,20 @@ final class GetComment
     }
 
     public function execute(
-        SenderId $senderId,
-        ReceiverId $receiverId,
+        UserId $loginUserId,
+        UserId $anotherUserId,
         BikeId $bikeId
-    ): Comment {
-        return $this->getCommentQueryPort->getComment($senderId, $receiverId, $bikeId);
+    ) {
+        $fromLoginUserToAntherUserComments = $this->getCommentQueryPort->getComment(
+            SenderId::of($loginUserId->toInt()),
+            ReceiverId::of($anotherUserId->toInt()),
+            $bikeId
+        );
+        $fromAnotherUserToLoginUserComments = $this->getCommentQueryPort->getComment(
+            SenderId::of($anotherUserId->toInt()),
+            ReceiverId::of($loginUserId->toInt()),
+            $bikeId
+        );
+        return [$fromLoginUserToAntherUserComments, $fromAnotherUserToLoginUserComments];
     }
 }
