@@ -25,31 +25,13 @@ class GetMessagesController extends Controller
         $anotherUserId = Userid::of($anotherUserId);
         $bikeId = BikeId::of($bikeId);
         $usersComments = $this->useCase->execute($loginUserId, $anotherUserId, $bikeId);
+        $loginUserCommentList = $usersComments[0]->items();
+        $anotherUserCommentList = $usersComments[1]->items();
         return response()->json(
             [
-                $loginUserComments = [
-                    'bikeId' => $usersComments[0]->bikeId()->toInt(),
-                    'senderId' => $usersComments[0]->senderId()->toInt(),
-                    'receiverId' => $usersComments[0]->receiverId()->toInt(),
-                    'body' => $usersComments[0]->commentBody()->toString()
-                ],
-                $anotherUserComments = [
-                    'bikeId' => $usersComments[1]->bikeId()->toInt(),
-                    'senderId' => $usersComments[1]->senderId()->toInt(),
-                    'receiverId' => $usersComments[1]->receiverId()->toInt(),
-                    'body' => $usersComments[1]->commentBody()->toString()
-                ]
+                "loginUserComments" => $loginUserCommentList,
+                "anotherUserComments" => $anotherUserCommentList
             ]
         );
-
-        // $senderId = Auth::id();
-        // $bikeId = 9;
-        // $receiverId = 2;
-        // $query = DB::table('comments')
-        //     ->where('bike_id', $bikeId)
-        //     ->where('receiver_id', $receiverId)
-        //     ->where('sender_id', $senderId)
-        //     ->get();
-        // return $query;
     }
 }

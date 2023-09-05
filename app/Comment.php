@@ -52,6 +52,7 @@ class Comment extends Model
     {
         $query = $this->newQuery();
         $comments = $query->where('sender_id', $senderId->toInt())
+            ->join('users', 'comments.sender_id', '=', 'users.id')
             ->where('receiver_id', $receiverId->toInt())
             ->where('bike_id', $bikeId->toInt())
             ->get();

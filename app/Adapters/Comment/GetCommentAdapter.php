@@ -2,12 +2,13 @@
 
 namespace App\Adapters\Comment;
 
-use Core\src\Comment\Domain\Models\SenderId;
-use Core\src\Comment\Domain\Models\ReceiverId;
-use Core\src\Bike\Domain\Models\BikeId;
-use Core\src\Comment\Domain\Models\Comment;
-use Core\src\Comment\UseCase\Ports\GetCommentQueryPort;
 use App\Comment as EloquentComment;
+use Core\src\Bike\Domain\Models\BikeId;
+use Core\src\Comment\Domain\Models\CommentList;
+use Core\src\Comment\Domain\Models\ReceiverId;
+use Core\src\Comment\Domain\Models\SenderId;
+use Core\src\Comment\UseCase\Ports\GetCommentQueryPort;
+
 
 class GetCommentAdapter implements GetCommentQueryPort
 {
@@ -21,10 +22,9 @@ class GetCommentAdapter implements GetCommentQueryPort
         $this->eloquentComment = $eloquentComment;
     }
 
-    public function getComment(SenderId $senderId, ReceiverId $receiverId, BikeId $bikeId): Comment
+    public function getCommentList(SenderId $senderId, ReceiverId $receiverId, BikeId $bikeId): CommentList
     {
         $values = $this->eloquentComment->getComment($senderId, $receiverId, $bikeId)->toArray();
-        // TODO コメントリストクラスを定義後、返却するように実装する
-        return Comment::fromArray($values);
+        return CommentList::fromArray($values);
     }
 }

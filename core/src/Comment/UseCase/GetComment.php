@@ -25,16 +25,17 @@ final class GetComment
         UserId $anotherUserId,
         BikeId $bikeId
     ) {
-        $fromLoginUserToAntherUserComments = $this->getCommentQueryPort->getComment(
+        $fromLoginUserToAntherUserComments = $this->getCommentQueryPort->getCommentList(
             SenderId::of($loginUserId->toInt()),
             ReceiverId::of($anotherUserId->toInt()),
             $bikeId
         );
-        $fromAnotherUserToLoginUserComments = $this->getCommentQueryPort->getComment(
+        $fromAnotherUserToLoginUserComments = $this->getCommentQueryPort->getCommentList(
             SenderId::of($anotherUserId->toInt()),
             ReceiverId::of($loginUserId->toInt()),
             $bikeId
         );
+        // dd($fromAnotherUserToLoginUserComments);
         return [$fromLoginUserToAntherUserComments, $fromAnotherUserToLoginUserComments];
     }
 }
