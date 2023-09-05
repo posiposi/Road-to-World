@@ -1,6 +1,5 @@
 <?php
 
-use App\Events\MessageAdded;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SearchController;
@@ -119,5 +118,5 @@ Route::group(['middleware' => ['auth']], function () {
     // 既存メッセージ取得
     Route::get('messages/{loginUserId}/{anotherUserId}/{bikeId}/get', GetMessagesController::class);
     // メッセージイベント発行
-    Route::post('message', SendMessageController::class);
+    Route::post('message/{loginUserId}/{anotherUserId}/{bikeId}/post', SendMessageController::class);
 });
