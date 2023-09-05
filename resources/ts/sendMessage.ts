@@ -1,5 +1,10 @@
 import axios from "axios";
 
+const splitPathName: Array<string> = location.pathname.split('/');
+const bikeId: number = Number(splitPathName[2]);
+const loginUserId: number = Number(splitPathName[3]);
+const anotherUserId: number = Number(splitPathName[4]);
+
 const btnSendMessage = <HTMLButtonElement>
 	document.querySelector("#btn-message-send");
 
@@ -16,7 +21,7 @@ const addMessageList = (addMessage: string): void => {
 }
 
 const sendMessage = (): void => {
-	axios.post('/message', { message: inputMessage.value })
+	axios.post('/message/' + loginUserId + '/' + anotherUserId + '/' + bikeId + '/post', { message: inputMessage.value })
 		.then((result) => {
 			addMessageList(inputMessage.value);
 			console.log("success!");
