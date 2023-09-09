@@ -9,10 +9,12 @@ const getMessageList = () => {
   axios.get('/messages/' + loginUserId + '/' + anotherUserId + '/' + bikeId + '/get')
     .then((result) => {
       const resultObj = result.data;
+      console.log(resultObj);
       let usersMessage = [...resultObj.loginUserComments, ...resultObj.anotherUserComments];
       let sortedUsersMessage = usersMessage.sort((x, y) => {
         return (x.created_at < y.created_at) ? -1 : 1;
       });
+      console.log(sortedUsersMessage);
       for (let index = 0; index < sortedUsersMessage.length; index++) {
         const date: string = sortedUsersMessage[index].created_at;
         const message: string = sortedUsersMessage[index].body;
@@ -26,6 +28,7 @@ const getMessageList = () => {
 };
 
 const initMessageList = (userName: string, date: string, message: string) => {
+  console.log(date);
   let listBlock = document.querySelector('#list-block');
   let list: HTMLLIElement = document.createElement('li');
   list.innerText = userName + ' ' + date + ' ' + message;

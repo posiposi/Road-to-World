@@ -11,12 +11,13 @@ const btnSendMessage = <HTMLButtonElement>
 const inputMessage = <HTMLInputElement>
 	document.querySelector('#input-message');
 
-const addMessageList = (addMessage: string): void => {
+const addMessageList = async (addMessage: string) => {
 	const listBlock = document.querySelector('#list-block');
 	let list: HTMLLIElement = document.createElement('li');
 	const DateTimeObject: Date = new Date();
 	const sendDateTime: string = DateTimeObject.toLocaleString('ja-JP', { month: "2-digit", day: "2-digit", hour: "numeric", minute: "numeric" });
-	list.innerText = sendDateTime + ' ' + addMessage;
+	const senderNickname = await getUserNickname();
+	list.innerText = senderNickname + ' ' + sendDateTime + ' ' + addMessage;
 	listBlock?.appendChild(list);
 }
 
@@ -24,12 +25,21 @@ const sendMessage = (): void => {
 	axios.post('/message/' + loginUserId + '/' + anotherUserId + '/' + bikeId + '/post', { message: inputMessage.value })
 		.then((result) => {
 			addMessageList(inputMessage.value);
-			console.log("success!");
 		})
 		.catch((error) => {
-			console.log("error!");
+			console.log(error);
 		});
 };
+
+const getUserNickname = async () => {
+	return await axios.get(location.href + '/users/get')
+		.then((result) => {
+			return result.data.userNickname;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+}
 
 const listenMessageChannel = () => {
 	window.Echo.channel('message-added-channel').listen(

@@ -35,7 +35,6 @@ final class GetComment
             ReceiverId::of($loginUserId->toInt()),
             $bikeId
         );
-        // dd($fromAnotherUserToLoginUserComments);
         return [$fromLoginUserToAntherUserComments, $fromAnotherUserToLoginUserComments];
     }
 }

@@ -55,6 +55,7 @@ class Comment extends Model
             ->join('users', 'comments.sender_id', '=', 'users.id')
             ->where('receiver_id', $receiverId->toInt())
             ->where('bike_id', $bikeId->toInt())
+            ->select('users.nickname', 'comments.body', 'comments.created_at')
             ->get();
         return $comments;
     }

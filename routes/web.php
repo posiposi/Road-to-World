@@ -2,18 +2,19 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\TopPageController;
 use App\Http\Controllers\BikesController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\Message\GetMessagesController;
+use App\Http\Controllers\Message\RedirectMessageRoomController;
+use App\Http\Controllers\Message\SendMessageController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\Message\SendMessageController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TopPageController;
+use App\Http\Controllers\User\GetUserNicknameController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\Message\RedirectMessageRoomController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Message\GetMessagesController;
 
 // メインページ
 Route::get('/', [TopPageController::class, 'index'])->name('home');
@@ -103,6 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{senderId}/{receiverId}/store', [CommentsController::class, 'store'])->name('comments.store');
         // コメント取得
         Route::get('/{senderId}/{receiverId}/get', [CommentsController::class, 'getSenderAndReceiverComment'])->name('comments.get');
+        Route::get('/{senderId}/{receiverId}/show/users/get', GetUserNicknameController::class)->name('nickname.get');
     });
 
     // 決済機能
