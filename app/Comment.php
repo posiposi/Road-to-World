@@ -2,29 +2,36 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use App\{Bike, User};
+use Carbon\Carbon;
+use Core\src\Bike\Domain\Models\BikeId;
+use Core\src\Comment\Domain\Models\Comment as ModelsComment;
+use Core\src\Comment\Domain\Models\ReceiverId;
+use Core\src\Comment\Domain\Models\SenderId;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Comment extends Model
 {
+    protected $table = 'comments';
+
     protected $fillable = [
         'body', 'sender_id', 'receiver_id', 'bike_id',
     ];
-    
+
     /** 一対多の記述(コメントは一人のユーザに従属) */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     /** 一対多の記述(コメントは一台のバイクに従属) */
     public function bike()
     {
         return $this->belongsTo(Bike::class);
     }
-    
+
     /** 一対多の記述(コメントは複数のリプライを所有) */
     public function riplies()
     {
@@ -41,17 +48,29 @@ class Comment extends Model
         return $date->format('m/d H:i');
     }
 
+    public function getComment(SenderId $senderId, ReceiverId $receiverId, BikeId $bikeId): Collection
+    {
+        $query = $this->newQuery();
+        $comments = $query->where('sender_id', $senderId->toInt())
+            ->join('users', 'comments.sender_id', '=', 'users.id')
+            ->where('receiver_id', $receiverId->toInt())
+            ->where('bike_id', $bikeId->toInt())
+            ->select('users.nickname', 'comments.body', 'comments.created_at')
+            ->get();
+        return $comments;
+    }
+
     /**
      * コメントルーム一覧で表示する情報を取得する
      *
      * @param int $bikeId 対象の自転車id
      * @param int $lenderId 借り手側ユーザーid
-     * @return array 
      */
-    public function getInfoForBikesIndex($bikeId, $lenderId){
+    public function getInfoForBikesIndex($bikeId, $lenderId): array
+    {
         $bike = Bike::findOrFail($bikeId);
-        $user = User::where('id', '!=', $lenderId)->get();
-        return [$bike, $user];
+        $users = User::where('id', '!=', $lenderId)->get();
+        return [$bike, $users];
     }
 
     /**
@@ -62,7 +81,8 @@ class Comment extends Model
      * @param int $receiverId 貸し手側ユーザーのid
      * @return array コメントルーム一覧表示用の情報
      */
-    public function getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId){
+    public function getInfoToShowCommentRoomShow($bikeId, $senderId, $receiverId)
+    {
         $bike = Bike::findOrFail($bikeId);
         $login_user = Auth::id();
         $sender = User::findOrFail($senderId);
@@ -81,7 +101,8 @@ class Comment extends Model
      * @param int $receiverId コメント受信者id
      * @return void
      */
-    public function saveComment($request, $bikeId, $senderId, $receiverId){
+    public function saveComment($request, $bikeId, $senderId, $receiverId)
+    {
         /* コメント本文 */
         $this->body = $request->body;
         /* コメント送信者ID */
@@ -92,5 +113,10 @@ class Comment extends Model
         $this->receiver_id = $receiverId;
         /* DBにコメント情報を保存する */
         $this->save();
+    }
+
+    public function toModel(array $values): ModelsComment
+    {
+        return ModelsComment::fromArray($values);
     }
 }

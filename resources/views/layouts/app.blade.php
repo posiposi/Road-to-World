@@ -19,12 +19,14 @@
 <body>
     {{-- ナビゲーションバー --}}
     @include('commons.navbar')
-    {{-- メインコンテンツ --}}
-    @yield('content')
-    {{-- フッター --}}
-    @include('layouts.footer')
     {{-- エラーメッセージ --}}
     @include('commons.error_messages')
+    {{-- メインコンテンツ --}}
+    <div class="container">
+        @yield('content')
+    </div>
+    {{-- フッター --}}
+    @include('layouts.footer')
 
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
     @yield('js')
