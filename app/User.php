@@ -2,17 +2,19 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\{Auth, Hash};
 use Storage;
 use App\Consts\Url;
 use App\{Bike, Reservation};
+use Core\src\User\Domain\Models\UserId;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -41,25 +43,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'tel' => 'string'
     ];
-    
+
     /** 一対多の記述(このUserは多数のBikeを所持する) */
     public function bikes()
     {
         return $this->hasMany(Bike::class);
     }
-    
+
     /**
      * 多対多の記述(多数のユーザが中間テーブルを通して多数の自転車を予約する。)
      * 
      * @param object reservations 予約テーブル
      * @param int user_id レンタル希望者のユーザid
      * @param int bike_id 対象自転車のid
-     */    
+     */
     public function reserving()
     {
         return $this->belongsToMany(Bike::class, 'reservations', 'user_id', 'bike_id')->withTimestamps();
     }
-    
+
     /**
      * 予約している自転車の中に対象の自転車があるか確認
      * 
@@ -70,7 +72,7 @@ class User extends Authenticatable
     {
         return $this->reserving()->where('bike_id', $bikeId)->exists();
     }
-    
+
     /** 一対多の記述(ユーザは複数のコメントを所有) */
     public function comments()
     {
@@ -104,6 +106,13 @@ class User extends Authenticatable
         $login_user->save();
     }
 
+    public function findByUserId(UserId $userId): self
+    {
+        return $this->newQuery()
+            ->where('id', $userId->toInt())
+            ->first();
+    }
+
     /**
      * ログインユーザーの情報を変更する
      *
@@ -123,7 +132,7 @@ class User extends Authenticatable
         $login_user->fill($form)->save();
         //パスワードをハッシュ化して更新する
         $login_user->fill(['password' => Hash::make($request->password)])->save();
-        
+
         // 画像の変更をしなかった場合のエラー回避のために条件確認を行う
         if (!is_null($request_image)) {
             self::registerUserAvatar($request_image, $login_user);
@@ -143,7 +152,7 @@ class User extends Authenticatable
         $bikes = Bike::all();
         /** @var array $reservations ログインユーザーが借り手の予約 */
         $reservations = Reservation::where('user_id', $login_user->id)->get();
-        
+
         return [$login_user, $bikes, $reservations];
     }
 

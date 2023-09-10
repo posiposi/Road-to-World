@@ -18,8 +18,7 @@
                 <div class="card-body">
                     <ul class="list-group list-unstyled">
                         <li class='list-group-item'> 所有者：{{ $bike->user->nickname }}</li>
-                        <li class="list-group-item"> ブランド：{{ $bike->brand }}
-                        <li>
+                        <li class="list-group-item"> ブランド：{{ $bike->brand }}</li>
                         <li class="list-group-item"> モデル名：{{ $bike->name }} </li>
                         <li class="list-group-item"> 保管状態：{{ $bike->status }} </li>
                         <li class="list-group-item"> 引き渡し場所：{{ $bike->bike_address }} </li>
@@ -53,10 +52,17 @@
             </div>
         </div>
     </div>
-    <div id="app" class="comment-area row mb-4">
-        <async-comment
-            v-bind:data="{sender: {{ $sender }}, sendercomments: {{ $sender_comments }}, receiver: {{ $receiver }}, receivercomments: {{ $receiver_comments }}}">
-        </async-comment>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>コメント</h2>
+            <ul id="list-block">
+            </ul>
+            <input id="input-message" type="text" class="form-control">
+            <button id="btn-message-send" class="btn btn-primary mt-2" disabled>送信</button>
+        </div>
     </div>
 </div>
+@vite('resources/ts/sendMessage.ts')
+@vite('resources/ts/getMessage.ts')
+@vite('resources/ts/comment.ts')
 @endsection

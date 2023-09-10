@@ -23,7 +23,9 @@
         "webpack-cli": "^5.1.4"
     },
     "dependencies": {
+        "laravel-echo": "^1.15.2",
         "mdb-ui-kit": "^6.0.1",
+        "pusher-js": "^8.3.0",
         "vue3-carousel": "^0.1.47"
     },
     "type": "module"

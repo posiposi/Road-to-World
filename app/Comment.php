@@ -2,13 +2,20 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use App\{Bike, User};
+use Carbon\Carbon;
+use Core\src\Bike\Domain\Models\BikeId;
+use Core\src\Comment\Domain\Models\Comment as ModelsComment;
+use Core\src\Comment\Domain\Models\ReceiverId;
+use Core\src\Comment\Domain\Models\SenderId;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Comment extends Model
 {
+    protected $table = 'comments';
+
     protected $fillable = [
         'body', 'sender_id', 'receiver_id', 'bike_id',
     ];
@@ -39,6 +46,18 @@ class Comment extends Model
         $date->addHours(9);
         // 時刻をフォーマットしてカラムに返却
         return $date->format('m/d H:i');
+    }
+
+    public function getComment(SenderId $senderId, ReceiverId $receiverId, BikeId $bikeId): Collection
+    {
+        $query = $this->newQuery();
+        $comments = $query->where('sender_id', $senderId->toInt())
+            ->join('users', 'comments.sender_id', '=', 'users.id')
+            ->where('receiver_id', $receiverId->toInt())
+            ->where('bike_id', $bikeId->toInt())
+            ->select('users.nickname', 'comments.body', 'comments.created_at')
+            ->get();
+        return $comments;
     }
 
     /**
@@ -94,5 +113,10 @@ class Comment extends Model
         $this->receiver_id = $receiverId;
         /* DBにコメント情報を保存する */
         $this->save();
+    }
+
+    public function toModel(array $values): ModelsComment
+    {
+        return ModelsComment::fromArray($values);
     }
 }
