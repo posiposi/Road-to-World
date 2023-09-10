@@ -23,8 +23,10 @@ const addMessageList = async (addMessage: string) => {
 
 const sendMessage = (): void => {
 	axios.post('/message/' + loginUserId + '/' + anotherUserId + '/' + bikeId + '/post', { message: inputMessage.value })
-		.then((result) => {
+		.then(() => {
 			addMessageList(inputMessage.value);
+			inputMessage.value = '';
+			btnSendMessage.setAttribute("disabled", "");
 		})
 		.catch((error) => {
 			console.log(error);
