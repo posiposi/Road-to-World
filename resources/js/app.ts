@@ -7,3 +7,4 @@
 import './bootstrap';
 import '../ts/confirm-dialog';
 import '../ts/file-preview';
+import '../ts/comment';

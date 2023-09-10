@@ -26,7 +26,6 @@ const getMessageList = () => {
 };
 
 const initMessageList = (userName: string, date: string, message: string) => {
-  console.log(date);
   let listBlock = document.querySelector('#list-block');
   let list: HTMLLIElement = document.createElement('li');
   list.innerText = userName + ' ' + date + ' ' + message;

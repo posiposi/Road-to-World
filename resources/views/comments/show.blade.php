@@ -58,10 +58,11 @@
             <ul id="list-block">
             </ul>
             <input id="input-message" type="text" class="form-control">
-            <button id="btn-message-send" class="btn btn-primary mt-2">送信</button>
+            <button id="btn-message-send" class="btn btn-primary mt-2" disabled>送信</button>
         </div>
     </div>
 </div>
 @vite('resources/ts/sendMessage.ts')
 @vite('resources/ts/getMessage.ts')
+@vite('resources/ts/comment.ts')
 @endsection
