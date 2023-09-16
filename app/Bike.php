@@ -9,9 +9,12 @@ use Core\src\Bike\Domain\Models\BikeId;
 use Core\src\User\Domain\Models\UserId;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bike extends Model
 {
+    use HasFactory;
+
     protected $table = 'bikes';
 
     private $uploadBikeImage;

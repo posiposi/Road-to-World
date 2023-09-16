@@ -9,10 +9,12 @@ use Storage;
 use App\Consts\Url;
 use App\{Bike, Reservation};
 use Core\src\User\Domain\Models\UserId;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasFactory;
 
     protected $table = 'users';
 

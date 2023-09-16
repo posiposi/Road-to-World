@@ -11,9 +11,12 @@ use Core\src\Comment\Domain\Models\SenderId;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comment extends Model
 {
+    use HasFactory;
+
     protected $table = 'comments';
 
     protected $fillable = [
