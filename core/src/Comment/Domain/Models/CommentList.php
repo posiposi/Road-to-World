@@ -9,9 +9,9 @@ final class CommentList
      */
     private $items;
 
-    public function __construct(array $parkingList = [])
+    public function __construct(array $commentList = [])
     {
-        $this->items = $parkingList;
+        $this->items = $commentList;
     }
 
     public function items(): array
