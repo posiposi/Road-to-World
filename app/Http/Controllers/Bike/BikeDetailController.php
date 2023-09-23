@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Bike;
 
 use App\Http\Controllers\Controller;
 use Core\src\Bike\Domain\Models\BikeId;
-use Core\src\Bike\UseCase\BikeDetail;
+use Core\src\Bike\UseCase\BikeDetail\BikeDetail;
 use Core\src\User\Domain\Models\UserId;
 
 class BikeDetailController extends Controller
@@ -20,10 +20,21 @@ class BikeDetailController extends Controller
     }
 
     public function __invoke(
-        UserId $loginUserId,
-        UserId $anotherUserId,
-        BikeId $bikeId
+        int $bikeId,
+        int $loginUserId,
+        int $anotherUserId
     ) {
-        $this->useCase->execute($loginUserId, $anotherUserId, $bikeId);
+        $useCaseResult = $this->useCase->execute(UserId::of($loginUserId), UserId::of($anotherUserId), BikeId::of($bikeId));
+        $bike = [
+            'bikeOwner' => $useCaseResult['ownerNickname']->userNickname()->toString(),
+            'brand' => $useCaseResult['bike']->brand()->toString(),
+            'name' => $useCaseResult['bike']->bikeName()->toString(),
+            'status' => $useCaseResult['bike']->status()->toString(),
+            'address' => $useCaseResult['bike']->bikeAddress()->toString(),
+            'price' => $useCaseResult['bike']->price()->toInt(),
+            'remark' => $useCaseResult['bike']->remark()->toString(),
+            'image' => $useCaseResult['bike']->imagePath()->toString(),
+        ];
+        return view('bikes.detail', compact('bike'));
     }
 }
