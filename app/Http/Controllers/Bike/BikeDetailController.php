@@ -26,6 +26,8 @@ class BikeDetailController extends Controller
     ) {
         $useCaseResult = $this->useCase->execute(UserId::of($loginUserId), UserId::of($anotherUserId), BikeId::of($bikeId));
         $bike = [
+            'ownerId' => $useCaseResult['bike']->userId()->toInt(),
+            'bikeId' => $useCaseResult['bike']->bikeId()->toInt(),
             'bikeOwner' => $useCaseResult['ownerNickname']->userNickname()->toString(),
             'brand' => $useCaseResult['bike']->brand()->toString(),
             'name' => $useCaseResult['bike']->bikeName()->toString(),
