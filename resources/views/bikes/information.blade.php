@@ -23,5 +23,7 @@
     <a class="btn btn-primary" href="{{ route('bikes.edit', ['bikeId' => $bike['bikeId']]) }}" role="button">
         自転車編集画面へ
     </a>
+    @else
+    @include('components.reservations.form')
     @endif
 </div>
