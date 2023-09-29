@@ -16,10 +16,20 @@
             <div class="col-md-4">
                 <div class="card mb-3 border border-0">
                     <div class="bd-placeholder-img card-img-top">
-                        <a
-                            href="{{ route('bikeDetail', ['loginUserId' => $user->id, 'anotherUserId' => $bike->user_id, 'bikeId' => $bike->id]) }}">
+                        @auth
+                        <a href="{{ route('bikeDetail', [
+                            'loginUserId' => $user->id,
+                            'anotherUserId' => $bike->user_id,
+                            'bikeId' => $bike->id
+                            ]) }}">
                             <img class="card-img img-fluid mt-4" src="{{ $bike->image_path }}" alt="自転車画像">
                         </a>
+                        @endauth
+                        @guest
+                        <a href="{{ route('login') }}">
+                            <img class="card-img img-fluid mt-4" src="{{ $bike->image_path }}" alt="自転車画像">
+                        </a>
+                        @endguest
                         <div class="card-body">
                             <ul class="list-group list-unstyled">
                                 <li class='list-group-item'> {{ Word::BIKE_INDEX_LABEL['owner'] }}{{
