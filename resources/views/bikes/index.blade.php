@@ -47,11 +47,7 @@
                                 <li class="list-group-item"> {{ Word::BIKE_INDEX_LABEL['price_yen'] }}{{
                                     number_format($bike->price) }}{{ Word::BIKE_INDEX_LABEL['per_thirty_minutes'] }}
                                 </li>
-                                <li class="list-group-item card-remark">{{ Word::BIKE_INDEX_LABEL['remark'] }}</br>
-                                    <p class="mt-2">{{ $bike->remark }}</p>
-                                </li>
                             </ul>
-                            @include('bikes.index_auth')
                         </div>
                     </div>
                 </div>

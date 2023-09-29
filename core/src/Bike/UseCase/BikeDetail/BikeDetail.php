@@ -41,7 +41,8 @@ final class BikeDetail
     ) {
         $bike = $this->getBikeQueryPort->findByBikeId($bikeId);
         $bikeOwnerNickname = $this->getUserQueryPort->findByUserId($bike->userId());
+        $times = setCalendarTimes();
 
-        return ['bike' => $bike, 'ownerNickname' => $bikeOwnerNickname];
+        return ['bike' => $bike, 'ownerNickname' => $bikeOwnerNickname, 'times' => $times];
     }
 }

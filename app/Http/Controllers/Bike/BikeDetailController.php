@@ -37,6 +37,7 @@ class BikeDetailController extends Controller
             'remark' => $useCaseResult['bike']->remark()->toString(),
             'image' => $useCaseResult['bike']->imagePath()->toString(),
         ];
-        return view('bikes.detail', compact('bike'));
+        $times = $useCaseResult['times'];
+        return view('bikes.detail', compact('bike', 'times'));
     }
 }
