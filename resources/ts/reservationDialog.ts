@@ -1,8 +1,8 @@
-const modal = document.getElementById('reservationModal') as HTMLDivElement | null;
-const modalBtn = document.getElementById('reservationModalOpenBtn');
-const closeBtn = document.getElementById('modal-close-btn');
+const modal = document.getElementById('reservationModal')!;
+const modalBtn = document.getElementById('reservationModalOpenBtn')!;
+const closeBtn = document.getElementById('modal-close-btn')!;
 
-const switchDialogShow = (target: HTMLDivElement | null) => {
+const switchDialogShow = (target: HTMLElement) => {
   if (target) {
     target.classList.toggle('active');
   }
@@ -11,10 +11,16 @@ const switchDialogShow = (target: HTMLDivElement | null) => {
   }
 }
 
-modalBtn?.addEventListener('click', () => {
+modalBtn.addEventListener('click', () => {
   switchDialogShow(modal);
 }, false);
 
-closeBtn?.addEventListener('click', () => {
-  modal?.classList.remove('active');
+closeBtn.addEventListener('click', () => {
+  modal.classList.remove('active');
 });
+
+document.addEventListener('keydown', (event: KeyboardEvent) => {
+  if (event.key === 'Escape') {
+    modal.classList.remove('active');
+  }
+})
