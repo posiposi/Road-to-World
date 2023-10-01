@@ -27,6 +27,7 @@
                         </li>
                     </ul>
                     <ul class="list-group list-unstyled mt-3">
+                        @if (Auth::id() != $bike->user_id)
                         <form action="{{ route('bikes.reservation', ['bikeId' => $bike->id]) }}" method="post">
                             @csrf
                             <li class="list-group-item">開始日 <input type="date" name="start_date"><br>
@@ -47,6 +48,7 @@
                             </li>
                             <input class="btn btn-success btn-block mt-2" type="submit" value="予約">
                         </form>
+                        @endif
                     </ul>
                 </div>
             </div>
