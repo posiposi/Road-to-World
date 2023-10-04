@@ -17,8 +17,7 @@
         </ul>
     </div>
 </div>
-<div>
-    {{-- 予約手続きモーダル表示導線 --}}
+<div class="my-2">
     @if(Auth::id() === $bike['ownerId'])
     <a class="btn btn-primary" href="{{ route('bikes.edit', ['bikeId' => $bike['bikeId']]) }}" role="button">
         自転車編集画面へ
