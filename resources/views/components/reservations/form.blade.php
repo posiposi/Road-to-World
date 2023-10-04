@@ -11,35 +11,37 @@
                 <button id="modal-close-btn" type="button" class="btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <ul class="list-group list-unstyled">
-                    <form class="reservation-form"
-                        action="{{ route('bikes.reservation', ['bikeId' => $bike['bikeId']]) }}" method="post">
-                        @csrf
-                        <li class="list-group-item">{{ Word::BIKE_INDEX_LABEL['start_date'] }}<input type="date"
-                                name="start_date"><br>
-                            {{ Word::BIKE_INDEX_LABEL['start_time'] }}
-                            <select name="start_time">
-                                @foreach($times as $time)
-                                <option value="{{ $time }}">{{ $time }}</option>
-                                @endforeach
-                            </select>
-                        </li>
-                        <li class="list-group-item">{{ Word::BIKE_INDEX_LABEL['end_date'] }}<input type="date"
-                                name="end_date"><br>
-                            {{ Word::BIKE_INDEX_LABEL['end_time'] }}
-                            <select name="end_time">
-                                @foreach($times as $time)
-                                <option value="{{ $time }}">{{ $time }}</option>
-                                @endforeach
-                            </select>
-                        </li>
-                </ul>
+            <div>
+                <form class="reservation-form" action="{{ route('bikes.reservation', ['bikeId' => $bike['bikeId']]) }}"
+                    method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <ul class="list-group list-unstyled">
+                            <li class="list-group-item">{{ Word::BIKE_INDEX_LABEL['start_date'] }}<input type="date"
+                                    name="start_date"><br>
+                                {{ Word::BIKE_INDEX_LABEL['start_time'] }}
+                                <select name="start_time">
+                                    @foreach($times as $time)
+                                    <option value="{{ $time }}">{{ $time }}</option>
+                                    @endforeach
+                                </select>
+                            </li>
+                            <li class="list-group-item">{{ Word::BIKE_INDEX_LABEL['end_date'] }}<input type="date"
+                                    name="end_date"><br>
+                                {{ Word::BIKE_INDEX_LABEL['end_time'] }}
+                                <select name="end_time">
+                                    @foreach($times as $time)
+                                    <option value="{{ $time }}">{{ $time }}</option>
+                                    @endforeach
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="reservation-btn" type="submit" class="btn btn-primary">予約する</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button id="reservation-btn" type="submit" class="btn btn-primary">予約する</button>
-            </div>
-            </form>
         </div>
     </div>
 </div>
