@@ -1,13 +1,16 @@
-const modal = document.getElementById('reservationModal')!;
-const reservationModalBtn = document.getElementById('reservationModalOpenBtn')!;
-const modalCloseBtn = document.getElementById('modal-close-btn')!;
+import { reservationConfirmDialog } from './reservationConfirmDialog';
+
+const modal: HTMLElement = document.getElementById('reservationModal')!;
+const reservationModalBtn: HTMLElement = document.getElementById('reservationModalOpenBtn')!;
+const modalCloseBtn: HTMLElement = document.getElementById('modal-close-btn')!;
+const modalErrorMessage: string = 'モーダルを表示できません。'
 
 const switchDialogShow = (target: HTMLElement) => {
   if (target) {
     toggleActiveClass(target);
   }
   else {
-    alert('モーダルを表示できません。');
+    alert(modalErrorMessage);
   }
 }
 
@@ -32,3 +35,8 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
     removeActiveClass(modal);
   }
 })
+
+const dialog: reservationConfirmDialog = new reservationConfirmDialog();
+document.querySelectorAll('.reservation-form').forEach((button) => {
+  button.addEventListener('submit', dialog.showConfirmDialog);
+});
