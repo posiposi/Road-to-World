@@ -22,6 +22,7 @@ class GetUserAdapter implements GetUserQueryPort
     public function findByUserId(UserId $userId): User
     {
         $user = $this->eloquentUser->findByUserId($userId);
+        // TODO 例外処理を追加する
         return User::fromArray($user->toArray());
     }
 }
