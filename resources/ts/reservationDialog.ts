@@ -1,11 +1,12 @@
-import { reservationConfirmDialog } from './reservationConfirmDialog';
+import { showConfirmDialog } from './reservationConfirmDialog';
 
 const modal: HTMLElement = document.getElementById('reservationModal')!;
 const reservationModalBtn: HTMLElement = document.getElementById('reservationModalOpenBtn')!;
 const modalCloseBtn: HTMLElement = document.getElementById('modal-close-btn')!;
-const modalErrorMessage: string = 'モーダルを表示できません。'
+const modalErrorMessage: string = 'モーダルを表示できません。';
+const reservationBtn: HTMLElement = document.getElementById('reservation-btn')!;
 
-const switchDialogShow = (target: HTMLElement) => {
+const switchDialogShow = (target: HTMLElement): void => {
   if (target) {
     toggleActiveClass(target);
   }
@@ -14,29 +15,26 @@ const switchDialogShow = (target: HTMLElement) => {
   }
 }
 
-const toggleActiveClass = (element: HTMLElement) => {
+const toggleActiveClass = (element: HTMLElement): void => {
   element.classList.toggle('active');
 }
 
-const removeActiveClass = (element: HTMLElement) => {
+const removeActiveClass = (element: HTMLElement): void => {
   element.classList.remove('active');
 }
 
-reservationModalBtn.addEventListener('click', () => {
+reservationModalBtn.addEventListener('click', (): void => {
   switchDialogShow(modal);
 });
 
-modalCloseBtn.addEventListener('click', () => {
+modalCloseBtn.addEventListener('click', (): void => {
   toggleActiveClass(modal);
 });
 
-document.addEventListener('keydown', (event: KeyboardEvent) => {
+document.addEventListener('keydown', (event: KeyboardEvent): void => {
   if (event.key === 'Escape') {
     removeActiveClass(modal);
   }
-})
-
-const dialog: reservationConfirmDialog = new reservationConfirmDialog();
-document.querySelectorAll('.reservation-form').forEach((button) => {
-  button.addEventListener('submit', dialog.showConfirmDialog);
 });
+
+reservationBtn.addEventListener('click', showConfirmDialog);

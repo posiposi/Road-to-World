@@ -3,7 +3,7 @@
 @endpush
 
 <button type="button" id="reservationModalOpenBtn" class="btn btn-primary">予約手続き</button>
-<div class="modal" id="reservationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="reservationModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,8 +12,7 @@
                     aria-label="Close"></button>
             </div>
             <div>
-                <form class="reservation-form" action="{{ route('bikes.reservation', ['bikeId' => $bike['bikeId']]) }}"
-                    method="post">
+                <form action="{{ route('bikes.reservation', ['bikeId' => $bike['bikeId']]) }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <ul class="list-group list-unstyled">
@@ -45,5 +44,4 @@
         </div>
     </div>
 </div>
-<div class="modalWrapper" id="modalBackground"></div>
 @vite('resources/ts/reservationDialog.ts')
