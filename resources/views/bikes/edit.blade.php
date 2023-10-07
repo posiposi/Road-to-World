@@ -33,9 +33,10 @@
 
             @foreach ($bike_status_cases as $bike_status)
             <div class="form-check">
-                <input type="radio" class="form-check-input" value="{{ $bike_status->value }}" name="status" @if ($bike->status == $bike_status->value) checked @endif>
+                <input type="radio" class="form-check-input" value="{{ $bike_status->value }}" name="status"
+                    @if($bike->status == $bike_status->value) checked @endif>
                 <label class="form-check-label">
-                    {{ $bike_status->label_BikeStatus() }}
+                    {{ $bike_status->label_BikeStatus(BikeStatus::from($bike_status->value)) }}
                 </label>
             </div>
             @endforeach

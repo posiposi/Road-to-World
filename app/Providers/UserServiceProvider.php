@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Adapters\User\GetUserAdapter;
 use App\Adapters\User\GetUserIdAdapter;
 use App\Adapters\User\GetUserNicknameAdapter;
 use Core\src\User\UseCase\Ports\GetUserIdQueryPort;
 use Core\src\User\UseCase\Ports\GetUserNicknamePort;
+use Core\src\User\UseCase\Ports\GetUserQueryPort;
+use Illuminate\Support\ServiceProvider;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class UserServiceProvider extends ServiceProvider
     {
         app()->bind(GetUserIdQueryPort::class, GetUserIdAdapter::class);
         app()->bind(GetUserNicknamePort::class, GetUserNicknameAdapter::class);
+        app()->bind(GetUserQueryPort::class, GetUserAdapter::class);
     }
 
     /**

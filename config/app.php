@@ -178,6 +178,7 @@ return [
         App\Providers\BikeServiceProvider::class,
         App\Providers\UserServiceProvider::class,
         App\Providers\CommentServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
     ],
 
     /*

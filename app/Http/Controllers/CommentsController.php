@@ -50,7 +50,7 @@ class CommentsController extends Controller
             if ($bike->user_id == $senderId || $bike->user_id == $receiverId) {
                 if ($senderId != $receiverId) {
                     $times = [];
-                    // TODO マジックナンバーは定数に変更する
+                    // TODO setCalendarTimes()をcallするように変更
                     for ($i = 0; $i < 48; $i++) {
                         $times[] = date("H:i", strtotime("+" . $i * 30 . "minute", (-3600 * 9)));
                     };
