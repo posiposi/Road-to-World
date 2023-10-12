@@ -6,6 +6,7 @@ use Core\src\User\Domain\Models\User;
 use Core\src\User\Domain\Models\UserId;
 use Core\src\User\UseCase\Ports\GetUserQueryPort;
 use App\User as EloquentUser;
+use Core\src\User\Domain\Exceptions\NotFoundException;
 
 class GetUserAdapter implements GetUserQueryPort
 {
@@ -21,8 +22,11 @@ class GetUserAdapter implements GetUserQueryPort
 
     public function findByUserId(UserId $userId): User
     {
+        /** @var EloquentUser $user */
         $user = $this->eloquentUser->findByUserId($userId);
-        // TODO 例外処理を追加する
+        if (is_null($user)) {
+            throw new NotFoundException('ユーザーが見つかりません。');
+        }
         return User::fromArray($user->toArray());
     }
 }

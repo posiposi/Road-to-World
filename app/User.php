@@ -108,7 +108,7 @@ class User extends Authenticatable
         $login_user->save();
     }
 
-    public function findByUserId(UserId $userId): self
+    public function findByUserId(UserId $userId): self | null
     {
         return $this->newQuery()
             ->where('id', $userId->toInt())
