@@ -39,7 +39,7 @@
                 <div class="form-check">
                     <input type="radio" class="form-check-input" value="{{ $bike_status->value }}" name="status">
                     <label class="form-check-label">
-                        {{ $bike_status->label_BikeStatus() }}
+                        {{ $bike_status->label_BikeStatus(BikeStatus::from($bike_status->value)) }}
                     </label>
                 </div>
                 @endforeach
@@ -47,7 +47,8 @@
                 <div class="mt-3">
                     <i class="fas fa-exclamation-circle"></i>
                     <label for="bike_address">{{ $bike_form_label['bike_address'] }}</label>
-                    <input class="form-control" type="text" name="bike_address" value="{{ old('bike_address') }}" enterkeyhint=”next”>
+                    <input class="form-control" type="text" name="bike_address" value="{{ old('bike_address') }}"
+                        enterkeyhint=”next”>
                 </div>
 
                 <div class="mt-3">
@@ -60,7 +61,8 @@
                 <div class="mt-3">
                     <label for="remark">{{ $bike_form_label['remark'] }}</label>
                     <textarea class="form-control" name="remark" cols="50" rows="2"
-                        placeholder="{{ Word::WORD_LIST['within_150words'] }}" maxlength="150" enterkeyhint=”next”>{{ old('remark') }}</textarea>
+                        placeholder="{{ Word::WORD_LIST['within_150words'] }}" maxlength="150"
+                        enterkeyhint=”next”>{{ old('remark') }}</textarea>
                 </div>
 
                 <div class="mt-3">

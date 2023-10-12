@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Bike\BikeDetailController;
 use App\Http\Controllers\BikesController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\Message\GetMessagesController;
@@ -70,6 +71,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{bikeId}', [ReservationController::class, 'store'])->name('bikes.reservation');
         // カレンダー表示
         Route::get('/{bikeId}/{week}/{now}/calendar', [ReservationController::class, 'index'])->name('bikes.calendar');
+        // 自転車詳細
+        Route::get('/{bikeId}/{loginUserId}/{anotherUserId}', BikeDetailController::class)->name('bikeDetail');
+        // コメント取得
+        Route::get('/{bikeId}/{senderId}/{receiverId}/users/get', GetUserNicknameController::class)->name('nickname.get');
     });
 
     // 自転車登録関連

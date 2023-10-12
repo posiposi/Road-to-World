@@ -1,23 +1,37 @@
 <?php
 
-namespace Core\src\Bike\UseCase;
+namespace Core\src\Bike\UseCase\BikeDetail;
 
+use Core\src\Bike\Domain\Models\Bike;
 use Core\src\Bike\Domain\Models\BikeId;
+use Core\src\Bike\UseCase\Ports\GetBikeQueryPort;
 use Core\src\Comment\Domain\Models\ReceiverId;
 use Core\src\Comment\Domain\Models\SenderId;
 use Core\src\Comment\UseCase\Ports\GetCommentQueryPort;
 use Core\src\User\Domain\Models\UserId;
+use Core\src\User\UseCase\Ports\GetUserQueryPort;
 
 final class BikeDetail
 {
+    /**
+     * @var GetBikeQueryPort
+     */
+    private $getBikeQueryPort;
     /**
      * @var GetCommentQueryPort
      */
     private $getCommentQueryPort;
 
-    public function __construct(GetCommentQueryPort $getCommentQueryPort)
-    {
+    private $getUserQueryPort;
+
+    public function __construct(
+        GetBikeQueryPort $getBikeQueryPort,
+        GetCommentQueryPort $getCommentQueryPort,
+        GetUserQueryPort $getUserQueryPort,
+    ) {
+        $this->getBikeQueryPort = $getBikeQueryPort;
         $this->getCommentQueryPort = $getCommentQueryPort;
+        $this->getUserQueryPort = $getUserQueryPort;
     }
 
     public function execute(
@@ -25,7 +39,10 @@ final class BikeDetail
         UserId $anotherUserId,
         BikeId $bikeId
     ) {
-        // TODO 自転車詳細情報表示UseCase呼び出し
-        // TODO 予約機能UseCase呼び出し
+        $bike = $this->getBikeQueryPort->findByBikeId($bikeId);
+        $bikeOwnerNickname = $this->getUserQueryPort->findByUserId($bike->userId());
+        $times = setCalendarTimes();
+
+        return ['bike' => $bike, 'ownerNickname' => $bikeOwnerNickname, 'times' => $times];
     }
 }

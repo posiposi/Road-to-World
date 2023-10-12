@@ -13,7 +13,7 @@
                 <h4 class="card-title">{{ $bike['brand'] }} / {{ $bike['name'] }}</h4>
                 <p class="card-text">受け渡し場所：{{ $bike['bike_address'] }}</p>
                 <p class="card-text">金額：¥{{ $bike['price'] }} / 30分</p>
-                <p class="card-text">状態：{{ BikeStatus::from($bike['status'])->label_BikeStatus() }}</p>
+                <p class="card-text">状態：{{ BikeStatus::label_BikeStatus(BikeStatus::from($bike['status'])) }}</p>
                 <p class="card-text">備考：{{ $bike['remark'] }}</p>
                 <a href="{{ route('bikes.edit', ['bikeId' => $bike['id']]) }}" class="btn btn-primary">編集</a>
                 <a href="{{ route('bikes.delete', ['bikeId' => $bike['id']]) }}" class="btn btn-danger">削除</a>

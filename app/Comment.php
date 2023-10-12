@@ -69,6 +69,7 @@ class Comment extends Model
      * @param int $bikeId 対象の自転車id
      * @param int $lenderId 借り手側ユーザーid
      */
+    // TODO コアレイヤパターンを適用したら削除
     public function getInfoForBikesIndex($bikeId, $lenderId): array
     {
         $bike = Bike::findOrFail($bikeId);

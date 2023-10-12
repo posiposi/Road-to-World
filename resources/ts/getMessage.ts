@@ -5,7 +5,7 @@ const bikeId: number = Number(splitPathName[2]);
 const loginUserId: number = Number(splitPathName[3]);
 const anotherUserId: number = Number(splitPathName[4]);
 
-const getMessageList = () => {
+const getMessageList = (): void => {
   axios.get('/messages/' + loginUserId + '/' + anotherUserId + '/' + bikeId + '/get')
     .then((result) => {
       const resultObj = result.data;
@@ -25,7 +25,7 @@ const getMessageList = () => {
     });
 };
 
-const initMessageList = (userName: string, date: string, message: string) => {
+const initMessageList = (userName: string, date: string, message: string): void => {
   let listBlock = document.querySelector('#list-block');
   let list: HTMLLIElement = document.createElement('li');
   list.innerText = userName + ' ' + date + ' ' + message;
