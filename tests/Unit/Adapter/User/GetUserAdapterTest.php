@@ -4,6 +4,7 @@ namespace tests\Unit\Adapter\User;
 
 use App\Adapters\User\GetUserAdapter;
 use App\User as EloquentUser;
+use Core\src\User\Domain\Exceptions\NotFoundException;
 use Core\src\User\Domain\Models\User;
 use Core\src\User\Domain\Models\UserId;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,22 +27,35 @@ final class GetUserAdapterTest extends TestCase
     }
 
     /** 
-     * @dataProvider findByUserDataProvider
+     * @dataProvider findByUserIdDataProvider
      */
-    public function testFindByUser($userId, $expected)
+    public function testFindByUserId($userId, $expectedInstance, $exceptionInstance, $exceptionMessage)
     {
-        $user = $this->getUserAdapter->findByUserId($userId);
-        $this->assertInstanceOf($expected, $user);
+        // expectExpectionMessage()では完全一致確認ができないため、try catchでテスト実装
+        try {
+            $result = $this->getUserAdapter->findByUserId($userId);
+            $this->assertInstanceOf($expectedInstance, $result);
+        } catch (NotFoundException $error) {
+            $this->assertInstanceOf($exceptionInstance, $error);
+            $this->assertSame($exceptionMessage, $error->getMessage());
+        }
     }
 
-    public function findByUserDataProvider()
+    public function findByUserIdDataProvider()
     {
         return [
             '正常系' => [
                 'userId' => UserId::of(1),
-                'expected' => User::class,
+                'expectedInstance' => User::class,
+                'exceptionInstance' => null,
+                'exceptionMessage' => null,
+            ],
+            '異常系' => [
+                'userId' => Userid::of(99),
+                'expectedInstance' => NotFoundException::class,
+                'exceptionInstance' => NotFoundException::class,
+                'exceptionMessage' => 'ユーザーが見つかりません。',
             ]
-            // TODO 異常系テスト追加 Adapterの例外処理を追加後
         ];
     }
 
