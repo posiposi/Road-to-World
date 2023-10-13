@@ -26,9 +26,7 @@
                         </a>
                         @endauth
                         @guest
-                        <a href="{{ route('login') }}">
-                            <img class="card-img img-fluid mt-4" src="{{ $bike->image_path }}" alt="自転車画像">
-                        </a>
+                        <img class="card-img img-fluid mt-4" src="{{ $bike->image_path }}" alt="自転車画像">
                         @endguest
                         <div class="card-body">
                             <ul class="list-group list-unstyled">
