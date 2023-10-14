@@ -15,7 +15,7 @@ class Word
         'bikes_index' => '貸出中の自転車はこちらから',
         'search' => '貸出中の自転車を検索する',
         'not_comma' => '価格はコンマなしで入力してください。',
-        'within_150words' => '150文字以内で入力してください。',
+        'within_140words' => '140文字以内で入力してください。',
         'required_content' => 'は必須項目です。',
         'copyright_icon' => '©',
         'copyright' => 'Copyright: Daichi Sugiyama',
