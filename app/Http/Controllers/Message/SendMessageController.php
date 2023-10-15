@@ -11,6 +11,7 @@ class SendMessageController extends Controller
 {
     private $message;
 
+    // TODO 要Requestクラスでのバリデーション #445
     public function __invoke(Request $request, int $loginUserId, int $anotherUserId, int $bikeId)
     {
         $this->message = $request->input('message');
