@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Message;
 
 use App\Events\MessageAdded;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Comment\SendRequest;
 use Illuminate\Support\Facades\DB;
 
 class SendMessageController extends Controller
 {
     private $message;
 
-    // TODO 要Requestクラスでのバリデーション #445
-    public function __invoke(Request $request, int $loginUserId, int $anotherUserId, int $bikeId)
+    public function __invoke(SendRequest $request, int $loginUserId, int $anotherUserId, int $bikeId)
     {
-        $this->message = $request->input('message');
+        $this->message = $request->message();
         $param = [
             'bike_id' => $bikeId,
             'receiver_id' => $anotherUserId,

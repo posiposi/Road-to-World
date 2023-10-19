@@ -29,7 +29,8 @@ const sendMessage = (): void => {
 			btnSendMessage.setAttribute("disabled", "");
 		})
 		.catch((error) => {
-			console.log(error);
+			const errorMessage: string = error.response.data.message;
+			alert(errorMessage);
 		});
 };
 
