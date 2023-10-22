@@ -20,10 +20,7 @@ class SendRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function message()
+    public function message(): string
     {
         return $this->input('message');
     }

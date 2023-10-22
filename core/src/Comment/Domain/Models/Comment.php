@@ -7,26 +7,15 @@ use Core\src\Bike\Domain\Models\BikeId;
 
 final class Comment
 {
-    /**
-     * @var SenderId
-     */
+    /** @var SenderId */
     private $senderId;
-    /**
-     * @var ReceiverId
-     */
+    /** @var ReceiverId */
     private $receiverId;
-    /**
-     * @var BikeId
-     */
+    /** @var BikeId */
     private $bikeId;
-    /**
-     * @var CommentBody
-     */
+    /** @var CommentBody */
     private $commentBody;
-
-    /**
-     * @var Carbon
-     */
+    /** @var Carbon */
     private $sendDateTime;
 
     public function __construct($senderId, $receiverId, $bikeId, $commentBody, $sendDateTime)
@@ -69,7 +58,7 @@ final class Comment
             ReceiverId::of($value['receiver_id'] ?? 0),
             BikeId::of($value['bike_id'] ?? 0),
             CommentBody::of($value['body'] ?? ''),
-            Carbon::now()
+            $value['sendDateTime'] ?? Carbon::now()
         );
     }
 }
