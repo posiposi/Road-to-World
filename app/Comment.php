@@ -20,7 +20,7 @@ class Comment extends Model
     protected $table = 'comments';
 
     protected $fillable = [
-        'body', 'sender_id', 'receiver_id', 'bike_id',
+        'body', 'sender_id', 'receiver_id', 'bike_id', 'created_at'
     ];
 
     /** 一対多の記述(コメントは一人のユーザに従属) */
