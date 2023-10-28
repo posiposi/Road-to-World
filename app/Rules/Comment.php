@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class Comment implements ValidationRule
 {
-    const MAX_COMMENT_LENGTH = 5;
+    const MAX_COMMENT_LENGTH = 140;
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
