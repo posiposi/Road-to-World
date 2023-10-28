@@ -20,7 +20,7 @@ class Comment extends Model
     protected $table = 'comments';
 
     protected $fillable = [
-        'body', 'sender_id', 'receiver_id', 'bike_id',
+        'body', 'sender_id', 'receiver_id', 'bike_id', 'created_at'
     ];
 
     /** 一対多の記述(コメントは一人のユーザに従属) */
@@ -96,27 +96,16 @@ class Comment extends Model
         return [$bike, $login_user, $sender, $sender_comments, $receiver, $receiver_comments];
     }
 
-    /**
-     * DBにコメントを保存する
-     *
-     * @param object $request コメント本文を含むオブジェクト
-     * @param int $bikeId 対象自転車のid
-     * @param int $senderId コメント送信者id
-     * @param int $receiverId コメント受信者id
-     * @return void
-     */
-    public function saveComment($request, $bikeId, $senderId, $receiverId)
+    public function saveComment(array $param): void
     {
-        /* コメント本文 */
-        $this->body = $request->body;
-        /* コメント送信者ID */
-        $this->sender_id = $senderId;
-        /* レンタル対象自転車ID */
-        $this->bike_id = $bikeId;
-        /* コメント受信者ID */
-        $this->receiver_id = $receiverId;
-        /* DBにコメント情報を保存する */
-        $this->save();
+        $query = $this->newQuery();
+        $query->create([
+            'bike_id' => $param['bikeId'],
+            'sender_id' => $param['senderId'],
+            'receiver_id' => $param['receiverId'],
+            'body' => $param['body'],
+            'created_at' => $param['sendDateTime']
+        ]);
     }
 
     public function toModel(array $values): ModelsComment

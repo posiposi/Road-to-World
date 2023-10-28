@@ -2,33 +2,39 @@
 
 namespace App\Http\Controllers\Message;
 
-use App\Events\MessageAdded;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\Comment\SendRequest;
+use Carbon\Carbon;
+use Core\src\Comment\UseCase\SendComment;
 
 class SendMessageController extends Controller
 {
+    /**
+     * @var SendComment
+     */
+    private $useCase;
+
+    /**
+     * @var string
+     */
     private $message;
 
-    public function __invoke(Request $request, int $loginUserId, int $anotherUserId, int $bikeId)
+    public function __construct(SendComment $useCase)
     {
-        $this->message = $request->input('message');
-        $param = [
-            'bike_id' => $bikeId,
-            'receiver_id' => $anotherUserId,
-            'sender_id' => $loginUserId,
-            'body' => $this->message,
-            'created_at' => now()
-        ];
-        DB::table('comments')->insert($param);
+        $this->useCase = $useCase;
+    }
 
-        $sendMessage = DB::table('comments')
-            ->where('bike_id', $bikeId)
-            ->where('receiver_id', $anotherUserId)
-            ->where('sender_id', $loginUserId)
-            ->latest()->first();
-        // メッセージ送信イベント発行
-        event((new MessageAdded($sendMessage))->dontBroadcastToCurrentUser());
+    public function __invoke(SendRequest $request, int $loginUserId, int $anotherUserId, int $bikeId)
+    {
+        $this->message = $request->message();
+        $values = [
+            'sender_id' => $loginUserId,
+            'receiver_id' => $anotherUserId,
+            'bike_id' => $bikeId,
+            'body' => $this->message,
+            'sendDateTime' => Carbon::now(),
+        ];
+
+        $this->useCase->execute($values);
     }
 }

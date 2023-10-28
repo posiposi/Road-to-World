@@ -61,7 +61,7 @@
                 <div class="mt-3">
                     <label for="remark">{{ $bike_form_label['remark'] }}</label>
                     <textarea class="form-control" name="remark" cols="50" rows="2"
-                        placeholder="{{ Word::WORD_LIST['within_150words'] }}" maxlength="150"
+                        placeholder="{{ Word::WORD_LIST['within_140words'] }}" maxlength="140"
                         enterkeyhint=”next”>{{ old('remark') }}</textarea>
                 </div>
 

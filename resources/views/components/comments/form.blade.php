@@ -8,8 +8,9 @@
 @else
 <div class="col-md-6">
     <h2>コメント</h2>
-    <input id="input-message" type="text" class="form-control">
-    <button id="btn-message-send" class="btn btn-primary mt-2" disabled>送信</button>
+    <input id="input-message" name="message" type="text" class="form-control"
+        placeholder="{{ Word::WORD_LIST['within_140words'] }}" maxlength="140" enterkeyhint=”next”>
+    <button id="btn-message-send" class="btn btn-primary mt-2" disabled enterkeyhint=”send”>送信</button>
     <ul id="list-block">
     </ul>
 </div>
