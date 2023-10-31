@@ -33,7 +33,7 @@ class CommentBodyTest extends TestCase
         }
     }
 
-    public function validateDataProvider()
+    public static function validateDataProvider()
     {
         return [
             '文字数140' => [
