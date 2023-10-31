@@ -41,7 +41,7 @@ final class GetUserAdapterTest extends TestCase
         }
     }
 
-    public function findByUserIdDataProvider()
+    public static function findByUserIdDataProvider()
     {
         return [
             '正常系' => [
