@@ -49,14 +49,9 @@ class CommentsController extends Controller
         if ($login_user == $sender->id || $login_user == $receiver->id) {
             if ($bike->user_id == $senderId || $bike->user_id == $receiverId) {
                 if ($senderId != $receiverId) {
-                    $times = [];
-                    // TODO setCalendarTimes()をcallするように変更
-                    for ($i = 0; $i < 48; $i++) {
-                        $times[] = date("H:i", strtotime("+" . $i * 30 . "minute", (-3600 * 9)));
-                    };
+                    $times = setCalendarTimes();
                     return view(
                         'comments.show',
-                        // TODO 不要な変数は渡さないように変更する
                         compact('bike', 'login_user', 'sender', 'sender_comments', 'receiver', 'receiver_comments', 'times')
                     );
                 } else {
