@@ -1,4 +1,5 @@
 @if (Auth::id() === $bike['ownerId'])
+@include('components.comments.user_tab')
 <div class="mt-2">
     <a href="{{ route('comments.index', [
     'bikeId' => $bike['bikeId'],
