@@ -1,25 +1,42 @@
 const navButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.nav-item');
 
-const toggleClickedTab = (): void => {
-}
-
-navButtons.forEach((navButton) => {
-  navButton.addEventListener('click', (event) => {
+navButtons.forEach((navButton: HTMLButtonElement) => {
+  navButton.addEventListener('click', (event: MouseEvent) => {
     const targetEvent = event.currentTarget as HTMLElement;
-    const allNavItems = document.querySelectorAll('.nav-item');
-    const othersNavItems = Array.from(allNavItems).filter((item) => item !== targetEvent);
+    const targetNavButton = targetEvent.querySelector('button');
+    // タブと連動しているパネルを取得するためにdatasetを取得する
+    const dataTabValue = targetNavButton?.getAttribute('data-tab');
 
-    const targetButton: HTMLButtonElement | null = targetEvent.querySelector('button');
+    if (dataTabValue) {
+      const targetPanel = document.getElementById(dataTabValue);
+      const allPanel = document.querySelectorAll('.tab-pane');
+      const otherTabContents = Array.from(allPanel).filter((panel) => panel !== targetPanel);
 
-    if (targetButton != null) {
-      targetButton.classList.add('active');
+      targetPanel?.classList.add('show', 'active');
+      otherTabContents.forEach((tabItem) => {
+        if (tabItem) {
+          tabItem.classList.remove('show', 'active');
+        }
+      })
     }
 
-    othersNavItems.forEach((navItem) => {
-      const navButton: HTMLButtonElement | null = navItem.querySelector('button');
-      if (navButton) {
-        navButton.classList.remove('active');
-      }
-    });
+    toggleNavTab(targetNavButton, targetEvent);
   })
 })
+
+// TODO 別ファイルへコンポーネントとして切り出し
+const toggleNavTab = (clickedButton: HTMLButtonElement | null, targetEvent: HTMLElement) => {
+  const allNavItems: NodeListOf<HTMLLIElement> = document.querySelectorAll('.nav-item');
+  const othersNavItems = Array.from(allNavItems).filter((item) => item !== targetEvent);
+
+  if (clickedButton) {
+    clickedButton.classList.add('active');
+  }
+
+  othersNavItems.forEach((navItem) => {
+    const navButton: HTMLButtonElement | null = navItem.querySelector('button');
+    if (navButton) {
+      navButton.classList.remove('active');
+    }
+  });
+}
