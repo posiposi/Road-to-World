@@ -18,15 +18,12 @@
         "typescript": "^5.1.6",
         "vite": "^4.3.9",
         "vite-plugin-checker": "^0.6.1",
-        "vue": "^3.2.36",
-        "vue-loader": "^16.8.3",
         "webpack-cli": "^5.1.4"
     },
     "dependencies": {
         "laravel-echo": "^1.15.2",
         "mdb-ui-kit": "^6.0.1",
-        "pusher-js": "^8.3.0",
-        "vue3-carousel": "^0.1.47"
+        "pusher-js": "^8.3.0"
     },
     "type": "module"
 }
