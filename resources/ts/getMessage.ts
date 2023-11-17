@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const splitPathName: Array<string> = location.pathname.split('/');
 const bikeId: number = Number(splitPathName[2]);
@@ -6,12 +6,18 @@ const loginUserId: number = Number(splitPathName[3]);
 const anotherUserId: number = Number(splitPathName[4]);
 
 const getMessageList = (): void => {
-  axios.get('/messages/' + loginUserId + '/' + anotherUserId + '/' + bikeId + '/get')
+  axios
+    .get(
+      '/messages/' + loginUserId + '/' + anotherUserId + '/' + bikeId + '/get'
+    )
     .then((result) => {
       const resultObj = result.data;
-      let usersMessage = [...resultObj.loginUserComments, ...resultObj.anotherUserComments];
-      let sortedUsersMessage = usersMessage.sort((x, y) => {
-        return (x.created_at < y.created_at) ? -1 : 1;
+      const usersMessage = [
+        ...resultObj.loginUserComments,
+        ...resultObj.anotherUserComments,
+      ];
+      const sortedUsersMessage = usersMessage.sort((x, y) => {
+        return x.created_at < y.created_at ? -1 : 1;
       });
       for (let index = 0; index < sortedUsersMessage.length; index++) {
         const date: string = sortedUsersMessage[index].created_at;
@@ -25,11 +31,15 @@ const getMessageList = (): void => {
     });
 };
 
-const initMessageList = (userName: string, date: string, message: string): void => {
-  let listBlock = document.querySelector('#list-block');
-  let list: HTMLLIElement = document.createElement('li');
+const initMessageList = (
+  userName: string,
+  date: string,
+  message: string
+): void => {
+  const listBlock = document.querySelector('#list-block');
+  const list: HTMLLIElement = document.createElement('li');
   list.innerText = userName + ' ' + date + ' ' + message;
   listBlock?.appendChild(list);
-}
+};
 
 document.addEventListener('DOMContentLoaded', getMessageList);
