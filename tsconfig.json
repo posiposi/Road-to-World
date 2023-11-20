@@ -1,17 +1,17 @@
 {
-    "compilerOptions": {
-        "target": "ES2018",
-        "module": "CommonJS",
-        "moduleResolution": "node",
-        "baseUrl": "./",
-        "strict": true,
-        "skipLibCheck": true,
-        "noImplicitAny": false
-    },
-    "include": [
-        "resources/ts/**/*"
-    ],
-    "files": [
-        "@types/window.d.ts"
-    ]
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "strict": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client", "react", "react-dom"],
+    "lib": ["dom", "dom.iterable", "esnext"]
+  },
+  "include": ["resources/ts/**/*", "resources/react/**/*"],
+  "files": ["@types/window.d.ts"]
 }

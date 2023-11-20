@@ -14,6 +14,7 @@
     {{-- 個別CSS読み込み --}}
     @stack('css')
     @vite('resources/js/app.ts')
+    @vite('../../react/src/common.ts')
 </head>
 
 <body>
